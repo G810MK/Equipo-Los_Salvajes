@@ -7,7 +7,7 @@
     - ROJAS SAMANIEGO SAYREIT RUBI 97
     - SANCHEZ GARAY ERNESTO ALAN 95
     - ZUÑIGA RAMIREZ CHRISTIAN AXEL 70
-2. 20170828 Se añadió al equipo **Los Salvajes** en Trello por parte de Migue Herrada Cisneros 
+2. 20170828 Se añadió al equipo **Los Salvajes** en Trello por parte de Miguel Herrada Cisneros 
 * Calificación desempeño:
     - 100
 3. 20170901 Se invitó al repositorio **Equipo-Los-Salvajes** por parte de Miguel Herrada Cisneros.
