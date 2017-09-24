@@ -4,4 +4,4 @@ Integrado por:
   José Manuel Rodríguez Rivas.
   Sayreit Rubí Rojas Samaniego.
   Miguel Herrada Cisneros.
-  Christin Axel Zúñiga Ramírez.
+  Christian Axel Zúñiga Ramírez.
