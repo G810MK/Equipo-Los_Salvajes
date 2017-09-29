@@ -11,7 +11,7 @@ package Clases;
  */
 public class Desempeño {
     private int idDesempeño;
-    private String Tarea;
+    private String Trabajo;
     private int Calificacion;
 
     public int getIdDesempeño() {
@@ -22,12 +22,12 @@ public class Desempeño {
         this.idDesempeño = idDesempeño;
     }
 
-    public String getTarea() {
-        return Tarea;
+    public String getTrabajo() {
+        return Trabajo;
     }
 
-    public void setTarea(String Tarea) {
-        this.Tarea = Tarea;
+    public void setTrabajo(String Trabajo) {
+        this.Trabajo = Trabajo;
     }
 
     public int getCalificacion() {
