@@ -12,7 +12,7 @@ package Clases;
 public class Alumno {
    private int idAlumno;
    private String nombre;
-   private String NC;
+   private int NC;
 
     public int getIdAlumno() {
         return idAlumno;
@@ -30,11 +30,11 @@ public class Alumno {
         this.nombre = nombre;
     }
 
-    public String getNC() {
+    public int getNC() {
         return NC;
     }
 
-    public void setNC(String NC) {
+    public void setNC(int NC) {
         this.NC = NC;
     }
    
