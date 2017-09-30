@@ -98,5 +98,62 @@ public class BD {
         mConexion.ejecutarActualizacion(SQL);
     }
     
+    //Eliminar producto
+    public void eliminarProducto(int ID) throws SQLException{
+        String SQL = "delete from producto where idProducto = '?1'";
+        SQL = SQL.replace("?1", String.valueOf(ID));
+        mConexion.ejecutarActualizacion(SQL);
+    }
+    
+    //Eliminar lista
+    public void eliminarlista(int ID) throws SQLException{
+        String SQL = "delete from lista where idLista = '?1'";
+        SQL = SQL.replace("?1", String.valueOf(ID));
+        mConexion.ejecutarActualizacion(SQL);
+    }
+    
+    //Eliminar evaluacion unidad
+    public void eliminarEvaUnidad(int ID) throws SQLException{
+        String SQL = "delete from evaluacion_unidad where idProducto = '?1'";    
+        SQL = SQL.replace("?1", String.valueOf(ID));
+        mConexion.ejecutarActualizacion(SQL);
+    }
+    
+    //Eliminar evaluacion general
+    public void eliminarGeneral(int ID) throws SQLException{
+        String SQL = "delete from evaluacion_general where idEvaluacion_general = '?1'";    
+        SQL = SQL.replace("?1", String.valueOf(ID));
+        mConexion.ejecutarActualizacion(SQL);
+    }
+    
+    //Eliminar evaluacion diagnostica
+    public void eliminarDiagnostica(int ID) throws SQLException{
+        String SQL = "delete from evaluacion_diagnostica where idEvaluacionDiagnostica = '?1'";
+        SQL = SQL.replace("?1", String.valueOf(ID));
+        mConexion.ejecutarActualizacion(SQL);
+    }
+    
+    //Eliminar desempeño
+    public void eliminarDesempeno(int ID) throws SQLException{
+        String SQL = "delete from desempeno where idDesempeno = '?1'";    
+        SQL = SQL.replace("?1", String.valueOf(ID));
+        mConexion.ejecutarActualizacion(SQL);
+    }
+    
+    //Eliminar alumno
+    public void eliminarAlumno(int ID) throws SQLException{
+        String SQL = "delete from alumno where idAlumno = '?1'";    
+        SQL = SQL.replace("?1", String.valueOf(ID));
+        mConexion.ejecutarActualizacion(SQL);
+    }
+    
+    //Eliminar actitud
+    public void eliminarActitud(int ID) throws SQLException{
+        String SQL = "delete from actitud where idActitud = '?1'";    
+        SQL = SQL.replace("?1", String.valueOf(ID));
+        mConexion.ejecutarActualizacion(SQL);
+    }
+    
     
 }
+
