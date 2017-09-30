@@ -154,6 +154,5 @@ public class BD {
         mConexion.ejecutarActualizacion(SQL);
     }
     
-    
 }
 
