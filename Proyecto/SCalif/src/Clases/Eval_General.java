@@ -10,16 +10,17 @@ package Clases;
  * @author Usuario lenovo
  */
 public class Eval_General {
-    private double Eval_Diagnostica;
+    private int idEval_General;
     private double Total;
 
-    public double getEval_Diagnostica() {
-        return Eval_Diagnostica;
+    public int getIdEval_General() {
+        return idEval_General;
     }
 
-    public void setEval_Diagnostica(double Eval_Diagnostica) {
-        this.Eval_Diagnostica = Eval_Diagnostica;
+    public void setIdEval_General(int idEval_General) {
+        this.idEval_General = idEval_General;
     }
+
 
     public double getTotal() {
         return Total;
