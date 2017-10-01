@@ -298,5 +298,90 @@ public class BD {
         }
         return lista;
     }
+    
+    //Obtener lista evaluacion general
+    public List<Eval_General> consultarGeneral() throws SQLException{
+        List<Eval_General> lista= new ArrayList();
+    String SQL = "select * from (evaluacion_general inner join evaluacion_unidad on evaluacion_general.evaluacion_unidad_idevaluacion_unidad = evaluacion_unidad.idEvaluacion_unidad) inner join Alumno on Alumno.idAlumno = evaluacion_unidad.Alumno_idAlumno";
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while(consulta.next()){
+        Eval_Unidad mEval_Unidad = new Eval_Unidad();
+        Eval_General mEval_General = new Eval_General();
+        Alumno mAlumno = new Alumno();
+        mEval_Unidad.setIdEvalUnidad(consulta.getInt("idEvaluacion_unidad"));
+        mEval_Unidad.setUnidad(consulta.getInt("Unidad"));
+        mEval_Unidad.setCal_Conocimiento(consulta.getInt("Conocimiento"));
+        mEval_Unidad.setCaL_Producto(consulta.getInt("Producto"));
+        mEval_Unidad.setCal_Desempeno(consulta.getInt("Desempeno"));
+        mEval_Unidad.setCaL_Actitud(consulta.getDouble("Actitud"));
+        mAlumno.setIdAlumno(consulta.getInt("IdAlumno"));
+        mAlumno.setNC(consulta.getInt("NC"));
+        mAlumno.setNombre(consulta.getString("Nombre"));            
+            mEval_General.setIdEval_General(consulta.getInt("idEvaluacion_diagnostica"));
+            mEval_General.setTotal(consulta.getDouble("Toltal"));
+            lista.add(mEval_General);
+        }
+        return lista;
+    }
+    
+    //Obtener lista evaluacion unidad
+    public List<Eval_Unidad> consultarUnidad() throws SQLException{
+        List<Eval_Unidad> lista= new ArrayList();
+        String SQL = "select * from evaluacion_unidad inner join alumno on evaluacion_unidad.alumno_idAlumno = Alumno.idAlumno";
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while(consulta.next()){
+            Eval_Unidad mEval_Unidad = new Eval_Unidad();
+        Alumno mAlumno = new Alumno();
+        mAlumno.setIdAlumno(consulta.getInt("IdAlumno"));
+        mAlumno.setNC(consulta.getInt("NC"));
+        mAlumno.setNombre(consulta.getString("Nombre"));
+            mEval_Unidad.setIdEvalUnidad(consulta.getInt("idEvaluacion_unidad"));
+            mEval_Unidad.setUnidad(consulta.getInt("Unidad"));
+            mEval_Unidad.setCal_Conocimiento(consulta.getDouble("Conocimiento"));
+            mEval_Unidad.setCal_Desempeno(consulta.getDouble("Desempeno"));
+            mEval_Unidad.setCaL_Actitud(consulta.getDouble("Actitud"));
+            lista.add(mEval_Unidad);
+        }
+        return lista;
+    }
+    
+    //Obtener lista
+    public List<Lista> consultarLista() throws SQLException{
+        List<Lista> lista= new ArrayList();
+    String SQL = "select * from lista inner join alumno on lista.idLista = Alumno.Lista_idLista";
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while(consulta.next()){
+            Lista mLista = new Lista();
+        Alumno mAlumno = new Alumno();
+        mAlumno.setIdAlumno(consulta.getInt("IdAlumno"));
+        mAlumno.setNC(consulta.getInt("NC"));
+        mAlumno.setNombre(consulta.getString("Nombre"));
+            mLista.setIdLista(consulta.getInt("idLista"));
+            mLista.setMateria(consulta.getString("Materia"));
+            mLista.setGrupo(consulta.getString("Grupo"));
+            mLista.setSemestre(consulta.getInt("Semestre"));
+            lista.add(mLista);
+        }
+        return lista;
+    }
+    
+    //Obtener lista producto
+    public List<Producto> consultarProducto() throws SQLException{
+        List<Producto> lista= new ArrayList();
+        String SQL = "select * from producto inner join alumno on producto.alumno_idAlumno = Alumno.idAlumno";
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while(consulta.next()){
+            Producto mProducto = new Producto();
+        Alumno mAlumno = new Alumno();
+        mAlumno.setIdAlumno(consulta.getInt("IdAlumno"));
+        mAlumno.setNC(consulta.getInt("NC"));
+        mAlumno.setNombre(consulta.getString("Nombre"));
+            mProducto.setIdProducto(consulta.getInt("idProducto"));
+            mProducto.setTareas(consulta.getString("Tareas"));
+            mProducto.setCalificacion(consulta.getInt("Calificacion"));
+            lista.add(mProducto);
+        }
+        return lista;
+    }
 }
 
