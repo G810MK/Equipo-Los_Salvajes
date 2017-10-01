@@ -7,7 +7,10 @@
 package BaseDatos;
 
 import Clases.*;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 
@@ -154,5 +157,146 @@ public class BD {
         mConexion.ejecutarActualizacion(SQL);
     }
     
+    //Modificar actitud
+    public void modificarActitud(Actitud mActitud) throws SQLException{
+        String SQL = "update actitud set Asistencia='?1', Fecha='?2' where idActitud = '?3'";
+        SQL = SQL.replace("?1", String.valueOf(mActitud.getAsistencia()));
+        SQL = SQL.replace("?2", String.valueOf(mActitud.getFecha()));
+        SQL = SQL.replace("?3", String.valueOf(mActitud.getIdActitud()));
+        mConexion.ejecutarActualizacion(SQL);
+    }   
+    
+    //Modificar alumno
+    public void modificarAlumno(Alumno mAlumno) throws SQLException{
+        String SQL = "update alumno set NC = '?1', Nombre = '?2' where idAlumno = '?3'";
+        SQL = SQL.replace("?1", String.valueOf(mAlumno.getNC()));
+        SQL = SQL.replace("?2", mAlumno.getNombre());
+        SQL = SQL.replace("?3", String.valueOf(mAlumno.getIdAlumno()));
+        mConexion.ejecutarActualizacion(SQL);
+    }
+    
+    //Modificar desempeño
+    public void modificarDesempeño(Desempeño mDesempeño) throws SQLException{
+        String SQL = "update desempeno set Trabajo = '?1', Calificacion = '?2' where idDesempeno = '?3'";
+        SQL = SQL.replace("?1", mDesempeño.getTrabajo());
+        SQL = SQL.replace("?2", String.valueOf(mDesempeño.getCalificacion()));
+        SQL = SQL.replace("?3", String.valueOf(mDesempeño.getIdDesempeño()));
+        mConexion.ejecutarActualizacion(SQL);
+    }
+    
+    //Modificar Evaluacion diagnostica
+    public void modificarEval_Diagnostica(Eval_Diagnostica mEval_Diagnostica) throws SQLException{
+        String SQL = "update evaluacion_diagnostica set Calificacion = '?1' where idEvaluacion_diagnostica = '?2'";
+        SQL = SQL.replace("?1", String.valueOf(mEval_Diagnostica.getCalificacion()));
+        SQL = SQL.replace("?2", String.valueOf(mEval_Diagnostica.getIdEval_Diagnostica()));
+        mConexion.ejecutarActualizacion(SQL);
+    }
+    
+    // Modificar evaluacion general
+    public void modificarEval_General(Eval_General mEval_General) throws SQLException{
+        String SQL = "update evaluacion_general set Total = '?1' where idEvaluacion_general = '?2'";
+        SQL = SQL.replace("?1", String.valueOf(mEval_General.getTotal()));
+        SQL = SQL.replace("?2", String.valueOf(mEval_General.getIdEval_General()));
+        mConexion.ejecutarActualizacion(SQL);
+    }
+    
+    // Modificar evaluacion unidad
+    public void modificarEval_Unidad(Eval_Unidad mEval_Unidad) throws SQLException{
+        String SQL = "update evaluacion_unidad set Unidad = '?1', Conocimiento = '?2' where idEvaluacion_unidad = '?3'";
+        SQL = SQL.replace("?1", String.valueOf(mEval_Unidad.getUnidad()));
+        SQL = SQL.replace("?2", String.valueOf(mEval_Unidad.getCal_Conocimiento()));
+        SQL = SQL.replace("?3", String.valueOf(mEval_Unidad.getIdEvalUnidad()));
+        mConexion.ejecutarActualizacion(SQL);
+    }
+    
+    // Modificar lista
+    public void modificarLista(Lista mLista) throws SQLException{
+        String SQL = "update lista set Materia = '?1', Grupo = '?2', Semetre = '?3' where idLista = '?4'";
+        SQL = SQL.replace("?1", mLista.getMateria());
+        SQL = SQL.replace("?2", mLista.getGrupo());
+        SQL = SQL.replace("?3", String.valueOf(mLista.getSemestre()));
+        SQL = SQL.replace("?4", String.valueOf(mLista.getIdLista()));
+        mConexion.ejecutarActualizacion(SQL);
+    }
+    
+    // Modificar producto
+    public void modificarProducto(Producto mProducto) throws SQLException{
+        String SQL = "update producto set Tareas = '?1', Calificacion = '?2' where idProducto = '?3'";
+        SQL = SQL.replace("?1", String.valueOf(mProducto.getTareas()));
+        SQL = SQL.replace("?2", String.valueOf(mProducto.getCalificacion()));
+        SQL = SQL.replace("?3", String.valueOf(mProducto.getIdProducto()));
+        mConexion.ejecutarActualizacion(SQL);
+    }
+    
+    //Obtener lista actitud
+    public List<Actitud> consultarActitud() throws SQLException{
+        List<Actitud> lista= new ArrayList();
+        String SQL = "select * from actitud inner join alumno on actitud.alumno_idAlumno = Alumno.idAlumno";
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while(consulta.next()){
+            Actitud mActitud = new Actitud();
+	    Alumno mAlumno = new Alumno();
+	    mAlumno.setIdAlumno(consulta.getInt("IdAlumno"));
+	    mAlumno.setNC(consulta.getInt("NC"));
+	    mAlumno.setNombre(consulta.getString("Nombre"));
+            mActitud.setIdActitud(consulta.getInt("idActitud"));
+            mActitud.setAsistencia(consulta.getInt("Asistensia"));
+            mActitud.setFecha(consulta.getDate("Fecha"));
+            lista.add(mActitud);
+        }
+        return lista;
+    }
+    
+    //Obtener lista alumnos
+    public List<Alumno> consultarAlumno() throws SQLException{
+        List<Alumno> lista= new ArrayList();
+        String SQL = "select * from alumno";
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while(consulta.next()){
+            Alumno mAlumno = new Alumno();
+            mAlumno.setIdAlumno(consulta.getInt("idAlumno"));
+            mAlumno.setNC(consulta.getInt("NC"));
+            mAlumno.setNombre(consulta.getString("Nombre"));
+            lista.add(mAlumno);
+        }
+        return lista;
+    }
+    
+    //Obtener lista desempeño
+    public List<Desempeño> consultarDesempeno() throws SQLException{
+        List<Desempeño> lista= new ArrayList();
+        String SQL = "select * from desempeno inner join alumno on desempeno.alumno_idAlumno = Alumno.idAlumno";
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while(consulta.next()){
+            Desempeño mDesempeño = new Desempeño();
+	    Alumno mAlumno = new Alumno();
+	    mAlumno.setIdAlumno(consulta.getInt("IdAlumno"));
+	    mAlumno.setNC(consulta.getInt("NC"));
+	    mAlumno.setNombre(consulta.getString("Nombre"));
+            mDesempeño.setIdDesempeño(consulta.getInt("idDesempeno"));
+            mDesempeño.setTrabajo(consulta.getString("Trabajo"));
+            mDesempeño.setCalificacion(consulta.getInt("Calificacion"));
+            lista.add(mDesempeño);
+        }
+        return lista;
+    }
+    
+    //Obtener lista evaluacion diagnostica
+    public List<Eval_Diagnostica> consultarEvalDiag() throws SQLException{
+        List<Eval_Diagnostica> lista= new ArrayList();
+        String SQL = "select * from evaluacion_diagnostica inner join alumno on evaluacion_diagnostica.alumno_idAlumno = Alumno.idAlumno";
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while(consulta.next()){
+            Eval_Diagnostica mEval_Diagnostica = new Eval_Diagnostica();
+	    Alumno mAlumno = new Alumno();
+	    mAlumno.setIdAlumno(consulta.getInt("IdAlumno"));
+	    mAlumno.setNC(consulta.getInt("NC"));
+	    mAlumno.setNombre(consulta.getString("Nombre"));
+            mEval_Diagnostica.setIdEval_Diagnostica(consulta.getInt("idEvaluacion_diagnostica"));
+            mEval_Diagnostica.setCalificacion(consulta.getDouble("Calificacion"));
+            lista.add(mEval_Diagnostica);
+        }
+        return lista;
+    }
 }
 
