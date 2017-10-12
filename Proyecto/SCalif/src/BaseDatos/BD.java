@@ -383,5 +383,74 @@ public class BD {
         }
         return lista;
     }
+     //Obtener lista de materias
+    public List<Lista> consultarListaMateria() throws SQLException {
+        List<Lista> lista = new ArrayList();
+        String SQL = "select distinct Materia from Lista";
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()) {
+            Lista mLista = new Lista();
+            mLista.setMateria(consulta.getString("Materia"));
+            lista.add(mLista);
+        }
+        return lista;
+    }
+    
+    //Obtener lista grupo
+    public List<Lista> consultarListaCarrera(String Materia) throws SQLException {
+        List<Lista> lista = new ArrayList();
+        String SQL = "select distinct Carrera from Lista where Materia = '" + Materia +  "'";
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()) {
+            Lista mLista = new Lista();
+            mLista.setCarrera(consulta.getString("Carrera"));
+            lista.add(mLista);
+        }
+        return lista;
+    }
+    
+    //Obtener lista semestre
+    public List<Lista> consultarListaSemestres(String Materia) throws SQLException {
+        List<Lista> lista = new ArrayList();
+        String SQL = "select distinct Semestre from Lista where Materia = '" + Materia +  "'";
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()) {
+            Lista mLista = new Lista();
+            mLista.setSemestre(consulta.getInt("Semestre"));
+            lista.add(mLista);
+        }
+        return lista;
+    }
+    
+    //Obtener lista Grupo
+    public List<Lista> consultarListaGrupo(String Materia) throws SQLException {
+        List<Lista> lista = new ArrayList();
+        String SQL = "select distinct Grupo from Lista where Materia = '" + Materia +  "'";
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()) {
+            Lista mLista = new Lista();
+            mLista.setGrupo(consulta.getString("Grupo"));
+            lista.add(mLista);
+        }
+        return lista;
+    }
+    
+    //Obtener id Lista
+    public List<Lista> consultarListarID(String Materia, String Carrera, String Grupo, String Semestre) throws SQLException {
+        List<Lista> lista = new ArrayList();
+        String SQL = "select idLista from Lista where Materia = '" + Materia +  "' and Carrera = '" + Carrera + "' and Grupo = '" + Grupo + "'and Semestre = '" + Semestre + "'";
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()) {
+            Lista mLista = new Lista();
+            mLista.setIdLista(consulta.getInt("idLista"));
+            lista.add(mLista);
+        }
+        return lista;
+    }
+    
+    public void Cargar(String ID, String Ruta) throws SQLException{
+        Ruta = Ruta.replace('\\', '/');
+        String SQL = "LOAD DATA LOCAL INFILE '" + Ruta + "' INTO TABLE alumno FIELDS TERMINATED BY ';' LINES TERMINATED BY '\n' (NC, Nombre) SET Lista_idLista = '" + ID + "'";
+        mConexion.ejecutarActualizacion(SQL);
+    }
 }
-

@@ -17,6 +17,7 @@ public class Lista {
     private String Materia;
     private String Grupo;
     private int Semestre;
+    private String Carrera;
 
     public int getIdLista() {
         return idLista;
@@ -49,7 +50,12 @@ public class Lista {
     public void setSemestre(int Semestre) {
         this.Semestre = Semestre;
     }
-    
-    
 
+    public String getCarrera() {
+        return Carrera;
+    }
+
+    public void setCarrera(String Carrera) {
+        this.Carrera = Carrera;
+    }
 }
