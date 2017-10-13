@@ -45,14 +45,13 @@ public class BD {
         mConexion.ejecutarActualizacion(SQL);
     }
     
-    //Agregar Alumno
-    public void agregarAlumno(Alumno mAlumno, Lista mLista) throws SQLException{
+     //Agregar Alumno
+    public void agregarAlumno(Alumno mAlumno, String ID) throws SQLException {
         String SQL = "insert into alumno values (null, '?1', '?2', '?3')";
-        SQL = SQL.replace("?1", String.valueOf(mLista.getIdLista() ));
+        SQL = SQL.replace("?1", String.valueOf(ID));
         SQL = SQL.replace("?2", String.valueOf(mAlumno.getNC()));
         SQL = SQL.replace("?3", mAlumno.getNombre());
         mConexion.ejecutarActualizacion(SQL);
-        
     }
     
     public void agregarEva_Diagnostica(Eval_Diagnostica mEval_Diagnostica, Alumno mAlumno) throws SQLException{
