@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -75,6 +76,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jPopupMenu1.add(jMIModificar);
 
         jMiEliminar.setText("Eliminar");
+        jMiEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMiEliminarActionPerformed(evt);
+            }
+        });
         jPopupMenu1.add(jMiEliminar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -261,6 +267,32 @@ public class FrmPrincipal extends javax.swing.JFrame {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMIModificarActionPerformed
+
+    private void jMiEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMiEliminarActionPerformed
+        // TODO add your handling code here:
+        BD mBD = new BD();
+        int fila = this.jTblConsulta.getSelectedRow();
+        String ID = "";
+        try {
+        if (fila >= 0){
+            int NC = (int)jTblConsulta.getValueAt(fila, 0);
+            String Nombre = (String)jTblConsulta.getValueAt(fila, 1);
+            System.out.println(NC);
+            System.out.println(Nombre);
+            
+            List<Alumno> mAlumno = mBD.ConsultaIDAlumno(NC, Nombre);
+            for(Alumno actual : mAlumno){
+                ID = String.valueOf(actual.getIdAlumno());
+                System.out.println(ID);
+            }
+            mBD.eliminarAlumno(Integer.parseInt(ID));
+            JOptionPane.showMessageDialog(null, "Alumno eliminado.");
+            this.LLenarTabla();
+        }
+        } catch (SQLException ex) {
+                Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMiEliminarActionPerformed
 
     /**
      * @param args the command line arguments
