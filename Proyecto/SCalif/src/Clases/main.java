@@ -1,5 +1,7 @@
 package Clases;
 
+import Formularios.FrmPrincipal;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,6 +19,9 @@ public class main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        String a = "";
+        FrmPrincipal mFrmPrincipal = new FrmPrincipal(a);
+        mFrmPrincipal.setVisible(true);
     }
     
 }

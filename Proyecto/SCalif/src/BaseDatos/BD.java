@@ -247,12 +247,12 @@ public class BD {
         return lista;
     }
     
-    //Obtener lista alumnos
-    public List<Alumno> consultarAlumno() throws SQLException{
-        List<Alumno> lista= new ArrayList();
-        String SQL = "select * from alumno";
+   //Obtener lista alumnos
+    public List<Alumno> consultarAlumno(int idLista) throws SQLException {
+        List<Alumno> lista = new ArrayList();
+        String SQL = "select * from alumno where Lista_idLista = " + idLista ;
         ResultSet consulta = mConexion.ejecutarConsulta(SQL);
-        while(consulta.next()){
+        while (consulta.next()) {
             Alumno mAlumno = new Alumno();
             mAlumno.setIdAlumno(consulta.getInt("idAlumno"));
             mAlumno.setNC(consulta.getInt("NC"));
@@ -453,4 +453,16 @@ public class BD {
         String SQL = "LOAD DATA LOCAL INFILE '" + Ruta + "' INTO TABLE alumno FIELDS TERMINATED BY ';' LINES TERMINATED BY '\n' (NC, Nombre) SET Lista_idLista = '" + ID + "'";
         mConexion.ejecutarActualizacion(SQL);
     }
+    
+    public List<Alumno> ConsultaIDAlumno(int NC, String Nombre) throws SQLException{
+        List <Alumno> Lista = new ArrayList();
+        String SQl = "select idAlumno from Alumno where NC = " + NC + " and Nombre = '" + Nombre + "'";
+        ResultSet consulta = mConexion.ejecutarConsulta(SQl);
+        while (consulta.next()){
+            Alumno mAlumno = new Alumno();
+            mAlumno.setIdAlumno(consulta.getInt("idAlumno"));
+            Lista.add(mAlumno);
+        }
+        return Lista;
+    } 
 }

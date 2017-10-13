@@ -5,6 +5,14 @@
  */
 package Formularios;
 
+import BaseDatos.BD;
+import Clases.Alumno;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author MHC <miguel.hrc>
@@ -14,11 +22,18 @@ public class FrmPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form FrmPrincipal
      */
-    public FrmPrincipal() {
+    String id = "";
+    public FrmPrincipal(String ID) {
         initComponents();
+        id=ID;
+        this.setLocationRelativeTo(null);
     }
-    
+
     public int uno;
+    String Carrera;
+    String Grupo;
+    String Semestre;
+    String Materia;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,6 +43,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMIModificar = new javax.swing.JMenuItem();
+        jMiEliminar = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTblConsulta = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -48,7 +66,20 @@ public class FrmPrincipal extends javax.swing.JFrame {
         JMItConocimientoC = new javax.swing.JMenuItem();
         JMItActitudC = new javax.swing.JMenuItem();
 
+        jMIModificar.setText("Modificar");
+        jMIModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIModificarActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMIModificar);
+
+        jMiEliminar.setText("Eliminar");
+        jPopupMenu1.add(jMiEliminar);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setExtendedState(6);
 
         jTblConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -61,6 +92,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
             }
         ));
+        jTblConsulta.setComponentPopupMenu(jPopupMenu1);
         jScrollPane1.setViewportView(jTblConsulta);
 
         MnArchivo.setText("Archivo");
@@ -157,6 +189,20 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void LLenarTabla() throws SQLException{
+        BD mBD = new BD();
+            List<Alumno> lista =  mBD.consultarAlumno(Integer.parseInt(id));
+
+            //Mostrar la consulta alumno
+            Object[] encabezado = {"NC","Nombre"};
+            DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+            for(Alumno actual : lista){
+                Object[] fila = {actual.getNC(), actual.getNombre()};
+                modelo.addRow(fila);
+            }
+            this.jTblConsulta.setModel(modelo);
+    }
+    
     private void JMItCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMItCargarActionPerformed
         // TODO add your handling code here:
         uno = 0;
@@ -174,7 +220,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void JMItAlumnoCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMItAlumnoCActionPerformed
         // TODO add your handling code here:
-        uno =1;
+        uno = 1;
         FrmBusquedaLista mFrmBusquedaLista = new FrmBusquedaLista(uno);
 
         System.out.println(uno);
@@ -182,6 +228,39 @@ public class FrmPrincipal extends javax.swing.JFrame {
         //this.setVisible(false);
 
     }//GEN-LAST:event_JMItAlumnoCActionPerformed
+
+    private void jMIModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIModificarActionPerformed
+        // TODO add your handling code here:
+        BD mBD = new BD();
+        int fila = this.jTblConsulta.getSelectedRow();
+        String ID = "";
+        String Nombre = "";
+        int NC = 0;
+
+        try {
+            if (fila >= 0) {
+                NC = (int) jTblConsulta.getValueAt(fila, 0);
+                Nombre = (String) jTblConsulta.getValueAt(fila, 1);
+                System.out.println(NC);
+                System.out.println(Nombre);
+
+                List<Alumno> mAlumno = mBD.ConsultaIDAlumno(NC, Nombre);
+                for (Alumno actual : mAlumno) {
+                    ID = String.valueOf(actual.getIdAlumno());
+                    System.out.println(ID);
+                }
+            }
+
+            FrmModificar mFrmModificar = new FrmModificar(ID);
+            mFrmModificar.TxtNombre.setText(Nombre);
+            mFrmModificar.TxtNC1.setText(String.valueOf(NC));
+            mFrmModificar.setVisible(true);
+            this.LLenarTabla();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMIModificarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -213,7 +292,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmPrincipal().setVisible(true);
+                new FrmPrincipal("").setVisible(true);
             }
         });
     }
@@ -235,7 +314,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu MnAgregar;
     private javax.swing.JMenu MnArchivo;
     private javax.swing.JMenu MnConsultar;
+    private javax.swing.JMenuItem jMIModificar;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMiEliminar;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jTblConsulta;
     // End of variables declaration//GEN-END:variables

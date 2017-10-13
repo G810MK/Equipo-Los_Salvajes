@@ -20,21 +20,25 @@ import javax.swing.table.DefaultTableModel;
  * @author MHC <miguel.hrc>
  */
 public class FrmBusquedaLista extends javax.swing.JFrame {
-FrmPrincipal mFrmPrincipal = new FrmPrincipal();
+
     /**
      * Creates new form FrmBusquedaLista
      */
     int i;
+
     public FrmBusquedaLista(int a) {
         initComponents();
+        this.setLocationRelativeTo(null);
         i = a;
     }
-    
+
     String Carrera;
     String Grupo;
     String Semestre;
     String Materia;
     String url;
+    public String ID = "";
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -187,13 +191,13 @@ FrmPrincipal mFrmPrincipal = new FrmPrincipal();
         // TODO add your handling code here:
         // TODO add your handling code here:
 
-        if (i == 0){
+        if (i == 0) {
             BD mBD = new BD();
             String ID = "0";
             try {
                 List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
-                for (Lista actual : mLista){
-                    ID  = String.valueOf(actual.getIdLista());
+                for (Lista actual : mLista) {
+                    ID = String.valueOf(actual.getIdLista());
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
@@ -201,12 +205,12 @@ FrmPrincipal mFrmPrincipal = new FrmPrincipal();
 
             System.out.println("id =" + ID);
 
-            JFileChooser dato= new JFileChooser();
+            JFileChooser dato = new JFileChooser();
             FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos csv", "csv");
             dato.setFileFilter(filter);
             int op = dato.showOpenDialog(this);
-            if(op==JFileChooser.APPROVE_OPTION){
-                url=dato.getSelectedFile().getPath();
+            if (op == JFileChooser.APPROVE_OPTION) {
+                url = dato.getSelectedFile().getPath();
             }
             System.out.println(url);
             try {
@@ -214,23 +218,29 @@ FrmPrincipal mFrmPrincipal = new FrmPrincipal();
             } catch (SQLException ex) {
                 Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else{
+        } else {
             try {
 
                 BD mBD = new BD();
-                List<Alumno> lista =  mBD.consultarAlumno();
+                List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+                for (Lista actual : mLista) {
+                    ID = String.valueOf(actual.getIdLista());
+                }
+                List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(ID));
 
                 //Mostrar la consulta alumno
-                Object[] encabezado = {"NC","Nombre"};
+                Object[] encabezado = {"NC", "Nombre"};
                 DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-                for(Alumno actual : lista){
+                for (Alumno actual : lista) {
                     Object[] fila = {actual.getNC(), actual.getNombre()};
                     modelo.addRow(fila);
                 }
+                FrmPrincipal mFrmPrincipal = new FrmPrincipal(ID);
                 mFrmPrincipal.jTblConsulta.setModel(modelo);
                 mFrmPrincipal.setVisible(true);
+                this.dispose();
 
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 System.out.println(ex.toString());
             }
         }
@@ -243,7 +253,7 @@ FrmPrincipal mFrmPrincipal = new FrmPrincipal();
         this.JCmbMateria.removeAllItems();
         try {
             List<Lista> mLista = mBD.consultarListaMateria();
-            for (Lista actual : mLista){
+            for (Lista actual : mLista) {
                 this.JCmbMateria.addItem(actual.getMateria());
             }
         } catch (SQLException ex) {
@@ -260,7 +270,7 @@ FrmPrincipal mFrmPrincipal = new FrmPrincipal();
 
         try {
             List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.JCmbMateria.getSelectedItem()));
-            for (Lista actual : mLista){
+            for (Lista actual : mLista) {
                 this.JCmbCarrera.addItem(actual.getCarrera());
             }
         } catch (SQLException ex) {
@@ -271,7 +281,7 @@ FrmPrincipal mFrmPrincipal = new FrmPrincipal();
 
         try {
             List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.JCmbMateria.getSelectedItem()));
-            for (Lista actual : mLista){
+            for (Lista actual : mLista) {
                 this.JCmbSemestro.addItem(String.valueOf(actual.getSemestre()));
             }
         } catch (SQLException ex) {
@@ -280,7 +290,7 @@ FrmPrincipal mFrmPrincipal = new FrmPrincipal();
 
         try {
             List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.JCmbMateria.getSelectedItem()));
-            for (Lista actual : mLista){
+            for (Lista actual : mLista) {
                 this.JCmbGrupo.addItem(String.valueOf(actual.getGrupo()));
             }
         } catch (SQLException ex) {
