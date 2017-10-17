@@ -57,8 +57,7 @@ public class FrmBusquedaLista extends javax.swing.JFrame {
         jLblSemestre = new javax.swing.JLabel();
         jLblCarrera = new javax.swing.JLabel();
         JCmbGrupo = new javax.swing.JComboBox<>();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMnRegresar = new javax.swing.JMenu();
+        BtnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -111,65 +110,68 @@ public class FrmBusquedaLista extends javax.swing.JFrame {
             }
         });
 
-        jMnRegresar.setText("Regresar");
-        jMenuBar1.add(jMnRegresar);
-
-        setJMenuBar(jMenuBar1);
+        BtnRegresar.setText("Regresar");
+        BtnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRegresarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(152, 152, 152)
+                .addComponent(jBtnAceptar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JCmbMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLblMateria))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(BtnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JCmbMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLblMateria))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLblCarrera)
                             .addComponent(JCmbCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JCmbSemestro, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLblSemestre))
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLblGrupo)
-                            .addComponent(JCmbGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(184, 184, 184)
-                        .addComponent(jBtnAceptar)))
-                .addGap(57, 57, 57))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLblSemestre)
+                                .addGap(47, 47, 47)
+                                .addComponent(jLblGrupo))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(JCmbSemestro, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(JCmbGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLblMateria)
-                                .addComponent(jLblCarrera))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(JCmbMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(JCmbCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLblGrupo)
-                                .addComponent(jLblSemestre))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(JCmbGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(JCmbSemestro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLblMateria)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLblSemestre)
+                        .addComponent(jLblGrupo)
+                        .addComponent(jLblCarrera)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JCmbMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JCmbCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JCmbSemestro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JCmbGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jBtnAceptar)
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnRegresar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -199,22 +201,32 @@ public class FrmBusquedaLista extends javax.swing.JFrame {
                 for (Lista actual : mLista) {
                     ID = String.valueOf(actual.getIdLista());
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
-            }
 
-            System.out.println("id =" + ID);
+                System.out.println("id =" + ID);
 
-            JFileChooser dato = new JFileChooser();
-            FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos csv", "csv");
-            dato.setFileFilter(filter);
-            int op = dato.showOpenDialog(this);
-            if (op == JFileChooser.APPROVE_OPTION) {
-                url = dato.getSelectedFile().getPath();
-            }
-            System.out.println(url);
-            try {
+                JFileChooser dato = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos csv", "csv");
+                dato.setAcceptAllFileFilterUsed(false);
+                dato.setFileFilter(filter);
+                int op = dato.showOpenDialog(this);
+                if (op == JFileChooser.APPROVE_OPTION) {
+                    url = dato.getSelectedFile().getPath();
+                }
+                System.out.println(url);
+
                 mBD.Cargar(ID, url);
+                dispose();
+                FrmPrincipal mFrmPrincipal = new FrmPrincipal(ID);
+                List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(ID));
+
+                Object[] encabezado = {"NC", "Nombre"};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                for (Alumno actual : lista) {
+                    Object[] fila = {actual.getNC(), actual.getNombre()};
+                    modelo.addRow(fila);
+                }
+                mFrmPrincipal.jTblConsulta.setModel(modelo);
+                mFrmPrincipal.setVisible(true);
             } catch (SQLException ex) {
                 Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -309,6 +321,11 @@ public class FrmBusquedaLista extends javax.swing.JFrame {
         System.out.println("Grupo: " + Grupo + "\n");
     }//GEN-LAST:event_JCmbGrupoActionPerformed
 
+    private void BtnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegresarActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_BtnRegresarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -345,6 +362,7 @@ public class FrmBusquedaLista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnRegresar;
     private javax.swing.JComboBox<String> JCmbCarrera;
     private javax.swing.JComboBox<String> JCmbGrupo;
     private javax.swing.JComboBox<String> JCmbMateria;
@@ -354,7 +372,5 @@ public class FrmBusquedaLista extends javax.swing.JFrame {
     private javax.swing.JLabel jLblGrupo;
     private javax.swing.JLabel jLblMateria;
     private javax.swing.JLabel jLblSemestre;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenu jMnRegresar;
     // End of variables declaration//GEN-END:variables
 }

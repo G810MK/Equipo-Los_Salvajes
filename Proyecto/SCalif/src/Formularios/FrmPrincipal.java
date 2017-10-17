@@ -119,6 +119,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         MnAgregar.add(JMItListaA);
 
         JMItAlumnoA.setText("Alumno");
+        JMItAlumnoA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMItAlumnoAActionPerformed(evt);
+            }
+        });
         MnAgregar.add(JMItAlumnoA);
 
         JMItProductoA.setText("Producto");
@@ -257,7 +262,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 }
             }
 
-            FrmModificar mFrmModificar = new FrmModificar(ID);
+            FrmModificar mFrmModificar = new FrmModificar(id, ID);
             mFrmModificar.TxtNombre.setText(Nombre);
             mFrmModificar.TxtNC1.setText(String.valueOf(NC));
             mFrmModificar.setVisible(true);
@@ -293,6 +298,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMiEliminarActionPerformed
+
+    private void JMItAlumnoAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMItAlumnoAActionPerformed
+        // TODO add your handling code here:
+        FrmAgregar mFrmAgregar = new FrmAgregar();
+        mFrmAgregar.setVisible(true);
+    }//GEN-LAST:event_JMItAlumnoAActionPerformed
 
     /**
      * @param args the command line arguments

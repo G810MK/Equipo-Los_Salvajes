@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,10 +26,12 @@ public class FrmModificar extends javax.swing.JFrame {
      * Creates new form FrmAgregar
      */
     String id = "";
-    public FrmModificar(String ID) {
+    String IDA = "";
+    public FrmModificar(String ID, String idA) {
         this.setLocationRelativeTo(null);
         initComponents();
         id = ID;
+        IDA = idA;
     
     }
  String Materia;
@@ -46,13 +49,17 @@ public class FrmModificar extends javax.swing.JFrame {
         TxtNC1 = new javax.swing.JTextField();
         BtnGuardar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        BtnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel2.setText("No.Control:");
 
+        TxtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtNombreActionPerformed(evt);
+            }
+        });
         TxtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TxtNombreKeyTyped(evt);
@@ -74,10 +81,12 @@ public class FrmModificar extends javax.swing.JFrame {
 
         jLabel7.setText("Nombre");
 
-        jMenu1.setText("Regresar");
-        jMenuBar1.add(jMenu1);
-
-        setJMenuBar(jMenuBar1);
+        BtnRegresar.setText("Regresar");
+        BtnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRegresarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,11 +104,14 @@ public class FrmModificar extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(TxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(BtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addComponent(BtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BtnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -110,28 +122,46 @@ public class FrmModificar extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(TxtNC1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
-                    .addComponent(TxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(TxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BtnGuardar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BtnRegresar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void LLenarTabla() throws SQLException{
+        BD mBD = new BD();
+            List<Alumno> lista =  mBD.consultarAlumno(Integer.parseInt(id));
+
+            //Mostrar la consulta alumno
+            Object[] encabezado = {"NC","Nombre"};
+            DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+            for(Alumno actual : lista){
+                Object[] fila = {actual.getNC(), actual.getNombre()};
+                modelo.addRow(fila);
+            }
+            FrmPrincipal mFrmPrincipal = new FrmPrincipal(id);
+            mFrmPrincipal.jTblConsulta.setModel(modelo);
+            mFrmPrincipal.setVisible(true);
+    }
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
         // TODO add your handling code here:
          try{
              BD mBD = new BD();
             Alumno mAlumno = new Alumno();
-            mAlumno.setIdAlumno(Integer.parseInt(id));
+            mAlumno.setIdAlumno(Integer.parseInt(IDA));
             mAlumno.setNC(Integer.parseInt(this.TxtNC1.getText()));
             mAlumno.setNombre(TxtNombre.getText());       
             
             mBD.modificarAlumno(mAlumno);
             JOptionPane.showMessageDialog(this, "Alumno modificado");
+            this.LLenarTabla();
             dispose();
         }catch(Exception ex){
             System.out.println(ex.toString());
@@ -157,6 +187,15 @@ public class FrmModificar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Ingresar Solo Números");
         }
     }//GEN-LAST:event_TxtNC1KeyTyped
+
+    private void BtnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegresarActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_BtnRegresarActionPerformed
+
+    private void TxtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtNombreActionPerformed
     
     /**
      * @param args the command line arguments
@@ -195,18 +234,17 @@ public class FrmModificar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmModificar("").setVisible(true);
+                new FrmModificar("", "").setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnGuardar;
+    private javax.swing.JButton BtnRegresar;
     public javax.swing.JTextField TxtNC1;
     public javax.swing.JTextField TxtNombre;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }
