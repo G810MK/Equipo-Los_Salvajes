@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 30-09-2017 a las 04:12:21
+-- Tiempo de generación: 17-10-2017 a las 02:11:30
 -- Versión del servidor: 5.7.17-log
 -- Versión de PHP: 5.6.30
 
@@ -111,7 +111,8 @@ CREATE TABLE `lista` (
   `idLista` int(11) NOT NULL,
   `Materia` varchar(50) DEFAULT NULL,
   `Grupo` varchar(255) DEFAULT NULL,
-  `Semetre` int(11) DEFAULT NULL
+  `Semestre` int(11) DEFAULT NULL,
+  `Carrera` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
