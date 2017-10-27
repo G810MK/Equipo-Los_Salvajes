@@ -30,10 +30,11 @@ public class BD {
     
     //Agregar Lista
     public void agregarLista(Lista mLista) throws SQLException{
-        String SQL = "insert into Lista values (null, '?1', '?2', '?3' )";
+        String SQL = "insert into Lista values (null, '?1', '?2', '?3', '?4' )";
         SQL = SQL.replace("?1", mLista.getMateria());
         SQL = SQL.replace("?2", mLista.getGrupo());
         SQL =SQL.replace("?3", String.valueOf(mLista.getSemestre()));
+        SQL = SQL.replace("?4", mLista.getCarrera());
         mConexion.ejecutarActualizacion(SQL);
     }
     
