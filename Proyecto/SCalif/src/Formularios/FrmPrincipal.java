@@ -116,6 +116,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         MnAgregar.setText("Agregar");
 
         JMItListaA.setText("Lista");
+        JMItListaA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMItListaAActionPerformed(evt);
+            }
+        });
         MnAgregar.add(JMItListaA);
 
         JMItAlumnoA.setText("Alumno");
@@ -304,6 +309,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         FrmAgregar mFrmAgregar = new FrmAgregar();
         mFrmAgregar.setVisible(true);
     }//GEN-LAST:event_JMItAlumnoAActionPerformed
+
+    private void JMItListaAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMItListaAActionPerformed
+        // TODO add your handling code here:
+        FrmLista mFrmLista = new FrmLista();
+        mFrmLista.setVisible(true);
+    }//GEN-LAST:event_JMItListaAActionPerformed
 
     /**
      * @param args the command line arguments
