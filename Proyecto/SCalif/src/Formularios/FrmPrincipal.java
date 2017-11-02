@@ -7,6 +7,7 @@ package Formularios;
 
 import BaseDatos.BD;
 import Clases.Alumno;
+import Clases.Lista;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -157,6 +158,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         MnConsultar.setText("Consultar");
 
         JMItListaC.setText("Lista");
+        JMItListaC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMItListaCActionPerformed(evt);
+            }
+        });
         MnConsultar.add(JMItListaC);
 
         JMItAlumnoC.setText("Alumno");
@@ -315,6 +321,25 @@ public class FrmPrincipal extends javax.swing.JFrame {
         FrmLista mFrmLista = new FrmLista();
         mFrmLista.setVisible(true);
     }//GEN-LAST:event_JMItListaAActionPerformed
+
+    private void JMItListaCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMItListaCActionPerformed
+        // TODO add your handling code here:
+        BD mBD = new BD();
+
+        try {
+            List<Lista> lista = mBD.consultarLista();
+
+            Object[] encabezado = {"Lista", "Materia", "Grupo", "Semestre", "Carrera"};
+            DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+            for (Lista actual : lista) {
+                Object[] fila = {actual.getIdLista(), actual.getMateria(), actual.getGrupo(), actual.getSemestre(), actual.getCarrera()};
+                modelo.addRow(fila);
+            }
+            this.jTblConsulta.setModel(modelo);
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_JMItListaCActionPerformed
 
     /**
      * @param args the command line arguments
