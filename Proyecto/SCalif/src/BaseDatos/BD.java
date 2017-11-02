@@ -348,7 +348,7 @@ public class BD {
     //Obtener lista
     public List<Lista> consultarLista() throws SQLException{
         List<Lista> lista= new ArrayList();
-    String SQL = "select * from lista inner join alumno on lista.idLista = Alumno.Lista_idLista";
+    String SQL = "select * from lista";
         ResultSet consulta = mConexion.ejecutarConsulta(SQL);
         while(consulta.next()){
             Lista mLista = new Lista();
