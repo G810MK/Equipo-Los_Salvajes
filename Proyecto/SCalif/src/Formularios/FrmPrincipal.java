@@ -25,9 +25,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
      * Creates new form FrmPrincipal
      */
     String id = "";
+
     public FrmPrincipal(String ID) {
         initComponents();
-        id=ID;
+        id = ID;
         this.setLocationRelativeTo(null);
     }
 
@@ -36,6 +37,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     String Grupo;
     String Semestre;
     String Materia;
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -211,20 +213,20 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void LLenarTabla() throws SQLException{
+    public void LLenarTabla() throws SQLException {
         BD mBD = new BD();
-            List<Alumno> lista =  mBD.consultarAlumno(Integer.parseInt(id));
+        List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(id));
 
-            //Mostrar la consulta alumno
-            Object[] encabezado = {"NC","Nombre"};
-            DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-            for(Alumno actual : lista){
-                Object[] fila = {actual.getNC(), actual.getNombre()};
-                modelo.addRow(fila);
-            }
-            this.jTblConsulta.setModel(modelo);
+        //Mostrar la consulta alumno
+        Object[] encabezado = {"NC", "Nombre"};
+        DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+        for (Alumno actual : lista) {
+            Object[] fila = {actual.getNC(), actual.getNombre()};
+            modelo.addRow(fila);
+        }
+        this.jTblConsulta.setModel(modelo);
     }
-    
+
     private void JMItCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMItCargarActionPerformed
         // TODO add your handling code here:
         uno = 0;
@@ -290,23 +292,23 @@ public class FrmPrincipal extends javax.swing.JFrame {
         int fila = this.jTblConsulta.getSelectedRow();
         String ID = "";
         try {
-        if (fila >= 0){
-            int NC = (int)jTblConsulta.getValueAt(fila, 0);
-            String Nombre = (String)jTblConsulta.getValueAt(fila, 1);
-            System.out.println(NC);
-            System.out.println(Nombre);
-            
-            List<Alumno> mAlumno = mBD.ConsultaIDAlumno(NC, Nombre);
-            for(Alumno actual : mAlumno){
-                ID = String.valueOf(actual.getIdAlumno());
-                System.out.println(ID);
+            if (fila >= 0) {
+                int NC = (int) jTblConsulta.getValueAt(fila, 0);
+                String Nombre = (String) jTblConsulta.getValueAt(fila, 1);
+                System.out.println(NC);
+                System.out.println(Nombre);
+
+                List<Alumno> mAlumno = mBD.ConsultaIDAlumno(NC, Nombre);
+                for (Alumno actual : mAlumno) {
+                    ID = String.valueOf(actual.getIdAlumno());
+                    System.out.println(ID);
+                }
+                mBD.eliminarAlumno(Integer.parseInt(ID));
+                JOptionPane.showMessageDialog(null, "Alumno eliminado.");
+                this.LLenarTabla();
             }
-            mBD.eliminarAlumno(Integer.parseInt(ID));
-            JOptionPane.showMessageDialog(null, "Alumno eliminado.");
-            this.LLenarTabla();
-        }
         } catch (SQLException ex) {
-                Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMiEliminarActionPerformed
 
