@@ -27,29 +27,79 @@
       </SubComponents>
     </Container>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder justification="5" title="L.S&apos;SOFT">
+              <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                <LineBorder roundedCorners="true"/>
+              </Border>
+              <Font PropertyName="font" name="Tahoma" size="18" style="1"/>
+            </TitledBorder>
+          </Border>
+        </Property>
+      </Properties>
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="MnArchivo">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/png/24x24/folder.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Archivo"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="JMItCargar">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/png/24x24/csv.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Cargar"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JMItCargarActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="JMItCargar1">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/png/24x24/icon.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Salir"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JMItCargar1ActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="MnAgregar">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/png/24x24/add.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Agregar"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="JMItListaA">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/png/24x24/add_page.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Lista"/>
               </Properties>
               <Events>
@@ -58,6 +108,12 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="JMItAlumnoA">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/png/24x24/user.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Alumno"/>
               </Properties>
               <Events>
@@ -66,6 +122,12 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="JMItProductoA">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/png/24x24/hombre-que-trabaja-en-monitor-plano-en-vista-lateral.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Producto"/>
               </Properties>
               <Events>
@@ -74,21 +136,45 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="JMItConocimientoA">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/png/24x24/conocimiento.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Conocimiento"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="JMItActitudA">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/png/24x24/atleta.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Actitud"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="JMItDesempe&#xf1;oA">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/png/24x24/datos-sobre-recursos-humanos-del-desempeno-laboral.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Desempe&#xf1;o"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="JMItEvalDA">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/png/24x24/evaluacion.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Evaluaci&#xf3;n diagn&#xf3;stica"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
@@ -97,11 +183,23 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="MnConsultar">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/png/24x24/search.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Consultar"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="JMItListaC">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/png/24x24/search_page.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Lista"/>
               </Properties>
               <Events>
@@ -110,6 +208,12 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="JMItAlumnoC">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/png/24x24/user.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Alumno"/>
               </Properties>
               <Events>
@@ -119,16 +223,34 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="JMItProductoC">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/png/24x24/hombre-que-trabaja-en-monitor-plano-en-vista-lateral.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Producto"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="JMItConocimientoC">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/png/24x24/conocimiento.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Conocimiento"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="JMItActitudC">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/png/24x24/atleta.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Actitud"/>
               </Properties>
             </MenuItem>
@@ -143,6 +265,7 @@
       <Color id="Cursor Por defecto"/>
     </Property>
     <Property name="extendedState" type="int" value="6"/>
+    <Property name="undecorated" type="boolean" value="true"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
@@ -175,7 +298,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="308" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="276" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>

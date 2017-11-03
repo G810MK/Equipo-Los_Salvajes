@@ -57,6 +57,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         MnArchivo = new javax.swing.JMenu();
         JMItCargar = new javax.swing.JMenuItem();
+        JMItCargar1 = new javax.swing.JMenuItem();
         MnAgregar = new javax.swing.JMenu();
         JMItListaA = new javax.swing.JMenuItem();
         JMItAlumnoA = new javax.swing.JMenuItem();
@@ -91,6 +92,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setExtendedState(6);
+        setUndecorated(true);
 
         jTblConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -106,8 +108,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jTblConsulta.setComponentPopupMenu(jPopupMenu1);
         jScrollPane1.setViewportView(jTblConsulta);
 
-        MnArchivo.setText("Archivo");
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "L.S'SOFT", javax.swing.border.TitledBorder.TRAILING, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
+        MnArchivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/folder.png"))); // NOI18N
+        MnArchivo.setText("Archivo");
+        MnArchivo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        JMItCargar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JMItCargar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/csv.png"))); // NOI18N
         JMItCargar.setText("Cargar");
         JMItCargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,10 +124,24 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         MnArchivo.add(JMItCargar);
 
+        JMItCargar1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JMItCargar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/icon.png"))); // NOI18N
+        JMItCargar1.setText("Salir");
+        JMItCargar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMItCargar1ActionPerformed(evt);
+            }
+        });
+        MnArchivo.add(JMItCargar1);
+
         jMenuBar1.add(MnArchivo);
 
+        MnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/add.png"))); // NOI18N
         MnAgregar.setText("Agregar");
+        MnAgregar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        JMItListaA.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JMItListaA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/add_page.png"))); // NOI18N
         JMItListaA.setText("Lista");
         JMItListaA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,6 +150,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         MnAgregar.add(JMItListaA);
 
+        JMItAlumnoA.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JMItAlumnoA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/user.png"))); // NOI18N
         JMItAlumnoA.setText("Alumno");
         JMItAlumnoA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,6 +160,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         MnAgregar.add(JMItAlumnoA);
 
+        JMItProductoA.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JMItProductoA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/hombre-que-trabaja-en-monitor-plano-en-vista-lateral.png"))); // NOI18N
         JMItProductoA.setText("Producto");
         JMItProductoA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,23 +170,35 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         MnAgregar.add(JMItProductoA);
 
+        JMItConocimientoA.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JMItConocimientoA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/conocimiento.png"))); // NOI18N
         JMItConocimientoA.setText("Conocimiento");
         MnAgregar.add(JMItConocimientoA);
 
+        JMItActitudA.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JMItActitudA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/atleta.png"))); // NOI18N
         JMItActitudA.setText("Actitud");
         MnAgregar.add(JMItActitudA);
 
+        JMItDesempeñoA.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JMItDesempeñoA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/datos-sobre-recursos-humanos-del-desempeno-laboral.png"))); // NOI18N
         JMItDesempeñoA.setText("Desempeño");
         MnAgregar.add(JMItDesempeñoA);
 
+        JMItEvalDA.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JMItEvalDA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/evaluacion.png"))); // NOI18N
         JMItEvalDA.setText("Evaluación diagnóstica");
         JMItEvalDA.setToolTipText("");
         MnAgregar.add(JMItEvalDA);
 
         jMenuBar1.add(MnAgregar);
 
+        MnConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/search.png"))); // NOI18N
         MnConsultar.setText("Consultar");
+        MnConsultar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        JMItListaC.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JMItListaC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/search_page.png"))); // NOI18N
         JMItListaC.setText("Lista");
         JMItListaC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,6 +207,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         MnConsultar.add(JMItListaC);
 
+        JMItAlumnoC.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JMItAlumnoC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/user.png"))); // NOI18N
         JMItAlumnoC.setText("Alumno");
         JMItAlumnoC.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -182,12 +222,18 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         MnConsultar.add(JMItAlumnoC);
 
+        JMItProductoC.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JMItProductoC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/hombre-que-trabaja-en-monitor-plano-en-vista-lateral.png"))); // NOI18N
         JMItProductoC.setText("Producto");
         MnConsultar.add(JMItProductoC);
 
+        JMItConocimientoC.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JMItConocimientoC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/conocimiento.png"))); // NOI18N
         JMItConocimientoC.setText("Conocimiento");
         MnConsultar.add(JMItConocimientoC);
 
+        JMItActitudC.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JMItActitudC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/atleta.png"))); // NOI18N
         JMItActitudC.setText("Actitud");
         MnConsultar.add(JMItActitudC);
 
@@ -208,7 +254,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -446,6 +492,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_JMItListaCActionPerformed
 
+    private void JMItCargar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMItCargar1ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_JMItCargar1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -490,6 +541,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem JMItAlumnoA;
     private javax.swing.JMenuItem JMItAlumnoC;
     private javax.swing.JMenuItem JMItCargar;
+    private javax.swing.JMenuItem JMItCargar1;
     private javax.swing.JMenuItem JMItConocimientoA;
     private javax.swing.JMenuItem JMItConocimientoC;
     private javax.swing.JMenuItem JMItDesempeñoA;
