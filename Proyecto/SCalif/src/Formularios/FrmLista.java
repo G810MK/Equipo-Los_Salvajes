@@ -8,6 +8,7 @@ package Formularios;
 import BaseDatos.BD;
 import Clases.Alumno;
 import Clases.Lista;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -63,7 +64,31 @@ public class FrmLista extends javax.swing.JFrame {
 
         jLabel4.setText("Carrera");
 
-        BtnAgragar.setText("AGREGAR");
+        TxtMateria.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtMateriaKeyTyped(evt);
+            }
+        });
+
+        TxtGrupo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtGrupoKeyTyped(evt);
+            }
+        });
+
+        TxtSemestre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtSemestreKeyTyped(evt);
+            }
+        });
+
+        TxtCarrera.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtCarreraKeyTyped(evt);
+            }
+        });
+
+        BtnAgragar.setText("Guardar");
         BtnAgragar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAgragarActionPerformed(evt);
@@ -85,11 +110,11 @@ public class FrmLista extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 1, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(TxtMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 234, Short.MAX_VALUE))
+                        .addGap(30, 63, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -108,7 +133,7 @@ public class FrmLista extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(TxtSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(TxtCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 178, Short.MAX_VALUE))))
+                        .addGap(0, 16, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,7 +158,7 @@ public class FrmLista extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnAgragar)
                     .addComponent(jButton1))
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -219,6 +244,44 @@ public class FrmLista extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_BtnAgragarActionPerformed
+
+    private void TxtMateriaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtMateriaKeyTyped
+        // TODO add your handling code here:
+        if (!Character.isLetter(evt.getKeyChar())
+                != (evt.getKeyChar() == KeyEvent.VK_SPACE)
+                != (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtMateriaKeyTyped
+
+    private void TxtGrupoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtGrupoKeyTyped
+        // TODO add your handling code here:
+        if (!Character.isLetter(evt.getKeyChar())
+                != (evt.getKeyChar() == KeyEvent.VK_SPACE)
+                != (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtGrupoKeyTyped
+
+    private void TxtSemestreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtSemestreKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE)
+                && (caracter != '.')) {
+            /* lo que deseo colocar aqui es si ya se pulso el caracter (.) el mismo no se pueda repetir*/
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Ingresar Solo Números");
+        }
+    }//GEN-LAST:event_TxtSemestreKeyTyped
+
+    private void TxtCarreraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtCarreraKeyTyped
+        // TODO add your handling code here:
+        if (!Character.isLetter(evt.getKeyChar())
+                != (evt.getKeyChar() == KeyEvent.VK_SPACE)
+                != (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtCarreraKeyTyped
 
     /**
      * @param args the command line arguments
