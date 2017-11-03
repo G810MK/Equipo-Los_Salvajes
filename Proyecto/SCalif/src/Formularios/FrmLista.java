@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,7 +24,12 @@ public class FrmLista extends javax.swing.JFrame {
     /**
      * Creates new form FrmLista
      */
-    public FrmLista() {
+    int i = 0;
+    String id = "";
+
+    public FrmLista(int a, String ID) {
+        i = a;
+        id = ID;
         initComponents();
     }
 
@@ -138,30 +144,73 @@ public class FrmLista extends javax.swing.JFrame {
         this.hide();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void LLenarTabla() throws SQLException {
+        BD mBD = new BD();
+        List<Lista> lista = mBD.consultarLista();
+
+        //Mostrar la consulta lista
+        Object[] encabezado = {"Lista", "Materia", "Grupo", "Semestre", "Carrera"};
+        DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+        for (Lista actual : lista) {
+            Object[] fila = {actual.getIdLista(), actual.getMateria(), actual.getGrupo(), actual.getSemestre(), actual.getCarrera()};
+            modelo.addRow(fila);
+        }
+        FrmPrincipal mFrmPrincipal = new FrmPrincipal(id, 0);
+        mFrmPrincipal.jTblConsulta.setModel(modelo);
+        mFrmPrincipal.setVisible(true);
+    }
+
     private void BtnAgragarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgragarActionPerformed
         // TODO add your handling code here:
-        if (((this.TxtMateria.getText().equals("")) | (this.TxtGrupo.getText().equals("")) | (this.TxtSemestre.getText().equals("")) | (this.TxtCarrera.getText().equals("")))) {
-            JOptionPane.showMessageDialog(rootPane, "Exiten campos vacios");
-        } else {
-
-            try {
-                //Empaquetar los datos en un productor
-                Lista mLista = new Lista();
-
-                mLista.setCarrera(TxtCarrera.getText());
-                mLista.setGrupo(TxtGrupo.getText());
-                mLista.setMateria(TxtMateria.getText());
-                mLista.setSemestre(Integer.parseInt(TxtSemestre.getText()));
-
-                //Guardar el productor usando su control
-                BD mBD = new BD();
-
-                mBD.agregarLista(mLista);
-                JOptionPane.showMessageDialog(this, "Lista guardada");
-                dispose();
-            } catch (Exception ex) {
-                System.out.println(ex.toString());
-            }
+        switch (i) {
+            case 0:
+                if (((this.TxtMateria.getText().equals("")) | (this.TxtGrupo.getText().equals("")) | (this.TxtSemestre.getText().equals("")) | (this.TxtCarrera.getText().equals("")))) {
+                    JOptionPane.showMessageDialog(rootPane, "Exiten campos vacios");
+                } else {
+                    
+                    try {
+                        //Agregar Lista
+                        Lista mLista = new Lista();
+                        
+                        mLista.setCarrera(TxtCarrera.getText());
+                        mLista.setGrupo(TxtGrupo.getText());
+                        mLista.setMateria(TxtMateria.getText());
+                        mLista.setSemestre(Integer.parseInt(TxtSemestre.getText()));
+                        
+                        //Guardar el productor usando su control
+                        BD mBD = new BD();
+                        
+                        mBD.agregarLista(mLista);
+                        JOptionPane.showMessageDialog(this, "Lista guardada");
+                        dispose();
+                        i = 0;
+                    } catch (Exception ex) {
+                        System.out.println(ex.toString());
+                    }
+                }   break;
+            case 1:
+                try {
+                    //Modificar Lista
+                    BD mBD = new BD();
+                    
+                    Lista mLista = new Lista();
+                    mLista.setIdLista(Integer.parseInt(id));
+                    mLista.setMateria(this.TxtMateria.getText());
+                    mLista.setGrupo(this.TxtGrupo.getText());
+                    mLista.setSemestre(Integer.parseInt(this.TxtSemestre.getText()));
+                    mLista.setCarrera(this.TxtCarrera.getText());
+                    
+                    mBD.modificarLista(mLista);
+                    JOptionPane.showMessageDialog(null, "Lista modificada");
+                    this.LLenarTabla();
+                    dispose();
+                    i = 0;
+                } catch (Exception ex) {
+                    System.out.println(ex.toString());
+                }   break;
+            default:
+                i = 0;
+                break;
         }
     }
 
@@ -202,17 +251,17 @@ public class FrmLista extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmLista().setVisible(true);
+                new FrmLista(0, "").setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAgragar;
-    private javax.swing.JTextField TxtCarrera;
-    private javax.swing.JTextField TxtGrupo;
-    private javax.swing.JTextField TxtMateria;
-    private javax.swing.JTextField TxtSemestre;
+    public javax.swing.JTextField TxtCarrera;
+    public javax.swing.JTextField TxtGrupo;
+    public javax.swing.JTextField TxtMateria;
+    public javax.swing.JTextField TxtSemestre;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

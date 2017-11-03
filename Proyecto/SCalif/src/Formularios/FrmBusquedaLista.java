@@ -24,7 +24,7 @@ public class FrmBusquedaLista extends javax.swing.JFrame {
     /**
      * Creates new form FrmBusquedaLista
      */
-    int i;
+    int i = 0;
 
     public FrmBusquedaLista(int a) {
         initComponents();
@@ -216,7 +216,7 @@ public class FrmBusquedaLista extends javax.swing.JFrame {
 
                 mBD.Cargar(ID, url);
                 dispose();
-                FrmPrincipal mFrmPrincipal = new FrmPrincipal(ID);
+                FrmPrincipal mFrmPrincipal = new FrmPrincipal(ID,0);
                 List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(ID));
 
                 Object[] encabezado = {"NC", "Nombre"};
@@ -247,7 +247,7 @@ public class FrmBusquedaLista extends javax.swing.JFrame {
                     Object[] fila = {actual.getNC(), actual.getNombre()};
                     modelo.addRow(fila);
                 }
-                FrmPrincipal mFrmPrincipal = new FrmPrincipal(ID);
+                FrmPrincipal mFrmPrincipal = new FrmPrincipal(ID,1);
                 mFrmPrincipal.jTblConsulta.setModel(modelo);
                 mFrmPrincipal.setVisible(true);
                 this.dispose();

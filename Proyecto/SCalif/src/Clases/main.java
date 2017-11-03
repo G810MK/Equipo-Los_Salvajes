@@ -20,7 +20,8 @@ public class main {
     public static void main(String[] args) {
         // TODO code application logic here
         String a = "";
-        FrmPrincipal mFrmPrincipal = new FrmPrincipal(a);
+        int c = 0;
+        FrmPrincipal mFrmPrincipal = new FrmPrincipal(a,c);
         mFrmPrincipal.setVisible(true);
     }
     

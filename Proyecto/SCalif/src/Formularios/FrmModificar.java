@@ -146,7 +146,7 @@ public class FrmModificar extends javax.swing.JFrame {
                 Object[] fila = {actual.getNC(), actual.getNombre()};
                 modelo.addRow(fila);
             }
-            FrmPrincipal mFrmPrincipal = new FrmPrincipal(id);
+            FrmPrincipal mFrmPrincipal = new FrmPrincipal(id,0);
             mFrmPrincipal.jTblConsulta.setModel(modelo);
             mFrmPrincipal.setVisible(true);
     }
