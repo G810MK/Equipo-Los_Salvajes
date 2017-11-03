@@ -420,8 +420,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void JMItListaAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMItListaAActionPerformed
         // TODO add your handling code here:
-        //FrmLista mFrmLista = new FrmLista();
-        //mFrmLista.setVisible(true);
+        FrmLista mFrmLista = new FrmLista(0, "");
+        mFrmLista.setVisible(true);
     }//GEN-LAST:event_JMItListaAActionPerformed
 
     private void JMItListaCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMItListaCActionPerformed
