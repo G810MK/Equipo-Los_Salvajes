@@ -25,19 +25,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
      * Creates new form FrmPrincipal
      */
     String id = "";
-<<<<<<< HEAD
     int cc = 0;
 
     public FrmPrincipal(String ID, int c) {
         initComponents();
         id = ID;
         cc = c;
-=======
-
-    public FrmPrincipal(String ID) {
-        initComponents();
-        id = ID;
->>>>>>> ccb79709a42d83ff73259974f3c6b6fb5495466a
         this.setLocationRelativeTo(null);
     }
 
@@ -365,35 +358,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-<<<<<<< HEAD
-=======
-    }//GEN-LAST:event_jMIModificarActionPerformed
-
-    private void jMiEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMiEliminarActionPerformed
-        // TODO add your handling code here:
-        BD mBD = new BD();
-        int fila = this.jTblConsulta.getSelectedRow();
-        String ID = "";
-        try {
-            if (fila >= 0) {
-                int NC = (int) jTblConsulta.getValueAt(fila, 0);
-                String Nombre = (String) jTblConsulta.getValueAt(fila, 1);
-                System.out.println(NC);
-                System.out.println(Nombre);
-
-                List<Alumno> mAlumno = mBD.ConsultaIDAlumno(NC, Nombre);
-                for (Alumno actual : mAlumno) {
-                    ID = String.valueOf(actual.getIdAlumno());
-                    System.out.println(ID);
-                }
-                mBD.eliminarAlumno(Integer.parseInt(ID));
-                JOptionPane.showMessageDialog(null, "Alumno eliminado.");
-                this.LLenarTabla();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
->>>>>>> ccb79709a42d83ff73259974f3c6b6fb5495466a
     }//GEN-LAST:event_jMiEliminarActionPerformed
 
     private void JMItAlumnoAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMItAlumnoAActionPerformed
@@ -452,6 +416,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
