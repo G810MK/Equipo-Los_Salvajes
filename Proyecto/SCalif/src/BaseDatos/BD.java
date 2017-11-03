@@ -211,7 +211,11 @@ public class BD {
     
     // Modificar lista
     public void modificarLista(Lista mLista) throws SQLException{
+<<<<<<< HEAD
         String SQL = "update lista set Materia = '?1', Grupo = '?2', Semestre = '?3', Carrera = '?4' where idLista = '?5'";
+=======
+        String SQL = "update lista set Materia = '?1', Grupo = '?2', Semetre = '?3' where idLista = '?4'";
+>>>>>>> ccb79709a42d83ff73259974f3c6b6fb5495466a
         SQL = SQL.replace("?1", mLista.getMateria());
         SQL = SQL.replace("?2", mLista.getGrupo());
         SQL = SQL.replace("?3", String.valueOf(mLista.getSemestre()));
@@ -349,15 +353,22 @@ public class BD {
     //Obtener lista
     public List<Lista> consultarLista() throws SQLException{
         List<Lista> lista= new ArrayList();
+<<<<<<< HEAD
     String SQL = "select * from lista";
+=======
+    String SQL = "select * from lista inner join alumno on lista.idLista = Alumno.Lista_idLista";
+>>>>>>> ccb79709a42d83ff73259974f3c6b6fb5495466a
         ResultSet consulta = mConexion.ejecutarConsulta(SQL);
         while(consulta.next()){
             Lista mLista = new Lista();
+        Alumno mAlumno = new Alumno();
+        mAlumno.setIdAlumno(consulta.getInt("IdAlumno"));
+        mAlumno.setNC(consulta.getInt("NC"));
+        mAlumno.setNombre(consulta.getString("Nombre"));
             mLista.setIdLista(consulta.getInt("idLista"));
             mLista.setMateria(consulta.getString("Materia"));
             mLista.setGrupo(consulta.getString("Grupo"));
             mLista.setSemestre(consulta.getInt("Semestre"));
-            mLista.setCarrera(consulta.getString("Carrera"));
             lista.add(mLista);
         }
         return lista;
@@ -463,6 +474,7 @@ public class BD {
         }
         return Lista;
     } 
+<<<<<<< HEAD
     
     public List<Lista> ConsultaIDLista(String Materia, String Grupo, int Semestre, String Carrera) throws SQLException {
         List<Lista> Lista = new ArrayList();
@@ -475,4 +487,6 @@ public class BD {
         }
         return Lista;
     }
+=======
+>>>>>>> ccb79709a42d83ff73259974f3c6b6fb5495466a
 }
