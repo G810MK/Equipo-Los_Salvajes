@@ -229,6 +229,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
         this.jTblConsulta.setModel(modelo);
     }
 
+    public void LLenarTablaLista() throws SQLException {
+        BD mBD = new BD();
+        List<Lista> lista = mBD.consultarLista();
+
+        Object[] encabezado = {"Lista", "Materia", "Grupo", "Semestre", "Carrera"};
+        DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+        for (Lista actual : lista) {
+            Object[] fila = {actual.getIdLista(), actual.getMateria(), actual.getGrupo(), actual.getSemestre(), actual.getCarrera()};
+            modelo.addRow(fila);
+        }
+        this.jTblConsulta.setModel(modelo);
+    }
+
     private void JMItCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMItCargarActionPerformed
         // TODO add your handling code here:
         uno = 0;
@@ -252,7 +265,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         System.out.println(uno);
         mFrmBusquedaLista.setVisible(true);
         //this.setVisible(false);
-
     }//GEN-LAST:event_JMItAlumnoCActionPerformed
 
     private void jMIModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIModificarActionPerformed
@@ -283,14 +295,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
                         System.out.println(Grupo);
                         System.out.println(SemestreL);
                         System.out.println(Carrera);
-                        
+
                         List<Lista> mLista = mBD.ConsultaIDLista(Materia, Grupo, SemestreL, Carrera);
                         for (Lista actual : mLista) {
                             ID = String.valueOf(actual.getIdLista());
                             System.out.println(ID);
                         }
                     }
-                    
+
                     FrmLista mFrmLista = new FrmLista(1, ID);
                     mFrmLista.TxtMateria.setText(Materia);
                     mFrmLista.TxtGrupo.setText(Grupo);
@@ -301,7 +313,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     cc = 0;
                 } catch (SQLException ex) {
                     Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                }   break;
+                }
+                break;
             case 1:
                 //Modificar Alumno
                 try {
@@ -310,24 +323,25 @@ public class FrmPrincipal extends javax.swing.JFrame {
                         Nombre = (String) jTblConsulta.getValueAt(fila, 1);
                         System.out.println(NC);
                         System.out.println(Nombre);
-                        
+
                         List<Alumno> mAlumno = mBD.ConsultaIDAlumno(NC, Nombre);
                         for (Alumno actual : mAlumno) {
                             ID = String.valueOf(actual.getIdAlumno());
                             System.out.println(ID);
                         }
                     }
-                    
+
                     FrmModificar mFrmModificar = new FrmModificar(id, ID);
                     mFrmModificar.TxtNombre.setText(Nombre);
                     mFrmModificar.TxtNC1.setText(String.valueOf(NC));
                     mFrmModificar.setVisible(true);
                     this.LLenarTabla();
                     cc = 1;
-                    
+
                 } catch (SQLException ex) {
                     Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                }   break;
+                }
+                break;
             default:
                 cc = 0;
                 break;
@@ -338,25 +352,63 @@ public class FrmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         BD mBD = new BD();
         int fila = this.jTblConsulta.getSelectedRow();
-        String ID = "";
-        try {
-            if (fila >= 0) {
-                int NC = (int) jTblConsulta.getValueAt(fila, 0);
-                String Nombre = (String) jTblConsulta.getValueAt(fila, 1);
-                System.out.println(NC);
-                System.out.println(Nombre);
+        switch (cc) {
+            case 0:
+                String ID = "";
+                try {
+                    if (fila >= 0) {
+                        String Materia = "";
+                        String Grupo = "";
+                        int SemestreL = 0;
+                        String Carrera = "";
+                        int Lista = 0;
+                        Lista = (int) jTblConsulta.getValueAt(fila, 0);
+                        Materia = (String) jTblConsulta.getValueAt(fila, 1);
+                        Grupo = (String) jTblConsulta.getValueAt(fila, 2);
+                        SemestreL = (int) jTblConsulta.getValueAt(fila, 3);
+                        Carrera = (String) jTblConsulta.getValueAt(fila, 4);
+                        System.out.println(Materia);
+                        System.out.println(Grupo);
+                        System.out.println(SemestreL);
+                        System.out.println(Carrera);
 
-                List<Alumno> mAlumno = mBD.ConsultaIDAlumno(NC, Nombre);
-                for (Alumno actual : mAlumno) {
-                    ID = String.valueOf(actual.getIdAlumno());
-                    System.out.println(ID);
+                        List<Lista> mLista = mBD.ConsultaIDLista(Materia, Grupo, SemestreL, Carrera);
+                        for (Lista actual : mLista) {
+                            ID = String.valueOf(actual.getIdLista());
+                            System.out.println(ID);
+                        }
+
+                        mBD.eliminarlista(Integer.parseInt(ID));
+                        JOptionPane.showMessageDialog(null, "Lista Eliminada");
+                        this.LLenarTablaLista();
+                        cc = 0;
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                mBD.eliminarAlumno(Integer.parseInt(ID));
-                JOptionPane.showMessageDialog(null, "Alumno eliminado.");
-                this.LLenarTabla();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                break;
+            case 1:
+                ID = "";
+                try {
+                    if (fila >= 0) {
+                        int NC = (int) jTblConsulta.getValueAt(fila, 0);
+                        String Nombre = (String) jTblConsulta.getValueAt(fila, 1);
+                        System.out.println(NC);
+                        System.out.println(Nombre);
+
+                        List<Alumno> mAlumno = mBD.ConsultaIDAlumno(NC, Nombre);
+                        for (Alumno actual : mAlumno) {
+                            ID = String.valueOf(actual.getIdAlumno());
+                            System.out.println(ID);
+                        }
+                        mBD.eliminarAlumno(Integer.parseInt(ID));
+                        JOptionPane.showMessageDialog(null, "Alumno eliminado.");
+                        this.LLenarTabla();
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
         }
     }//GEN-LAST:event_jMiEliminarActionPerformed
 
@@ -424,7 +476,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmPrincipal("",0).setVisible(true);
+                new FrmPrincipal("", 0).setVisible(true);
             }
         });
     }
