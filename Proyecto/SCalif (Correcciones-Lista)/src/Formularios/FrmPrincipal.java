@@ -7,6 +7,7 @@ package Formularios;
 
 import BaseDatos.BD;
 import Clases.Alumno;
+import Clases.Desempeño;
 import Clases.Lista;
 import java.sql.SQLException;
 import java.util.List;
@@ -14,6 +15,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -32,13 +36,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
         id = ID;
         cc = c;
         this.setLocationRelativeTo(null);
+        this.jLabel1.setVisible(false);
+        this.JTxtTrabajo.setVisible(false);
+        this.jBtnAgregar.setVisible(false);
+        this.jBtnGuardar.setVisible(false);
+        this.jBtnActualizar.setVisible(false);
     }
 
     public int uno;
     String Carrera;
     String Grupo;
     String Semestre;
-    String Materia;
+    String Materia;    
+    String Trabajo;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,6 +64,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMiEliminar = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTblConsulta = new javax.swing.JTable();
+        jBtnGuardar = new javax.swing.JButton();
+        jBtnActualizar = new javax.swing.JButton();
+        jBtnAgregar = new javax.swing.JButton();
+        JTxtTrabajo = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         MnArchivo = new javax.swing.JMenu();
         JMItCargar = new javax.swing.JMenuItem();
@@ -72,6 +87,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         JMItProductoC = new javax.swing.JMenuItem();
         JMItConocimientoC = new javax.swing.JMenuItem();
         JMItActitudC = new javax.swing.JMenuItem();
+        JMItDesempeñoC = new javax.swing.JMenuItem();
 
         jMIModificar.setText("Modificar");
         jMIModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -107,6 +123,29 @@ public class FrmPrincipal extends javax.swing.JFrame {
         ));
         jTblConsulta.setComponentPopupMenu(jPopupMenu1);
         jScrollPane1.setViewportView(jTblConsulta);
+
+        jBtnGuardar.setText("Guardar");
+        jBtnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnGuardarActionPerformed(evt);
+            }
+        });
+
+        jBtnActualizar.setText("Actualizar");
+        jBtnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnActualizarActionPerformed(evt);
+            }
+        });
+
+        jBtnAgregar.setText("Agregar");
+        jBtnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAgregarActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Agregar trabajo:");
 
         jMenuBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "L.S'SOFT", javax.swing.border.TitledBorder.TRAILING, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
@@ -183,6 +222,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         JMItDesempeñoA.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         JMItDesempeñoA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/datos-sobre-recursos-humanos-del-desempeno-laboral.png"))); // NOI18N
         JMItDesempeñoA.setText("Desempeño");
+        JMItDesempeñoA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMItDesempeñoAActionPerformed(evt);
+            }
+        });
         MnAgregar.add(JMItDesempeñoA);
 
         JMItEvalDA.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -237,6 +281,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
         JMItActitudC.setText("Actitud");
         MnConsultar.add(JMItActitudC);
 
+        JMItDesempeñoC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/datos-sobre-recursos-humanos-del-desempeno-laboral.png"))); // NOI18N
+        JMItDesempeñoC.setText("Desempeño");
+        JMItDesempeñoC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMItDesempeñoCActionPerformed(evt);
+            }
+        });
+        MnConsultar.add(JMItDesempeñoC);
+
         jMenuBar1.add(MnConsultar);
 
         setJMenuBar(jMenuBar1);
@@ -247,15 +300,34 @@ public class FrmPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(JTxtTrabajo, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnAgregar)
+                    .addComponent(jBtnGuardar)
+                    .addComponent(jBtnActualizar))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(JTxtTrabajo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBtnAgregar)
+                .addGap(18, 18, 18)
+                .addComponent(jBtnActualizar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBtnGuardar)
+                .addGap(57, 57, 57))
         );
 
         pack();
@@ -288,6 +360,36 @@ public class FrmPrincipal extends javax.swing.JFrame {
         this.jTblConsulta.setModel(modelo);
     }
 
+    public void LlenarTablaDesempeno() throws SQLException {
+        BD mBD = new BD();
+        String Desem = "";
+        
+        List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(id));
+        int cont = 1;
+
+        Object[] encabezado = {"No", "NC", "Nombre"};
+
+        DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+        for (Alumno actual1 : lista) {
+            Object[] fila = {cont, actual1.getNC(), actual1.getNombre()};
+            modelo.addRow(fila);
+            cont++;
+        }
+        List<Desempeño> lista2 = mBD.consultarListaTrabajos(Integer.parseInt(id));
+        int q = 3;
+        int z = 0;
+        for (Desempeño actual : lista2) {
+            modelo.addColumn(String.valueOf(actual.getTrabajo()));
+            List<Desempeño> lista3 = mBD.consultarDesempenoCal(String.valueOf(actual.getTrabajo()));
+            for (Desempeño actual2 : lista3) {
+                modelo.setValueAt(actual2.getCalificacion(), z, q);
+                z++;
+            }
+            z = 0;
+            q++;
+        }
+    }
+    
     private void JMItCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMItCargarActionPerformed
         // TODO add your handling code here:
         uno = 0;
@@ -497,6 +599,133 @@ public class FrmPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_JMItCargar1ActionPerformed
 
+    private void jBtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuardarActionPerformed
+        // TODO add your handling code here:
+        String Nombre;
+        String NC;
+        String Calificacion;
+        String ID = "";
+        BD mBD = new BD();
+        try {
+            for (int i = 0; i < jTblConsulta.getRowCount(); i++) {
+                Nombre = jTblConsulta.getValueAt(i, 2).toString();
+                NC = jTblConsulta.getValueAt(i, 1).toString();
+                List<Alumno> mLista = mBD.ConsultaIDAlumno(Integer.parseInt(NC), Nombre);
+                for (Alumno actual : mLista) {
+                    ID = String.valueOf(actual.getIdAlumno());
+                }
+                Calificacion = jTblConsulta.getValueAt(i, 3).toString();
+                Desempeño mDesempeño = new Desempeño();
+                mDesempeño.setCalificacion(Integer.parseInt(Calificacion));
+                mDesempeño.setTrabajo(Trabajo);
+                mBD.agregarDesempeño(mDesempeño, Integer.parseInt(ID));
+            }
+
+            JOptionPane.showMessageDialog(this, "Desempeno guardado");
+            this.jBtnAgregar.setEnabled(false);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class
+                .getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnGuardarActionPerformed
+
+    private void jBtnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnActualizarActionPerformed
+        // TODO add your handling code here:
+        try {
+            BD mBD = new BD();
+            int calificacion;
+            String Nombre;
+            int NC;
+            int IdD = 0;
+            int IdA = 0;
+            Desempeño mDesempeño = new Desempeño();
+
+            for (int j = 3; j < 10; j++) {
+                for (int i = 0; i < jTblConsulta.getRowCount(); i++) {
+                    DefaultTableModel modelo = (DefaultTableModel) jTblConsulta.getModel();
+                    JTableHeader th = jTblConsulta.getTableHeader();
+                    TableColumnModel tcm = th.getColumnModel();
+                    TableColumn tcmn = tcm.getColumn(j);
+                    tcmn.getHeaderValue();
+
+                    System.out.println(tcmn.getHeaderValue().toString());
+
+                    calificacion = Integer.parseInt( jTblConsulta.getValueAt(i, j).toString());
+                    Nombre = jTblConsulta.getValueAt(i, 2).toString();
+                    NC = Integer.parseInt(jTblConsulta.getValueAt(i, 1).toString());
+
+                    List<Alumno> mLista3 = mBD.ConsultaIDAlumno(NC, Nombre);
+                    for(Alumno actual3 : mLista3){
+                        IdA = actual3.getIdAlumno();
+                    }
+
+                    System.out.println(calificacion);
+                    List<Desempeño> mLista2 = mBD.ConsultaIDDesempeño(tcmn.getHeaderValue().toString(), IdA);
+                    for (Desempeño actual2 : mLista2) {
+                        IdD = actual2.getIdDesempeño();
+                    }
+
+                    System.out.println(IdD);
+                    mDesempeño.setCalificacion(calificacion);
+                    mDesempeño.setTrabajo(tcmn.getHeaderValue().toString());
+                    mDesempeño.setIdDesempeño(IdD);
+                    mBD.modificarDesempeño(mDesempeño);
+
+                }
+
+            }
+            this.jBtnActualizar.setEnabled(false);
+            LlenarTablaDesempeno();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnActualizarActionPerformed
+
+    private void jBtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarActionPerformed
+        // TODO add your handling code here:
+        Trabajo = this.JTxtTrabajo.getText();
+        BD mBD = new BD();
+        List<Alumno> lista;
+        try {
+            lista = mBD.consultarAlumno(Integer.parseInt(id));
+
+            int cont = 1;
+            //Mostrar la consulta alumno
+            Object[] encabezado = {"No", "NC", "Nombre", Trabajo};
+            DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+            for (Alumno actual : lista) {
+
+                Object[] fila = {cont, actual.getNC(), actual.getNombre(), ""};
+                modelo.addRow(fila);
+                cont++;
+            }
+            this.jTblConsulta.setModel(modelo);
+
+            this.jBtnAgregar.setEnabled(false);
+            this.JTxtTrabajo.setEnabled(false);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class
+                .getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnAgregarActionPerformed
+
+    private void JMItDesempeñoCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMItDesempeñoCActionPerformed
+        // TODO add your handling code here:
+        int a = 3;
+        FrmBusquedaLista mFrmBusquedaLista = new FrmBusquedaLista(a);
+        mFrmBusquedaLista.setVisible(true);
+    }//GEN-LAST:event_JMItDesempeñoCActionPerformed
+
+    private void JMItDesempeñoAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMItDesempeñoAActionPerformed
+        // TODO add your handling code here:
+        int a = 2;
+        FrmBusquedaLista mFrmBusquedaLista = new FrmBusquedaLista(a);
+        mFrmBusquedaLista.setVisible(true);
+    }//GEN-LAST:event_JMItDesempeñoAActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -545,14 +774,20 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem JMItConocimientoA;
     private javax.swing.JMenuItem JMItConocimientoC;
     private javax.swing.JMenuItem JMItDesempeñoA;
+    private javax.swing.JMenuItem JMItDesempeñoC;
     private javax.swing.JMenuItem JMItEvalDA;
     private javax.swing.JMenuItem JMItListaA;
     private javax.swing.JMenuItem JMItListaC;
     private javax.swing.JMenuItem JMItProductoA;
     private javax.swing.JMenuItem JMItProductoC;
+    public javax.swing.JTextField JTxtTrabajo;
     private javax.swing.JMenu MnAgregar;
     private javax.swing.JMenu MnArchivo;
     private javax.swing.JMenu MnConsultar;
+    public javax.swing.JButton jBtnActualizar;
+    public javax.swing.JButton jBtnAgregar;
+    public javax.swing.JButton jBtnGuardar;
+    public javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMIModificar;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMiEliminar;

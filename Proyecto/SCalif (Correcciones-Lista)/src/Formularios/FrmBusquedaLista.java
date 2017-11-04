@@ -243,19 +243,20 @@ public class FrmBusquedaLista extends javax.swing.JFrame {
                 dispose();
                 FrmPrincipal mFrmPrincipal = new FrmPrincipal(ID,0);
                 List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(ID));
-
-                Object[] encabezado = {"NC", "Nombre"};
+                int cont = 1;
+                Object[] encabezado = {"No","NC", "Nombre"};
                 DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
                 for (Alumno actual : lista) {
-                    Object[] fila = {actual.getNC(), actual.getNombre()};
+                    Object[] fila = {cont, actual.getNC(), actual.getNombre()};
                     modelo.addRow(fila);
+                    cont++;
                 }
                 mFrmPrincipal.jTblConsulta.setModel(modelo);
                 mFrmPrincipal.setVisible(true);
             } catch (SQLException ex) {
                 Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else {
+        } else if(i == 1){
             try {
 
                 BD mBD = new BD();
@@ -264,18 +265,91 @@ public class FrmBusquedaLista extends javax.swing.JFrame {
                     ID = String.valueOf(actual.getIdLista());
                 }
                 List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(ID));
-
+                int cont = 1;
                 //Mostrar la consulta alumno
-                Object[] encabezado = {"NC", "Nombre"};
+                Object[] encabezado = {"No","NC", "Nombre"};
                 DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
                 for (Alumno actual : lista) {
-                    Object[] fila = {actual.getNC(), actual.getNombre()};
+                    Object[] fila = {cont, actual.getNC(), actual.getNombre()};
                     modelo.addRow(fila);
+                    cont++;
                 }
                 FrmPrincipal mFrmPrincipal = new FrmPrincipal(ID,1);
                 mFrmPrincipal.jTblConsulta.setModel(modelo);
                 mFrmPrincipal.setVisible(true);
                 this.dispose();
+
+            } catch (Exception ex) {
+                System.out.println(ex.toString());
+            }
+        }else if (i == 2) {
+            try {
+
+                BD mBD = new BD();
+                List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+                for (Lista actual : mLista) {
+                    ID = String.valueOf(actual.getIdLista());
+                }
+                List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(ID));
+                int cont = 1;
+                //Mostrar la consulta alumno
+                Object[] encabezado = {"No", "NC", "Nombre"};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                for (Alumno actual : lista) {
+
+                    Object[] fila = {cont, actual.getNC(), actual.getNombre()};
+                    modelo.addRow(fila);
+                    cont++;
+                }
+                FrmPrincipal mFrmPrincipal = new FrmPrincipal(ID, 0);
+                mFrmPrincipal.jLabel1.setVisible(true);
+                mFrmPrincipal.JTxtTrabajo.setVisible(true);
+                mFrmPrincipal.jBtnAgregar.setVisible(true);
+                mFrmPrincipal.jBtnGuardar.setVisible(true);
+                mFrmPrincipal.jTblConsulta.setModel(modelo);
+                mFrmPrincipal.setVisible(true);
+                this.dispose();
+
+            } catch (Exception ex) {
+                System.out.println(ex.toString());
+            }
+        } else if (i == 3) {
+            try {
+                BD mBD = new BD();
+                String Desem = "";
+                List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+                for (Lista actual : mLista) {
+                    ID = String.valueOf(actual.getIdLista());
+                }
+                List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(ID));
+                int cont = 1;
+
+                Object[] encabezado = {"No", "NC", "Nombre"};
+
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                for (Alumno actual1 : lista) {
+                    Object[] fila = {cont, actual1.getNC(), actual1.getNombre()};
+                    modelo.addRow(fila);
+                    cont++;
+                }
+                
+               List<Desempeño> lista2 = mBD.consultarListaTrabajos(Integer.parseInt(ID));
+                int q = 3;
+                int z = 0;
+                for (Desempeño actual : lista2) {
+                    modelo.addColumn(String.valueOf(actual.getTrabajo()));
+                    List<Desempeño> lista3 = mBD.consultarDesempenoCal(String.valueOf(actual.getTrabajo()));
+                    for (Desempeño actual2 : lista3) {
+                        modelo.setValueAt(actual2.getCalificacion(), z, q);
+                        z++;
+                    }
+                    z = 0;
+                    q++;
+                }
+                FrmPrincipal mFrmPrincipal = new FrmPrincipal(ID, 0);
+                mFrmPrincipal.jTblConsulta.setModel(modelo);
+                mFrmPrincipal.jBtnActualizar.setVisible(true);
+                mFrmPrincipal.setVisible(true);
 
             } catch (Exception ex) {
                 System.out.println(ex.toString());
