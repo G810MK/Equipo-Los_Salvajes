@@ -23,7 +23,7 @@ public class BD {
 
     public BD() {
         try {
-            mConexion.Conectar("localhost", "calificaciones", "root", "1234aszx");
+            mConexion.Conectar("localhost", "calificaciones", "root", "noteladigo");
         } catch (Exception error) {
             System.out.println(error.toString());
         }
@@ -74,9 +74,9 @@ public class BD {
     }
 
     //Agregar Desempeño
-    public void agregarDesempeño(Desempeño mDesempeño, Alumno mAlumno) throws SQLException {
+    public void agregarDesempeño(Desempeño mDesempeño, int ID) throws SQLException {
         String SQL = "insert into desempeno values (null, '?1', '?2','?3')";
-        SQL = SQL.replace("?1", String.valueOf(mAlumno.getIdAlumno()));
+        SQL = SQL.replace("?1", String.valueOf(ID));
         SQL = SQL.replace("?2", mDesempeño.getTrabajo());
         SQL = SQL.replace("?3", String.valueOf(mDesempeño.getCalificacion()));
         mConexion.ejecutarActualizacion(SQL);
@@ -479,5 +479,43 @@ public class BD {
             Lista.add(mLista);
         }
         return Lista;
+    }
+    
+    public List<Desempeño> ConsultaIDDesempeño(String Trabajo, int IdA) throws SQLException {
+        List<Desempeño> Lista = new ArrayList();
+        String SQl = "select idDesempeno from desempeno where Trabajo = '" + Trabajo + "' and Alumno_idAlumno = " + IdA ;
+        ResultSet consulta = mConexion.ejecutarConsulta(SQl);
+        while (consulta.next()) {
+            Desempeño mDesempeño = new Desempeño();
+            mDesempeño.setIdDesempeño(consulta.getInt("idDesempeno"));            
+            Lista.add(mDesempeño);
+        }
+        return Lista;
+    }
+    
+    //Obtener nombre del trabajo
+    public List<Desempeño> consultarListaTrabajos(int ID) throws SQLException {
+        List<Desempeño> lista = new ArrayList();
+        String SQL = "select distinct Trabajo from lista inner join alumno on Alumno.Lista_idLista = idLista inner join desempeno on desempeno.Alumno_idAlumno = idAlumno where idLista = " + ID;
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()) {
+            Desempeño mDesempeño = new Desempeño();
+            mDesempeño.setTrabajo(consulta.getString("Trabajo"));
+            lista.add(mDesempeño);
+        }
+        return lista;
+    }
+    
+    //Obtener calificacion del trabajo
+    public List<Desempeño> consultarDesempenoCal(String NombreTrabajo) throws SQLException {
+        List<Desempeño> lista = new ArrayList();
+        String SQL = "select calificacion from desempeno where Trabajo = '" + NombreTrabajo + "'";
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()) {
+            Desempeño mDesempeño = new Desempeño();
+            mDesempeño.setCalificacion(consulta.getInt("calificacion"));
+            lista.add(mDesempeño);
+        }
+        return lista;
     }
 }
