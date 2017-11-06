@@ -6,10 +6,13 @@
 package Formularios;
 
 import BaseDatos.BD;
+import Clases.Actitud;
 import Clases.Alumno;
 import Clases.Desempeño;
 import Clases.Lista;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,14 +44,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
         this.jBtnAgregar.setVisible(false);
         this.jBtnGuardar.setVisible(false);
         this.jBtnActualizar.setVisible(false);
+        this.jDtFecha.setVisible(false);
     }
 
     public int uno;
     String Carrera;
     String Grupo;
     String Semestre;
-    String Materia;    
+    String Materia;
     String Trabajo;
+    String Fecha5;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,6 +74,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jBtnAgregar = new javax.swing.JButton();
         JTxtTrabajo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jDtFecha = new com.toedter.calendar.JDateChooser();
         jMenuBar1 = new javax.swing.JMenuBar();
         MnArchivo = new javax.swing.JMenu();
         JMItCargar = new javax.swing.JMenuItem();
@@ -217,6 +223,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         JMItActitudA.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         JMItActitudA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/atleta.png"))); // NOI18N
         JMItActitudA.setText("Actitud");
+        JMItActitudA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMItActitudAActionPerformed(evt);
+            }
+        });
         MnAgregar.add(JMItActitudA);
 
         JMItDesempeñoA.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -279,6 +290,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         JMItActitudC.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         JMItActitudC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/atleta.png"))); // NOI18N
         JMItActitudC.setText("Actitud");
+        JMItActitudC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMItActitudCActionPerformed(evt);
+            }
+        });
         MnConsultar.add(JMItActitudC);
 
         JMItDesempeñoC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/datos-sobre-recursos-humanos-del-desempeno-laboral.png"))); // NOI18N
@@ -307,7 +323,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addComponent(JTxtTrabajo, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnAgregar)
                     .addComponent(jBtnGuardar)
-                    .addComponent(jBtnActualizar))
+                    .addComponent(jBtnActualizar)
+                    .addComponent(jDtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -321,13 +338,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JTxtTrabajo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jDtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
                 .addComponent(jBtnAgregar)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBtnActualizar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBtnGuardar)
-                .addGap(57, 57, 57))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -363,7 +382,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     public void LlenarTablaDesempeno() throws SQLException {
         BD mBD = new BD();
         String Desem = "";
-        
+
         List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(id));
         int cont = 1;
 
@@ -389,7 +408,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             q++;
         }
     }
-    
+
     private void JMItCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMItCargarActionPerformed
         // TODO add your handling code here:
         uno = 0;
@@ -458,7 +477,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     mFrmLista.TxtCarrera.setText(Carrera);
                     mFrmLista.setVisible(true);
                     this.LLenarTablaLista();
-                    
+
                 } catch (SQLException ex) {
                     Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -601,115 +620,278 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void jBtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuardarActionPerformed
         // TODO add your handling code here:
-        String Nombre;
-        String NC;
-        String Calificacion;
-        String ID = "";
         BD mBD = new BD();
-        try {
-            for (int i = 0; i < jTblConsulta.getRowCount(); i++) {
-                Nombre = jTblConsulta.getValueAt(i, 2).toString();
-                NC = jTblConsulta.getValueAt(i, 1).toString();
-                List<Alumno> mLista = mBD.ConsultaIDAlumno(Integer.parseInt(NC), Nombre);
-                for (Alumno actual : mLista) {
-                    ID = String.valueOf(actual.getIdAlumno());
+        String ID = "";
+        String Actitud = "";
+
+        switch (cc) {
+            case 2:
+                String Nombre;
+                String NC;
+                String Calificacion;
+
+                try {
+                    for (int i = 0; i < jTblConsulta.getRowCount(); i++) {
+                        Nombre = jTblConsulta.getValueAt(i, 2).toString();
+                        NC = jTblConsulta.getValueAt(i, 1).toString();
+                        List<Alumno> mLista = mBD.ConsultaIDAlumno(Integer.parseInt(NC), Nombre);
+                        for (Alumno actual : mLista) {
+                            ID = String.valueOf(actual.getIdAlumno());
+                        }
+                        Calificacion = jTblConsulta.getValueAt(i, 3).toString();
+                        Desempeño mDesempeño = new Desempeño();
+                        mDesempeño.setCalificacion(Integer.parseInt(Calificacion));
+                        mDesempeño.setTrabajo(Trabajo);
+                        mBD.agregarDesempeño(mDesempeño, Integer.parseInt(ID));
+                    }
+
+                    JOptionPane.showMessageDialog(this, "Desempeno guardado");
+                    this.jBtnAgregar.setEnabled(false);
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(FrmPrincipal.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
-                Calificacion = jTblConsulta.getValueAt(i, 3).toString();
-                Desempeño mDesempeño = new Desempeño();
-                mDesempeño.setCalificacion(Integer.parseInt(Calificacion));
-                mDesempeño.setTrabajo(Trabajo);
-                mBD.agregarDesempeño(mDesempeño, Integer.parseInt(ID));
-            }
+                break;
+            case 3:
+                try {
+                    String Fecha6 = "";
+                    for (int i = 0; i < jTblConsulta.getRowCount(); i++) {
+                        Nombre = jTblConsulta.getValueAt(i, 2).toString();
+                        NC = jTblConsulta.getValueAt(i, 1).toString();
+                        List<Alumno> mLista = mBD.ConsultaIDAlumno(Integer.parseInt(NC), Nombre);
+                        for (Alumno actual : mLista) {
+                            ID = String.valueOf(actual.getIdAlumno());
+                        }
+                        Actitud = jTblConsulta.getValueAt(i, 3).toString();
+                        Actitud mActitud = new Actitud();
+                        mActitud.setAsistencia(Integer.parseInt(Actitud));
 
-            JOptionPane.showMessageDialog(this, "Desempeno guardado");
-            this.jBtnAgregar.setEnabled(false);
+                        Date Fecha = this.jDtFecha.getDate();
+                        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+                        Fecha6 = String.valueOf(sdf.format(Fecha));
+                        System.out.println(Fecha5);
 
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class
-                .getName()).log(Level.SEVERE, null, ex);
+                        mActitud.setFecha(Fecha6);
+                        //mDesempeño.setTrabajo(Trabajo);
+
+                        mBD.agregarActitud(mActitud, Integer.parseInt(ID));
+                    }
+
+                    JOptionPane.showMessageDialog(this, "Asistencia guardada");
+                    this.jBtnAgregar.setEnabled(false);
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(FrmPrincipal.class
+                            .getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            default:
+                cc = 0;
+                break;
         }
+
     }//GEN-LAST:event_jBtnGuardarActionPerformed
 
     private void jBtnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnActualizarActionPerformed
         // TODO add your handling code here:
-        try {
-            BD mBD = new BD();
-            int calificacion;
-            String Nombre;
-            int NC;
-            int IdD = 0;
-            int IdA = 0;
-            Desempeño mDesempeño = new Desempeño();
+        switch (cc) {
+            case 2:
+                //Actualizar desempeño
+                try {
+                    BD mBD = new BD();
+                    int calificacion;
+                    String Nombre;
+                    int NC;
+                    int IdD = 0;
+                    int IdA = 0;
+                    Desempeño mDesempeño = new Desempeño();
 
-            for (int j = 3; j < 10; j++) {
-                for (int i = 0; i < jTblConsulta.getRowCount(); i++) {
-                    DefaultTableModel modelo = (DefaultTableModel) jTblConsulta.getModel();
-                    JTableHeader th = jTblConsulta.getTableHeader();
-                    TableColumnModel tcm = th.getColumnModel();
-                    TableColumn tcmn = tcm.getColumn(j);
-                    tcmn.getHeaderValue();
+                    for (int j = 3; j < 10; j++) {
+                        for (int i = 0; i < jTblConsulta.getRowCount(); i++) {
+                            DefaultTableModel modelo = (DefaultTableModel) jTblConsulta.getModel();
+                            JTableHeader th = jTblConsulta.getTableHeader();
+                            TableColumnModel tcm = th.getColumnModel();
+                            TableColumn tcmn = tcm.getColumn(j);
+                            tcmn.getHeaderValue();
 
-                    System.out.println(tcmn.getHeaderValue().toString());
+                            System.out.println(tcmn.getHeaderValue().toString());
 
-                    calificacion = Integer.parseInt( jTblConsulta.getValueAt(i, j).toString());
-                    Nombre = jTblConsulta.getValueAt(i, 2).toString();
-                    NC = Integer.parseInt(jTblConsulta.getValueAt(i, 1).toString());
+                            calificacion = Integer.parseInt(jTblConsulta.getValueAt(i, j).toString());
+                            Nombre = jTblConsulta.getValueAt(i, 2).toString();
+                            NC = Integer.parseInt(jTblConsulta.getValueAt(i, 1).toString());
 
-                    List<Alumno> mLista3 = mBD.ConsultaIDAlumno(NC, Nombre);
-                    for(Alumno actual3 : mLista3){
-                        IdA = actual3.getIdAlumno();
+                            List<Alumno> mLista3 = mBD.ConsultaIDAlumno(NC, Nombre);
+                            for (Alumno actual3 : mLista3) {
+                                IdA = actual3.getIdAlumno();
+                            }
+
+                            System.out.println(calificacion);
+                            List<Desempeño> mLista2 = mBD.ConsultaIDDesempeño(tcmn.getHeaderValue().toString(), IdA);
+                            for (Desempeño actual2 : mLista2) {
+                                IdD = actual2.getIdDesempeño();
+                            }
+
+                            System.out.println(IdD);
+                            mDesempeño.setCalificacion(calificacion);
+                            mDesempeño.setTrabajo(tcmn.getHeaderValue().toString());
+                            mDesempeño.setIdDesempeño(IdD);
+                            mBD.modificarDesempeño(mDesempeño);
+
+                        }
+
                     }
+                    this.jBtnActualizar.setEnabled(false);
+                    JOptionPane.showMessageDialog(null, "Desempeño actualizado");
+                    LlenarTablaDesempeno();
 
-                    System.out.println(calificacion);
-                    List<Desempeño> mLista2 = mBD.ConsultaIDDesempeño(tcmn.getHeaderValue().toString(), IdA);
-                    for (Desempeño actual2 : mLista2) {
-                        IdD = actual2.getIdDesempeño();
-                    }
-
-                    System.out.println(IdD);
-                    mDesempeño.setCalificacion(calificacion);
-                    mDesempeño.setTrabajo(tcmn.getHeaderValue().toString());
-                    mDesempeño.setIdDesempeño(IdD);
-                    mBD.modificarDesempeño(mDesempeño);
-
+                } catch (SQLException ex) {
+                    Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                break;
+            case 3:
+                try {
+                    //Actualizar actitud
+                    BD mBD = new BD();
+                    int calificacion;
+                    String Nombre;
+                    int NC;
+                    int IdAC = 0;
+                    int IdA = 0;
+                    int Asistencia = 0;
+                    int cont = 0;
+                    Actitud mActitud = new Actitud();
 
-            }
-            this.jBtnActualizar.setEnabled(false);
-            LlenarTablaDesempeno();
+                    List<Actitud> lista2 = mBD.consultarFechas(Integer.parseInt(id));
 
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    for (Actitud actual : lista2) {
+                        cont++;
+                    }
+                    int d = 3 + cont;
+
+                    for (int j = 3; j < d; j++) {
+                        for (int i = 0; i < jTblConsulta.getRowCount(); i++) {
+                            DefaultTableModel modelo = (DefaultTableModel) jTblConsulta.getModel();
+                            JTableHeader th = jTblConsulta.getTableHeader();
+                            TableColumnModel tcm = th.getColumnModel();
+                            TableColumn tcmn = tcm.getColumn(j);
+                            tcmn.getHeaderValue();
+
+                            System.out.println(tcmn.getHeaderValue().toString());
+
+                            Asistencia = Integer.parseInt(jTblConsulta.getValueAt(i, j).toString());
+                            Nombre = jTblConsulta.getValueAt(i, 2).toString();
+                            NC = Integer.parseInt(jTblConsulta.getValueAt(i, 1).toString());
+
+                            List<Alumno> mLista3 = mBD.ConsultaIDAlumno(NC, Nombre);
+                            for (Alumno actual3 : mLista3) {
+                                IdA = actual3.getIdAlumno();
+                            }
+
+                            String Fecha = tcmn.getHeaderValue().toString();
+                            String[] partes = Fecha.split("-");
+                            String dia = partes[0];
+                            String mes = partes[1];
+                            String anyo = partes[2];
+                            String FechaAC = anyo + "-" + mes + "-" + dia;
+
+                            System.out.println(Asistencia);
+                            List<Actitud> mLista2 = mBD.ConsultaIDActiud(FechaAC, IdA);
+                            for (Actitud actual2 : mLista2) {
+                                IdAC = actual2.getIdActitud();
+                            }
+
+                            System.out.println(IdAC);
+                            mActitud.setAsistencia(Asistencia);
+                            mActitud.setFecha(FechaAC);
+                            mActitud.setIdActitud(IdAC);
+
+                            mBD.modificarActitud(mActitud);
+                        }
+
+                    }
+                    this.jBtnActualizar.setEnabled(false);
+                    LlenarTablaDesempeno();
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            default:
+                cc = 0;
+                break;
         }
+
     }//GEN-LAST:event_jBtnActualizarActionPerformed
 
     private void jBtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarActionPerformed
         // TODO add your handling code here:
-        Trabajo = this.JTxtTrabajo.getText();
         BD mBD = new BD();
-        List<Alumno> lista;
-        try {
-            lista = mBD.consultarAlumno(Integer.parseInt(id));
+        switch (cc) {
+            case 2:
+                Trabajo = this.JTxtTrabajo.getText();
 
-            int cont = 1;
-            //Mostrar la consulta alumno
-            Object[] encabezado = {"No", "NC", "Nombre", Trabajo};
-            DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-            for (Alumno actual : lista) {
+                List<Alumno> lista;
+                try {
+                    lista = mBD.consultarAlumno(Integer.parseInt(id));
 
-                Object[] fila = {cont, actual.getNC(), actual.getNombre(), ""};
-                modelo.addRow(fila);
-                cont++;
-            }
-            this.jTblConsulta.setModel(modelo);
+                    int cont = 1;
+                    //Mostrar la consulta alumno
+                    Object[] encabezado = {"No", "NC", "Nombre", Trabajo};
+                    DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                    for (Alumno actual : lista) {
 
-            this.jBtnAgregar.setEnabled(false);
-            this.JTxtTrabajo.setEnabled(false);
+                        Object[] fila = {cont, actual.getNC(), actual.getNombre(), ""};
+                        modelo.addRow(fila);
+                        cont++;
+                    }
+                    this.jTblConsulta.setModel(modelo);
 
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class
-                .getName()).log(Level.SEVERE, null, ex);
+                    this.jBtnAgregar.setEnabled(false);
+                    this.JTxtTrabajo.setEnabled(false);
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(FrmPrincipal.class
+                            .getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case 3:
+                //Agregar fecha
+                Date Fecha = this.jDtFecha.getDate();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-YYYY");
+                Fecha5 = String.valueOf(sdf.format(Fecha));
+                System.out.println(Fecha5);
+
+                try {
+                    lista = mBD.consultarAlumno(Integer.parseInt(id));
+
+                    int cont = 1;
+                    //Mostrar la consulta alumno
+                    Object[] encabezado = {"No", "NC", "Nombre", Fecha5};
+                    DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                    for (Alumno actual : lista) {
+
+                        Object[] fila = {cont, actual.getNC(), actual.getNombre(), ""};
+                        modelo.addRow(fila);
+                        cont++;
+                    }
+                    this.jTblConsulta.setModel(modelo);
+
+                    this.jBtnAgregar.setEnabled(false);
+                    this.JTxtTrabajo.setEnabled(false);
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(FrmPrincipal.class
+                            .getName()).log(Level.SEVERE, null, ex);
+                }
+
+                break;
+            default:
+                cc = 0;
+                break;
         }
+
+
     }//GEN-LAST:event_jBtnAgregarActionPerformed
 
     private void JMItDesempeñoCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMItDesempeñoCActionPerformed
@@ -725,6 +907,20 @@ public class FrmPrincipal extends javax.swing.JFrame {
         FrmBusquedaLista mFrmBusquedaLista = new FrmBusquedaLista(a);
         mFrmBusquedaLista.setVisible(true);
     }//GEN-LAST:event_JMItDesempeñoAActionPerformed
+
+    private void JMItActitudCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMItActitudCActionPerformed
+        // TODO add your handling code here:
+        int a = 5;
+        FrmBusquedaLista mFrmBusquedaLista = new FrmBusquedaLista(a);
+        mFrmBusquedaLista.setVisible(true);
+    }//GEN-LAST:event_JMItActitudCActionPerformed
+
+    private void JMItActitudAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMItActitudAActionPerformed
+        // TODO add your handling code here:
+        int a = 4;
+        FrmBusquedaLista mFrmBusquedaLista = new FrmBusquedaLista(a);
+        mFrmBusquedaLista.setVisible(true);
+    }//GEN-LAST:event_JMItActitudAActionPerformed
 
     /**
      * @param args the command line arguments
@@ -787,6 +983,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     public javax.swing.JButton jBtnActualizar;
     public javax.swing.JButton jBtnAgregar;
     public javax.swing.JButton jBtnGuardar;
+    public com.toedter.calendar.JDateChooser jDtFecha;
     public javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMIModificar;
     private javax.swing.JMenuBar jMenuBar1;

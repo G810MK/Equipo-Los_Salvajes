@@ -23,7 +23,7 @@ public class BD {
 
     public BD() {
         try {
-            mConexion.Conectar("localhost", "calificaciones", "root", "noteladigo");
+            mConexion.Conectar("localhost", "calificaciones", "root", "1234aszx");
         } catch (Exception error) {
             System.out.println(error.toString());
         }
@@ -65,9 +65,9 @@ public class BD {
     }
 
     //Agregar Actitud
-    public void agregarActitud(Actitud mActitud, Alumno mAlumno) throws SQLException {
+    public void agregarActitud(Actitud mActitud, int ID) throws SQLException {
         String SQL = "insert into actitud values (null, '?1', '?2', '?3')";
-        SQL = SQL.replace("?1", String.valueOf(mAlumno.getIdAlumno()));
+        SQL = SQL.replace("?1", String.valueOf(ID));
         SQL = SQL.replace("?2", String.valueOf(mActitud.getAsistencia()));
         SQL = SQL.replace("?3", String.valueOf(mActitud.getFecha()));
         mConexion.ejecutarActualizacion(SQL);
@@ -246,7 +246,7 @@ public class BD {
             mAlumno.setNombre(consulta.getString("Nombre"));
             mActitud.setIdActitud(consulta.getInt("idActitud"));
             mActitud.setAsistencia(consulta.getInt("Asistensia"));
-            mActitud.setFecha(consulta.getDate("Fecha"));
+            mActitud.setFecha(consulta.getString("Fecha"));
             lista.add(mActitud);
         }
         return lista;
@@ -413,9 +413,9 @@ public class BD {
     }
 
     //Obtener lista semestre
-    public List<Lista> consultarListaSemestres(String Materia) throws SQLException {
+    public List<Lista> consultarListaSemestres(String Materia, String Carrera) throws SQLException {
         List<Lista> lista = new ArrayList();
-        String SQL = "select distinct Semestre from Lista where Materia = '" + Materia + "'";
+        String SQL = "select distinct Semestre from Lista where Materia = '" + Materia + "' and Carrera = '" + Carrera + "'";
         ResultSet consulta = mConexion.ejecutarConsulta(SQL);
         while (consulta.next()) {
             Lista mLista = new Lista();
@@ -426,9 +426,9 @@ public class BD {
     }
 
     //Obtener lista Grupo
-    public List<Lista> consultarListaGrupo(String Materia) throws SQLException {
+    public List<Lista> consultarListaGrupo(String Materia, String Carrera, String Semestre) throws SQLException {
         List<Lista> lista = new ArrayList();
-        String SQL = "select distinct Grupo from Lista where Materia = '" + Materia + "'";
+        String SQL = "select distinct Grupo from Lista where Materia = '" + Materia + "' and Carrera = '" + Carrera + "' and Semestre = '" + Semestre + "'";
         ResultSet consulta = mConexion.ejecutarConsulta(SQL);
         while (consulta.next()) {
             Lista mLista = new Lista();
@@ -517,5 +517,52 @@ public class BD {
             lista.add(mDesempeño);
         }
         return lista;
+    }
+    public List<Actitud> consultarFechas(int ID) throws SQLException {
+        List<Actitud> Lista = new ArrayList();
+        String SQL = "select distinct fecha from lista inner join alumno on Alumno.Lista_idLista = idLista inner join Actitud on Actitud.Alumno_idAlumno = idAlumno where idLista = " + ID;
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()) {
+            Actitud mActitud = new Actitud();
+            mActitud.setFecha(consulta.getString("Fecha"));
+            Lista.add(mActitud);
+        }
+        return Lista;
+    }
+
+    public List<Actitud> consultarFechasCovertir(int ID, String Fecha) throws SQLException {
+        List<Actitud> Lista = new ArrayList();
+        String SQL = "select distinct date_format(\"" + Fecha + "\", '%d-%m-%Y') fecha from lista inner join alumno on Alumno.Lista_idLista = idLista inner join Actitud on Actitud.Alumno_idAlumno = idAlumno where idLista = " + ID;
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()) {
+            Actitud mActitud = new Actitud();
+            mActitud.setFecha(consulta.getString("Fecha"));
+            Lista.add(mActitud);
+        }
+        return Lista;
+    }
+
+    public List<Actitud> consultarAsistencia(String Fecha, int id) throws SQLException {
+        List<Actitud> lista = new ArrayList();
+        String SQL = "select asistencia from lista inner join alumno on Alumno.Lista_idLista = idLista inner join Actitud on Actitud.Alumno_idAlumno = idAlumno where idLista = " + id + " and fecha = '" + Fecha + "'";
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()) {
+            Actitud mActitud = new Actitud();
+            mActitud.setAsistencia(consulta.getInt("Asistencia"));
+            lista.add(mActitud);
+        }
+        return lista;
+    }
+
+    public List<Actitud> ConsultaIDActiud(String Fecha, int IdA) throws SQLException {
+        List<Actitud> Lista = new ArrayList();
+        String SQl = "select idActitud from Actitud where Fecha = '" + Fecha + "' and Alumno_idAlumno = " + IdA;
+        ResultSet consulta = mConexion.ejecutarConsulta(SQl);
+        while (consulta.next()) {
+            Actitud mActitud = new Actitud();
+            mActitud.setIdActitud(consulta.getInt("IdActitud"));
+            Lista.add(mActitud);
+        }
+        return Lista;
     }
 }

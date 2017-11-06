@@ -71,6 +71,11 @@ public class FrmBusquedaLista extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         JCmbSemestro.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        JCmbSemestro.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                JCmbSemestroFocusGained(evt);
+            }
+        });
         JCmbSemestro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JCmbSemestroActionPerformed(evt);
@@ -78,6 +83,11 @@ public class FrmBusquedaLista extends javax.swing.JFrame {
         });
 
         JCmbCarrera.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        JCmbCarrera.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                JCmbCarreraFocusGained(evt);
+            }
+        });
         JCmbCarrera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JCmbCarreraActionPerformed(evt);
@@ -217,143 +227,235 @@ public class FrmBusquedaLista extends javax.swing.JFrame {
     private void jBtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAceptarActionPerformed
         // TODO add your handling code here:
         // TODO add your handling code here:
-
-        if (i == 0) {
-            BD mBD = new BD();
-            String ID = "0";
-            try {
-                List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
-                for (Lista actual : mLista) {
-                    ID = String.valueOf(actual.getIdLista());
-                }
-
-                System.out.println("id =" + ID);
-
-                JFileChooser dato = new JFileChooser();
-                FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos csv", "csv");
-                dato.setAcceptAllFileFilterUsed(false);
-                dato.setFileFilter(filter);
-                int op = dato.showOpenDialog(this);
-                if (op == JFileChooser.APPROVE_OPTION) {
-                    url = dato.getSelectedFile().getPath();
-                }
-                System.out.println(url);
-
-                mBD.Cargar(ID, url);
-                dispose();
-                FrmPrincipal mFrmPrincipal = new FrmPrincipal(ID,0);
-                List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(ID));
-                int cont = 1;
-                Object[] encabezado = {"No","NC", "Nombre"};
-                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-                for (Alumno actual : lista) {
-                    Object[] fila = {cont, actual.getNC(), actual.getNombre()};
-                    modelo.addRow(fila);
-                    cont++;
-                }
-                mFrmPrincipal.jTblConsulta.setModel(modelo);
-                mFrmPrincipal.setVisible(true);
-            } catch (SQLException ex) {
-                Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else if(i == 1){
-            try {
-
+        switch (i) {
+            case 0: {
                 BD mBD = new BD();
-                List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
-                for (Lista actual : mLista) {
-                    ID = String.valueOf(actual.getIdLista());
-                }
-                List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(ID));
-                int cont = 1;
-                //Mostrar la consulta alumno
-                Object[] encabezado = {"No","NC", "Nombre"};
-                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-                for (Alumno actual : lista) {
-                    Object[] fila = {cont, actual.getNC(), actual.getNombre()};
-                    modelo.addRow(fila);
-                    cont++;
-                }
-                FrmPrincipal mFrmPrincipal = new FrmPrincipal(ID,1);
-                mFrmPrincipal.jTblConsulta.setModel(modelo);
-                mFrmPrincipal.setVisible(true);
-                this.dispose();
-
-            } catch (Exception ex) {
-                System.out.println(ex.toString());
-            }
-        }else if (i == 2) {
-            try {
-
-                BD mBD = new BD();
-                List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
-                for (Lista actual : mLista) {
-                    ID = String.valueOf(actual.getIdLista());
-                }
-                List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(ID));
-                int cont = 1;
-                //Mostrar la consulta alumno
-                Object[] encabezado = {"No", "NC", "Nombre"};
-                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-                for (Alumno actual : lista) {
-
-                    Object[] fila = {cont, actual.getNC(), actual.getNombre()};
-                    modelo.addRow(fila);
-                    cont++;
-                }
-                FrmPrincipal mFrmPrincipal = new FrmPrincipal(ID, 0);
-                mFrmPrincipal.jLabel1.setVisible(true);
-                mFrmPrincipal.JTxtTrabajo.setVisible(true);
-                mFrmPrincipal.jBtnAgregar.setVisible(true);
-                mFrmPrincipal.jBtnGuardar.setVisible(true);
-                mFrmPrincipal.jTblConsulta.setModel(modelo);
-                mFrmPrincipal.setVisible(true);
-                this.dispose();
-
-            } catch (Exception ex) {
-                System.out.println(ex.toString());
-            }
-        } else if (i == 3) {
-            try {
-                BD mBD = new BD();
-                String Desem = "";
-                List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
-                for (Lista actual : mLista) {
-                    ID = String.valueOf(actual.getIdLista());
-                }
-                List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(ID));
-                int cont = 1;
-
-                Object[] encabezado = {"No", "NC", "Nombre"};
-
-                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-                for (Alumno actual1 : lista) {
-                    Object[] fila = {cont, actual1.getNC(), actual1.getNombre()};
-                    modelo.addRow(fila);
-                    cont++;
-                }
-                
-               List<Desempeño> lista2 = mBD.consultarListaTrabajos(Integer.parseInt(ID));
-                int q = 3;
-                int z = 0;
-                for (Desempeño actual : lista2) {
-                    modelo.addColumn(String.valueOf(actual.getTrabajo()));
-                    List<Desempeño> lista3 = mBD.consultarDesempenoCal(String.valueOf(actual.getTrabajo()));
-                    for (Desempeño actual2 : lista3) {
-                        modelo.setValueAt(actual2.getCalificacion(), z, q);
-                        z++;
+                String ID = "0";
+                try {
+                    List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+                    for (Lista actual : mLista) {
+                        ID = String.valueOf(actual.getIdLista());
                     }
-                    z = 0;
-                    q++;
-                }
-                FrmPrincipal mFrmPrincipal = new FrmPrincipal(ID, 0);
-                mFrmPrincipal.jTblConsulta.setModel(modelo);
-                mFrmPrincipal.jBtnActualizar.setVisible(true);
-                mFrmPrincipal.setVisible(true);
 
-            } catch (Exception ex) {
-                System.out.println(ex.toString());
+                    System.out.println("id =" + ID);
+
+                    JFileChooser dato = new JFileChooser();
+                    FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos csv", "csv");
+                    dato.setAcceptAllFileFilterUsed(false);
+                    dato.setFileFilter(filter);
+                    int op = dato.showOpenDialog(this);
+                    if (op == JFileChooser.APPROVE_OPTION) {
+                        url = dato.getSelectedFile().getPath();
+                    }
+                    System.out.println(url);
+
+                    mBD.Cargar(ID, url);
+                    dispose();
+                    FrmPrincipal mFrmPrincipal = new FrmPrincipal(ID, 0);
+                    List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(ID));
+                    int cont = 1;
+                    Object[] encabezado = {"No", "NC", "Nombre"};
+                    DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                    for (Alumno actual : lista) {
+                        Object[] fila = {cont, actual.getNC(), actual.getNombre()};
+                        modelo.addRow(fila);
+                        cont++;
+                    }
+                    mFrmPrincipal.jTblConsulta.setModel(modelo);
+                    mFrmPrincipal.setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
             }
+            case 1:
+                try {
+                    //Consulta alumno
+                    BD mBD = new BD();
+                    List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+                    for (Lista actual : mLista) {
+                        ID = String.valueOf(actual.getIdLista());
+                    }
+                    List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(ID));
+                    int cont = 1;
+                    //Mostrar la consulta alumno
+                    Object[] encabezado = {"No", "NC", "Nombre"};
+                    DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                    for (Alumno actual : lista) {
+                        Object[] fila = {cont, actual.getNC(), actual.getNombre()};
+                        modelo.addRow(fila);
+                        cont++;
+                    }
+                    FrmPrincipal mFrmPrincipal = new FrmPrincipal(ID, 1);
+                    mFrmPrincipal.jTblConsulta.setModel(modelo);
+                    mFrmPrincipal.setVisible(true);
+                    this.dispose();
+
+                } catch (Exception ex) {
+                    System.out.println(ex.toString());
+                }
+                break;
+            case 2:
+                try {
+                    //Agregar desempeño
+                    BD mBD = new BD();
+                    List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+                    for (Lista actual : mLista) {
+                        ID = String.valueOf(actual.getIdLista());
+                    }
+                    List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(ID));
+                    int cont = 1;
+                    //Mostrar la consulta alumno
+                    Object[] encabezado = {"No", "NC", "Nombre"};
+                    DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                    for (Alumno actual : lista) {
+
+                        Object[] fila = {cont, actual.getNC(), actual.getNombre()};
+                        modelo.addRow(fila);
+                        cont++;
+                    }
+                    FrmPrincipal mFrmPrincipal = new FrmPrincipal(ID, 2);
+                    mFrmPrincipal.jLabel1.setVisible(true);
+                    mFrmPrincipal.JTxtTrabajo.setVisible(true);
+                    mFrmPrincipal.jBtnAgregar.setVisible(true);
+                    mFrmPrincipal.jBtnGuardar.setVisible(true);
+                    mFrmPrincipal.jTblConsulta.setModel(modelo);
+                    mFrmPrincipal.setVisible(true);
+                    this.dispose();
+
+                } catch (Exception ex) {
+                    System.out.println(ex.toString());
+                }
+                break;
+            case 3:
+                try {
+                    //Modificacion desempeño
+                    int q = 3;
+                    int z = 0;
+                    BD mBD = new BD();
+                    String Desem = "";
+                    List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+                    for (Lista actual : mLista) {
+                        ID = String.valueOf(actual.getIdLista());
+                    }
+                    List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(ID));
+                    int cont = 1;
+
+                    Object[] encabezado = {"No", "NC", "Nombre"};
+
+                    DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                    for (Alumno actual1 : lista) {
+                        Object[] fila = {cont, actual1.getNC(), actual1.getNombre()};
+                        modelo.addRow(fila);
+                        cont++;
+                    }
+
+                    List<Desempeño> lista2 = mBD.consultarListaTrabajos(Integer.parseInt(ID));
+
+                    for (Desempeño actual : lista2) {
+                        modelo.addColumn(String.valueOf(actual.getTrabajo()));
+                        List<Desempeño> lista3 = mBD.consultarDesempenoCal(String.valueOf(actual.getTrabajo()));
+                        for (Desempeño actual2 : lista3) {
+                            modelo.setValueAt(actual2.getCalificacion(), z, q);
+                            z++;
+                        }
+                        z = 0;
+                        q++;
+                    }
+                    FrmPrincipal mFrmPrincipal = new FrmPrincipal(ID, 2);
+                    mFrmPrincipal.jTblConsulta.setModel(modelo);
+                    mFrmPrincipal.jBtnActualizar.setVisible(true);
+                    mFrmPrincipal.setVisible(true);
+
+                } catch (Exception ex) {
+                    System.out.println(ex.toString());
+                }
+                break;
+            case 4:
+                try {
+                    //Agregar Actitud
+                    BD mBD = new BD();
+                    List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+                    for (Lista actual : mLista) {
+                        ID = String.valueOf(actual.getIdLista());
+                    }
+                    List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(ID));
+                    int cont = 1;
+                    //Mostrar la consulta alumno
+                    Object[] encabezado = {"No", "NC", "Nombre"};
+                    DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                    for (Alumno actual : lista) {
+
+                        Object[] fila = {cont, actual.getNC(), actual.getNombre()};
+                        modelo.addRow(fila);
+                        cont++;
+                    }
+                    FrmPrincipal mFrmPrincipal = new FrmPrincipal(ID, 3);
+                    mFrmPrincipal.jLabel1.setVisible(true);
+                    mFrmPrincipal.jLabel1.setText("Seleccione fecha");
+                    mFrmPrincipal.jDtFecha.setVisible(true);
+                    mFrmPrincipal.jBtnAgregar.setVisible(true);
+                    mFrmPrincipal.jBtnGuardar.setVisible(true);
+                    mFrmPrincipal.jTblConsulta.setModel(modelo);
+                    mFrmPrincipal.setVisible(true);
+                    this.dispose();
+
+                } catch (Exception ex) {
+                    System.out.println(ex.toString());
+                }
+                break;
+            case 5:
+                try {
+                    //Modificacion actitud
+
+                    BD mBD = new BD();
+                    int q = 3;
+                    int z = 0;
+                    String Act = "";
+                    String Fecha = "";
+                    List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+                    for (Lista actual : mLista) {
+                        ID = String.valueOf(actual.getIdLista());
+                    }
+                    List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(ID));
+                    int cont = 1;
+
+                    Object[] encabezado = {"No", "NC", "Nombre"};
+
+                    DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                    for (Alumno actual1 : lista) {
+                        Object[] fila = {cont, actual1.getNC(), actual1.getNombre()};
+                        modelo.addRow(fila);
+                        cont++;
+                    }
+
+                    List<Actitud> listaActitud = mBD.consultarFechas(Integer.parseInt(ID));
+                    for (Actitud actual2 : listaActitud) {
+                        Fecha = String.valueOf(actual2.getFecha());
+                        List< Actitud> Lista = mBD.consultarFechasCovertir(Integer.parseInt(ID), Fecha);
+                        for (Actitud actual3 : Lista) {
+                            modelo.addColumn(String.valueOf(actual3.getFecha()));
+                        }
+                        List<Actitud> Lista2 = mBD.consultarAsistencia(Fecha, Integer.parseInt(ID));
+                        for (Actitud actual4 : Lista2) {
+                            modelo.setValueAt(actual4.getAsistencia(), z, q);
+                            z++;
+                        }
+                        z = 0;
+                        q++;
+
+                    }
+                    FrmPrincipal mFrmPrincipal = new FrmPrincipal(ID, 3);
+                    mFrmPrincipal.jTblConsulta.setModel(modelo);
+                    mFrmPrincipal.jBtnActualizar.setVisible(true);
+                    mFrmPrincipal.setVisible(true);
+
+                } catch (Exception ex) {
+                    System.out.println(ex.toString());
+                }
+                break;
+            default:
+                break;
         }
 
     }//GEN-LAST:event_jBtnAceptarActionPerformed
@@ -362,6 +464,9 @@ public class FrmBusquedaLista extends javax.swing.JFrame {
         // TODO add your handling code here:
         BD mBD = new BD();
         this.JCmbMateria.removeAllItems();
+        this.JCmbCarrera.removeAllItems();
+        this.JCmbSemestro.removeAllItems();
+        this.JCmbGrupo.removeAllItems();
         try {
             List<Lista> mLista = mBD.consultarListaMateria();
             for (Lista actual : mLista) {
@@ -373,6 +478,37 @@ public class FrmBusquedaLista extends javax.swing.JFrame {
     }//GEN-LAST:event_JCmbMateriaFocusGained
 
     private void JCmbMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCmbMateriaActionPerformed
+        // TODO add your handling code here:
+        Materia = String.valueOf(this.JCmbMateria.getSelectedItem());
+        System.out.println("Materia: " + Materia + "\n");
+    }//GEN-LAST:event_JCmbMateriaActionPerformed
+
+    private void JCmbGrupoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JCmbGrupoFocusGained
+        // TODO add your handling code here:
+        BD mBD = new BD();
+        this.JCmbGrupo.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.JCmbMateria.getSelectedItem()), String.valueOf(this.JCmbCarrera.getSelectedItem()), Semestre);
+            for (Lista actual : mLista) {
+                this.JCmbGrupo.addItem(String.valueOf(actual.getGrupo()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_JCmbGrupoFocusGained
+
+    private void JCmbGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCmbGrupoActionPerformed
+        // TODO add your handling code here:
+        Grupo = String.valueOf(this.JCmbGrupo.getSelectedItem());
+        System.out.println("Grupo: " + Grupo + "\n");
+    }//GEN-LAST:event_JCmbGrupoActionPerformed
+
+    private void BtnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegresarActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_BtnRegresarActionPerformed
+
+    private void JCmbCarreraFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JCmbCarreraFocusGained
         // TODO add your handling code here:
         BD mBD = new BD();
         this.JCmbCarrera.removeAllItems();
@@ -387,43 +523,21 @@ public class FrmBusquedaLista extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Materia = String.valueOf(this.JCmbMateria.getSelectedItem());
-        System.out.println("Materia: " + Materia + "\n");
+    }//GEN-LAST:event_JCmbCarreraFocusGained
 
+    private void JCmbSemestroFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JCmbSemestroFocusGained
+        // TODO add your handling code here:
+        BD mBD = new BD();
+        this.JCmbSemestro.removeAllItems();
         try {
-            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.JCmbMateria.getSelectedItem()));
+            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.JCmbMateria.getSelectedItem()), String.valueOf(this.JCmbCarrera.getSelectedItem()));
             for (Lista actual : mLista) {
                 this.JCmbSemestro.addItem(String.valueOf(actual.getSemestre()));
             }
         } catch (SQLException ex) {
             Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        try {
-            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.JCmbMateria.getSelectedItem()));
-            for (Lista actual : mLista) {
-                this.JCmbGrupo.addItem(String.valueOf(actual.getGrupo()));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_JCmbMateriaActionPerformed
-
-    private void JCmbGrupoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JCmbGrupoFocusGained
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_JCmbGrupoFocusGained
-
-    private void JCmbGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCmbGrupoActionPerformed
-        // TODO add your handling code here:
-        Grupo = String.valueOf(this.JCmbGrupo.getSelectedItem());
-        System.out.println("Grupo: " + Grupo + "\n");
-    }//GEN-LAST:event_JCmbGrupoActionPerformed
-
-    private void BtnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegresarActionPerformed
-        // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_BtnRegresarActionPerformed
+    }//GEN-LAST:event_JCmbSemestroFocusGained
 
     /**
      * @param args the command line arguments

@@ -29,6 +29,9 @@ public class FrmAgregar extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
     String Materia;
+    String Carrera;
+    String Grupo;
+    String Semestre;
 
     /**
      * T11his method is called from within the constructor to initialize the
@@ -110,10 +113,40 @@ public class FrmAgregar extends javax.swing.JFrame {
         });
 
         cmbSemestre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        cmbSemestre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cmbSemestreFocusGained(evt);
+            }
+        });
+        cmbSemestre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSemestreActionPerformed(evt);
+            }
+        });
 
         cmbGrupo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        cmbGrupo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cmbGrupoFocusGained(evt);
+            }
+        });
+        cmbGrupo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbGrupoActionPerformed(evt);
+            }
+        });
 
         cmbCarrera.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        cmbCarrera.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cmbCarreraFocusGained(evt);
+            }
+        });
+        cmbCarrera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCarreraActionPerformed(evt);
+            }
+        });
 
         BtnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/32x32/disquete.png"))); // NOI18N
         BtnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -267,7 +300,7 @@ public class FrmAgregar extends javax.swing.JFrame {
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
         // TODO add your handling code here:
         if (((this.TxtNC1.getText().equals("")) | (this.TxtNombre.getText().equals("")) | (this.TxtPaterno.getText().equals("")) | (this.TxtMaterno.getText().equals("")))) {
-                JOptionPane.showMessageDialog(rootPane, "Exiten campos vacios");
+            JOptionPane.showMessageDialog(rootPane, "Exiten campos vacios");
         } else {
 
             try {
@@ -302,48 +335,17 @@ public class FrmAgregar extends javax.swing.JFrame {
     }
     private void cmbMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMateriaActionPerformed
         // TODO add your handling code here:
-        BD mBD = new BD();
-        this.cmbCarrera.removeAllItems();
-        this.cmbSemestre.removeAllItems();
-        this.cmbGrupo.removeAllItems();
-
-        try {
-            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.cmbMateria.getSelectedItem()));
-            for (Lista actual : mLista) {
-                this.cmbCarrera.addItem(actual.getCarrera());
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
         Materia = String.valueOf(this.cmbMateria.getSelectedItem());
         System.out.println("Materia: " + Materia + "\n");
-
-        try {
-            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.cmbMateria.getSelectedItem()));
-            for (Lista actual : mLista) {
-                this.cmbSemestre.addItem(String.valueOf(actual.getSemestre()));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmAgregar.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        try {
-            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.cmbMateria.getSelectedItem()));
-            for (Lista actual : mLista) {
-                this.cmbGrupo.addItem(String.valueOf(actual.getGrupo()));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmAgregar.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-
     }//GEN-LAST:event_cmbMateriaActionPerformed
 
     private void cmbMateriaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmbMateriaFocusGained
         // TODO add your handling code here:
         BD mBD = new BD();
         this.cmbMateria.removeAllItems();
+        this.cmbCarrera.removeAllItems();
+        this.cmbSemestre.removeAllItems();
+        this.cmbGrupo.removeAllItems();
         try {
             List<Lista> mLista = mBD.consultarListaMateria();
             for (Lista actual : mLista) {
@@ -396,6 +398,71 @@ public class FrmAgregar extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_BtnRegresarActionPerformed
+
+    private void cmbCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCarreraActionPerformed
+        // TODO add your handling code here:
+        Carrera = String.valueOf(this.cmbCarrera.getSelectedItem());
+        System.out.println("Carrera: " + Carrera + "\n");
+    }//GEN-LAST:event_cmbCarreraActionPerformed
+
+    private void cmbCarreraFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmbCarreraFocusGained
+        // TODO add your handling code here:
+        BD mBD = new BD();
+        this.cmbCarrera.removeAllItems();
+        this.cmbSemestre.removeAllItems();
+        this.cmbGrupo.removeAllItems();
+
+        try {
+            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.cmbMateria.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.cmbCarrera.addItem(actual.getCarrera());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cmbCarreraFocusGained
+
+    private void cmbSemestreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSemestreActionPerformed
+        // TODO add your handling code here:
+        Semestre = String.valueOf(this.cmbSemestre.getSelectedItem());
+        System.out.println("Semestre: " + Semestre + "\n");
+    }//GEN-LAST:event_cmbSemestreActionPerformed
+
+    private void cmbSemestreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmbSemestreFocusGained
+        // TODO add your handling code here:
+        BD mBD = new BD();
+        this.cmbSemestre.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.cmbMateria.getSelectedItem()), String.valueOf(this.cmbCarrera.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.cmbSemestre.addItem(String.valueOf(actual.getSemestre()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cmbSemestreFocusGained
+
+    private void cmbGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGrupoActionPerformed
+        // TODO add your handling code here:
+        Grupo = String.valueOf(this.cmbGrupo.getSelectedItem());
+        System.out.println("Grupo: " + Grupo + "\n");
+    }//GEN-LAST:event_cmbGrupoActionPerformed
+
+    private void cmbGrupoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmbGrupoFocusGained
+        // TODO add your handling code here:
+        BD mBD = new BD();
+        this.cmbGrupo.removeAllItems();
+        try {
+            // List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.JCmbMateria.getSelectedItem(), String.valueOf(this.JCmbCarrera.getSelectedItem())));
+            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.cmbMateria.getSelectedItem()), String.valueOf(this.cmbCarrera.getSelectedItem()), Semestre);
+            //String.valueOf(this.JCmbSemestro.getSelectedItem())
+            for (Lista actual : mLista) {
+                this.cmbGrupo.addItem(String.valueOf(actual.getGrupo()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cmbGrupoFocusGained
 
     /**
      * @param args the command line arguments

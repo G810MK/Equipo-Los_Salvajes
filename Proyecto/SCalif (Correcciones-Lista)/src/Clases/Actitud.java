@@ -14,7 +14,7 @@ import java.sql.Date;
 public class Actitud {
     private int idActitud;
     private int Asistencia;
-    private Date Fecha;
+    private String Fecha;
 
     public int getIdActitud() {
         return idActitud;
@@ -32,11 +32,11 @@ public class Actitud {
         this.Asistencia = Asistencia;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return Fecha;
     }
 
-    public void setFecha(Date Fecha) {
+    public void setFecha(String Fecha) {
         this.Fecha = Fecha;
     }
     
