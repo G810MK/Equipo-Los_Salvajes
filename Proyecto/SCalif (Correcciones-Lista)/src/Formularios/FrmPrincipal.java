@@ -930,6 +930,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
                         this.jBtnAgregar.setEnabled(false);
                         this.JTxtTrabajo.setEnabled(false);
+                        this.jBtnGuardar.setEnabled(true);
 
                     } catch (SQLException ex) {
                         Logger.getLogger(FrmPrincipal.class
