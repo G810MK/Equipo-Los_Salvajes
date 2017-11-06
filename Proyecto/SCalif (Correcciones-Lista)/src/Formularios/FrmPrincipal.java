@@ -407,6 +407,48 @@ public class FrmPrincipal extends javax.swing.JFrame {
             z = 0;
             q++;
         }
+        this.jTblConsulta.setModel(modelo);
+    }
+
+    public void LLenarLista() throws SQLException {
+        BD mBD = new BD();
+        int q = 3;
+        int z = 0;
+        String Act = "";
+        String Fecha = "";
+        List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+        for (Lista actual : mLista) {
+            id = String.valueOf(actual.getIdLista());
+        }
+        List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(id));
+        int cont = 1;
+
+        Object[] encabezado = {"No", "NC", "Nombre"};
+
+        DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+        for (Alumno actual1 : lista) {
+            Object[] fila = {cont, actual1.getNC(), actual1.getNombre()};
+            modelo.addRow(fila);
+            cont++;
+        }
+
+        List<Actitud> listaActitud = mBD.consultarFechas(Integer.parseInt(id));
+        for (Actitud actual2 : listaActitud) {
+            Fecha = String.valueOf(actual2.getFecha());
+            List< Actitud> Lista = mBD.consultarFechasCovertir(Integer.parseInt(id), Fecha);
+            for (Actitud actual3 : Lista) {
+                modelo.addColumn(String.valueOf(actual3.getFecha()));
+            }
+            List<Actitud> Lista2 = mBD.consultarAsistencia(Fecha, Integer.parseInt(id));
+            for (Actitud actual4 : Lista2) {
+                modelo.setValueAt(actual4.getAsistencia(), z, q);
+                z++;
+            }
+            z = 0;
+            q++;
+
+        }
+        this.jTblConsulta.setModel(modelo);
     }
 
     private void JMItCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMItCargarActionPerformed
@@ -630,62 +672,93 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 String NC;
                 String Calificacion;
 
+                //Agregar desempeño
+                boolean Vacio = true;
                 try {
-                    for (int i = 0; i < jTblConsulta.getRowCount(); i++) {
-                        Nombre = jTblConsulta.getValueAt(i, 2).toString();
-                        NC = jTblConsulta.getValueAt(i, 1).toString();
-                        List<Alumno> mLista = mBD.ConsultaIDAlumno(Integer.parseInt(NC), Nombre);
-                        for (Alumno actual : mLista) {
-                            ID = String.valueOf(actual.getIdAlumno());
+                    for (int y = 0; y < jTblConsulta.getRowCount(); y++) {
+                        if (jTblConsulta.getValueAt(y, 3) == "" || jTblConsulta.getValueAt(y, 3) == null) {
+                            Vacio = false;
                         }
-                        Calificacion = jTblConsulta.getValueAt(i, 3).toString();
-                        Desempeño mDesempeño = new Desempeño();
-                        mDesempeño.setCalificacion(Integer.parseInt(Calificacion));
-                        mDesempeño.setTrabajo(Trabajo);
-                        mBD.agregarDesempeño(mDesempeño, Integer.parseInt(ID));
+                        System.out.println(Vacio);
                     }
+                    if (Vacio == true) {
+                        for (int i = 0; i < jTblConsulta.getRowCount(); i++) {
+                            Nombre = jTblConsulta.getValueAt(i, 2).toString();
+                            NC = jTblConsulta.getValueAt(i, 1).toString();
+                            List<Alumno> mLista = mBD.ConsultaIDAlumno(Integer.parseInt(NC), Nombre);
+                            for (Alumno actual : mLista) {
+                                ID = String.valueOf(actual.getIdAlumno());
+                            }
+                            Calificacion = jTblConsulta.getValueAt(i, 3).toString();
+                            Desempeño mDesempeño = new Desempeño();
+                            mDesempeño.setCalificacion(Integer.parseInt(Calificacion));
+                            mDesempeño.setTrabajo(Trabajo);
+                            mBD.agregarDesempeño(mDesempeño, Integer.parseInt(ID));
+                        }
 
-                    JOptionPane.showMessageDialog(this, "Desempeno guardado");
-                    this.jBtnAgregar.setEnabled(false);
-
+                        JOptionPane.showMessageDialog(this, "Desempeno guardado");
+                        this.jBtnAgregar.setEnabled(false);
+                        this.jDtFecha.setEnabled(false);
+                        this.jBtnGuardar.setEnabled(false);
+                    } else if (Vacio == false) {
+                        JOptionPane.showMessageDialog(this, "Hay campo(s) vacio(s), favor de verificar");
+                    }
                 } catch (SQLException ex) {
                     Logger.getLogger(FrmPrincipal.class
                             .getName()).log(Level.SEVERE, null, ex);
                 }
                 break;
             case 3:
+                //Agregar actitud
+                Vacio = true;
                 try {
-                    String Fecha6 = "";
-                    for (int i = 0; i < jTblConsulta.getRowCount(); i++) {
-                        Nombre = jTblConsulta.getValueAt(i, 2).toString();
-                        NC = jTblConsulta.getValueAt(i, 1).toString();
-                        List<Alumno> mLista = mBD.ConsultaIDAlumno(Integer.parseInt(NC), Nombre);
-                        for (Alumno actual : mLista) {
-                            ID = String.valueOf(actual.getIdAlumno());
+                    for (int y = 0; y < jTblConsulta.getRowCount(); y++) {
+                        if (jTblConsulta.getValueAt(y, 3) == "" || jTblConsulta.getValueAt(y, 3) == null) {
+                            Vacio = false;
                         }
-                        Actitud = jTblConsulta.getValueAt(i, 3).toString();
-                        Actitud mActitud = new Actitud();
-                        mActitud.setAsistencia(Integer.parseInt(Actitud));
-
-                        Date Fecha = this.jDtFecha.getDate();
-                        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
-                        Fecha6 = String.valueOf(sdf.format(Fecha));
-                        System.out.println(Fecha5);
-
-                        mActitud.setFecha(Fecha6);
-                        //mDesempeño.setTrabajo(Trabajo);
-
-                        mBD.agregarActitud(mActitud, Integer.parseInt(ID));
+                        System.out.println(Vacio);
                     }
+                    this.jDtFecha.setEnabled(false);
+                    String Fecha6 = "";
+                    if (Vacio == true) {
+                        for (int i = 0; i < jTblConsulta.getRowCount(); i++) {
+                            Nombre = jTblConsulta.getValueAt(i, 2).toString();
+                            NC = jTblConsulta.getValueAt(i, 1).toString();
+                            List<Alumno> mLista = mBD.ConsultaIDAlumno(Integer.parseInt(NC), Nombre);
+                            for (Alumno actual : mLista) {
+                                ID = String.valueOf(actual.getIdAlumno());
+                            }
+                            Actitud = jTblConsulta.getValueAt(i, 3).toString();
+                            Actitud mActitud = new Actitud();
+                            mActitud.setAsistencia(Integer.parseInt(Actitud));
 
-                    JOptionPane.showMessageDialog(this, "Asistencia guardada");
-                    this.jBtnAgregar.setEnabled(false);
+                            Date Fecha = this.jDtFecha.getDate();
+                            SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+                            Fecha6 = String.valueOf(sdf.format(Fecha));
+                            System.out.println(Fecha5);
+
+                            mActitud.setFecha(Fecha6);
+                            //mDesempeño.setTrabajo(Trabajo);
+
+                            mBD.agregarActitud(mActitud, Integer.parseInt(ID));
+                            this.jDtFecha.setEnabled(false);
+
+                        }
+                        JOptionPane.showMessageDialog(this, "Asistencia guardada");
+                        this.jBtnAgregar.setEnabled(false);
+                        this.jDtFecha.setEnabled(false);
+                        this.jBtnGuardar.setEnabled(false);
+
+                    } else if (Vacio == false) {
+                        JOptionPane.showMessageDialog(this, "Hay campo(s) vacio(s), favor de verificar");
+                    }
 
                 } catch (SQLException ex) {
                     Logger.getLogger(FrmPrincipal.class
                             .getName()).log(Level.SEVERE, null, ex);
                 }
                 break;
+
             default:
                 cc = 0;
                 break;
@@ -705,9 +778,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     int NC;
                     int IdD = 0;
                     int IdA = 0;
+                    int cont = 0;
                     Desempeño mDesempeño = new Desempeño();
+                    List<Desempeño> lista2 = mBD.consultarListaTrabajos(Integer.parseInt(id));
 
-                    for (int j = 3; j < 10; j++) {
+                    for (Desempeño actual : lista2) {
+                        cont++;
+                    }
+                    int d = 3 + cont;
+                    for (int j = 3; j < d; j++) {
                         for (int i = 0; i < jTblConsulta.getRowCount(); i++) {
                             DefaultTableModel modelo = (DefaultTableModel) jTblConsulta.getModel();
                             JTableHeader th = jTblConsulta.getTableHeader();
@@ -737,12 +816,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
                             mDesempeño.setTrabajo(tcmn.getHeaderValue().toString());
                             mDesempeño.setIdDesempeño(IdD);
                             mBD.modificarDesempeño(mDesempeño);
-
                         }
-
                     }
-                    this.jBtnActualizar.setEnabled(false);
-                    JOptionPane.showMessageDialog(null, "Desempeño actualizado");
+                    this.jBtnActualizar.setEnabled(true);
+                    JOptionPane.showMessageDialog(null, "Desempeño(s) actualizado(s)");
                     LlenarTablaDesempeno();
 
                 } catch (SQLException ex) {
@@ -810,8 +887,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
                         }
 
                     }
-                    this.jBtnActualizar.setEnabled(false);
-                    LlenarTablaDesempeno();
+                    this.jBtnActualizar.setEnabled(true);
+                    JOptionPane.showMessageDialog(null, "Asistencia actualizada");
+                    this.LLenarLista();
 
                 } catch (SQLException ex) {
                     Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -861,6 +939,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-YYYY");
                 Fecha5 = String.valueOf(sdf.format(Fecha));
                 System.out.println(Fecha5);
+                this.jDtFecha.setEnabled(false);
 
                 try {
                     lista = mBD.consultarAlumno(Integer.parseInt(id));
