@@ -45,6 +45,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         this.jBtnGuardar.setVisible(false);
         this.jBtnActualizar.setVisible(false);
         this.jDtFecha.setVisible(false);
+        this.jBtnGuardar.setEnabled(false);
     }
 
     public int uno;
@@ -905,65 +906,78 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void jBtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarActionPerformed
         // TODO add your handling code here:
         BD mBD = new BD();
+        this.jBtnGuardar.setEnabled(false);
         switch (cc) {
             case 2:
                 Trabajo = this.JTxtTrabajo.getText();
-
                 List<Alumno> lista;
-                try {
-                    lista = mBD.consultarAlumno(Integer.parseInt(id));
 
-                    int cont = 1;
-                    //Mostrar la consulta alumno
-                    Object[] encabezado = {"No", "NC", "Nombre", Trabajo};
-                    DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-                    for (Alumno actual : lista) {
+                if (!"".equals(Trabajo)) {
+                    try {
+                        lista = mBD.consultarAlumno(Integer.parseInt(id));
 
-                        Object[] fila = {cont, actual.getNC(), actual.getNombre(), ""};
-                        modelo.addRow(fila);
-                        cont++;
+                        int cont = 1;
+                        //Mostrar la consulta alumno
+                        Object[] encabezado = {"No", "NC", "Nombre", Trabajo};
+                        DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                        for (Alumno actual : lista) {
+
+                            Object[] fila = {cont, actual.getNC(), actual.getNombre(), ""};
+                            modelo.addRow(fila);
+                            cont++;
+                        }
+                        this.jTblConsulta.setModel(modelo);
+
+                        this.jBtnAgregar.setEnabled(false);
+                        this.JTxtTrabajo.setEnabled(false);
+
+                    } catch (SQLException ex) {
+                        Logger.getLogger(FrmPrincipal.class
+                                .getName()).log(Level.SEVERE, null, ex);
                     }
-                    this.jTblConsulta.setModel(modelo);
-
-                    this.jBtnAgregar.setEnabled(false);
-                    this.JTxtTrabajo.setEnabled(false);
-
-                } catch (SQLException ex) {
-                    Logger.getLogger(FrmPrincipal.class
-                            .getName()).log(Level.SEVERE, null, ex);
+                } else {
+                    JOptionPane.showMessageDialog(null, "El trabajo no puedes estar vacio");
                 }
+
                 break;
+                
             case 3:
                 //Agregar fecha
+                
                 Date Fecha = this.jDtFecha.getDate();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-YYYY");
-                Fecha5 = String.valueOf(sdf.format(Fecha));
-                System.out.println(Fecha5);
-                this.jDtFecha.setEnabled(false);
+                
+                
+                if (null != this.jDtFecha.getDate()) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-YYYY");
+                    Fecha5 = String.valueOf(sdf.format(Fecha));
+                    System.out.println(Fecha5);
+                    this.jDtFecha.setEnabled(false);
 
-                try {
-                    lista = mBD.consultarAlumno(Integer.parseInt(id));
+                    try {
+                        lista = mBD.consultarAlumno(Integer.parseInt(id));
 
-                    int cont = 1;
-                    //Mostrar la consulta alumno
-                    Object[] encabezado = {"No", "NC", "Nombre", Fecha5};
-                    DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-                    for (Alumno actual : lista) {
+                        int cont = 1;
+                        //Mostrar la consulta alumno
+                        Object[] encabezado = {"No", "NC", "Nombre", Fecha5};
+                        DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                        for (Alumno actual : lista) {
 
-                        Object[] fila = {cont, actual.getNC(), actual.getNombre(), ""};
-                        modelo.addRow(fila);
-                        cont++;
+                            Object[] fila = {cont, actual.getNC(), actual.getNombre(), ""};
+                            modelo.addRow(fila);
+                            cont++;
+                        }
+                        this.jTblConsulta.setModel(modelo);
+                        this.jBtnAgregar.setEnabled(false);
+                        this.JTxtTrabajo.setEnabled(false);
+                        this.jBtnGuardar.setEnabled(true);
+
+                    } catch (SQLException ex) {
+                        Logger.getLogger(FrmPrincipal.class
+                                .getName()).log(Level.SEVERE, null, ex);
                     }
-                    this.jTblConsulta.setModel(modelo);
-
-                    this.jBtnAgregar.setEnabled(false);
-                    this.JTxtTrabajo.setEnabled(false);
-
-                } catch (SQLException ex) {
-                    Logger.getLogger(FrmPrincipal.class
-                            .getName()).log(Level.SEVERE, null, ex);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Primero seleccione una fecha");
                 }
-
                 break;
             default:
                 cc = 0;

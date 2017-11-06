@@ -7,6 +7,7 @@ package Formularios;
 
 import BaseDatos.*;
 import Clases.*;
+import java.awt.Color;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -29,6 +30,7 @@ public class FrmBusquedaLista extends javax.swing.JFrame {
     public FrmBusquedaLista(int a) {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.getContentPane().setBackground(Color.lightGray);
         i = a;
     }
 
@@ -69,6 +71,7 @@ public class FrmBusquedaLista extends javax.swing.JFrame {
         jMenu2.setText("jMenu2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         JCmbSemestro.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         JCmbSemestro.addFocusListener(new java.awt.event.FocusAdapter() {

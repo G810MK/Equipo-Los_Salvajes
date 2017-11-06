@@ -8,6 +8,7 @@ package Formularios;
 import BaseDatos.BD;
 import Clases.Alumno;
 import Clases.Lista;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.List;
@@ -31,6 +32,7 @@ public class FrmModificar extends javax.swing.JFrame {
         
         initComponents();
         this.setLocationRelativeTo(null);
+        this.getContentPane().setBackground(Color.lightGray);
         id = ID;
         IDA = idA;
     
@@ -57,6 +59,7 @@ public class FrmModificar extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("No.Control:");
