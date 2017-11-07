@@ -163,13 +163,14 @@ public class FrmModificar extends javax.swing.JFrame {
     public void LLenarTabla() throws SQLException{
         BD mBD = new BD();
             List<Alumno> lista =  mBD.consultarAlumno(Integer.parseInt(id));
-
+            int cont = 1;
             //Mostrar la consulta alumno
-            Object[] encabezado = {"NC","Nombre"};
+            Object[] encabezado = {"No", "NC","Nombre"};
             DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
             for(Alumno actual : lista){
-                Object[] fila = {actual.getNC(), actual.getNombre()};
+                Object[] fila = {cont, actual.getNC(), actual.getNombre()};
                 modelo.addRow(fila);
+                cont++;
             }
             FrmPrincipal mFrmPrincipal = new FrmPrincipal(id,1);
             mFrmPrincipal.jTblConsulta.setModel(modelo);

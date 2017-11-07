@@ -356,13 +356,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
     public void LLenarTabla() throws SQLException {
         BD mBD = new BD();
         List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(id));
-
+        int cont = 1;
         //Mostrar la consulta alumno
-        Object[] encabezado = {"NC", "Nombre"};
+        Object[] encabezado = {"No", "NC", "Nombre"};
         DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
         for (Alumno actual : lista) {
-            Object[] fila = {actual.getNC(), actual.getNombre()};
+            Object[] fila = {cont, actual.getNC(), actual.getNombre()};
             modelo.addRow(fila);
+            cont++;
         }
         this.jTblConsulta.setModel(modelo);
     }
@@ -529,8 +530,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 //Modificar Alumno
                 try {
                     if (fila >= 0) {
-                        NC = (int) jTblConsulta.getValueAt(fila, 0);
-                        Nombre = (String) jTblConsulta.getValueAt(fila, 1);
+                        NC = (int) jTblConsulta.getValueAt(fila, 1);
+                        Nombre = (String) jTblConsulta.getValueAt(fila, 2);
                         System.out.println(NC);
                         System.out.println(Nombre);
 
@@ -545,8 +546,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     mFrmModificar.TxtNombre.setText(Nombre);
                     mFrmModificar.TxtNC1.setText(String.valueOf(NC));
                     mFrmModificar.setVisible(true);
+                   // this.LLenarTabla();
                     cc = 0;
-                    this.LLenarTabla();
 
                 } catch (SQLException ex) {
                     Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -602,8 +603,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 ID = "";
                 try {
                     if (fila >= 0) {
-                        int NC = (int) jTblConsulta.getValueAt(fila, 0);
-                        String Nombre = (String) jTblConsulta.getValueAt(fila, 1);
+                        int NC = (int) jTblConsulta.getValueAt(fila, 1);
+                        String Nombre = (String) jTblConsulta.getValueAt(fila, 2);
                         System.out.println(NC);
                         System.out.println(Nombre);
 
