@@ -83,18 +83,18 @@ public class FrmPrincipal extends javax.swing.JFrame {
         MnAgregar = new javax.swing.JMenu();
         JMItListaA = new javax.swing.JMenuItem();
         JMItAlumnoA = new javax.swing.JMenuItem();
-        JMItProductoA = new javax.swing.JMenuItem();
-        JMItConocimientoA = new javax.swing.JMenuItem();
         JMItActitudA = new javax.swing.JMenuItem();
         JMItDesempeñoA = new javax.swing.JMenuItem();
+        JMItConocimientoA = new javax.swing.JMenuItem();
+        JMItProductoA = new javax.swing.JMenuItem();
         JMItEvalDA = new javax.swing.JMenuItem();
         MnConsultar = new javax.swing.JMenu();
         JMItListaC = new javax.swing.JMenuItem();
         JMItAlumnoC = new javax.swing.JMenuItem();
-        JMItProductoC = new javax.swing.JMenuItem();
-        JMItConocimientoC = new javax.swing.JMenuItem();
         JMItActitudC = new javax.swing.JMenuItem();
         JMItDesempeñoC = new javax.swing.JMenuItem();
+        JMItProductoC = new javax.swing.JMenuItem();
+        JMItConocimientoC = new javax.swing.JMenuItem();
 
         jMIModificar.setText("Modificar");
         jMIModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -206,21 +206,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         MnAgregar.add(JMItAlumnoA);
 
-        JMItProductoA.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        JMItProductoA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/hombre-que-trabaja-en-monitor-plano-en-vista-lateral.png"))); // NOI18N
-        JMItProductoA.setText("Producto");
-        JMItProductoA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JMItProductoAActionPerformed(evt);
-            }
-        });
-        MnAgregar.add(JMItProductoA);
-
-        JMItConocimientoA.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        JMItConocimientoA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/conocimiento.png"))); // NOI18N
-        JMItConocimientoA.setText("Conocimiento");
-        MnAgregar.add(JMItConocimientoA);
-
         JMItActitudA.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         JMItActitudA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/atleta.png"))); // NOI18N
         JMItActitudA.setText("Actitud");
@@ -240,6 +225,21 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
         MnAgregar.add(JMItDesempeñoA);
+
+        JMItConocimientoA.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JMItConocimientoA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/conocimiento.png"))); // NOI18N
+        JMItConocimientoA.setText("Conocimiento");
+        MnAgregar.add(JMItConocimientoA);
+
+        JMItProductoA.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JMItProductoA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/hombre-que-trabaja-en-monitor-plano-en-vista-lateral.png"))); // NOI18N
+        JMItProductoA.setText("Producto");
+        JMItProductoA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMItProductoAActionPerformed(evt);
+            }
+        });
+        MnAgregar.add(JMItProductoA);
 
         JMItEvalDA.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         JMItEvalDA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/evaluacion.png"))); // NOI18N
@@ -278,16 +278,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         MnConsultar.add(JMItAlumnoC);
 
-        JMItProductoC.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        JMItProductoC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/hombre-que-trabaja-en-monitor-plano-en-vista-lateral.png"))); // NOI18N
-        JMItProductoC.setText("Producto");
-        MnConsultar.add(JMItProductoC);
-
-        JMItConocimientoC.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        JMItConocimientoC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/conocimiento.png"))); // NOI18N
-        JMItConocimientoC.setText("Conocimiento");
-        MnConsultar.add(JMItConocimientoC);
-
         JMItActitudC.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         JMItActitudC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/atleta.png"))); // NOI18N
         JMItActitudC.setText("Actitud");
@@ -306,6 +296,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
         MnConsultar.add(JMItDesempeñoC);
+
+        JMItProductoC.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JMItProductoC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/hombre-que-trabaja-en-monitor-plano-en-vista-lateral.png"))); // NOI18N
+        JMItProductoC.setText("Producto");
+        MnConsultar.add(JMItProductoC);
+
+        JMItConocimientoC.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JMItConocimientoC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/conocimiento.png"))); // NOI18N
+        JMItConocimientoC.setText("Conocimiento");
+        MnConsultar.add(JMItConocimientoC);
 
         jMenuBar1.add(MnConsultar);
 
