@@ -23,7 +23,7 @@ public class BD {
 
     public BD() {
         try {
-            mConexion.Conectar("localhost", "calificaciones", "root", "1234aszx");
+            mConexion.Conectar("localhost", "calificaciones", "root", "noteladigo");
         } catch (Exception error) {
             System.out.println(error.toString());
         }
@@ -95,11 +95,12 @@ public class BD {
     }
 
     //Agregar Producto
-    public void agregarProducto(Producto mProducto, Alumno mAlumno) throws SQLException {
-        String SQL = "insert into producto values (null, '?1', '?2', '?3')";
-        SQL = SQL.replace("?1", String.valueOf(mAlumno.getIdAlumno()));
+    public void agregarProducto(Producto mProducto, int Id) throws SQLException {
+        String SQL = "insert into producto values (null, '?1', '?2', '?3', '?4')";
+        SQL = SQL.replace("?1", String.valueOf(Id));
         SQL = SQL.replace("?2", mProducto.getTareas());
         SQL = SQL.replace("?3", String.valueOf(mProducto.getCalificacion()));
+        SQL = SQL.replace("?4", String.valueOf(mProducto.getUnidadP()));
         mConexion.ejecutarActualizacion(SQL);
     }
 
@@ -494,9 +495,9 @@ public class BD {
     }
     
     //Obtener nombre del trabajo
-    public List<Desempeño> consultarListaTrabajos(int ID) throws SQLException {
+    public List<Desempeño> consultarListaTrabajos(int ID, String Unidad) throws SQLException {
         List<Desempeño> lista = new ArrayList();
-        String SQL = "select distinct Trabajo from lista inner join alumno on Alumno.Lista_idLista = idLista inner join desempeno on desempeno.Alumno_idAlumno = idAlumno where idLista = " + ID;
+        String SQL = "select distinct Trabajo from lista inner join alumno on Alumno.Lista_idLista = idLista inner join desempeno on desempeno.Alumno_idAlumno = idAlumno where idLista = " + ID + " and Unidad = " + Unidad;;
         ResultSet consulta = mConexion.ejecutarConsulta(SQL);
         while (consulta.next()) {
             Desempeño mDesempeño = new Desempeño();
@@ -507,9 +508,9 @@ public class BD {
     }
     
     //Obtener calificacion del trabajo
-    public List<Desempeño> consultarDesempenoCal(String NombreTrabajo) throws SQLException {
+    public List<Desempeño> consultarDesempenoCal(String NombreTrabajo, String Unidad) throws SQLException {
         List<Desempeño> lista = new ArrayList();
-        String SQL = "select calificacion from desempeno where Trabajo = '" + NombreTrabajo + "'";
+        String SQL = "select calificacion from desempeno where Trabajo = '" + NombreTrabajo + "' and Unidad =" + Unidad ;
         ResultSet consulta = mConexion.ejecutarConsulta(SQL);
         while (consulta.next()) {
             Desempeño mDesempeño = new Desempeño();
@@ -562,6 +563,66 @@ public class BD {
             Actitud mActitud = new Actitud();
             mActitud.setIdActitud(consulta.getInt("IdActitud"));
             Lista.add(mActitud);
+        }
+        return Lista;
+    }
+    
+    public List<Desempeño> ConsultaDUnidad() throws SQLException {
+        List<Desempeño> Lista = new ArrayList();
+        String SQL = "select distinct unidad from Desempeno;";
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()){
+            Desempeño mDesempeño = new Desempeño();
+            mDesempeño.setUnidadD(consulta.getString("Unidad"));
+            Lista.add(mDesempeño);
+        }
+        return Lista;
+    }
+    
+    public List<Producto> consultarListaTareas(int ID, String Unidad) throws SQLException {
+        List<Producto> lista = new ArrayList();
+        String SQL = "select distinct Tareas from lista inner join alumno on Alumno.Lista_idLista = idLista inner join producto on producto.Alumno_idAlumno = idAlumno where idLista = " + ID + " and Unidad = " + Unidad;
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()) {
+            Producto mProducto = new Producto();
+            mProducto.setTareas(consulta.getString("Tareas"));
+            lista.add(mProducto);
+        }
+        return lista;
+    }
+    
+    public List<Producto> consultarProductoCal(String NombreTareas, String Unidad) throws SQLException {
+        List<Producto> lista = new ArrayList();
+        String SQL = "select calificacion from producto where Tareas = '" + NombreTareas + "' and Unidad = " + Unidad;
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()) {
+            Producto mProducto = new Producto();
+            mProducto.setCalificacion(consulta.getInt("calificacion"));
+            lista.add(mProducto);
+        }
+        return lista;
+    }
+    
+    public List<Producto> ConsultaIDProducto(String Tarea, int IdA) throws SQLException {
+        List<Producto> Lista = new ArrayList();
+        String SQl = "select idProducto from Producto where Tareas = '" + Tarea + "' and Alumno_idAlumno = " + IdA ;
+        ResultSet consulta = mConexion.ejecutarConsulta(SQl);
+        while (consulta.next()) {
+            Producto mProducto = new Producto();
+            mProducto.setIdProducto(consulta.getInt("idProducto"));            
+            Lista.add(mProducto);
+        }
+        return Lista;
+    }
+    
+    public List<Producto> ConsultaPUnidad() throws SQLException {
+        List<Producto> Lista = new ArrayList();
+        String SQL = "select distinct unidad from Producto;";
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()){
+            Producto mProducto = new Producto();
+            mProducto.setUnidadP(consulta.getString("Unidad"));
+            Lista.add(mProducto);
         }
         return Lista;
     }

@@ -16,6 +16,15 @@ public class Producto {
     private int idProducto;
     private String Tareas;
     private int Calificacion;
+    private String UnidadP;
+
+    public String getUnidadP() {
+        return UnidadP;
+    }
+
+    public void setUnidadP(String UnidadP) {
+        this.UnidadP = UnidadP;
+    }
 
     public int getIdProducto() {
         return idProducto;

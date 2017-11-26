@@ -13,6 +13,15 @@ public class Desempeño {
     private int idDesempeño;
     private String Trabajo;
     private int Calificacion;
+    private String UnidadD;
+
+    public String getUnidadD() {
+        return UnidadD;
+    }
+
+    public void setUnidadD(String UnidadD) {
+        this.UnidadD = UnidadD;
+    }
 
     public int getIdDesempeño() {
         return idDesempeño;
