@@ -54,8 +54,8 @@ public class FrmPrincipal extends javax.swing.JDialog {
     public String IDL;
     public String IDAl;
     public int opc;
-    
-    private boolean[] editable = {false,false,false,false,true,false};
+
+    //private boolean[] editable = {false, false, false, false};
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -266,6 +266,12 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jLblListaGeneral.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLblListaGeneral.setText("Lista General");
 
+        jTblConsultarListaLs = new javax.swing.JTable(){
+            private boolean[] editable = {false, false, false, false, false};
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return editable[colIndex]; //Disallow the editing of any cell
+            }
+        };
         jTblConsultarListaLs.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -279,6 +285,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
         ));
         jTblConsultarListaLs.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
         jTblConsultarListaLs.setComponentPopupMenu(jPpmEliminarLista);
+        jTblConsultarListaLs.getTableHeader().setResizingAllowed(false);
         jTblConsultarListaLs.getTableHeader().setReorderingAllowed(false);
         jTblConsultarListaLs.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -644,6 +651,12 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jLabel22.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel22.setText("Nombre:");
 
+        jTblConsultarAlumno = new javax.swing.JTable(){
+            private boolean[] editable = {false, false, false};
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return editable[colIndex]; //Disallow the editing of any cell
+            }
+        };
         jTblConsultarAlumno.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -656,6 +669,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
             }
         ));
         jTblConsultarAlumno.setComponentPopupMenu(jPpmEliminarAlumno);
+        jTblConsultarAlumno.getTableHeader().setResizingAllowed(false);
         jTblConsultarAlumno.getTableHeader().setReorderingAllowed(false);
         jTblConsultarAlumno.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1214,39 +1228,38 @@ public class FrmPrincipal extends javax.swing.JDialog {
 
         DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
 
-        
         for (Lista actual : lista) {
             Object[] fila = {actual.getIdLista(), actual.getMateria(), actual.getGrupo(), actual.getSemestre(), actual.getCarrera()};
             modelo.addRow(fila);
         }
-        
+
         this.jTblConsultarListaLs.setModel(modelo);
+        jTblConsultarListaLs.getColumnModel().getColumn(0).setPreferredWidth(11);
+        jTblConsultarListaLs.getColumnModel().getColumn(1).setPreferredWidth(160);
+        jTblConsultarListaLs.getColumnModel().getColumn(2).setPreferredWidth(35);
     }
-    
-    
-   public boolean isCellEditable(int row, int column){
-                return editable[column];
-            }
 
     public void LLenarTablaAlumno() throws SQLException {
-            //Consulta alumno
-            BD mBD = new BD();
-            List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
-            for (Lista actual : mLista) {
-                IDAl = String.valueOf(actual.getIdLista());
-            }
-            System.out.println(IDAl);
-            List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(IDAl));
-            int cont = 1;
-            //Mostrar la consulta alumno
-            Object[] encabezado = {"No", "NC", "Nombre"};
-            DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-            for (Alumno actual : lista) {
-                Object[] fila = {cont, actual.getNC(), actual.getNombre()};
-                modelo.addRow(fila);
-                cont++;
-            }
-            this.jTblConsultarAlumno.setModel(modelo);        
+        //Consulta alumno
+        BD mBD = new BD();
+        List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+        for (Lista actual : mLista) {
+            IDAl = String.valueOf(actual.getIdLista());
+        }
+        System.out.println(IDAl);
+        List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(IDAl));
+        int cont = 1;
+        //Mostrar la consulta alumno
+        Object[] encabezado = {"No", "NC", "Nombre"};
+        DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+        for (Alumno actual : lista) {
+            Object[] fila = {cont, actual.getNC(), actual.getNombre()};
+            modelo.addRow(fila);
+            cont++;
+        }
+        this.jTblConsultarAlumno.setModel(modelo);
+        //jTblConsultarAlumno.getColumnModel().getColumn(0).setPreferredWidth(3);
+        //jTblConsultarAlumno.getColumnModel().getColumn(0).setPreferredWidth(20);
     }
 
     public void LimpiarCamposLista() {
@@ -1676,6 +1689,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
         try {
             // TODO add your handling code here:
             this.LLenarTablaLista();
+
         } catch (SQLException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1789,7 +1803,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
         this.jCmbCarreraAlm.removeAllItems();
         this.jCmbSemestreAlm.removeAllItems();
         this.jCmbGrupoAlm.removeAllItems();
-        
+
         try {
             List<Lista> mLista = mBD.consultarListaMateria();
             for (Lista actual : mLista) {
@@ -1818,44 +1832,43 @@ public class FrmPrincipal extends javax.swing.JDialog {
     private void jTblConsultarAlumnoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblConsultarAlumnoMouseClicked
         BD mBD = new BD();
 
-            int fila = this.jTblConsultarAlumno.getSelectedRow();
-            if (fila >= 0) {
-               int NC = (int) jTblConsultarAlumno.getValueAt(fila, 1);
-               String Nombre = (String) jTblConsultarAlumno.getValueAt(fila, 2);
-               
-               this.jTxtNombreAlm.setText(Nombre);
-               this.jTxtNCAlm.setText(String.valueOf(NC));
-            }
+        int fila = this.jTblConsultarAlumno.getSelectedRow();
+        if (fila >= 0) {
+            int NC = (int) jTblConsultarAlumno.getValueAt(fila, 1);
+            String Nombre = (String) jTblConsultarAlumno.getValueAt(fila, 2);
+
+            this.jTxtNombreAlm.setText(Nombre);
+            this.jTxtNCAlm.setText(String.valueOf(NC));
+        }
     }//GEN-LAST:event_jTblConsultarAlumnoMouseClicked
 
     private void jBtnModificarAlmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnModificarAlmActionPerformed
-        try{
-             BD mBD = new BD();
-             String IDAlum = "";
+        try {
+            BD mBD = new BD();
+            String IDAlum = "";
             Alumno mAlumno = new Alumno();
             int fila = this.jTblConsultarAlumno.getSelectedRow();
-            
-            if( fila >= 0){
+
+            if (fila >= 0) {
                 int NC = (int) jTblConsultarAlumno.getValueAt(fila, 1);
-                String Nombre  = (String) jTblConsultarAlumno.getValueAt(fila, 2);
-             List<Alumno> mAlumno1 = mBD.ConsultaIDAlumno(NC, Nombre);
-                        for (Alumno actual : mAlumno1) {
-                            IDAlum = String.valueOf(actual.getIdAlumno());
-                            System.out.println(IDAlum);
-                        }   
+                String Nombre = (String) jTblConsultarAlumno.getValueAt(fila, 2);
+                List<Alumno> mAlumno1 = mBD.ConsultaIDAlumno(NC, Nombre);
+                for (Alumno actual : mAlumno1) {
+                    IDAlum = String.valueOf(actual.getIdAlumno());
+                    System.out.println(IDAlum);
+                }
             }
-             
-                        
+
             mAlumno.setIdAlumno(Integer.parseInt(IDAlum));
             mAlumno.setNC(Integer.parseInt(this.jTxtNCAlm.getText()));
-            mAlumno.setNombre(jTxtNombreAlm.getText());       
-            
+            mAlumno.setNombre(jTxtNombreAlm.getText());
+
             mBD.modificarAlumno(mAlumno);
             JOptionPane.showMessageDialog(this, "Alumno modificado");
             this.LLenarTablaAlumno();
             jTxtNCAlm.setText(null);
             jTxtNombreAlm.setText(null);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.toString());
         }
     }//GEN-LAST:event_jBtnModificarAlmActionPerformed
@@ -1978,7 +1991,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
+    public javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPopupMenu jPpmEliminarAlumno;
     private javax.swing.JPopupMenu jPpmEliminarLista;
@@ -2006,7 +2019,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
     private javax.swing.JTabbedPane jTabbedPane1;
     public javax.swing.JTable jTable2;
     public javax.swing.JTable jTable3;
-    private javax.swing.JTable jTblConsultarAlumno;
+    public javax.swing.JTable jTblConsultarAlumno;
     public javax.swing.JTable jTblConsultarListaLs;
     private javax.swing.JTabbedPane jTbpModificar;
     public javax.swing.JTextField jTxtNCAl;
