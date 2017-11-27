@@ -626,4 +626,227 @@ public class BD {
         }
         return Lista;
     }
+    
+    public List<Conocimiento> consultarListaUnidadesC(int ID, String Unidad) throws SQLException {
+        List<Conocimiento> lista = new ArrayList();
+        String SQL = "select distinct Unidad from lista inner join alumno on Alumno.Lista_idLista = idLista inner join evaluacion_unidad on evaluacion_unidad.Alumno_idAlumno = idAlumno where idLista = " + ID + " and Unidad = " + Unidad;
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()) {
+            Conocimiento mConocimiento = new Conocimiento();
+            mConocimiento.setUnidad(consulta.getInt("Unidad"));
+            lista.add(mConocimiento);
+        }
+        return lista;
+    }
+    
+    public List<Conocimiento> ConsultaCUnidad(int ID, int Unidad) throws SQLException {
+        List<Conocimiento> Lista = new ArrayList();
+        String SQL = "select distinct unidad from lista inner join alumno on Alumno.Lista_idLista = idLista inner join evaluacion_unidad on evaluacion_unidad.Alumno_idAlumno = idAlumno where idLista = " + ID + " and unidad = "+ Unidad;
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()){
+            Conocimiento mConocimiento = new Conocimiento();
+            mConocimiento.setUnidad(consulta.getInt("Unidad"));
+            Lista.add(mConocimiento);
+        }
+        return Lista;
+    }
+    
+    public List<Conocimiento> consultarConocimientoCal(String Unidad, String ID) throws SQLException {
+        List<Conocimiento> lista = new ArrayList();
+        String SQL = "select conocimiento from lista inner join alumno on Alumno.Lista_idLista = idLista inner join evaluacion_unidad on evaluacion_unidad.Alumno_idAlumno = idAlumno where Unidad = '" + Unidad + "' and idLista = " + ID;
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()) {
+            Conocimiento mConocimiento = new Conocimiento();
+            mConocimiento.setCalificacion(consulta.getInt("Conocimiento"));
+            lista.add(mConocimiento);
+        }
+        return lista;
+    }
+   
+    public List<Conocimiento> ConsultaIDConocimiento(String Unidad, int IdA) throws SQLException {
+        List<Conocimiento> Lista = new ArrayList();
+        String SQl = "select idevaluacion_unidad from evaluacion_unidad where unidad = '" + Unidad + "' and Alumno_idAlumno = " + IdA ;
+        ResultSet consulta = mConexion.ejecutarConsulta(SQl);
+        while (consulta.next()) {
+            Conocimiento mConocimiento = new Conocimiento();
+            mConocimiento.setIdConocimiento(consulta.getInt("idEvaluacion_unidad"));            
+            Lista.add(mConocimiento);
+        }
+        return Lista;
+    }
+    
+    public List<Conocimiento> ConsultaConoUnidad() throws SQLException {
+        List<Conocimiento> Lista = new ArrayList();
+        String SQL = "select distinct unidad from evaluacion_unidad";
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()){
+            Conocimiento mConocimiento = new Conocimiento();
+            mConocimiento.setUnidad(consulta.getInt("Unidad"));
+            Lista.add(mConocimiento);
+        }
+        return Lista;
+    }
+     
+    public void agregarPuntosExtras(PuntosExtras mPuntos, int ID) throws SQLException {
+        String SQL = "insert into puntos_extras values (null, '?1', '?2', '?3')";
+        SQL = SQL.replace("?1", String.valueOf(ID));
+        SQL = SQL.replace("?2", String.valueOf(mPuntos.getPuntos()));
+        SQL = SQL.replace("?3", String.valueOf(mPuntos.getUnidad()));
+        mConexion.ejecutarActualizacion(SQL);
+    }
+    
+    public List<Alumno> ConsultaAlumnoPuntos(int ID) throws SQLException {
+        List<Alumno> Lista = new ArrayList();
+        String SQL = "select * from lista inner join alumno on Alumno.Lista_idLista = idLista inner join puntos_extras on Alumno_idAlumno = idAlumno where idLista = " + ID;
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()){
+            Alumno mAlumno =  new Alumno();
+            mAlumno.setNC(consulta.getInt("NC"));
+            mAlumno.setNombre(consulta.getString("Nombre"));
+            Lista.add(mAlumno);
+        }
+        return Lista;
+    }
+    
+    public List<PuntosExtras> ConsultaPuntosExtrasUnidad(int ID) throws SQLException {
+        List<PuntosExtras> Lista =  new ArrayList();
+        String SQL = "select distinct unidad from lista inner join alumno on Alumno.Lista_idLista = idLista inner join puntos_extras on puntos_extras.Alumno_idAlumno = idAlumno where idLista = " + ID;
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()){
+            PuntosExtras mPuntosExtras =  new PuntosExtras();
+            mPuntosExtras.setUnidad(consulta.getInt("unidad"));
+            Lista.add(mPuntosExtras);
+        }
+        return Lista;
+    }
+    
+    public List<PuntosExtras> ConsultaPuntosExtrasUnidad1() throws SQLException {
+        List<PuntosExtras> Lista =  new ArrayList();
+        String SQL = "select distinct unidad from lista inner join alumno on Alumno.Lista_idLista = idLista inner join puntos_extras on Alumno_idAlumno = idAlumno";
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()){
+            PuntosExtras mPuntosExtras =  new PuntosExtras();
+            mPuntosExtras.setUnidad(consulta.getInt("unidad"));
+            Lista.add(mPuntosExtras);
+        }
+        return Lista;
+    }
+    public List<PuntosExtras> ConsultaPuntosExtrasPuntos(int ID, String Unidad) throws SQLException {
+        List<PuntosExtras> Lista =  new ArrayList();
+        String SQL = "select * from lista inner join alumno on Alumno.Lista_idLista = idLista inner join puntos_extras on puntos_extras.Alumno_idAlumno = idAlumno where idLista = " + ID + " and Unidad = " + Unidad;
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()){
+            PuntosExtras mPuntosExtras =  new PuntosExtras();
+            mPuntosExtras.setPuntos(consulta.getInt("puntos"));
+            mPuntosExtras.setUnidad(consulta.getInt("unidad"));
+            Lista.add(mPuntosExtras);
+        }
+        return Lista;
+    }
+    
+    public List<PuntosExtras> ConsultaIDPuntosExtras(String Unidad, int IdA) throws SQLException {
+        List<PuntosExtras> Lista = new ArrayList();
+        String SQl = "select idPuntos_Extras from Puntos_Extras where unidad = '" + Unidad + "' and Alumno_idAlumno = " + IdA ;
+        ResultSet consulta = mConexion.ejecutarConsulta(SQl);
+        while (consulta.next()) {
+            PuntosExtras mPuntosExtras = new PuntosExtras();
+            mPuntosExtras.setIdPuntosExtras(consulta.getInt("idPuntos_Extras"));            
+            Lista.add(mPuntosExtras);
+        }
+        return Lista;
+    }
+    
+    public void modificarPuntosExtras(PuntosExtras mPuntosExtras) throws SQLException {
+        String SQL = "update Puntos_Extras set Puntos = '?1' where idpuntos_extras = '?2'";
+        SQL = SQL.replace("?1", String.valueOf(mPuntosExtras.getPuntos()));
+        SQL = SQL.replace("?2", String.valueOf(mPuntosExtras.getIdPuntosExtras()));
+        mConexion.ejecutarActualizacion(SQL);
+    }
+    
+    public List<Eval_Diagnostica> ConsultaCalED(int ID) throws SQLException {
+    List<Eval_Diagnostica> lista = new ArrayList();
+        String SQL = "select calificacion from lista inner join alumno on Alumno.Lista_idLista = idLista inner join evaluacion_diagnostica on evaluacion_diagnostica.Alumno_idAlumno = idAlumno where idLista = " + ID;
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()) {
+            Eval_Diagnostica mEval_Diagnostica = new Eval_Diagnostica();
+            mEval_Diagnostica.setCalificacion(consulta.getInt("Calificacion"));
+            lista.add(mEval_Diagnostica);
+        }
+        return lista;
+}
+    
+    public List<Eval_Diagnostica> ConsultaIDEvaluacion(int Calificacion, int IdA) throws SQLException {
+        List<Eval_Diagnostica> Lista = new ArrayList();
+        String SQl = "select idEvaluacion_diagnostica from Evaluacion_diagnostica where calificacion = '" + Calificacion + "' and Alumno_idAlumno = " + IdA ;
+        ResultSet consulta = mConexion.ejecutarConsulta(SQl);
+        while (consulta.next()) {
+            Eval_Diagnostica mEval_Diagnostica = new Eval_Diagnostica();
+            mEval_Diagnostica.setIdEval_Diagnostica(consulta.getInt("idEvaluacion_diagnostica"));            
+            Lista.add(mEval_Diagnostica);
+        }
+        return Lista;
+    }
+    
+    public List<Desempeño> ConsultaCalDes(int idL, int idA, int Unidad) throws SQLException {
+        List<Desempeño> Lista = new ArrayList();
+        String SQL = "select calificacion from lista inner join alumno on alumno.Lista_idLista = idLista inner join desempeno on desempeno.Alumno_idAlumno = idAlumno where idLista = " + idL + " and idAlumno = " + idA + " and Unidad = " + Unidad;
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()){
+            Desempeño mDesempeño = new Desempeño();
+            mDesempeño.setCalificacion(consulta.getInt("calificacion"));
+            Lista.add(mDesempeño);
+        }
+        return Lista;
+    }
+    
+    public List<Conocimiento> ConsultaCalCon(int idL, int idA, int Unidad) throws SQLException {
+        List<Conocimiento> Lista = new ArrayList();
+        String SQL = "select conocimiento from lista inner join alumno on alumno.Lista_idLista = idLista inner join evaluacion_unidad on evaluacion_unidad.Alumno_idAlumno = idAlumno where idLista = " + idL + " and idAlumno = " + idA + " and Unidad = " + Unidad;
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()){
+            Conocimiento mConocimiento = new Conocimiento();
+            mConocimiento.setCalificacion(consulta.getInt("conocimiento"));
+            Lista.add(mConocimiento);
+        }
+        return Lista;
+    }
+    
+    public List<PuntosExtras> ConsultaCalExtras(int idL, int idA, int Unidad) throws SQLException {
+        List<PuntosExtras> Lista = new ArrayList();
+        String SQL = "select puntos from lista inner join alumno on alumno.Lista_idLista = idLista inner join puntos_extras on puntos_extras.Alumno_idAlumno = idAlumno where idLista = " + idL + " and idAlumno = " + idA + " and Unidad = " + Unidad;
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()){
+            PuntosExtras mPuntosExtras = new PuntosExtras();
+            mPuntosExtras.setPuntos(consulta.getInt("puntos"));
+            Lista.add(mPuntosExtras);
+        }
+        return Lista;
+    }
+    
+    public List<Producto> ConsultaCalProd(int idL, int idA, int Unidad) throws SQLException {
+        List<Producto> Lista = new ArrayList();
+        String SQL = "select calificacion from lista inner join alumno on alumno.Lista_idLista = idLista inner join producto on producto.Alumno_idAlumno = idAlumno where idLista = " + idL + " and idAlumno = " + idA + " and Unidad = " + Unidad;
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()){
+            Producto mProducto = new Producto();
+            mProducto.setCalificacion(consulta.getInt("calificacion"));
+            Lista.add(mProducto);
+        }
+        return Lista;
+    }
+    public void agregarConocimiento(Conocimiento mConocimiento, int ID) throws SQLException {
+        String SQL = "insert into evaluacion_unidad values (null, '?1', '?2', '?3')";
+        SQL = SQL.replace("?1", String.valueOf(ID));
+        SQL = SQL.replace("?2", String.valueOf(mConocimiento.getUnidad()));
+        SQL = SQL.replace("?3", String.valueOf(mConocimiento.getCalificacion()));
+        mConexion.ejecutarActualizacion(SQL);
+    }
+    
+    public void modificarConocimiento(Conocimiento mConocimiento, int idAl) throws SQLException {
+        String SQL = "update evaluacion_unidad set conocimiento = '?1' where idEvaluacion_unidad = '?2' and Alumno_idAlumno = '?3'";
+        SQL = SQL.replace("?1", String.valueOf(mConocimiento.getCalificacion()));
+        SQL = SQL.replace("?2", String.valueOf(mConocimiento.getIdConocimiento()));
+        SQL = SQL.replace("?3", String.valueOf(idAl));
+        mConexion.ejecutarActualizacion(SQL);
+    }
 }

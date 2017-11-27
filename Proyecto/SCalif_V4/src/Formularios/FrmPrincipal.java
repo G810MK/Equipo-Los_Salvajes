@@ -7,9 +7,11 @@ package Formularios;
 
 import BaseDatos.BD;
 import Clases.Alumno;
+import Clases.Conocimiento;
 import Clases.Desempeño;
 import Clases.Lista;
 import Clases.Producto;
+import Clases.PuntosExtras;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
@@ -36,10 +38,34 @@ public class FrmPrincipal extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        this.jCmbUnidadD.setEnabled(false);
+        this.jTxtNombreTrabajo.setEnabled(false);
+        this.jBtnGuardarD.setVisible(false);
+        this.jBtnAgregarD.setEnabled(false);
+        this.jBtnCancelarD.setEnabled(false);
+
+        this.jCmbUnidadP.setEnabled(false);
+        this.jTxtNombreProducto.setEnabled(false);
+        this.jBtnAgregarP.setEnabled(false);
+        this.jBtnGuardarP.setVisible(false);
+        this.jBtnCancelarP.setEnabled(false);
+
+        jCmbUnidadC.setEnabled(false);
+        this.jBtnAgregarC.setEnabled(false);
+        this.jBtnGuardarC.setVisible(false);
+        this.jBtnCancelarC.setEnabled(false);
+
+        this.jTxtNCAlmPE.setEnabled(false);
+        this.jTxtNombreAlmPE.setEnabled(false);
+        this.jCmbUnidadPE.setEnabled(false);
+        this.jTxtPuntosExtras.setEnabled(false);
+        this.jBtnGuardarPE.setEnabled(false);
+        this.jBtnCancelarPE.setEnabled(false);
         //JTable setAutoResizeMode = jTblConsultarListaLs.setAutoResizeMode(JTable.AUTO_RESIZE_ON);
         //TableColumnModel columnModel = jTblConsultarListaLs.getColumnModel();
 
         //columnModel.getColumn(0).setPreferredWidth(50);
+        
         try {
             this.LLenarTablaLista();
         } catch (SQLException ex) {
@@ -56,6 +82,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
     String Fecha5;
     public String IDL;
     public String IDAl;
+    public String IDCon;
     public String IDDes = "";
     public String IDPro = "";
     public int opc;
@@ -79,7 +106,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jMniEliminarLista = new javax.swing.JMenuItem();
         jPpmEliminarAlumno = new javax.swing.JPopupMenu();
         jMniEliminarAlumno = new javax.swing.JMenuItem();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        Unidad = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jSeparator5 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
@@ -169,6 +196,48 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jLabel9 = new javax.swing.JLabel();
         jSeparator17 = new javax.swing.JSeparator();
         jPanel5 = new javax.swing.JPanel();
+        jTabbedPane3 = new javax.swing.JTabbedPane();
+        jPanel14 = new javax.swing.JPanel();
+        jSeparator26 = new javax.swing.JSeparator();
+        jLabel48 = new javax.swing.JLabel();
+        jLabel49 = new javax.swing.JLabel();
+        jCmbMateriaC = new javax.swing.JComboBox<>();
+        jLblCarrera5 = new javax.swing.JLabel();
+        jCmbCarreraC = new javax.swing.JComboBox<>();
+        jLblSemestre5 = new javax.swing.JLabel();
+        jCmbSemestreC = new javax.swing.JComboBox<>();
+        jLblGrupo5 = new javax.swing.JLabel();
+        jCmbGrupoC = new javax.swing.JComboBox<>();
+        jBtnBuscarC = new javax.swing.JButton();
+        jLabel50 = new javax.swing.JLabel();
+        jCmbUnidadC = new javax.swing.JComboBox<>();
+        jLabel51 = new javax.swing.JLabel();
+        jSeparator27 = new javax.swing.JSeparator();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jTblConocimiento = new javax.swing.JTable();
+        jBtnAgregarC = new javax.swing.JButton();
+        jBtnCancelarC = new javax.swing.JButton();
+        jBtnGuardarC = new javax.swing.JButton();
+        jSeparator31 = new javax.swing.JSeparator();
+        jPanel15 = new javax.swing.JPanel();
+        jSeparator28 = new javax.swing.JSeparator();
+        jLabel52 = new javax.swing.JLabel();
+        jLabel53 = new javax.swing.JLabel();
+        jCmbMateriaC1 = new javax.swing.JComboBox<>();
+        jLblCarrera6 = new javax.swing.JLabel();
+        jCmbCarreraC1 = new javax.swing.JComboBox<>();
+        jLblSemestre6 = new javax.swing.JLabel();
+        jCmbSemestreC1 = new javax.swing.JComboBox<>();
+        jLblGrupo6 = new javax.swing.JLabel();
+        jCmbGrupoC1 = new javax.swing.JComboBox<>();
+        jBtnBuscarC1 = new javax.swing.JButton();
+        jLabel54 = new javax.swing.JLabel();
+        jCmbUnidadC1 = new javax.swing.JComboBox<>();
+        jLabel55 = new javax.swing.JLabel();
+        jSeparator29 = new javax.swing.JSeparator();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        jTblConocimiento1 = new javax.swing.JTable();
+        jBtnAgregarC1 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jTabbedPane5 = new javax.swing.JTabbedPane();
         jPanel12 = new javax.swing.JPanel();
@@ -259,6 +328,73 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jBtnBuscarD1 = new javax.swing.JButton();
         jLblSemestre2 = new javax.swing.JLabel();
         jLblGrupo2 = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
+        jTabbedPane4 = new javax.swing.JTabbedPane();
+        jPanel17 = new javax.swing.JPanel();
+        jSeparator30 = new javax.swing.JSeparator();
+        jLabel38 = new javax.swing.JLabel();
+        jLblCarrera7 = new javax.swing.JLabel();
+        jLblSemestre7 = new javax.swing.JLabel();
+        jLblGrupo7 = new javax.swing.JLabel();
+        jCmbGrupoPE = new javax.swing.JComboBox<>();
+        jBtnBuscarPE = new javax.swing.JButton();
+        jCmbSemestrePE = new javax.swing.JComboBox<>();
+        jCmbCarreraPE = new javax.swing.JComboBox<>();
+        jCmbMateriaPE = new javax.swing.JComboBox<>();
+        jLabel56 = new javax.swing.JLabel();
+        jSeparator32 = new javax.swing.JSeparator();
+        jLabel57 = new javax.swing.JLabel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jTblPuntosExtras = new javax.swing.JTable();
+        jCmbUnidadPE = new javax.swing.JComboBox<>();
+        jLabel58 = new javax.swing.JLabel();
+        jSeparator33 = new javax.swing.JSeparator();
+        jBtnGuardarPE = new javax.swing.JButton();
+        jBtnCancelarPE = new javax.swing.JButton();
+        jTxtNCAlmPE = new javax.swing.JTextField();
+        jLabel64 = new javax.swing.JLabel();
+        jLabel65 = new javax.swing.JLabel();
+        jTxtNombreAlmPE = new javax.swing.JTextField();
+        jTxtPuntosExtras = new javax.swing.JTextField();
+        jLabel66 = new javax.swing.JLabel();
+        jPanel18 = new javax.swing.JPanel();
+        jLabel60 = new javax.swing.JLabel();
+        jSeparator34 = new javax.swing.JSeparator();
+        jCmbMateriaPE1 = new javax.swing.JComboBox<>();
+        jCmbCarreraPE1 = new javax.swing.JComboBox<>();
+        jLblCarrera8 = new javax.swing.JLabel();
+        jLabel61 = new javax.swing.JLabel();
+        jLabel62 = new javax.swing.JLabel();
+        jSeparator35 = new javax.swing.JSeparator();
+        jCmbUnidadPE1 = new javax.swing.JComboBox<>();
+        jLabel63 = new javax.swing.JLabel();
+        jBtnAgregarPE1 = new javax.swing.JButton();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        jTblPuntosExtras1 = new javax.swing.JTable();
+        jCmbSemestrePE1 = new javax.swing.JComboBox<>();
+        jCmbGrupoPE1 = new javax.swing.JComboBox<>();
+        jBtnBuscarPE1 = new javax.swing.JButton();
+        jLblSemestre8 = new javax.swing.JLabel();
+        jLblGrupo8 = new javax.swing.JLabel();
+        jPanel16 = new javax.swing.JPanel();
+        jPanel22 = new javax.swing.JPanel();
+        jLabel74 = new javax.swing.JLabel();
+        jLabel76 = new javax.swing.JLabel();
+        jSeparator40 = new javax.swing.JSeparator();
+        jLblCarrera11 = new javax.swing.JLabel();
+        jLblSemestre11 = new javax.swing.JLabel();
+        jLblGrupo11 = new javax.swing.JLabel();
+        jCmbGrupoU = new javax.swing.JComboBox<>();
+        jCmbSemestreU = new javax.swing.JComboBox<>();
+        jCmbCarreraU = new javax.swing.JComboBox<>();
+        jCmbMateriaU = new javax.swing.JComboBox<>();
+        jBtnBuscarU = new javax.swing.JButton();
+        jLabel77 = new javax.swing.JLabel();
+        jSeparator41 = new javax.swing.JSeparator();
+        jScrollPane16 = new javax.swing.JScrollPane();
+        jTblUnidad = new javax.swing.JTable();
+        jLabel67 = new javax.swing.JLabel();
+        jCmbUnidadU = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMICargar = new javax.swing.JMenuItem();
@@ -295,7 +431,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTabbedPane1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        Unidad.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel5.setText("Datos del la lista:");
@@ -429,7 +565,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
                                 .addComponent(BtnGuardarLista))
                             .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
                         .addGap(8, 8, 8))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -479,10 +615,10 @@ public class FrmPrincipal extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Lista", jPanel1);
+        Unidad.addTab("Lista", jPanel1);
 
         jTbpModificar.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
 
@@ -646,7 +782,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
                                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jCmbGrupoAl, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel14))))
-                                .addGap(0, 91, Short.MAX_VALUE)))
+                                .addGap(0, 194, Short.MAX_VALUE)))
                         .addGap(18, 18, 18))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLblAlumno)
@@ -964,7 +1100,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
             .addComponent(jTbpModificar)
         );
 
-        jTabbedPane1.addTab("Alumno", jPanel2);
+        Unidad.addTab("Alumno", jPanel2);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1159,20 +1295,441 @@ public class FrmPrincipal extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Actitud", jPanel3);
+        Unidad.addTab("Actitud", jPanel3);
+
+        jLabel48.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel48.setText("Busqueda:");
+
+        jLabel49.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel49.setText("Materia:");
+
+        jCmbMateriaC.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbMateriaC.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbMateriaCFocusGained(evt);
+            }
+        });
+        jCmbMateriaC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbMateriaCActionPerformed(evt);
+            }
+        });
+
+        jLblCarrera5.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLblCarrera5.setText("Carrera:");
+
+        jCmbCarreraC.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbCarreraC.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbCarreraCFocusGained(evt);
+            }
+        });
+        jCmbCarreraC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbCarreraCActionPerformed(evt);
+            }
+        });
+
+        jLblSemestre5.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLblSemestre5.setText("Semestre:");
+
+        jCmbSemestreC.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbSemestreC.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbSemestreCFocusGained(evt);
+            }
+        });
+        jCmbSemestreC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbSemestreCActionPerformed(evt);
+            }
+        });
+
+        jLblGrupo5.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLblGrupo5.setText("Grupo:");
+
+        jCmbGrupoC.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbGrupoC.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbGrupoCFocusGained(evt);
+            }
+        });
+        jCmbGrupoC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbGrupoCActionPerformed(evt);
+            }
+        });
+
+        jBtnBuscarC.setText("Buscar");
+        jBtnBuscarC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnBuscarCActionPerformed(evt);
+            }
+        });
+
+        jLabel50.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel50.setText("Unidad:");
+
+        jCmbUnidadC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+
+        jLabel51.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel51.setText("Datos del conocimiento:");
+
+        jTblConocimiento.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jTblConocimiento.getTableHeader().setReorderingAllowed(false);
+        jScrollPane9.setViewportView(jTblConocimiento);
+
+        jBtnAgregarC.setText("Agregar");
+        jBtnAgregarC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAgregarCActionPerformed(evt);
+            }
+        });
+
+        jBtnCancelarC.setText("Cancelar");
+        jBtnCancelarC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarCActionPerformed(evt);
+            }
+        });
+
+        jBtnGuardarC.setText("Guardar");
+        jBtnGuardarC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnGuardarCActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBtnCancelarC)
+                    .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel14Layout.createSequentialGroup()
+                            .addComponent(jBtnAgregarC)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBtnGuardarC))
+                        .addComponent(jSeparator31, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 647, Short.MAX_VALUE))
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator26))
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel14Layout.createSequentialGroup()
+                                .addComponent(jLabel50)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCmbUnidadC, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel14Layout.createSequentialGroup()
+                                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCmbMateriaC, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel49))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCmbCarreraC, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLblCarrera5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLblSemestre5)
+                                    .addComponent(jCmbSemestreC, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLblGrupo5)
+                                    .addGroup(jPanel14Layout.createSequentialGroup()
+                                        .addComponent(jCmbGrupoC, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jBtnBuscarC)))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addComponent(jLabel51)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSeparator27)))
+                .addContainerGap())
+            .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel14Layout.createSequentialGroup()
+                    .addGap(0, 445, Short.MAX_VALUE)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(5, 5, 5)))
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel48)
+                    .addComponent(jSeparator26, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLblCarrera5)
+                    .addComponent(jLblSemestre5)
+                    .addComponent(jLabel49)
+                    .addComponent(jLblGrupo5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCmbMateriaC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCmbCarreraC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCmbSemestreC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCmbGrupoC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnBuscarC))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator27, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel51))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel50)
+                    .addComponent(jCmbUnidadC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator31, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnAgregarC)
+                    .addComponent(jBtnGuardarC))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBtnCancelarC)
+                .addContainerGap(339, Short.MAX_VALUE))
+            .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel14Layout.createSequentialGroup()
+                    .addContainerGap(140, Short.MAX_VALUE)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
+        );
+
+        jTabbedPane3.addTab("Agregar", jPanel14);
+
+        jLabel52.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel52.setText("Busqueda:");
+
+        jLabel53.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel53.setText("Materia:");
+
+        jCmbMateriaC1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbMateriaC1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbMateriaC1FocusGained(evt);
+            }
+        });
+        jCmbMateriaC1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbMateriaC1ActionPerformed(evt);
+            }
+        });
+
+        jLblCarrera6.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLblCarrera6.setText("Carrera:");
+
+        jCmbCarreraC1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbCarreraC1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbCarreraC1FocusGained(evt);
+            }
+        });
+        jCmbCarreraC1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbCarreraC1ActionPerformed(evt);
+            }
+        });
+
+        jLblSemestre6.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLblSemestre6.setText("Semestre:");
+
+        jCmbSemestreC1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbSemestreC1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbSemestreC1FocusGained(evt);
+            }
+        });
+        jCmbSemestreC1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbSemestreC1ActionPerformed(evt);
+            }
+        });
+
+        jLblGrupo6.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLblGrupo6.setText("Grupo:");
+
+        jCmbGrupoC1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbGrupoC1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbGrupoC1FocusGained(evt);
+            }
+        });
+        jCmbGrupoC1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbGrupoC1ActionPerformed(evt);
+            }
+        });
+
+        jBtnBuscarC1.setText("Buscar");
+        jBtnBuscarC1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnBuscarC1ActionPerformed(evt);
+            }
+        });
+
+        jLabel54.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel54.setText("Unidad:");
+
+        jCmbUnidadC1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        jCmbUnidadC1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbUnidadC1FocusGained(evt);
+            }
+        });
+
+        jLabel55.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel55.setText("Datos del conocimiento:");
+
+        jTblConocimiento1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jTblConocimiento1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane10.setViewportView(jTblConocimiento1);
+
+        jBtnAgregarC1.setText("Actualizar");
+        jBtnAgregarC1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAgregarC1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                        .addComponent(jLabel52, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                                .addComponent(jSeparator28, javax.swing.GroupLayout.PREFERRED_SIZE, 784, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCmbSemestreC1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel15Layout.createSequentialGroup()
+                                        .addComponent(jLblSemestre6)
+                                        .addGap(56, 56, 56)
+                                        .addComponent(jLblGrupo6)))
+                                .addGap(85, 85, 85)
+                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel15Layout.createSequentialGroup()
+                                        .addComponent(jCmbUnidadC1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jBtnBuscarC1))
+                                    .addComponent(jLabel54))
+                                .addGap(189, 189, 189))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel15Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jSeparator29, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel15Layout.createSequentialGroup()
+                                .addComponent(jScrollPane10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBtnAgregarC1)))
+                        .addContainerGap())))
+            .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel15Layout.createSequentialGroup()
+                    .addGap(5, 5, 5)
+                    .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel15Layout.createSequentialGroup()
+                            .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jCmbMateriaC1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel15Layout.createSequentialGroup()
+                                    .addGap(2, 2, 2)
+                                    .addComponent(jLabel53)))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jCmbCarreraC1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLblCarrera6))
+                            .addGap(140, 140, 140)
+                            .addComponent(jCmbGrupoC1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel55))
+                    .addContainerGap(474, Short.MAX_VALUE)))
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator28, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel52))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel54)
+                    .addComponent(jLblSemestre6)
+                    .addComponent(jLblGrupo6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCmbUnidadC1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnBuscarC1)
+                    .addComponent(jCmbSemestreC1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addComponent(jSeparator29, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnAgregarC1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel15Layout.createSequentialGroup()
+                    .addGap(57, 57, 57)
+                    .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLblCarrera6)
+                        .addComponent(jLabel53))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jCmbMateriaC1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCmbCarreraC1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCmbGrupoC1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel55)
+                    .addContainerGap(444, Short.MAX_VALUE)))
+        );
+
+        jTabbedPane3.addTab("Modificar", jPanel15);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 887, Short.MAX_VALUE)
+            .addComponent(jTabbedPane3, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 535, Short.MAX_VALUE)
+            .addComponent(jTabbedPane3)
         );
 
-        jTabbedPane1.addTab("Conocimiento", jPanel5);
+        Unidad.addTab("Conocimiento", jPanel5);
 
         jLabel39.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel39.setText("Materia:");
@@ -1324,7 +1881,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jSeparator21))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
-                        .addContainerGap(147, Short.MAX_VALUE)
+                        .addContainerGap(250, Short.MAX_VALUE)
                         .addComponent(jSeparator20, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1507,7 +2064,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                        .addContainerGap(147, Short.MAX_VALUE)
+                        .addContainerGap(250, Short.MAX_VALUE)
                         .addComponent(jSeparator23, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1596,7 +2153,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Producto", jPanel6);
+        Unidad.addTab("Producto", jPanel6);
 
         jLabel33.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel33.setText("Materia:");
@@ -1749,7 +2306,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jSeparator15))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                        .addContainerGap(147, Short.MAX_VALUE)
+                        .addContainerGap(250, Short.MAX_VALUE)
                         .addComponent(jSeparator18, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1932,7 +2489,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                        .addContainerGap(147, Short.MAX_VALUE)
+                        .addContainerGap(250, Short.MAX_VALUE)
                         .addComponent(jSeparator19, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2021,7 +2578,696 @@ public class FrmPrincipal extends javax.swing.JDialog {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Desempeño", jPanel4);
+        Unidad.addTab("Desempeño", jPanel4);
+
+        jLabel38.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel38.setText("Materia:");
+
+        jLblCarrera7.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLblCarrera7.setText("Carrera:");
+
+        jLblSemestre7.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLblSemestre7.setText("Semestre:");
+
+        jLblGrupo7.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLblGrupo7.setText("Grupo:");
+
+        jCmbGrupoPE.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbGrupoPE.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbGrupoPEFocusGained(evt);
+            }
+        });
+        jCmbGrupoPE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbGrupoPEActionPerformed(evt);
+            }
+        });
+
+        jBtnBuscarPE.setText("Buscar");
+        jBtnBuscarPE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnBuscarPEActionPerformed(evt);
+            }
+        });
+
+        jCmbSemestrePE.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbSemestrePE.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbSemestrePEFocusGained(evt);
+            }
+        });
+        jCmbSemestrePE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbSemestrePEActionPerformed(evt);
+            }
+        });
+
+        jCmbCarreraPE.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbCarreraPE.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbCarreraPEFocusGained(evt);
+            }
+        });
+        jCmbCarreraPE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbCarreraPEActionPerformed(evt);
+            }
+        });
+
+        jCmbMateriaPE.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbMateriaPE.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbMateriaPEFocusGained(evt);
+            }
+        });
+        jCmbMateriaPE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbMateriaPEActionPerformed(evt);
+            }
+        });
+
+        jLabel56.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel56.setText("Datos de puntos extras:");
+
+        jLabel57.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel57.setText("Busqueda:");
+
+        jTblPuntosExtras.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jTblPuntosExtras.getTableHeader().setReorderingAllowed(false);
+        jTblPuntosExtras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTblPuntosExtrasMouseClicked(evt);
+            }
+        });
+        jScrollPane11.setViewportView(jTblPuntosExtras);
+
+        jCmbUnidadPE.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+
+        jLabel58.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel58.setText("Unidad:");
+
+        jBtnGuardarPE.setText("Guardar");
+        jBtnGuardarPE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnGuardarPEActionPerformed(evt);
+            }
+        });
+
+        jBtnCancelarPE.setText("Cancelar");
+        jBtnCancelarPE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarPEActionPerformed(evt);
+            }
+        });
+
+        jTxtNCAlmPE.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jTxtNCAlmPE.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTxtNCAlmPEKeyTyped(evt);
+            }
+        });
+
+        jLabel64.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel64.setText("No.Control:");
+
+        jLabel65.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel65.setText("Nombre:");
+
+        jTxtNombreAlmPE.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jTxtNombreAlmPE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtNombreAlmPEActionPerformed(evt);
+            }
+        });
+        jTxtNombreAlmPE.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTxtNombreAlmPEKeyTyped(evt);
+            }
+        });
+
+        jTxtPuntosExtras.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jTxtPuntosExtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtPuntosExtrasActionPerformed(evt);
+            }
+        });
+        jTxtPuntosExtras.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTxtPuntosExtrasKeyTyped(evt);
+            }
+        });
+
+        jLabel66.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel66.setText("Puntos extras:");
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel56)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSeparator32))
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCmbMateriaPE, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel17Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel57, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel38))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCmbCarreraPE, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLblCarrera7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCmbSemestrePE, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLblSemestre7))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCmbGrupoPE, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLblGrupo7))
+                        .addGap(10, 10, 10)
+                        .addComponent(jBtnBuscarPE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel17Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jSeparator33)
+                                    .addGroup(jPanel17Layout.createSequentialGroup()
+                                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
+                                                .addComponent(jLabel64)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jTxtNCAlmPE, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
+                                                .addComponent(jLabel65)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jTxtNombreAlmPE, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jPanel17Layout.createSequentialGroup()
+                                                .addGap(9, 9, 9)
+                                                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jLabel66)
+                                                    .addComponent(jLabel58))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jCmbUnidadPE, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jTxtPuntosExtras, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(jPanel17Layout.createSequentialGroup()
+                                .addGap(140, 140, 140)
+                                .addComponent(jBtnGuardarPE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBtnCancelarPE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jSeparator30, javax.swing.GroupLayout.PREFERRED_SIZE, 895, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator30, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel57))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLblCarrera7)
+                    .addComponent(jLblSemestre7)
+                    .addComponent(jLblGrupo7)
+                    .addComponent(jLabel38))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCmbMateriaPE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCmbCarreraPE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCmbSemestrePE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCmbGrupoPE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnBuscarPE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator32, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel56))
+                .addGap(4, 4, 4)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel64)
+                            .addComponent(jTxtNCAlmPE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel65)
+                            .addComponent(jTxtNombreAlmPE, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel58)
+                            .addComponent(jCmbUnidadPE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel66)
+                            .addComponent(jTxtPuntosExtras, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(8, 8, 8)
+                        .addComponent(jSeparator33, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jBtnGuardarPE)
+                            .addComponent(jBtnCancelarPE)))
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+
+        jTabbedPane4.addTab("Agregar", jPanel17);
+
+        jLabel60.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel60.setText("Busqueda:");
+
+        jCmbMateriaPE1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbMateriaPE1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbMateriaPE1FocusGained(evt);
+            }
+        });
+        jCmbMateriaPE1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbMateriaPE1ActionPerformed(evt);
+            }
+        });
+
+        jCmbCarreraPE1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbCarreraPE1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbCarreraPE1FocusGained(evt);
+            }
+        });
+        jCmbCarreraPE1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbCarreraPE1ActionPerformed(evt);
+            }
+        });
+
+        jLblCarrera8.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLblCarrera8.setText("Carrera:");
+
+        jLabel61.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel61.setText("Materia:");
+
+        jLabel62.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel62.setText("Datos de puntos extras:");
+
+        jCmbUnidadPE1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        jCmbUnidadPE1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbUnidadPE1FocusGained(evt);
+            }
+        });
+
+        jLabel63.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel63.setText("Unidad:");
+
+        jBtnAgregarPE1.setText("Actualizar");
+        jBtnAgregarPE1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAgregarPE1ActionPerformed(evt);
+            }
+        });
+
+        jTblPuntosExtras1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jTblPuntosExtras1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane12.setViewportView(jTblPuntosExtras1);
+
+        jCmbSemestrePE1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbSemestrePE1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbSemestrePE1FocusGained(evt);
+            }
+        });
+        jCmbSemestrePE1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbSemestrePE1ActionPerformed(evt);
+            }
+        });
+
+        jCmbGrupoPE1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbGrupoPE1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbGrupoPE1FocusGained(evt);
+            }
+        });
+        jCmbGrupoPE1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbGrupoPE1ActionPerformed(evt);
+            }
+        });
+
+        jBtnBuscarPE1.setText("Buscar");
+        jBtnBuscarPE1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnBuscarPE1ActionPerformed(evt);
+            }
+        });
+
+        jLblSemestre8.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLblSemestre8.setText("Semestre:");
+
+        jLblGrupo8.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLblGrupo8.setText("Grupo:");
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCmbMateriaPE1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel18Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel60, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel61))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCmbCarreraPE1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLblCarrera8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCmbSemestrePE1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLblSemestre8))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCmbGrupoPE1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLblGrupo8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel63)
+                            .addGroup(jPanel18Layout.createSequentialGroup()
+                                .addComponent(jCmbUnidadPE1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jBtnBuscarPE1)))
+                        .addGap(0, 292, Short.MAX_VALUE))
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addComponent(jLabel62)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator35))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+                        .addComponent(jScrollPane12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnAgregarPE1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jSeparator34, javax.swing.GroupLayout.PREFERRED_SIZE, 878, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator34, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel60))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLblCarrera8)
+                    .addComponent(jLblSemestre8)
+                    .addComponent(jLblGrupo8)
+                    .addComponent(jLabel61)
+                    .addComponent(jLabel63))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCmbMateriaPE1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCmbCarreraPE1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCmbSemestrePE1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCmbGrupoPE1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnBuscarPE1)
+                    .addComponent(jCmbUnidadPE1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator35, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel62))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addComponent(jBtnAgregarPE1)
+                        .addContainerGap())
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)))
+        );
+
+        jTabbedPane4.addTab("Consulta", jPanel18);
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 990, Short.MAX_VALUE)
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        Unidad.addTab("Puntos extras", jPanel11);
+
+        jLabel74.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel74.setText("Busqueda:");
+
+        jLabel76.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel76.setText("Materia:");
+
+        jLblCarrera11.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLblCarrera11.setText("Carrera:");
+
+        jLblSemestre11.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLblSemestre11.setText("Semestre:");
+
+        jLblGrupo11.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLblGrupo11.setText("Grupo:");
+
+        jCmbGrupoU.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbGrupoU.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbGrupoUFocusGained(evt);
+            }
+        });
+        jCmbGrupoU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbGrupoUActionPerformed(evt);
+            }
+        });
+
+        jCmbSemestreU.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbSemestreU.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbSemestreUFocusGained(evt);
+            }
+        });
+        jCmbSemestreU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbSemestreUActionPerformed(evt);
+            }
+        });
+
+        jCmbCarreraU.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbCarreraU.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbCarreraUFocusGained(evt);
+            }
+        });
+        jCmbCarreraU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbCarreraUActionPerformed(evt);
+            }
+        });
+
+        jCmbMateriaU.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbMateriaU.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbMateriaUFocusGained(evt);
+            }
+        });
+        jCmbMateriaU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbMateriaUActionPerformed(evt);
+            }
+        });
+
+        jBtnBuscarU.setText("Buscar");
+        jBtnBuscarU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnBuscarUActionPerformed(evt);
+            }
+        });
+
+        jLabel77.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel77.setText("Datos unidad:");
+
+        jTblUnidad.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jTblUnidad.getTableHeader().setReorderingAllowed(false);
+        jScrollPane16.setViewportView(jTblUnidad);
+
+        jLabel67.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel67.setText("Unidad:");
+
+        jCmbUnidadU.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        jCmbUnidadU.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbUnidadUFocusGained(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
+        jPanel22.setLayout(jPanel22Layout);
+        jPanel22Layout.setHorizontalGroup(
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel22Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel22Layout.createSequentialGroup()
+                        .addComponent(jLabel74, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator40))
+                    .addGroup(jPanel22Layout.createSequentialGroup()
+                        .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCmbMateriaU, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel22Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jLabel76)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCmbCarreraU, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLblCarrera11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCmbSemestreU, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLblSemestre11))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel22Layout.createSequentialGroup()
+                                .addComponent(jLblGrupo11)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel22Layout.createSequentialGroup()
+                                .addComponent(jCmbGrupoU, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel67)
+                            .addGroup(jPanel22Layout.createSequentialGroup()
+                                .addComponent(jCmbUnidadU, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jBtnBuscarU)))
+                        .addGap(291, 291, 291))
+                    .addGroup(jPanel22Layout.createSequentialGroup()
+                        .addComponent(jLabel77)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator41)))
+                .addContainerGap())
+            .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel22Layout.createSequentialGroup()
+                    .addGap(7, 7, 7)
+                    .addComponent(jScrollPane16)
+                    .addContainerGap()))
+        );
+        jPanel22Layout.setVerticalGroup(
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel22Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator40, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel74))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel22Layout.createSequentialGroup()
+                        .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLblCarrera11)
+                            .addComponent(jLblSemestre11)
+                            .addComponent(jLblGrupo11)
+                            .addComponent(jLabel76))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCmbMateriaU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCmbCarreraU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCmbSemestreU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCmbGrupoU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel22Layout.createSequentialGroup()
+                        .addComponent(jLabel67)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCmbUnidadU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBtnBuscarU))))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel77)
+                    .addComponent(jSeparator41, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(521, Short.MAX_VALUE))
+            .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel22Layout.createSequentialGroup()
+                    .addGap(129, 129, 129)
+                    .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(34, Short.MAX_VALUE)))
+        );
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 990, Short.MAX_VALUE)
+            .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel16Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 642, Short.MAX_VALUE)
+            .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel16Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        Unidad.addTab("Unidad", jPanel16);
 
         jMenuBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true), "L.S'SOFT", javax.swing.border.TitledBorder.TRAILING, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
@@ -2057,11 +3303,11 @@ public class FrmPrincipal extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(Unidad)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(Unidad, javax.swing.GroupLayout.PREFERRED_SIZE, 632, Short.MAX_VALUE)
         );
 
         pack();
@@ -3019,6 +4265,16 @@ public class FrmPrincipal extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnGuardarPActionPerformed
 
     private void jBtnCancelarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarPActionPerformed
+        jTblProducto.setTableHeader(null);
+        DefaultTableModel tb = (DefaultTableModel) jTblProducto.getModel();
+        int a = jTblProducto.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            tb.removeRow(tb.getRowCount() - 1);
+        }
+
+        Object[] encabezado = {};
+        DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+        jTblProducto.setModel(modelo);
         this.jBtnGuardarP.setEnabled(false);
         this.jBtnAgregarP.setEnabled(false);
         this.jCmbUnidadP.setEnabled(false);
@@ -3760,6 +5016,1094 @@ public class FrmPrincipal extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jBtnBuscarD1ActionPerformed
 
+    private void jCmbMateriaCFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaCFocusGained
+        BD mBD = new BD();
+        this.jCmbMateriaC.removeAllItems();
+        this.jCmbCarreraC.removeAllItems();
+        this.jCmbSemestreC.removeAllItems();
+        this.jCmbGrupoC.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaMateria();
+            for (Lista actual : mLista) {
+                this.jCmbMateriaC.addItem(actual.getMateria());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbMateriaCFocusGained
+
+    private void jCmbMateriaCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaCActionPerformed
+        Materia = String.valueOf(this.jCmbMateriaC.getSelectedItem());
+        System.out.println("Materia: " + Materia + "\n");
+    }//GEN-LAST:event_jCmbMateriaCActionPerformed
+
+    private void jCmbCarreraCFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraCFocusGained
+        BD mBD = new BD();
+        this.jCmbCarreraC.removeAllItems();
+        this.jCmbSemestreC.removeAllItems();
+        this.jCmbGrupoC.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaC.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbCarreraC.addItem(actual.getCarrera());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbCarreraCFocusGained
+
+    private void jCmbCarreraCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraCActionPerformed
+        Carrera = String.valueOf(this.jCmbCarreraC.getSelectedItem());
+        System.out.println("Carrera: " + Carrera + "\n");
+    }//GEN-LAST:event_jCmbCarreraCActionPerformed
+
+    private void jCmbSemestreCFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestreCFocusGained
+        BD mBD = new BD();
+        this.jCmbSemestreC.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaC.getSelectedItem()), String.valueOf(this.jCmbCarreraC.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbSemestreC.addItem(String.valueOf(actual.getSemestre()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbSemestreCFocusGained
+
+    private void jCmbSemestreCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreCActionPerformed
+        Semestre = String.valueOf(this.jCmbSemestreC.getSelectedItem());
+        System.out.println("Semestre: " + Semestre + "\n");
+    }//GEN-LAST:event_jCmbSemestreCActionPerformed
+
+    private void jCmbGrupoCFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoCFocusGained
+        BD mBD = new BD();
+        this.jCmbGrupoC.removeAllItems();
+        try {
+
+            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaC.getSelectedItem()), String.valueOf(this.jCmbCarreraC.getSelectedItem()), Semestre);
+
+            for (Lista actual : mLista) {
+                this.jCmbGrupoC.addItem(String.valueOf(actual.getGrupo()));
+            }
+        } catch (SQLException ex) {
+
+        }
+    }//GEN-LAST:event_jCmbGrupoCFocusGained
+
+    private void jCmbGrupoCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoCActionPerformed
+        Grupo = String.valueOf(this.jCmbGrupoC.getSelectedItem());
+        System.out.println("Grupo: " + Grupo + "\n");
+    }//GEN-LAST:event_jCmbGrupoCActionPerformed
+
+    private void jBtnBuscarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarCActionPerformed
+        try {
+            BD mBD = new BD();
+            List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+            for (Lista actual : mLista) {
+                IDAl = String.valueOf(actual.getIdLista());
+            }
+            System.out.println(IDAl);
+            List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(IDAl));
+            int cont = 1;
+
+            if (lista.isEmpty()) {
+
+                JOptionPane.showMessageDialog(rootPane, "Lista vacia.");
+                jTblConocimiento.setTableHeader(null);
+                DefaultTableModel tb = (DefaultTableModel) jTblConocimiento.getModel();
+                int a = jTblConocimiento.getRowCount() - 1;
+                for (int i = a; i >= 0; i--) {
+                    tb.removeRow(tb.getRowCount() - 1);
+                }
+
+                Object[] encabezado = {};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                jTblConocimiento.setModel(modelo);
+                jCmbUnidadC.setEnabled(false);
+                this.jBtnAgregarC.setEnabled(false);
+                this.jBtnCancelarC.setEnabled(false);
+
+            } else {
+                //Mostrar la consulta alumno
+                Object[] encabezado = {"No", "NC", "Nombre"};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                for (Alumno actual : lista) {
+                    Object[] fila = {cont, actual.getNC(), actual.getNombre()};
+                    modelo.addRow(fila);
+                    cont++;
+                }
+                this.jTblConocimiento.setModel(modelo);
+                this.jCmbUnidadC.setEnabled(true);
+                this.jBtnAgregarC.setEnabled(true);
+                this.jBtnCancelarC.setEnabled(true);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnBuscarCActionPerformed
+
+    private void jBtnAgregarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarCActionPerformed
+        String Unidad = this.jCmbUnidadC.getSelectedItem().toString();
+        boolean a = false;
+        BD mBD = new BD();
+        String Unidad2;
+        List<Alumno> lista;
+
+        try {
+            List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+            for (Lista actual : mLista) {
+                IDAl = String.valueOf(actual.getIdLista());
+            }
+
+            List<Conocimiento> listaC = mBD.consultarListaUnidadesC(Integer.parseInt(IDAl), Unidad);
+
+            for (Conocimiento actual : listaC) {
+                Unidad2 = String.valueOf(actual.getUnidad());
+                System.out.println(Unidad2);
+                if (Unidad2.equals(jTxtNombreProducto.getText())) {
+                    a = true;
+                    System.out.println(Unidad2 + "*");
+                }
+
+            }
+            if (a == false) {
+                lista = mBD.consultarAlumno(Integer.parseInt(IDAl));
+
+                int cont = 1;
+                String Nombre = "Unidad " + Unidad;
+                //Mostrar la consulta alumno
+                Object[] encabezado = {"No", "NC", "Nombre", Nombre};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                for (Alumno actual : lista) {
+
+                    Object[] fila = {cont, actual.getNC(), actual.getNombre(), ""};
+                    modelo.addRow(fila);
+                    cont++;
+                }
+                this.jTblConocimiento.setModel(modelo);
+
+                this.jBtnAgregarC.setEnabled(false);
+                this.jCmbUnidadC.setEnabled(false);
+                this.jBtnGuardarC.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Existe unidad");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class
+                .getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnAgregarCActionPerformed
+
+    private void jBtnCancelarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarCActionPerformed
+        jTblConocimiento.setTableHeader(null);
+        DefaultTableModel tb = (DefaultTableModel) jTblConocimiento.getModel();
+        int a = jTblConocimiento.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            tb.removeRow(tb.getRowCount() - 1);
+        }
+
+        Object[] encabezado = {};
+        DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+        jTblConocimiento.setModel(modelo);
+        this.jBtnGuardarC.setEnabled(false);
+        this.jBtnAgregarC.setEnabled(false);
+        this.jCmbUnidadC.setEnabled(false);
+        this.jBtnCancelarC.setEnabled(false);
+    }//GEN-LAST:event_jBtnCancelarCActionPerformed
+
+    private void jBtnGuardarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuardarCActionPerformed
+        String Nombre;
+        String NC;
+        String Calificacion;
+        String ID = "";
+        BD mBD = new BD();
+        String Unidad = (String) this.jCmbUnidadC.getSelectedItem();
+
+        boolean Vacio = true;
+        try {
+            for (int y = 0; y < jTblConocimiento.getRowCount(); y++) {
+                if (jTblConocimiento.getValueAt(y, 3) == "" || jTblConocimiento.getValueAt(y, 3) == null) {
+                    Vacio = false;
+                }
+                System.out.println(Vacio);
+            }
+            if (Vacio == true) {
+                for (int i = 0; i < jTblConocimiento.getRowCount(); i++) {
+                    Nombre = jTblConocimiento.getValueAt(i, 2).toString();
+                    NC = jTblConocimiento.getValueAt(i, 1).toString();
+                    List<Alumno> mLista = mBD.ConsultaIDAlumno(Integer.parseInt(NC), Nombre);
+                    for (Alumno actual : mLista) {
+                        ID = String.valueOf(actual.getIdAlumno());
+                    }
+                    Calificacion = jTblConocimiento.getValueAt(i, 3).toString();
+                    Conocimiento mConocimiento = new Conocimiento();
+                    mConocimiento.setCalificacion(Integer.parseInt(Calificacion));
+                    mConocimiento.setUnidad(Integer.parseInt(Unidad));
+                    mBD.agregarConocimiento(mConocimiento, Integer.parseInt(ID));
+                }
+
+                JOptionPane.showMessageDialog(this, "Conocimiento guardado");
+                this.jBtnGuardarC.setVisible(false);
+                this.jBtnCancelarC.setEnabled(false);
+                jTblConocimiento.setTableHeader(null);
+                DefaultTableModel tb = (DefaultTableModel) jTblConocimiento.getModel();
+                int a = jTblConocimiento.getRowCount() - 1;
+                for (int i = a; i >= 0; i--) {
+                    tb.removeRow(tb.getRowCount() - 1);
+                }
+
+                Object[] encabezado = {};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                jTblConocimiento.setModel(modelo);
+
+                Object[] encabezado1 = {};
+                DefaultTableModel modelo1 = new DefaultTableModel(null, encabezado1);
+                jTblConocimiento1.setModel(modelo1);
+
+            } else if (Vacio == false) {
+                JOptionPane.showMessageDialog(this, "Hay campo(s) vacio(s), favor de verificar");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class
+                .getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnGuardarCActionPerformed
+
+    private void jCmbMateriaC1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaC1FocusGained
+        BD mBD = new BD();
+        this.jCmbMateriaC1.removeAllItems();
+        this.jCmbCarreraC1.removeAllItems();
+        this.jCmbSemestreC1.removeAllItems();
+        this.jCmbGrupoC1.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaMateria();
+            for (Lista actual : mLista) {
+                this.jCmbMateriaC1.addItem(actual.getMateria());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbMateriaC1FocusGained
+
+    private void jCmbMateriaC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaC1ActionPerformed
+        Materia = String.valueOf(this.jCmbMateriaC1.getSelectedItem());
+        System.out.println("Materia: " + Materia + "\n");
+    }//GEN-LAST:event_jCmbMateriaC1ActionPerformed
+
+    private void jCmbCarreraC1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraC1FocusGained
+        BD mBD = new BD();
+        this.jCmbCarreraC1.removeAllItems();
+        this.jCmbSemestreC1.removeAllItems();
+        this.jCmbGrupoC1.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaC1.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbCarreraC1.addItem(actual.getCarrera());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbCarreraC1FocusGained
+
+    private void jCmbCarreraC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraC1ActionPerformed
+        Carrera = String.valueOf(this.jCmbCarreraC1.getSelectedItem());
+        System.out.println("Carrera: " + Carrera + "\n");
+    }//GEN-LAST:event_jCmbCarreraC1ActionPerformed
+
+    private void jCmbSemestreC1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestreC1FocusGained
+        BD mBD = new BD();
+        this.jCmbSemestreC1.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaC1.getSelectedItem()), String.valueOf(this.jCmbCarreraC1.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbSemestreC1.addItem(String.valueOf(actual.getSemestre()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbSemestreC1FocusGained
+
+    private void jCmbSemestreC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreC1ActionPerformed
+        Semestre = String.valueOf(this.jCmbSemestreC1.getSelectedItem());
+        System.out.println("Semestre: " + Semestre + "\n");
+    }//GEN-LAST:event_jCmbSemestreC1ActionPerformed
+
+    private void jCmbGrupoC1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoC1FocusGained
+        BD mBD = new BD();
+        this.jCmbGrupoC1.removeAllItems();
+        try {
+
+            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaC1.getSelectedItem()), String.valueOf(this.jCmbCarreraC1.getSelectedItem()), Semestre);
+
+            for (Lista actual : mLista) {
+                this.jCmbGrupoC1.addItem(String.valueOf(actual.getGrupo()));
+            }
+        } catch (SQLException ex) {
+
+        }
+    }//GEN-LAST:event_jCmbGrupoC1FocusGained
+
+    private void jCmbGrupoC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoC1ActionPerformed
+        Grupo = String.valueOf(this.jCmbGrupoC1.getSelectedItem());
+        System.out.println("Grupo: " + Grupo + "\n");
+    }//GEN-LAST:event_jCmbGrupoC1ActionPerformed
+
+    private void jBtnBuscarC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarC1ActionPerformed
+        int q = 3;
+        int z = 0;
+        String Unidad = this.jCmbUnidadC1.getSelectedItem().toString();
+
+        BD mBD = new BD();
+        String Conocimiento = "";
+        List<Lista> mLista;
+        try {
+            mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+            for (Lista actual : mLista) {
+                IDCon = String.valueOf(actual.getIdLista());
+            }
+            List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(IDCon));
+            int cont = 1;
+            if (lista.isEmpty()) {
+
+                JOptionPane.showMessageDialog(rootPane, "Lista vacia.");
+                jTblConocimiento1.setTableHeader(null);
+                DefaultTableModel tb = (DefaultTableModel) jTblConocimiento1.getModel();
+                int a = jTblConocimiento1.getRowCount() - 1;
+                for (int i = a; i >= 0; i--) {
+                    tb.removeRow(tb.getRowCount() - 1);
+                }
+
+                Object[] encabezado = {};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                jTblConocimiento1.setModel(modelo);
+
+            } else {
+                Object[] encabezado = {"No", "NC", "Nombre"};
+
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                for (Alumno actual1 : lista) {
+                    Object[] fila = {cont, actual1.getNC(), actual1.getNombre()};
+                    modelo.addRow(fila);
+                    cont++;
+                }
+
+                List<Conocimiento> lista2 = mBD.consultarListaUnidadesC(Integer.parseInt(IDCon), Unidad);
+
+                for (Conocimiento actual : lista2) {
+                    modelo.addColumn(String.valueOf(actual.getUnidad()));
+                    List<Conocimiento> lista3 = mBD.consultarConocimientoCal(String.valueOf(actual.getUnidad()), IDCon);
+                    for (Conocimiento actual2 : lista3) {
+                        modelo.setValueAt(actual2.getCalificacion(), z, q);
+                        z++;
+                    }
+                    z = 0;
+                    q++;
+                }
+                jTblConocimiento1.setModel(modelo);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnBuscarC1ActionPerformed
+
+    private void jCmbUnidadC1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbUnidadC1FocusGained
+        BD mBD = new BD();
+        this.jCmbUnidadC1.removeAllItems();
+        try {
+            List<Conocimiento> mLista = mBD.ConsultaConoUnidad();
+            for (Conocimiento actual : mLista) {
+                this.jCmbUnidadC1.addItem(String.valueOf(actual.getUnidad()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbUnidadC1FocusGained
+
+    private void jBtnAgregarC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarC1ActionPerformed
+        try {
+            BD mBD = new BD();
+            String Unidad = this.jCmbUnidadC1.getSelectedItem().toString();
+            int calificacion;
+            String Nombre;
+            int NC;
+            int IdD = 0;
+            int IdA = 0;
+            int cont = 0;
+
+            Conocimiento mConocimiento = new Conocimiento();
+            List<Conocimiento> lista2 = mBD.ConsultaCUnidad(Integer.parseInt(IDCon), Integer.parseInt(Unidad));
+
+            for (Conocimiento actual : lista2) {
+                cont++;
+            }
+            int d = 3 + cont;
+            for (int j = 3; j < d; j++) {
+                for (int i = 0; i < jTblConocimiento1.getRowCount(); i++) {
+                    DefaultTableModel modelo = (DefaultTableModel) jTblConocimiento1.getModel();
+                    JTableHeader th = jTblConocimiento1.getTableHeader();
+                    TableColumnModel tcm = th.getColumnModel();
+                    TableColumn tcmn = tcm.getColumn(j);
+                    tcmn.getHeaderValue();
+
+                    System.out.println(tcmn.getHeaderValue().toString());
+
+                    calificacion = Integer.parseInt(jTblConocimiento1.getValueAt(i, j).toString());
+                    Nombre = jTblConocimiento1.getValueAt(i, 2).toString();
+                    NC = Integer.parseInt(jTblConocimiento1.getValueAt(i, 1).toString());
+
+                    List<Alumno> mLista3 = mBD.ConsultaIDAlumno(NC, Nombre);
+                    for (Alumno actual3 : mLista3) {
+                        IdA = actual3.getIdAlumno();
+                    }
+
+                    System.out.println(calificacion);
+                    List<Conocimiento> mLista2 = mBD.ConsultaIDConocimiento(tcmn.getHeaderValue().toString(), IdA);
+                    for (Conocimiento actual2 : mLista2) {
+                        IdD = actual2.getIdConocimiento();
+                    }
+
+                    System.out.println(IdD);
+                    mConocimiento.setCalificacion(calificacion);
+                    mConocimiento.setUnidad(Integer.parseInt(tcmn.getHeaderValue().toString()));
+                    mConocimiento.setIdConocimiento(IdD);
+                    mBD.modificarConocimiento(mConocimiento, IdA);
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Conocimiento(s) actualizado(s)");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnAgregarC1ActionPerformed
+
+    private void jCmbGrupoPEFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoPEFocusGained
+        BD mBD = new BD();
+        this.jCmbGrupoPE.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaPE.getSelectedItem()), String.valueOf(this.jCmbCarreraPE.getSelectedItem()), Semestre);
+            for (Lista actual : mLista) {
+                this.jCmbGrupoPE.addItem(String.valueOf(actual.getGrupo()));
+            }
+        } catch (SQLException ex) {
+        }
+    }//GEN-LAST:event_jCmbGrupoPEFocusGained
+
+    private void jCmbGrupoPEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoPEActionPerformed
+        Grupo = String.valueOf(this.jCmbGrupoPE.getSelectedItem());
+        System.out.println("Grupo: " + Grupo + "\n");
+    }//GEN-LAST:event_jCmbGrupoPEActionPerformed
+
+    private void jBtnBuscarPEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarPEActionPerformed
+        try {
+            BD mBD = new BD();
+            List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+            for (Lista actual : mLista) {
+                IDAl = String.valueOf(actual.getIdLista());
+            }
+            System.out.println(IDAl);
+            List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(IDAl));
+            int cont = 1;
+
+            if (lista.isEmpty()) {
+
+                JOptionPane.showMessageDialog(rootPane, "Lista vacia.");
+                jTblPuntosExtras.setTableHeader(null);
+                DefaultTableModel tb = (DefaultTableModel) jTblPuntosExtras.getModel();
+                int a = jTblPuntosExtras.getRowCount() - 1;
+                for (int i = a; i >= 0; i--) {
+                    tb.removeRow(tb.getRowCount() - 1);
+                }
+
+                Object[] encabezado = {};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                jTblPuntosExtras.setModel(modelo);
+
+            } else {
+                //Mostrar la consulta alumno
+                Object[] encabezado = {"No", "NC", "Nombre"};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                for (Alumno actual : lista) {
+                    Object[] fila = {cont, actual.getNC(), actual.getNombre()};
+                    modelo.addRow(fila);
+                    cont++;
+                }
+                this.jTblPuntosExtras.setModel(modelo);
+                this.jCmbUnidadPE.setEnabled(true);
+                this.jTxtPuntosExtras.setEnabled(true);
+                this.jBtnGuardarPE.setEnabled(true);
+                this.jBtnCancelarPE.setEnabled(true);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnBuscarPEActionPerformed
+
+    private void jCmbSemestrePEFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestrePEFocusGained
+        BD mBD = new BD();
+        this.jCmbSemestrePE.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaPE.getSelectedItem()), String.valueOf(this.jCmbCarreraPE.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbSemestrePE.addItem(String.valueOf(actual.getSemestre()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbSemestrePEFocusGained
+
+    private void jCmbSemestrePEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestrePEActionPerformed
+        Semestre = String.valueOf(this.jCmbSemestrePE.getSelectedItem());
+        System.out.println("Semestre: " + Semestre + "\n");
+    }//GEN-LAST:event_jCmbSemestrePEActionPerformed
+
+    private void jCmbCarreraPEFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraPEFocusGained
+        BD mBD = new BD();
+        this.jCmbCarreraPE.removeAllItems();
+        this.jCmbSemestrePE.removeAllItems();
+        this.jCmbGrupoPE.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaPE.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbCarreraPE.addItem(actual.getCarrera());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbCarreraPEFocusGained
+
+    private void jCmbCarreraPEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraPEActionPerformed
+        Carrera = String.valueOf(this.jCmbCarreraPE.getSelectedItem());
+        System.out.println("Carrera: " + Carrera + "\n");
+    }//GEN-LAST:event_jCmbCarreraPEActionPerformed
+
+    private void jCmbMateriaPEFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaPEFocusGained
+        BD mBD = new BD();
+        this.jCmbMateriaPE.removeAllItems();
+        this.jCmbCarreraPE.removeAllItems();
+        this.jCmbSemestrePE.removeAllItems();
+        this.jCmbGrupoPE.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaMateria();
+            for (Lista actual : mLista) {
+                this.jCmbMateriaPE.addItem(actual.getMateria());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbMateriaPEFocusGained
+
+    private void jCmbMateriaPEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaPEActionPerformed
+        Materia = String.valueOf(this.jCmbMateriaPE.getSelectedItem());
+        System.out.println("Materia: " + Materia + "\n");
+    }//GEN-LAST:event_jCmbMateriaPEActionPerformed
+
+    private void jTblPuntosExtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblPuntosExtrasMouseClicked
+        BD mBD = new BD();
+
+        int fila = this.jTblPuntosExtras.getSelectedRow();
+        if (fila >= 0) {
+            int NC = (int) jTblPuntosExtras.getValueAt(fila, 1);
+            String Nombre = (String) jTblPuntosExtras.getValueAt(fila, 2);
+
+            this.jTxtNombreAlmPE.setText(Nombre);
+            this.jTxtNCAlmPE.setText(String.valueOf(NC));
+        }
+    }//GEN-LAST:event_jTblPuntosExtrasMouseClicked
+
+    private void jBtnGuardarPEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuardarPEActionPerformed
+        int NC = Integer.parseInt(jTxtNCAlmPE.getText());
+        String Nombre = jTxtNombreAlmPE.getText();
+        String PuntosExtras = jTxtPuntosExtras.getText();
+        BD mBD = new BD();
+        int IdA = 0;
+        if ((this.jTxtNCAlmPE.getText().equals("")) || (jTxtNombreAlmPE.getText().equals("")) || (jTxtPuntosExtras.getText().equals(""))) {
+            JOptionPane.showMessageDialog(rootPane, "Hay campos vacios");
+        } else {
+            List<Alumno> mLista3;
+            try {
+                mLista3 = mBD.ConsultaIDAlumno(NC, Nombre);
+                for (Alumno actual3 : mLista3) {
+                    IdA = actual3.getIdAlumno();
+                }
+                PuntosExtras mPuntos = new PuntosExtras();
+                mPuntos.setPuntos(Integer.parseInt(PuntosExtras));
+                mPuntos.setUnidad(Integer.parseInt(jCmbUnidadPE.getSelectedItem().toString()));
+                mBD.agregarPuntosExtras(mPuntos, IdA);
+                JOptionPane.showMessageDialog(rootPane, "Puntos agregados con exito");
+
+                this.jTxtPuntosExtras.setText("");
+                Object[] encabezado1 = {};
+                DefaultTableModel modelo1 = new DefaultTableModel(null, encabezado1);
+                jTblPuntosExtras1.setModel(modelo1);
+
+            } catch (SQLException ex) {
+                Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jBtnGuardarPEActionPerformed
+
+    private void jBtnCancelarPEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarPEActionPerformed
+        jTblPuntosExtras.setTableHeader(null);
+        DefaultTableModel tb = (DefaultTableModel) jTblPuntosExtras.getModel();
+        int a = jTblPuntosExtras.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            tb.removeRow(tb.getRowCount() - 1);
+        }
+
+        Object[] encabezado = {};
+        DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+        jTblPuntosExtras.setModel(modelo);
+        this.jTxtNCAlmPE.setText("");
+        this.jTxtNombreAlmPE.setText("");
+        this.jCmbUnidadPE.setEnabled(false);
+        this.jTxtPuntosExtras.setEnabled(false);
+        this.jBtnGuardarPE.setEnabled(false);
+        this.jBtnCancelarPE.setEnabled(false);
+    }//GEN-LAST:event_jBtnCancelarPEActionPerformed
+
+    private void jTxtNCAlmPEKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtNCAlmPEKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtNCAlmPEKeyTyped
+
+    private void jTxtNombreAlmPEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtNombreAlmPEActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtNombreAlmPEActionPerformed
+
+    private void jTxtNombreAlmPEKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtNombreAlmPEKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtNombreAlmPEKeyTyped
+
+    private void jTxtPuntosExtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtPuntosExtrasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtPuntosExtrasActionPerformed
+
+    private void jTxtPuntosExtrasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtPuntosExtrasKeyTyped
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE)
+            && (caracter != '-')) {
+            /* lo que deseo colocar aqui es si ya se pulso el caracter (.) el mismo no se pueda repetir*/
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Ingresar Solo Números");
+        }
+    }//GEN-LAST:event_jTxtPuntosExtrasKeyTyped
+
+    private void jCmbMateriaPE1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaPE1FocusGained
+        BD mBD = new BD();
+        this.jCmbMateriaPE1.removeAllItems();
+        this.jCmbCarreraPE1.removeAllItems();
+        this.jCmbSemestrePE1.removeAllItems();
+        this.jCmbGrupoPE1.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaMateria();
+            for (Lista actual : mLista) {
+                this.jCmbMateriaPE1.addItem(actual.getMateria());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbMateriaPE1FocusGained
+
+    private void jCmbMateriaPE1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaPE1ActionPerformed
+        Materia = String.valueOf(this.jCmbMateriaPE1.getSelectedItem());
+        System.out.println("Materia: " + Materia + "\n");
+    }//GEN-LAST:event_jCmbMateriaPE1ActionPerformed
+
+    private void jCmbCarreraPE1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraPE1FocusGained
+        BD mBD = new BD();
+        this.jCmbCarreraPE1.removeAllItems();
+        this.jCmbSemestrePE1.removeAllItems();
+        this.jCmbGrupoPE1.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaPE1.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbCarreraPE1.addItem(actual.getCarrera());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbCarreraPE1FocusGained
+
+    private void jCmbCarreraPE1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraPE1ActionPerformed
+        Carrera = String.valueOf(this.jCmbCarreraPE1.getSelectedItem());
+        System.out.println("Carrera: " + Carrera + "\n");
+    }//GEN-LAST:event_jCmbCarreraPE1ActionPerformed
+
+    private void jCmbUnidadPE1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbUnidadPE1FocusGained
+        BD mBD = new BD();
+        this.jCmbUnidadPE1.removeAllItems();
+        try {
+            List<PuntosExtras> mLista = mBD.ConsultaPuntosExtrasUnidad1();
+            for (PuntosExtras actual : mLista) {
+                this.jCmbUnidadPE1.addItem(String.valueOf(actual.getUnidad()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbUnidadPE1FocusGained
+
+    private void jBtnAgregarPE1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarPE1ActionPerformed
+        try {
+            BD mBD = new BD();
+            String Unidad = this.jCmbUnidadPE1.getSelectedItem().toString();
+            int calificacion;
+            String Nombre;
+            int NC;
+            int IdD = 0;
+            int IdA = 0;
+            int cont = 0;
+
+            PuntosExtras mPuntosExtras = new PuntosExtras();
+            List<PuntosExtras> lista2 = mBD.ConsultaPuntosExtrasUnidad(Integer.parseInt(IDDes));
+
+            for (PuntosExtras actual : lista2) {
+                cont++;
+            }
+            int d = 3 + cont;
+            for (int j = 3; j < d; j++) {
+                for (int i = 0; i < jTblPuntosExtras1.getRowCount(); i++) {
+                    DefaultTableModel modelo = (DefaultTableModel) jTblPuntosExtras1.getModel();
+                    JTableHeader th = jTblPuntosExtras1.getTableHeader();
+                    TableColumnModel tcm = th.getColumnModel();
+                    TableColumn tcmn = tcm.getColumn(j);
+                    tcmn.getHeaderValue();
+
+                    System.out.println(tcmn.getHeaderValue().toString());
+
+                    calificacion = Integer.parseInt(jTblPuntosExtras1.getValueAt(i, j).toString());
+                    Nombre = jTblPuntosExtras1.getValueAt(i, 2).toString();
+                    NC = Integer.parseInt(jTblPuntosExtras1.getValueAt(i, 1).toString());
+
+                    List<Alumno> mLista3 = mBD.ConsultaIDAlumno(NC, Nombre);
+                    for (Alumno actual3 : mLista3) {
+                        IdA = actual3.getIdAlumno();
+                    }
+
+                    System.out.println(calificacion);
+                    List<PuntosExtras> mLista2 = mBD.ConsultaIDPuntosExtras(tcmn.getHeaderValue().toString(), IdA);
+                    for (PuntosExtras actual2 : mLista2) {
+                        IdD = actual2.getIdPuntosExtras();
+                    }
+
+                    System.out.println(IdD);
+                    mPuntosExtras.setPuntos(calificacion);
+                    mPuntosExtras.setIdPuntosExtras(IdD);
+                    mPuntosExtras.setUnidad(Integer.parseInt(tcmn.getHeaderValue().toString()));
+                    mBD.modificarPuntosExtras(mPuntosExtras);
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Puntos extras actualizados");
+            LlenarTablaDesempeño1();
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnAgregarPE1ActionPerformed
+
+    private void jCmbSemestrePE1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestrePE1FocusGained
+        BD mBD = new BD();
+        this.jCmbSemestrePE1.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaPE1.getSelectedItem()), String.valueOf(this.jCmbCarreraPE1.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbSemestrePE1.addItem(String.valueOf(actual.getSemestre()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbSemestrePE1FocusGained
+
+    private void jCmbSemestrePE1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestrePE1ActionPerformed
+        Semestre = String.valueOf(this.jCmbSemestrePE1.getSelectedItem());
+        System.out.println("Semestre: " + Semestre + "\n");
+    }//GEN-LAST:event_jCmbSemestrePE1ActionPerformed
+
+    private void jCmbGrupoPE1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoPE1FocusGained
+        BD mBD = new BD();
+        this.jCmbGrupoPE1.removeAllItems();
+        try {
+
+            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaPE1.getSelectedItem()), String.valueOf(this.jCmbCarreraPE1.getSelectedItem()), Semestre);
+
+            for (Lista actual : mLista) {
+                this.jCmbGrupoPE1.addItem(String.valueOf(actual.getGrupo()));
+            }
+        } catch (SQLException ex) {
+
+        }
+    }//GEN-LAST:event_jCmbGrupoPE1FocusGained
+
+    private void jCmbGrupoPE1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoPE1ActionPerformed
+        Grupo = String.valueOf(this.jCmbGrupoPE1.getSelectedItem());
+        System.out.println("Grupo: " + Grupo + "\n");
+    }//GEN-LAST:event_jCmbGrupoPE1ActionPerformed
+
+    private void jBtnBuscarPE1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarPE1ActionPerformed
+        int q = 3;
+        int z = 0;
+        String Unidad = this.jCmbUnidadPE1.getSelectedItem().toString();
+
+        BD mBD = new BD();
+        String Desem = "";
+        List<Lista> mLista;
+        try {
+            mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+            for (Lista actual : mLista) {
+                IDDes = String.valueOf(actual.getIdLista());
+            }
+            List<Alumno> lista = mBD.ConsultaAlumnoPuntos(Integer.parseInt(IDDes));
+            int cont = 1;
+            if (lista.isEmpty()) {
+
+                JOptionPane.showMessageDialog(rootPane, "Lista vacia.");
+                jTblPuntosExtras1.setTableHeader(null);
+                DefaultTableModel tb = (DefaultTableModel) jTblPuntosExtras1.getModel();
+                int a = jTblPuntosExtras1.getRowCount() - 1;
+                for (int i = a; i >= 0; i--) {
+                    tb.removeRow(tb.getRowCount() - 1);
+                }
+
+                Object[] encabezado = {};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                jTblPuntosExtras1.setModel(modelo);
+
+            } else {
+                Object[] encabezado = {"No", "NC", "Nombre"};
+
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                for (Alumno actual1 : lista) {
+                    Object[] fila = {cont, actual1.getNC(), actual1.getNombre()};
+                    modelo.addRow(fila);
+                    cont++;
+                }
+
+                List<PuntosExtras> lista2 = mBD.ConsultaPuntosExtrasUnidad(Integer.parseInt(IDDes));
+
+                for (PuntosExtras actual : lista2) {
+                    modelo.addColumn(String.valueOf(actual.getUnidad()));
+                    List<PuntosExtras> lista3 = mBD.ConsultaPuntosExtrasPuntos(Integer.parseInt(IDDes), String.valueOf(Unidad));
+                    for (PuntosExtras actual2 : lista3) {
+                        modelo.setValueAt(actual2.getPuntos(), z, q);
+                        z++;
+                    }
+                    z = 0;
+                    q++;
+                }
+                jTblPuntosExtras1.setModel(modelo);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnBuscarPE1ActionPerformed
+
+    private void jCmbGrupoUFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoUFocusGained
+        BD mBD = new BD();
+        this.jCmbGrupoU.removeAllItems();
+        try {
+
+            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaU.getSelectedItem()), String.valueOf(this.jCmbCarreraU.getSelectedItem()), Semestre);
+
+            for (Lista actual : mLista) {
+                this.jCmbGrupoU.addItem(String.valueOf(actual.getGrupo()));
+            }
+        } catch (SQLException ex) {
+
+        }
+    }//GEN-LAST:event_jCmbGrupoUFocusGained
+
+    private void jCmbGrupoUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoUActionPerformed
+        Grupo = String.valueOf(this.jCmbGrupoU.getSelectedItem());
+        System.out.println("Grupo: " + Grupo + "\n");
+    }//GEN-LAST:event_jCmbGrupoUActionPerformed
+
+    private void jCmbSemestreUFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestreUFocusGained
+        BD mBD = new BD();
+        this.jCmbSemestreU.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaU.getSelectedItem()), String.valueOf(this.jCmbCarreraU.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbSemestreU.addItem(String.valueOf(actual.getSemestre()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbSemestreUFocusGained
+
+    private void jCmbSemestreUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreUActionPerformed
+        Semestre = String.valueOf(this.jCmbSemestreU.getSelectedItem());
+        System.out.println("Semestre: " + Semestre + "\n");
+    }//GEN-LAST:event_jCmbSemestreUActionPerformed
+
+    private void jCmbCarreraUFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraUFocusGained
+        BD mBD = new BD();
+        this.jCmbCarreraU.removeAllItems();
+        this.jCmbSemestreU.removeAllItems();
+        this.jCmbGrupoU.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaU.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbCarreraU.addItem(actual.getCarrera());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbCarreraUFocusGained
+
+    private void jCmbCarreraUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraUActionPerformed
+        Carrera = String.valueOf(this.jCmbCarreraU.getSelectedItem());
+        System.out.println("Carrera: " + Carrera + "\n");
+    }//GEN-LAST:event_jCmbCarreraUActionPerformed
+
+    private void jCmbMateriaUFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaUFocusGained
+        BD mBD = new BD();
+        this.jCmbMateriaU.removeAllItems();
+        this.jCmbCarreraU.removeAllItems();
+        this.jCmbSemestreU.removeAllItems();
+        this.jCmbGrupoU.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaMateria();
+            for (Lista actual : mLista) {
+                this.jCmbMateriaU.addItem(actual.getMateria());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbMateriaUFocusGained
+
+    private void jCmbMateriaUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaUActionPerformed
+        Materia = String.valueOf(this.jCmbMateriaU.getSelectedItem());
+        System.out.println("Materia: " + Materia + "\n");
+    }//GEN-LAST:event_jCmbMateriaUActionPerformed
+
+    private void jBtnBuscarUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarUActionPerformed
+        int q = 3;
+        int z = 0;
+        String Unidad = this.jCmbUnidadU.getSelectedItem().toString();
+        String Nombre;
+        int NC;
+        int IdA = 0;
+        int numF = 3;
+        int SumaD = 0;
+        int PromedioD = 0;
+        int SumaC = 0;
+        int PromedioC = 0;
+        int SumaP = 0;
+        int PromedioP = 0;
+
+        BD mBD = new BD();
+        String Desem = "";
+        List<Lista> mLista;
+        try {
+            mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+            for (Lista actual : mLista) {
+                IDDes = String.valueOf(actual.getIdLista());
+            }
+            List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(IDDes));
+            int cont = 1;
+            if (lista.isEmpty()) {
+
+                JOptionPane.showMessageDialog(rootPane, "Lista vacia.");
+                jTblUnidad.setTableHeader(null);
+                DefaultTableModel tb = (DefaultTableModel) jTblUnidad.getModel();
+                int a = jTblUnidad.getRowCount() - 1;
+                for (int i = a; i >= 0; i--) {
+                    tb.removeRow(tb.getRowCount() - 1);
+                }
+
+                Object[] encabezado = {};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                jTblUnidad.setModel(modelo);
+
+            } else {
+                Object[] encabezado = {"No", "NC", "Nombre", "Conocimiento 35%", "Producto 35%", "Desempeño 20%", "Actitud 10%", "Total"};
+
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                for (Alumno actual1 : lista) {
+                    Nombre = actual1.getNombre();
+                    NC = actual1.getNC();
+
+                    List<Alumno> Lista = mBD.ConsultaIDAlumno(NC, Nombre);
+                    for (Alumno actual2 : Lista) {
+                        IdA = actual2.getIdAlumno();
+                    }
+
+                    //Conocimiento
+                    List<Conocimiento> Lista3 = mBD.ConsultaCalCon(Integer.parseInt(IDDes), IdA, Integer.parseInt(Unidad));
+                    if (Lista3.isEmpty()) {
+                        PromedioC = 0;
+                    } else {
+                        SumaC = 0;
+                        for (Conocimiento actual4 : Lista3) {
+                            SumaC = actual4.getCalificacion();
+                        }
+                        int Puntos = 0;
+                        List<PuntosExtras> Lista4 = mBD.ConsultaCalExtras(Integer.parseInt(IDDes), IdA, Integer.parseInt(Unidad));
+                        if (Lista4.isEmpty()) {
+                            Puntos = 0;
+                        } else {
+                            for (PuntosExtras actual5 : Lista4) {
+                                Puntos = actual5.getPuntos() + Puntos;
+                            }
+                        }
+                        PromedioC = SumaC + Puntos;
+
+                        if (PromedioC > 100) {
+                            PromedioC = 100;
+                        }
+
+                    }
+
+                    //Producto
+                    List<Producto> Lista5 = mBD.ConsultaCalProd(Integer.parseInt(IDDes), IdA, Integer.parseInt(Unidad));
+                    if (Lista5.isEmpty()) {
+                        PromedioP = 0;
+                    } else {
+                        int numP = 0;
+                        SumaP = 0;
+                        for (Producto actual6 : Lista5) {
+                            SumaP = actual6.getCalificacion() + SumaP;
+                            numP++;
+                        }
+                        PromedioP = SumaP / numP;
+
+                    }
+
+                    //Desempeno
+                    List<Desempeño> Lista2 = mBD.ConsultaCalDes(Integer.parseInt(IDDes), IdA, Integer.parseInt(Unidad));
+                    if (Lista2.isEmpty()) {
+                        PromedioD = 0;
+                    } else {
+                        int numD = 0;
+                        SumaD = 0;
+                        for (Desempeño actual3 : Lista2) {
+                            SumaD = actual3.getCalificacion() + SumaD;
+                            numD++;
+                        }
+                        PromedioD = SumaD / numD;
+
+                    }
+                    //Actitud
+                    int PromedioA =0;
+                    //Total
+                    double PromedioUni = 0;
+                    PromedioUni = (PromedioC * 0.35) + (PromedioP * 0.30) + (PromedioD * 0.30) + (PromedioA * 0.20);
+
+                    Object[] fila = {cont, actual1.getNC(), actual1.getNombre(), PromedioC, PromedioP, PromedioD, PromedioA, (int)PromedioUni};
+                    modelo.addRow(fila);
+                    cont++;
+                }
+
+                jTblUnidad.setModel(modelo);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnBuscarUActionPerformed
+
+    private void jCmbUnidadUFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbUnidadUFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCmbUnidadUFocusGained
+
     /**
      * @param args the command line arguments
      */
@@ -3810,56 +6154,94 @@ public class FrmPrincipal extends javax.swing.JDialog {
     public javax.swing.JTextField TxtNombreAl;
     public javax.swing.JTextField TxtPaternoAl;
     public javax.swing.JTextField TxtSemestreLs;
+    private javax.swing.JTabbedPane Unidad;
     private javax.swing.JButton jBtnActualizarAc;
+    private javax.swing.JButton jBtnAgregarC;
+    private javax.swing.JButton jBtnAgregarC1;
     private javax.swing.JButton jBtnAgregarD;
     private javax.swing.JButton jBtnAgregarD1;
     private javax.swing.JButton jBtnAgregarP;
     private javax.swing.JButton jBtnAgregarP1;
+    private javax.swing.JButton jBtnAgregarPE1;
     private javax.swing.JButton jBtnBuscarAc;
     private javax.swing.JButton jBtnBuscarAlm;
+    private javax.swing.JButton jBtnBuscarC;
+    private javax.swing.JButton jBtnBuscarC1;
     private javax.swing.JButton jBtnBuscarD;
     private javax.swing.JButton jBtnBuscarD1;
     private javax.swing.JButton jBtnBuscarP;
     private javax.swing.JButton jBtnBuscarP1;
+    private javax.swing.JButton jBtnBuscarPE;
+    private javax.swing.JButton jBtnBuscarPE1;
+    private javax.swing.JButton jBtnBuscarU;
+    private javax.swing.JButton jBtnCancelarC;
     private javax.swing.JButton jBtnCancelarD;
     private javax.swing.JButton jBtnCancelarP;
+    private javax.swing.JButton jBtnCancelarPE;
+    private javax.swing.JButton jBtnGuardarC;
     private javax.swing.JButton jBtnGuardarD;
     private javax.swing.JButton jBtnGuardarP;
+    private javax.swing.JButton jBtnGuardarPE;
     private javax.swing.JButton jBtnModificarAlm;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JComboBox<String> jCmbCarreraAc;
     private javax.swing.JComboBox<String> jCmbCarreraAl;
     private javax.swing.JComboBox<String> jCmbCarreraAlm;
+    private javax.swing.JComboBox<String> jCmbCarreraC;
+    private javax.swing.JComboBox<String> jCmbCarreraC1;
     private javax.swing.JComboBox<String> jCmbCarreraD;
     private javax.swing.JComboBox<String> jCmbCarreraD1;
     private javax.swing.JComboBox<String> jCmbCarreraP;
     private javax.swing.JComboBox<String> jCmbCarreraP1;
+    private javax.swing.JComboBox<String> jCmbCarreraPE;
+    private javax.swing.JComboBox<String> jCmbCarreraPE1;
+    private javax.swing.JComboBox<String> jCmbCarreraU;
     private javax.swing.JComboBox<String> jCmbGrupoAc;
     private javax.swing.JComboBox<String> jCmbGrupoAl;
     private javax.swing.JComboBox<String> jCmbGrupoAlm;
+    private javax.swing.JComboBox<String> jCmbGrupoC;
+    private javax.swing.JComboBox<String> jCmbGrupoC1;
     private javax.swing.JComboBox<String> jCmbGrupoD;
     private javax.swing.JComboBox<String> jCmbGrupoD1;
     private javax.swing.JComboBox<String> jCmbGrupoP;
     private javax.swing.JComboBox<String> jCmbGrupoP1;
+    private javax.swing.JComboBox<String> jCmbGrupoPE;
+    private javax.swing.JComboBox<String> jCmbGrupoPE1;
+    private javax.swing.JComboBox<String> jCmbGrupoU;
     private javax.swing.JComboBox<String> jCmbMateriaAc;
     private javax.swing.JComboBox<String> jCmbMateriaAl;
     private javax.swing.JComboBox<String> jCmbMateriaAlm;
+    private javax.swing.JComboBox<String> jCmbMateriaC;
+    private javax.swing.JComboBox<String> jCmbMateriaC1;
     private javax.swing.JComboBox<String> jCmbMateriaD;
     private javax.swing.JComboBox<String> jCmbMateriaD1;
     private javax.swing.JComboBox<String> jCmbMateriaP;
     private javax.swing.JComboBox<String> jCmbMateriaP1;
+    private javax.swing.JComboBox<String> jCmbMateriaPE;
+    private javax.swing.JComboBox<String> jCmbMateriaPE1;
+    private javax.swing.JComboBox<String> jCmbMateriaU;
     private javax.swing.JComboBox<String> jCmbSemestreAc;
     private javax.swing.JComboBox<String> jCmbSemestreAl;
     private javax.swing.JComboBox<String> jCmbSemestreAlm;
+    private javax.swing.JComboBox<String> jCmbSemestreC;
+    private javax.swing.JComboBox<String> jCmbSemestreC1;
     private javax.swing.JComboBox<String> jCmbSemestreD;
     private javax.swing.JComboBox<String> jCmbSemestreD1;
     private javax.swing.JComboBox<String> jCmbSemestreP;
     private javax.swing.JComboBox<String> jCmbSemestreP1;
+    private javax.swing.JComboBox<String> jCmbSemestrePE;
+    private javax.swing.JComboBox<String> jCmbSemestrePE1;
+    private javax.swing.JComboBox<String> jCmbSemestreU;
     private javax.swing.JComboBox<String> jCmbUnidadAc;
+    private javax.swing.JComboBox<String> jCmbUnidadC;
+    private javax.swing.JComboBox<String> jCmbUnidadC1;
     private javax.swing.JComboBox<String> jCmbUnidadD;
     private javax.swing.JComboBox<String> jCmbUnidadD1;
     private javax.swing.JComboBox<String> jCmbUnidadP;
     private javax.swing.JComboBox<String> jCmbUnidadP1;
+    private javax.swing.JComboBox<String> jCmbUnidadPE;
+    private javax.swing.JComboBox<String> jCmbUnidadPE1;
+    private javax.swing.JComboBox<String> jCmbUnidadU;
     private com.toedter.calendar.JDateChooser jDtcUnidadAc;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
@@ -3889,6 +6271,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
@@ -3899,29 +6282,66 @@ public class FrmPrincipal extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
+    private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
+    private javax.swing.JLabel jLabel62;
+    private javax.swing.JLabel jLabel63;
+    private javax.swing.JLabel jLabel64;
+    private javax.swing.JLabel jLabel65;
+    private javax.swing.JLabel jLabel66;
+    private javax.swing.JLabel jLabel67;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel74;
+    private javax.swing.JLabel jLabel76;
+    private javax.swing.JLabel jLabel77;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLblAlumno;
     private javax.swing.JLabel jLblCarrera;
     private javax.swing.JLabel jLblCarrera1;
+    private javax.swing.JLabel jLblCarrera11;
     private javax.swing.JLabel jLblCarrera2;
     private javax.swing.JLabel jLblCarrera3;
     private javax.swing.JLabel jLblCarrera4;
+    private javax.swing.JLabel jLblCarrera5;
+    private javax.swing.JLabel jLblCarrera6;
+    private javax.swing.JLabel jLblCarrera7;
+    private javax.swing.JLabel jLblCarrera8;
     private javax.swing.JLabel jLblDatos;
     private javax.swing.JLabel jLblGrupo;
     private javax.swing.JLabel jLblGrupo1;
+    private javax.swing.JLabel jLblGrupo11;
     private javax.swing.JLabel jLblGrupo2;
     private javax.swing.JLabel jLblGrupo3;
     private javax.swing.JLabel jLblGrupo4;
+    private javax.swing.JLabel jLblGrupo5;
+    private javax.swing.JLabel jLblGrupo6;
+    private javax.swing.JLabel jLblGrupo7;
+    private javax.swing.JLabel jLblGrupo8;
     private javax.swing.JLabel jLblListaGeneral;
     private javax.swing.JLabel jLblMateria;
     private javax.swing.JLabel jLblSemestre;
     private javax.swing.JLabel jLblSemestre1;
+    private javax.swing.JLabel jLblSemestre11;
     private javax.swing.JLabel jLblSemestre2;
     private javax.swing.JLabel jLblSemestre3;
     private javax.swing.JLabel jLblSemestre4;
+    private javax.swing.JLabel jLblSemestre5;
+    private javax.swing.JLabel jLblSemestre6;
+    private javax.swing.JLabel jLblSemestre7;
+    private javax.swing.JLabel jLblSemestre8;
     private javax.swing.JLabel jLblUnidad;
     private javax.swing.JMenuItem jMICargar;
     private javax.swing.JMenu jMenu1;
@@ -3933,9 +6353,16 @@ public class FrmPrincipal extends javax.swing.JDialog {
     private javax.swing.JMenuItem jMniEliminarLista;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -3946,12 +6373,17 @@ public class FrmPrincipal extends javax.swing.JDialog {
     private javax.swing.JPopupMenu jPpmEliminarAlumno;
     private javax.swing.JPopupMenu jPpmEliminarLista;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane16;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator11;
@@ -3970,28 +6402,49 @@ public class FrmPrincipal extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator23;
     private javax.swing.JSeparator jSeparator24;
     private javax.swing.JSeparator jSeparator25;
+    private javax.swing.JSeparator jSeparator26;
+    private javax.swing.JSeparator jSeparator27;
+    private javax.swing.JSeparator jSeparator28;
+    private javax.swing.JSeparator jSeparator29;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator30;
+    private javax.swing.JSeparator jSeparator31;
+    private javax.swing.JSeparator jSeparator32;
+    private javax.swing.JSeparator jSeparator33;
+    private javax.swing.JSeparator jSeparator34;
+    private javax.swing.JSeparator jSeparator35;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator40;
+    private javax.swing.JSeparator jSeparator41;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTabbedPane jTabbedPane3;
+    private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTabbedPane jTabbedPane5;
     public javax.swing.JTable jTable2;
+    public javax.swing.JTable jTblConocimiento;
+    public javax.swing.JTable jTblConocimiento1;
     public javax.swing.JTable jTblConsultarAlumno;
     public javax.swing.JTable jTblConsultarListaLs;
     public javax.swing.JTable jTblDesempeño;
     public javax.swing.JTable jTblDesempeño1;
     public javax.swing.JTable jTblProducto;
     public javax.swing.JTable jTblProducto1;
+    public javax.swing.JTable jTblPuntosExtras;
+    public javax.swing.JTable jTblPuntosExtras1;
+    public javax.swing.JTable jTblUnidad;
     private javax.swing.JTabbedPane jTbpModificar;
     public javax.swing.JTextField jTxtNCAl;
     public javax.swing.JTextField jTxtNCAlm;
+    public javax.swing.JTextField jTxtNCAlmPE;
     public javax.swing.JTextField jTxtNombreAlm;
+    public javax.swing.JTextField jTxtNombreAlmPE;
     private javax.swing.JTextField jTxtNombreProducto;
     private javax.swing.JTextField jTxtNombreTrabajo;
+    public javax.swing.JTextField jTxtPuntosExtras;
     // End of variables declaration//GEN-END:variables
 }
