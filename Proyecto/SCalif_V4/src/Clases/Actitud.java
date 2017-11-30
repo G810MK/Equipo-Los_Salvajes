@@ -15,6 +15,15 @@ public class Actitud {
     private int idActitud;
     private int Asistencia;
     private String Fecha;
+    private int Unidad;
+
+    public int getUnidad() {
+        return Unidad;
+    }
+
+    public void setUnidad(int Unidad) {
+        this.Unidad = Unidad;
+    }
 
     public int getIdActitud() {
         return idActitud;

@@ -23,7 +23,7 @@ public class BD {
 
     public BD() {
         try {
-            mConexion.Conectar("localhost", "calificaciones", "root", "noteladigo");
+            mConexion.Conectar("localhost", "calificaciones", "root", "1234aszx");
         } catch (Exception error) {
             System.out.println(error.toString());
         }
@@ -56,9 +56,9 @@ public class BD {
         mConexion.ejecutarActualizacion(SQL);
     }
 
-    public void agregarEva_Diagnostica(Eval_Diagnostica mEval_Diagnostica, Alumno mAlumno) throws SQLException {
+    public void agregarEva_Diagnostica(Eval_Diagnostica mEval_Diagnostica, int ID) throws SQLException {
         String SQL = "insert into evaluacion_diagnostica values (null, '?1', '?2')";
-        SQL = SQL.replace("?1", String.valueOf(mAlumno.getIdAlumno()));
+        SQL = SQL.replace("?1", String.valueOf(ID));
         SQL = SQL.replace("?2", String.valueOf(mEval_Diagnostica.getCalificacion()));
         mConexion.ejecutarActualizacion(SQL);
 
@@ -66,19 +66,21 @@ public class BD {
 
     //Agregar Actitud
     public void agregarActitud(Actitud mActitud, int ID) throws SQLException {
-        String SQL = "insert into actitud values (null, '?1', '?2', '?3')";
+        String SQL = "insert into actitud values (null, '?1', '?2', '?3', '?4')";
         SQL = SQL.replace("?1", String.valueOf(ID));
         SQL = SQL.replace("?2", String.valueOf(mActitud.getAsistencia()));
         SQL = SQL.replace("?3", String.valueOf(mActitud.getFecha()));
+        SQL = SQL.replace("?4", String.valueOf(mActitud.getUnidad()));
         mConexion.ejecutarActualizacion(SQL);
     }
 
     //Agregar Desempeño
     public void agregarDesempeño(Desempeño mDesempeño, int ID) throws SQLException {
-        String SQL = "insert into desempeno values (null, '?1', '?2','?3')";
+        String SQL = "insert into desempeno values (null, '?1', '?2','?3','?4')";
         SQL = SQL.replace("?1", String.valueOf(ID));
         SQL = SQL.replace("?2", mDesempeño.getTrabajo());
         SQL = SQL.replace("?3", String.valueOf(mDesempeño.getCalificacion()));
+        SQL = SQL.replace("?4", String.valueOf(mDesempeño.getUnidadD()));
         mConexion.ejecutarActualizacion(SQL);
     }
 
@@ -299,7 +301,7 @@ public class BD {
             mAlumno.setNC(consulta.getInt("NC"));
             mAlumno.setNombre(consulta.getString("Nombre"));
             mEval_Diagnostica.setIdEval_Diagnostica(consulta.getInt("idEvaluacion_diagnostica"));
-            mEval_Diagnostica.setCalificacion(consulta.getDouble("Calificacion"));
+            mEval_Diagnostica.setCalificacion(consulta.getInt("Calificacion"));
             lista.add(mEval_Diagnostica);
         }
         return lista;
@@ -775,9 +777,9 @@ public class BD {
         return lista;
 }
     
-    public List<Eval_Diagnostica> ConsultaIDEvaluacion(int Calificacion, int IdA) throws SQLException {
+    public List<Eval_Diagnostica> ConsultaIDEvaluacion( int IdA) throws SQLException {
         List<Eval_Diagnostica> Lista = new ArrayList();
-        String SQl = "select idEvaluacion_diagnostica from Evaluacion_diagnostica where calificacion = '" + Calificacion + "' and Alumno_idAlumno = " + IdA ;
+        String SQl = "select idEvaluacion_diagnostica from Evaluacion_diagnostica where Alumno_idAlumno = " + IdA ;
         ResultSet consulta = mConexion.ejecutarConsulta(SQl);
         while (consulta.next()) {
             Eval_Diagnostica mEval_Diagnostica = new Eval_Diagnostica();
@@ -848,5 +850,53 @@ public class BD {
         SQL = SQL.replace("?2", String.valueOf(mConocimiento.getIdConocimiento()));
         SQL = SQL.replace("?3", String.valueOf(idAl));
         mConexion.ejecutarActualizacion(SQL);
+    }
+    
+    public List<Conocimiento> ConsultaUnidadCono() throws SQLException{
+        List<Conocimiento> Lista = new ArrayList();
+        String SQL = "select distict unidad from evaluacion_unidad";
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while(consulta.next()){
+            Conocimiento mConocimiento = new Conocimiento();
+            mConocimiento.setUnidad(consulta.getInt("unidad"));
+            Lista.add(mConocimiento);
+        }
+        return Lista;
+    }
+    
+    public List<Actitud> ConsultaActitudUnidad1() throws SQLException{
+        List<Actitud> Lista = new ArrayList();
+        String SQL = "select distinct unidad from actitud";
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while(consulta.next()){
+            Actitud mActitud = new Actitud();
+            mActitud.setUnidad(consulta.getInt("unidad"));
+            Lista.add(mActitud);
+        }
+        return Lista;
+    }
+    
+    public List<Actitud> ConsultaAsistencia(int idL, int idA, int Unidad) throws SQLException {
+        List<Actitud> Lista = new ArrayList();
+        String SQL = "select asistencia from lista inner join alumno on alumno.Lista_idLista = idLista inner join actitud on actitud.Alumno_idAlumno = idAlumno where idLista = " + idL + " and idAlumno = " + idA + " and Unidad = " + Unidad;
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()){
+            Actitud mActitud = new Actitud();
+            mActitud.setAsistencia(consulta.getInt("asistencia"));
+            Lista.add(mActitud);
+        }
+        return Lista;
+    }
+    
+    public List<Conocimiento> ConcultarUnidades(int ID) throws SQLException {
+        List<Conocimiento> Lista = new ArrayList();
+        String SQL = "select distinct unidad from lista inner join alumno on alumno.Lista_idLista = idLista inner join evaluacion_unidad on evaluacion_unidad.Alumno_idAlumno = idAlumno where idLista = "+ ID;
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()){
+            Conocimiento mConocimiento = new Conocimiento();
+            mConocimiento.setUnidad(consulta.getInt("unidad"));
+            Lista.add(mConocimiento);
+        }
+        return Lista;
     }
 }

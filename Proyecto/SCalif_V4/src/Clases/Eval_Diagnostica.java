@@ -11,7 +11,7 @@ package Clases;
  */
 public class Eval_Diagnostica {
     private int idEval_Diagnostica;
-    private double calificacion;
+    private int calificacion;
 
     public int getIdEval_Diagnostica() {
         return idEval_Diagnostica;
@@ -21,11 +21,11 @@ public class Eval_Diagnostica {
         this.idEval_Diagnostica = idEval_Diagnostica;
     }
 
-    public double getCalificacion() {
+    public int getCalificacion() {
         return calificacion;
     }
 
-    public void setCalificacion(double calificacion) {
+    public void setCalificacion(int calificacion) {
         this.calificacion = calificacion;
     }
     

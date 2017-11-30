@@ -10,7 +10,7 @@ import Formularios.FrmPrincipal;
 
 /**
  *
- * @author MHC <miguel.hrc>
+ * @author MHC <>
  */
 public class Main {
 

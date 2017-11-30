@@ -9,12 +9,16 @@ import BaseDatos.BD;
 import Clases.Alumno;
 import Clases.Conocimiento;
 import Clases.Desempeño;
+import Clases.Eval_Diagnostica;
 import Clases.Lista;
+import Clases.Actitud;
 import Clases.Producto;
 import Clases.PuntosExtras;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.util.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,11 +65,21 @@ public class FrmPrincipal extends javax.swing.JDialog {
         this.jTxtPuntosExtras.setEnabled(false);
         this.jBtnGuardarPE.setEnabled(false);
         this.jBtnCancelarPE.setEnabled(false);
+
+        this.jBtnAgregarED.setEnabled(true);
+        this.jBtnCancelarED.setEnabled(true);
+
+        this.jBtnAgregarA.setEnabled(false);
+        jCmbUnidadAc1.setEnabled(false);
+        jBtnAgregarA.setVisible(false);
+        jDtcUnidadAc1.setEnabled(false);
+        jBtnAgregarAc1.setEnabled(false);
+        
+        jBtnMostrar.setEnabled(false);
         //JTable setAutoResizeMode = jTblConsultarListaLs.setAutoResizeMode(JTable.AUTO_RESIZE_ON);
         //TableColumnModel columnModel = jTblConsultarListaLs.getColumnModel();
 
         //columnModel.getColumn(0).setPreferredWidth(50);
-        
         try {
             this.LLenarTablaLista();
         } catch (SQLException ex) {
@@ -83,12 +97,12 @@ public class FrmPrincipal extends javax.swing.JDialog {
     public String IDL;
     public String IDAl;
     public String IDCon;
+    public String IDAc;
     public String IDDes = "";
     public String IDPro = "";
     public int opc;
 
     //private boolean[] editable = {false, false, false, false};
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -173,28 +187,6 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         jBtnBuscarAlm = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jLabel23 = new javax.swing.JLabel();
-        jBtnActualizarAc = new javax.swing.JButton();
-        jSeparator14 = new javax.swing.JSeparator();
-        jDtcUnidadAc = new com.toedter.calendar.JDateChooser();
-        jCmbMateriaAc = new javax.swing.JComboBox<>();
-        jLblMateria = new javax.swing.JLabel();
-        jLblCarrera = new javax.swing.JLabel();
-        jCmbCarreraAc = new javax.swing.JComboBox<>();
-        jLblSemestre = new javax.swing.JLabel();
-        jCmbSemestreAc = new javax.swing.JComboBox<>();
-        jLblGrupo = new javax.swing.JLabel();
-        jCmbGrupoAc = new javax.swing.JComboBox<>();
-        jBtnBuscarAc = new javax.swing.JButton();
-        jCmbUnidadAc = new javax.swing.JComboBox<>();
-        jLblUnidad = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jSeparator6 = new javax.swing.JSeparator();
-        jLabel9 = new javax.swing.JLabel();
-        jSeparator17 = new javax.swing.JSeparator();
         jPanel5 = new javax.swing.JPanel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel14 = new javax.swing.JPanel();
@@ -395,6 +387,108 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jTblUnidad = new javax.swing.JTable();
         jLabel67 = new javax.swing.JLabel();
         jCmbUnidadU = new javax.swing.JComboBox<>();
+        jPanel19 = new javax.swing.JPanel();
+        jTabbedPane6 = new javax.swing.JTabbedPane();
+        jPanel25 = new javax.swing.JPanel();
+        jSeparator45 = new javax.swing.JSeparator();
+        jLabel59 = new javax.swing.JLabel();
+        jLblCarrera9 = new javax.swing.JLabel();
+        jLblSemestre9 = new javax.swing.JLabel();
+        jLblGrupo9 = new javax.swing.JLabel();
+        jCmbGrupoED = new javax.swing.JComboBox<>();
+        jBtnBuscarED = new javax.swing.JButton();
+        jCmbSemestreED = new javax.swing.JComboBox<>();
+        jCmbCarreraED = new javax.swing.JComboBox<>();
+        jCmbMateriaED = new javax.swing.JComboBox<>();
+        jLabel68 = new javax.swing.JLabel();
+        jScrollPane15 = new javax.swing.JScrollPane();
+        jTblEvaluacionD = new javax.swing.JTable();
+        jLabel75 = new javax.swing.JLabel();
+        jSeparator39 = new javax.swing.JSeparator();
+        jBtnAgregarED = new javax.swing.JButton();
+        jBtnCancelarED = new javax.swing.JButton();
+        jPanel21 = new javax.swing.JPanel();
+        jLabel71 = new javax.swing.JLabel();
+        jSeparator37 = new javax.swing.JSeparator();
+        jCmbMateriaED1 = new javax.swing.JComboBox<>();
+        jCmbCarreraED1 = new javax.swing.JComboBox<>();
+        jLblCarrera10 = new javax.swing.JLabel();
+        jLabel72 = new javax.swing.JLabel();
+        jLabel73 = new javax.swing.JLabel();
+        jSeparator38 = new javax.swing.JSeparator();
+        jBtnAgregarD3 = new javax.swing.JButton();
+        jScrollPane14 = new javax.swing.JScrollPane();
+        jTblEvaluacionD1 = new javax.swing.JTable();
+        jCmbSemestreED1 = new javax.swing.JComboBox<>();
+        jCmbGrupoED1 = new javax.swing.JComboBox<>();
+        jBtnBuscarED1 = new javax.swing.JButton();
+        jLblSemestre10 = new javax.swing.JLabel();
+        jLblGrupo10 = new javax.swing.JLabel();
+        jLblPromedio = new javax.swing.JLabel();
+        jLabel79 = new javax.swing.JLabel();
+        jPanel20 = new javax.swing.JPanel();
+        jPanel24 = new javax.swing.JPanel();
+        jLabel81 = new javax.swing.JLabel();
+        jLabel82 = new javax.swing.JLabel();
+        jSeparator43 = new javax.swing.JSeparator();
+        jLblCarrera12 = new javax.swing.JLabel();
+        jLblSemestre12 = new javax.swing.JLabel();
+        jLblGrupo12 = new javax.swing.JLabel();
+        jCmbGrupoS = new javax.swing.JComboBox<>();
+        jCmbSemestreS = new javax.swing.JComboBox<>();
+        jCmbCarreraS = new javax.swing.JComboBox<>();
+        jCmbMateriaS = new javax.swing.JComboBox<>();
+        jBtnBuscarS = new javax.swing.JButton();
+        jLabel83 = new javax.swing.JLabel();
+        jSeparator44 = new javax.swing.JSeparator();
+        jScrollPane17 = new javax.swing.JScrollPane();
+        jTblSemestre = new javax.swing.JTable();
+        jBtnMostrar = new javax.swing.JButton();
+        jPanel23 = new javax.swing.JPanel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel26 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jSeparator36 = new javax.swing.JSeparator();
+        jLblMateria1 = new javax.swing.JLabel();
+        jCmbMateriaAc1 = new javax.swing.JComboBox<>();
+        jLblCarrera13 = new javax.swing.JLabel();
+        jCmbCarreraAc1 = new javax.swing.JComboBox<>();
+        jLblSemestre13 = new javax.swing.JLabel();
+        jCmbSemestreAc1 = new javax.swing.JComboBox<>();
+        jLblGrupo13 = new javax.swing.JLabel();
+        jCmbGrupoAc1 = new javax.swing.JComboBox<>();
+        jBtnBuscarAc1 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jSeparator42 = new javax.swing.JSeparator();
+        jLblUnidad1 = new javax.swing.JLabel();
+        jCmbUnidadAc1 = new javax.swing.JComboBox<>();
+        jLabel26 = new javax.swing.JLabel();
+        jDtcUnidadAc1 = new com.toedter.calendar.JDateChooser();
+        jSeparator46 = new javax.swing.JSeparator();
+        jBtnAgregarAc1 = new javax.swing.JButton();
+        jScrollPane13 = new javax.swing.JScrollPane();
+        jTblActitudA = new javax.swing.JTable();
+        jBtnAgregarA = new javax.swing.JButton();
+        jBtnCancelarA = new javax.swing.JButton();
+        jPanel27 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jSeparator47 = new javax.swing.JSeparator();
+        jLblMateria2 = new javax.swing.JLabel();
+        jCmbMateriaAcM = new javax.swing.JComboBox<>();
+        jCmbCarreraAcM = new javax.swing.JComboBox<>();
+        jLblCarrera14 = new javax.swing.JLabel();
+        jLblSemestre14 = new javax.swing.JLabel();
+        jCmbSemestreAcM = new javax.swing.JComboBox<>();
+        jLblGrupo14 = new javax.swing.JLabel();
+        jCmbGrupoAcM = new javax.swing.JComboBox<>();
+        jBtnBuscarAcM = new javax.swing.JButton();
+        jLabel69 = new javax.swing.JLabel();
+        jSeparator48 = new javax.swing.JSeparator();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTblActitudM = new javax.swing.JTable();
+        jBtnActualizarAcM = new javax.swing.JButton();
+        jCmbUnidadAcM = new javax.swing.JComboBox<>();
+        jLblGrupo15 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMICargar = new javax.swing.JMenuItem();
@@ -431,7 +525,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        Unidad.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        Unidad.setFont(new java.awt.Font("Consolas", 0, 15)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel5.setText("Datos del la lista:");
@@ -493,6 +587,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
                 return editable[colIndex]; //Disallow the editing of any cell
             }
         };
+        jTblConsultarListaLs.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         jTblConsultarListaLs.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -552,7 +647,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
                                 .addComponent(TxtCarreraLs, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLblListaGeneral)
-                        .addGap(180, 180, 180))))
+                        .addGap(246, 246, 246))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -565,7 +660,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
                                 .addComponent(BtnGuardarLista))
                             .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
                         .addGap(8, 8, 8))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -615,7 +710,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
 
         Unidad.addTab("Lista", jPanel1);
@@ -782,7 +877,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
                                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jCmbGrupoAl, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel14))))
-                                .addGap(0, 194, Short.MAX_VALUE)))
+                                .addGap(0, 253, Short.MAX_VALUE)))
                         .addGap(18, 18, 18))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLblAlumno)
@@ -878,6 +973,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
                 return editable[colIndex]; //Disallow the editing of any cell
             }
         };
+        jTblConsultarAlumno.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         jTblConsultarAlumno.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -902,6 +998,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jLblDatos.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
         jLblDatos.setText("Datos del alumno:");
 
+        jBtnModificarAlm.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jBtnModificarAlm.setText("Modificar");
         jBtnModificarAlm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1102,200 +1199,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
 
         Unidad.addTab("Alumno", jPanel2);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jTable2.getTableHeader().setReorderingAllowed(false);
-        jScrollPane4.setViewportView(jTable2);
-
-        jLabel23.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jLabel23.setText("Seleccione una fecha:");
-
-        jBtnActualizarAc.setText("Actualizar");
-
-        jCmbMateriaAc.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jCmbMateriaAc.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jCmbMateriaAcFocusGained(evt);
-            }
-        });
-        jCmbMateriaAc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCmbMateriaAcActionPerformed(evt);
-            }
-        });
-
-        jLblMateria.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLblMateria.setText("Materia:");
-
-        jLblCarrera.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLblCarrera.setText("Carrera:");
-
-        jCmbCarreraAc.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jCmbCarreraAc.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jCmbCarreraAcFocusGained(evt);
-            }
-        });
-        jCmbCarreraAc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCmbCarreraAcActionPerformed(evt);
-            }
-        });
-
-        jLblSemestre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLblSemestre.setText("Semestre:");
-
-        jCmbSemestreAc.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jCmbSemestreAc.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jCmbSemestreAcFocusGained(evt);
-            }
-        });
-        jCmbSemestreAc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCmbSemestreAcActionPerformed(evt);
-            }
-        });
-
-        jLblGrupo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLblGrupo.setText("Grupo:");
-
-        jCmbGrupoAc.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jCmbGrupoAc.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jCmbGrupoAcFocusGained(evt);
-            }
-        });
-        jCmbGrupoAc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCmbGrupoAcActionPerformed(evt);
-            }
-        });
-
-        jBtnBuscarAc.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jBtnBuscarAc.setText("Buscar");
-
-        jCmbUnidadAc.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jCmbUnidadAc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLblUnidad.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jLblUnidad.setText("Unidad:");
-
-        jLabel8.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
-        jLabel8.setText("Busqueda:");
-
-        jLabel9.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
-        jLabel9.setText("Datos de la actitud:");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator6))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(jLblMateria)
-                                .addGap(87, 87, 87)
-                                .addComponent(jLblCarrera)
-                                .addGap(88, 88, 88)
-                                .addComponent(jLblSemestre))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jCmbMateriaAc, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCmbCarreraAc, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCmbSemestreAc, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jCmbGrupoAc, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jBtnBuscarAc))
-                                    .addComponent(jLblGrupo))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator17))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator14, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(76, 76, 76)
-                                .addComponent(jBtnActualizarAc))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLblUnidad)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCmbUnidadAc, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel23)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jDtcUnidadAc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel8)
-                    .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLblMateria)
-                    .addComponent(jLblCarrera)
-                    .addComponent(jLblSemestre)
-                    .addComponent(jLblGrupo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCmbMateriaAc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCmbCarreraAc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCmbSemestreAc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCmbGrupoAc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnBuscarAc))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel9)
-                    .addComponent(jSeparator17, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCmbUnidadAc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLblUnidad))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel23)
-                            .addComponent(jDtcUnidadAc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jSeparator14, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBtnActualizarAc))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        Unidad.addTab("Actitud", jPanel3);
+        jTabbedPane3.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
 
         jLabel48.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
         jLabel48.setText("Busqueda:");
@@ -1303,7 +1207,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jLabel49.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel49.setText("Materia:");
 
-        jCmbMateriaC.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbMateriaC.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jCmbMateriaC.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jCmbMateriaCFocusGained(evt);
@@ -1318,7 +1222,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jLblCarrera5.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLblCarrera5.setText("Carrera:");
 
-        jCmbCarreraC.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbCarreraC.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jCmbCarreraC.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jCmbCarreraCFocusGained(evt);
@@ -1333,7 +1237,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jLblSemestre5.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLblSemestre5.setText("Semestre:");
 
-        jCmbSemestreC.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbSemestreC.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jCmbSemestreC.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jCmbSemestreCFocusGained(evt);
@@ -1348,7 +1252,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jLblGrupo5.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLblGrupo5.setText("Grupo:");
 
-        jCmbGrupoC.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbGrupoC.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jCmbGrupoC.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jCmbGrupoCFocusGained(evt);
@@ -1360,6 +1264,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
             }
         });
 
+        jBtnBuscarC.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jBtnBuscarC.setText("Buscar");
         jBtnBuscarC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1370,6 +1275,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jLabel50.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel50.setText("Unidad:");
 
+        jCmbUnidadC.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jCmbUnidadC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
 
         jLabel51.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
@@ -1389,6 +1295,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jTblConocimiento.getTableHeader().setReorderingAllowed(false);
         jScrollPane9.setViewportView(jTblConocimiento);
 
+        jBtnAgregarC.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jBtnAgregarC.setText("Agregar");
         jBtnAgregarC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1396,6 +1303,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
             }
         });
 
+        jBtnCancelarC.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jBtnCancelarC.setText("Cancelar");
         jBtnCancelarC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1403,6 +1311,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
             }
         });
 
+        jBtnGuardarC.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jBtnGuardarC.setText("Guardar");
         jBtnGuardarC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1415,15 +1324,15 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBtnCancelarC)
-                    .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel14Layout.createSequentialGroup()
-                            .addComponent(jBtnAgregarC)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jBtnGuardarC))
-                        .addComponent(jSeparator31, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 647, Short.MAX_VALUE))
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addComponent(jBtnAgregarC)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBtnGuardarC)
+                        .addGap(81, 81, 81)
+                        .addComponent(jBtnCancelarC))
+                    .addComponent(jSeparator31, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 571, Short.MAX_VALUE))
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1456,7 +1365,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
                                         .addComponent(jCmbGrupoC, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(jBtnBuscarC)))))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 415, Short.MAX_VALUE))
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addComponent(jLabel51)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1464,7 +1373,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
                 .addContainerGap())
             .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel14Layout.createSequentialGroup()
-                    .addGap(0, 445, Short.MAX_VALUE)
+                    .addGap(0, 504, Short.MAX_VALUE)
                     .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(5, 5, 5)))
         );
@@ -1501,13 +1410,12 @@ public class FrmPrincipal extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnAgregarC)
-                    .addComponent(jBtnGuardarC))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBtnCancelarC)
-                .addContainerGap(339, Short.MAX_VALUE))
+                    .addComponent(jBtnGuardarC)
+                    .addComponent(jBtnCancelarC))
+                .addContainerGap(371, Short.MAX_VALUE))
             .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel14Layout.createSequentialGroup()
-                    .addContainerGap(140, Short.MAX_VALUE)
+                    .addContainerGap(145, Short.MAX_VALUE)
                     .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
         );
@@ -1520,7 +1428,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jLabel53.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel53.setText("Materia:");
 
-        jCmbMateriaC1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbMateriaC1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jCmbMateriaC1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jCmbMateriaC1FocusGained(evt);
@@ -1535,7 +1443,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jLblCarrera6.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLblCarrera6.setText("Carrera:");
 
-        jCmbCarreraC1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbCarreraC1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jCmbCarreraC1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jCmbCarreraC1FocusGained(evt);
@@ -1550,7 +1458,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jLblSemestre6.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLblSemestre6.setText("Semestre:");
 
-        jCmbSemestreC1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbSemestreC1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jCmbSemestreC1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jCmbSemestreC1FocusGained(evt);
@@ -1565,7 +1473,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jLblGrupo6.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLblGrupo6.setText("Grupo:");
 
-        jCmbGrupoC1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbGrupoC1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jCmbGrupoC1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jCmbGrupoC1FocusGained(evt);
@@ -1577,6 +1485,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
             }
         });
 
+        jBtnBuscarC1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jBtnBuscarC1.setText("Buscar");
         jBtnBuscarC1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1587,6 +1496,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jLabel54.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel54.setText("Unidad:");
 
+        jCmbUnidadC1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jCmbUnidadC1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
         jCmbUnidadC1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -1597,6 +1507,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jLabel55.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
         jLabel55.setText("Datos del conocimiento:");
 
+        jTblConocimiento1.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         jTblConocimiento1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -1611,6 +1522,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jTblConocimiento1.getTableHeader().setReorderingAllowed(false);
         jScrollPane10.setViewportView(jTblConocimiento1);
 
+        jBtnAgregarC1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jBtnAgregarC1.setText("Actualizar");
         jBtnAgregarC1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1626,55 +1538,54 @@ public class FrmPrincipal extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                        .addComponent(jLabel52, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                                .addComponent(jSeparator28, javax.swing.GroupLayout.PREFERRED_SIZE, 784, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCmbSemestreC1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel15Layout.createSequentialGroup()
-                                        .addComponent(jLblSemestre6)
-                                        .addGap(56, 56, 56)
-                                        .addComponent(jLblGrupo6)))
-                                .addGap(85, 85, 85)
-                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel15Layout.createSequentialGroup()
-                                        .addComponent(jCmbUnidadC1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jBtnBuscarC1))
-                                    .addComponent(jLabel54))
-                                .addGap(189, 189, 189))))
+                            .addComponent(jCmbCarreraC1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLblCarrera6))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCmbSemestreC1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel15Layout.createSequentialGroup()
+                                .addComponent(jLblSemestre6)
+                                .addGap(48, 48, 48)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLblGrupo6)
+                            .addComponent(jCmbGrupoC1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel54)
+                            .addGroup(jPanel15Layout.createSequentialGroup()
+                                .addComponent(jCmbUnidadC1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBtnBuscarC1)))
+                        .addGap(263, 263, 263))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel15Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jSeparator29, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel15Layout.createSequentialGroup()
-                                .addComponent(jScrollPane10)
+                                .addComponent(jLabel52, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSeparator28, javax.swing.GroupLayout.PREFERRED_SIZE, 921, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel15Layout.createSequentialGroup()
+                                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 876, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jBtnAgregarC1)))
                         .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSeparator29, javax.swing.GroupLayout.PREFERRED_SIZE, 799, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel15Layout.createSequentialGroup()
                     .addGap(5, 5, 5)
                     .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel15Layout.createSequentialGroup()
-                            .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jCmbMateriaC1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel15Layout.createSequentialGroup()
-                                    .addGap(2, 2, 2)
-                                    .addComponent(jLabel53)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jCmbCarreraC1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLblCarrera6))
-                            .addGap(140, 140, 140)
-                            .addComponent(jCmbGrupoC1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCmbMateriaC1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel15Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jLabel53)))
                         .addComponent(jLabel55))
-                    .addContainerGap(474, Short.MAX_VALUE)))
+                    .addContainerGap(832, Short.MAX_VALUE)))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1684,18 +1595,29 @@ public class FrmPrincipal extends javax.swing.JDialog {
                     .addComponent(jSeparator28, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel52))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel54)
-                    .addComponent(jLblSemestre6)
-                    .addComponent(jLblGrupo6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCmbUnidadC1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnBuscarC1)
-                    .addComponent(jCmbSemestreC1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel15Layout.createSequentialGroup()
+                            .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLblSemestre6)
+                                .addComponent(jLblCarrera6))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jCmbSemestreC1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCmbCarreraC1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel15Layout.createSequentialGroup()
+                            .addComponent(jLblGrupo6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jCmbGrupoC1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addComponent(jLabel54)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCmbUnidadC1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBtnBuscarC1))))
+                .addGap(20, 20, 20)
                 .addComponent(jSeparator29, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnAgregarC1))
@@ -1703,17 +1625,12 @@ public class FrmPrincipal extends javax.swing.JDialog {
             .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel15Layout.createSequentialGroup()
                     .addGap(57, 57, 57)
-                    .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLblCarrera6)
-                        .addComponent(jLabel53))
+                    .addComponent(jLabel53)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jCmbMateriaC1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jCmbCarreraC1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jCmbGrupoC1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCmbMateriaC1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(jLabel55)
-                    .addContainerGap(444, Short.MAX_VALUE)))
+                    .addContainerGap(447, Short.MAX_VALUE)))
         );
 
         jTabbedPane3.addTab("Modificar", jPanel15);
@@ -1731,6 +1648,8 @@ public class FrmPrincipal extends javax.swing.JDialog {
 
         Unidad.addTab("Conocimiento", jPanel5);
 
+        jTabbedPane5.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+
         jLabel39.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel39.setText("Materia:");
 
@@ -1743,7 +1662,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jLblGrupo3.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLblGrupo3.setText("Grupo:");
 
-        jCmbGrupoP.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbGrupoP.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jCmbGrupoP.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jCmbGrupoPFocusGained(evt);
@@ -1755,6 +1674,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
             }
         });
 
+        jBtnBuscarP.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jBtnBuscarP.setText("Buscar");
         jBtnBuscarP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1762,7 +1682,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
             }
         });
 
-        jCmbSemestreP.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbSemestreP.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jCmbSemestreP.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jCmbSemestrePFocusGained(evt);
@@ -1774,7 +1694,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
             }
         });
 
-        jCmbCarreraP.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbCarreraP.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jCmbCarreraP.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jCmbCarreraPFocusGained(evt);
@@ -1786,7 +1706,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
             }
         });
 
-        jCmbMateriaP.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbMateriaP.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jCmbMateriaP.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jCmbMateriaPFocusGained(evt);
@@ -1804,6 +1724,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jLabel41.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
         jLabel41.setText("Busqueda:");
 
+        jTblProducto.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         jTblProducto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -1818,6 +1739,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jTblProducto.getTableHeader().setReorderingAllowed(false);
         jScrollPane7.setViewportView(jTblProducto);
 
+        jCmbUnidadP.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jCmbUnidadP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
 
         jLabel42.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
@@ -1826,6 +1748,9 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jLabel43.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel43.setText("Nombre de la tarea:");
 
+        jTxtNombreProducto.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+
+        jBtnAgregarP.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jBtnAgregarP.setText("Agregar");
         jBtnAgregarP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1833,6 +1758,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
             }
         });
 
+        jBtnGuardarP.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jBtnGuardarP.setText("Guardar");
         jBtnGuardarP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1840,6 +1766,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
             }
         });
 
+        jBtnCancelarP.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jBtnCancelarP.setText("Cancelar");
         jBtnCancelarP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1861,48 +1788,50 @@ public class FrmPrincipal extends javax.swing.JDialog {
                                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel39))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCmbCarreraP, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLblCarrera3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCmbSemestreP, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLblSemestre3))
-                        .addGap(10, 10, 10)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCmbGrupoP, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLblGrupo3))
-                        .addGap(10, 10, 10)
-                        .addComponent(jBtnBuscarP)
+                            .addComponent(jLblGrupo3)
+                            .addGroup(jPanel12Layout.createSequentialGroup()
+                                .addComponent(jCmbGrupoP, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBtnBuscarP)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addComponent(jLabel40)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jSeparator21))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
-                        .addContainerGap(250, Short.MAX_VALUE)
-                        .addComponent(jSeparator20, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTxtNombreProducto)
                             .addComponent(jSeparator22)
                             .addGroup(jPanel12Layout.createSequentialGroup()
-                                .addComponent(jBtnAgregarP)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jBtnGuardarP))
-                            .addGroup(jPanel12Layout.createSequentialGroup()
+                                .addContainerGap()
                                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(jPanel12Layout.createSequentialGroup()
-                                            .addComponent(jLabel42)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jCmbUnidadP, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jLabel43, javax.swing.GroupLayout.Alignment.LEADING))
-                                    .addComponent(jBtnCancelarP))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addGroup(jPanel12Layout.createSequentialGroup()
+                                        .addComponent(jLabel42)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jCmbUnidadP, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel43))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel12Layout.createSequentialGroup()
+                                .addComponent(jBtnAgregarP)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                                .addComponent(jBtnGuardarP)
+                                .addGap(89, 89, 89)
+                                .addComponent(jBtnCancelarP)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jSeparator20, javax.swing.GroupLayout.PREFERRED_SIZE, 850, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel12Layout.setVerticalGroup(
@@ -1913,42 +1842,48 @@ public class FrmPrincipal extends javax.swing.JDialog {
                     .addComponent(jSeparator20, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel41))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLblCarrera3)
-                    .addComponent(jLblSemestre3)
-                    .addComponent(jLblGrupo3)
-                    .addComponent(jLabel39))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCmbMateriaP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCmbCarreraP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCmbSemestreP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCmbGrupoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnBuscarP))
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jLabel39)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCmbMateriaP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jLblCarrera3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCmbCarreraP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLblSemestre3)
+                            .addComponent(jLblGrupo3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCmbSemestreP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCmbGrupoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBtnBuscarP))
+                        .addGap(1, 1, 1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jSeparator21, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel40))
-                .addGap(4, 4, 4)
+                .addGap(1, 1, 1)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCmbUnidadP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel42))
+                            .addComponent(jLabel42)
+                            .addComponent(jCmbUnidadP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel43)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTxtNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator22, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jBtnAgregarP)
-                            .addComponent(jBtnGuardarP))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnCancelarP))
+                            .addComponent(jBtnGuardarP)
+                            .addComponent(jBtnCancelarP)))
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jTabbedPane5.addTab("Agregar", jPanel12);
@@ -2006,6 +1941,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
             }
         });
 
+        jTblProducto1.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         jTblProducto1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -2064,7 +2000,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                        .addContainerGap(250, Short.MAX_VALUE)
+                        .addContainerGap(209, Short.MAX_VALUE)
                         .addComponent(jSeparator23, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2135,7 +2071,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addComponent(jBtnAgregarP1)
                         .addContainerGap())
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)))
         );
 
         jTabbedPane5.addTab("Consulta", jPanel13);
@@ -2144,11 +2080,14 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane5)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane5)
+                .addGap(90, 90, 90))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addComponent(jTabbedPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -2306,7 +2245,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jSeparator15))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                        .addContainerGap(250, Short.MAX_VALUE)
+                        .addContainerGap(309, Short.MAX_VALUE)
                         .addComponent(jSeparator18, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2489,7 +2428,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                        .addContainerGap(250, Short.MAX_VALUE)
+                        .addContainerGap(309, Short.MAX_VALUE)
                         .addComponent(jSeparator19, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2994,7 +2933,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
                                 .addComponent(jCmbUnidadPE1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jBtnBuscarPE1)))
-                        .addGap(0, 292, Short.MAX_VALUE))
+                        .addGap(0, 351, Short.MAX_VALUE))
                     .addGroup(jPanel18Layout.createSequentialGroup()
                         .addComponent(jLabel62)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -3048,7 +2987,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 990, Short.MAX_VALUE)
+            .addComponent(jTabbedPane4)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3250,7 +3189,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 990, Short.MAX_VALUE)
+            .addGap(0, 1049, Short.MAX_VALUE)
             .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel16Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -3269,13 +3208,1049 @@ public class FrmPrincipal extends javax.swing.JDialog {
 
         Unidad.addTab("Unidad", jPanel16);
 
+        jLabel59.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel59.setText("Materia:");
+
+        jLblCarrera9.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLblCarrera9.setText("Carrera:");
+
+        jLblSemestre9.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLblSemestre9.setText("Semestre:");
+
+        jLblGrupo9.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLblGrupo9.setText("Grupo:");
+
+        jCmbGrupoED.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbGrupoED.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbGrupoEDFocusGained(evt);
+            }
+        });
+        jCmbGrupoED.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbGrupoEDActionPerformed(evt);
+            }
+        });
+
+        jBtnBuscarED.setText("Buscar");
+        jBtnBuscarED.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnBuscarEDActionPerformed(evt);
+            }
+        });
+
+        jCmbSemestreED.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbSemestreED.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbSemestreEDFocusGained(evt);
+            }
+        });
+        jCmbSemestreED.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbSemestreEDActionPerformed(evt);
+            }
+        });
+
+        jCmbCarreraED.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbCarreraED.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbCarreraEDFocusGained(evt);
+            }
+        });
+        jCmbCarreraED.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbCarreraEDActionPerformed(evt);
+            }
+        });
+
+        jCmbMateriaED.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbMateriaED.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbMateriaEDFocusGained(evt);
+            }
+        });
+        jCmbMateriaED.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbMateriaEDActionPerformed(evt);
+            }
+        });
+
+        jLabel68.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel68.setText("Busqueda:");
+
+        jTblEvaluacionD.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jTblEvaluacionD.getTableHeader().setReorderingAllowed(false);
+        jScrollPane15.setViewportView(jTblEvaluacionD);
+
+        jLabel75.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel75.setText("Datos del evaluación diagnóstica:");
+
+        jBtnAgregarED.setText("Guardar");
+        jBtnAgregarED.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAgregarEDActionPerformed(evt);
+            }
+        });
+
+        jBtnCancelarED.setText("Cancelar");
+        jBtnCancelarED.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarEDActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
+        jPanel25.setLayout(jPanel25Layout);
+        jPanel25Layout.setHorizontalGroup(
+            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel25Layout.createSequentialGroup()
+                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel25Layout.createSequentialGroup()
+                        .addComponent(jLabel75)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator39))
+                    .addGroup(jPanel25Layout.createSequentialGroup()
+                        .addComponent(jScrollPane15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBtnAgregarED)
+                            .addComponent(jBtnCancelarED))))
+                .addContainerGap())
+            .addGroup(jPanel25Layout.createSequentialGroup()
+                .addComponent(jCmbMateriaED, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCmbCarreraED, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLblCarrera9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCmbSemestreED, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLblSemestre9))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCmbGrupoED, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLblGrupo9))
+                .addGap(10, 10, 10)
+                .addComponent(jBtnBuscarED)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel25Layout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel25Layout.createSequentialGroup()
+                        .addComponent(jLabel68, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSeparator45, javax.swing.GroupLayout.PREFERRED_SIZE, 882, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel59)))
+        );
+        jPanel25Layout.setVerticalGroup(
+            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel25Layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel68)
+                    .addComponent(jSeparator45, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLblCarrera9)
+                    .addComponent(jLblSemestre9)
+                    .addComponent(jLblGrupo9)
+                    .addComponent(jLabel59))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCmbMateriaED, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCmbCarreraED, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCmbSemestreED, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCmbGrupoED, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnBuscarED))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator39, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel75))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
+                    .addGroup(jPanel25Layout.createSequentialGroup()
+                        .addComponent(jBtnAgregarED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnCancelarED)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+
+        jTabbedPane6.addTab("Agregar", jPanel25);
+
+        jLabel71.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel71.setText("Busqueda:");
+
+        jCmbMateriaED1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbMateriaED1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbMateriaED1FocusGained(evt);
+            }
+        });
+        jCmbMateriaED1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbMateriaED1ActionPerformed(evt);
+            }
+        });
+
+        jCmbCarreraED1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbCarreraED1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbCarreraED1FocusGained(evt);
+            }
+        });
+        jCmbCarreraED1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbCarreraED1ActionPerformed(evt);
+            }
+        });
+
+        jLblCarrera10.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLblCarrera10.setText("Carrera:");
+
+        jLabel72.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel72.setText("Materia:");
+
+        jLabel73.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel73.setText("Datos del evaluación diagnóstica:");
+
+        jBtnAgregarD3.setText("Actualizar");
+        jBtnAgregarD3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAgregarD3ActionPerformed(evt);
+            }
+        });
+
+        jTblEvaluacionD1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jTblEvaluacionD1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane14.setViewportView(jTblEvaluacionD1);
+
+        jCmbSemestreED1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbSemestreED1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbSemestreED1FocusGained(evt);
+            }
+        });
+        jCmbSemestreED1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbSemestreED1ActionPerformed(evt);
+            }
+        });
+
+        jCmbGrupoED1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbGrupoED1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbGrupoED1FocusGained(evt);
+            }
+        });
+        jCmbGrupoED1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbGrupoED1ActionPerformed(evt);
+            }
+        });
+
+        jBtnBuscarED1.setText("Buscar");
+        jBtnBuscarED1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnBuscarED1ActionPerformed(evt);
+            }
+        });
+
+        jLblSemestre10.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLblSemestre10.setText("Semestre:");
+
+        jLblGrupo10.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLblGrupo10.setText("Grupo:");
+
+        jLblPromedio.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLblPromedio.setText("0");
+
+        jLabel79.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel79.setText("Promedio:");
+
+        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
+        jPanel21.setLayout(jPanel21Layout);
+        jPanel21Layout.setHorizontalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel21Layout.createSequentialGroup()
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel21Layout.createSequentialGroup()
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCmbMateriaED1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel21Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel71, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel72))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCmbCarreraED1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLblCarrera10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCmbSemestreED1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLblSemestre10))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLblGrupo10)
+                            .addGroup(jPanel21Layout.createSequentialGroup()
+                                .addComponent(jCmbGrupoED1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jBtnBuscarED1)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel21Layout.createSequentialGroup()
+                        .addComponent(jLabel73)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator38))
+                    .addGroup(jPanel21Layout.createSequentialGroup()
+                        .addComponent(jScrollPane14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBtnAgregarD3))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
+                                .addGap(0, 299, Short.MAX_VALUE)
+                                .addComponent(jSeparator37, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
+                                .addComponent(jLabel79)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLblPromedio)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
+        );
+        jPanel21Layout.setVerticalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel21Layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator37, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel71))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLblCarrera10)
+                    .addComponent(jLblSemestre10)
+                    .addComponent(jLblGrupo10)
+                    .addComponent(jLabel72))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCmbMateriaED1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCmbCarreraED1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCmbSemestreED1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCmbGrupoED1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnBuscarED1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator38, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel73))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLblPromedio)
+                    .addComponent(jLabel79))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnAgregarD3)))
+        );
+
+        jTabbedPane6.addTab("Consulta", jPanel21);
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane6)
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addComponent(jTabbedPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        Unidad.addTab("Evaluación diagnóstica", jPanel19);
+
+        jLabel81.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel81.setText("Busqueda:");
+
+        jLabel82.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel82.setText("Materia:");
+
+        jLblCarrera12.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLblCarrera12.setText("Carrera:");
+
+        jLblSemestre12.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLblSemestre12.setText("Semestre:");
+
+        jLblGrupo12.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLblGrupo12.setText("Grupo:");
+
+        jCmbGrupoS.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbGrupoS.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbGrupoSFocusGained(evt);
+            }
+        });
+        jCmbGrupoS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbGrupoSActionPerformed(evt);
+            }
+        });
+
+        jCmbSemestreS.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbSemestreS.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbSemestreSFocusGained(evt);
+            }
+        });
+        jCmbSemestreS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbSemestreSActionPerformed(evt);
+            }
+        });
+
+        jCmbCarreraS.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbCarreraS.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbCarreraSFocusGained(evt);
+            }
+        });
+        jCmbCarreraS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbCarreraSActionPerformed(evt);
+            }
+        });
+
+        jCmbMateriaS.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCmbMateriaS.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbMateriaSFocusGained(evt);
+            }
+        });
+        jCmbMateriaS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbMateriaSActionPerformed(evt);
+            }
+        });
+
+        jBtnBuscarS.setText("Buscar");
+        jBtnBuscarS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnBuscarSActionPerformed(evt);
+            }
+        });
+
+        jLabel83.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel83.setText("Datos semestre:");
+
+        jTblSemestre.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jTblSemestre.getTableHeader().setReorderingAllowed(false);
+        jScrollPane17.setViewportView(jTblSemestre);
+
+        jBtnMostrar.setText("Mostrar");
+        jBtnMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnMostrarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
+        jPanel24.setLayout(jPanel24Layout);
+        jPanel24Layout.setHorizontalGroup(
+            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel24Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel24Layout.createSequentialGroup()
+                        .addComponent(jLabel81, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator43))
+                    .addGroup(jPanel24Layout.createSequentialGroup()
+                        .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCmbMateriaS, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel24Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jLabel82)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCmbCarreraS, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLblCarrera12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCmbSemestreS, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLblSemestre12))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLblGrupo12)
+                            .addGroup(jPanel24Layout.createSequentialGroup()
+                                .addComponent(jCmbGrupoS, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBtnBuscarS)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jBtnMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 288, Short.MAX_VALUE))
+                    .addGroup(jPanel24Layout.createSequentialGroup()
+                        .addComponent(jLabel83)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator44)))
+                .addContainerGap())
+            .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel24Layout.createSequentialGroup()
+                    .addGap(7, 7, 7)
+                    .addComponent(jScrollPane17)
+                    .addContainerGap()))
+        );
+        jPanel24Layout.setVerticalGroup(
+            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel24Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator43, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel81))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLblCarrera12)
+                    .addComponent(jLblSemestre12)
+                    .addComponent(jLblGrupo12)
+                    .addComponent(jLabel82))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCmbMateriaS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCmbCarreraS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCmbSemestreS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCmbGrupoS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnBuscarS)
+                    .addComponent(jBtnMostrar))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel83)
+                    .addComponent(jSeparator44, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(519, Short.MAX_VALUE))
+            .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel24Layout.createSequentialGroup()
+                    .addGap(129, 129, 129)
+                    .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(32, Short.MAX_VALUE)))
+        );
+
+        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
+        jPanel20.setLayout(jPanel20Layout);
+        jPanel20Layout.setHorizontalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel20Layout.setVerticalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        Unidad.addTab("Semestral", jPanel20);
+
+        jTabbedPane1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+
+        jLabel10.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel10.setText("Busqueda:");
+
+        jLblMateria1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLblMateria1.setText("Materia:");
+
+        jCmbMateriaAc1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jCmbMateriaAc1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbMateriaAc1FocusGained(evt);
+            }
+        });
+        jCmbMateriaAc1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbMateriaAc1ActionPerformed(evt);
+            }
+        });
+
+        jLblCarrera13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLblCarrera13.setText("Carrera:");
+
+        jCmbCarreraAc1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jCmbCarreraAc1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbCarreraAc1FocusGained(evt);
+            }
+        });
+        jCmbCarreraAc1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbCarreraAc1ActionPerformed(evt);
+            }
+        });
+
+        jLblSemestre13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLblSemestre13.setText("Semestre:");
+
+        jCmbSemestreAc1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jCmbSemestreAc1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbSemestreAc1FocusGained(evt);
+            }
+        });
+        jCmbSemestreAc1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbSemestreAc1ActionPerformed(evt);
+            }
+        });
+
+        jLblGrupo13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLblGrupo13.setText("Grupo:");
+
+        jCmbGrupoAc1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jCmbGrupoAc1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbGrupoAc1FocusGained(evt);
+            }
+        });
+        jCmbGrupoAc1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbGrupoAc1ActionPerformed(evt);
+            }
+        });
+
+        jBtnBuscarAc1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jBtnBuscarAc1.setText("Buscar");
+        jBtnBuscarAc1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnBuscarAc1ActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel11.setText("Datos de la actitud:");
+
+        jLblUnidad1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLblUnidad1.setText("Unidad:");
+
+        jCmbUnidadAc1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jCmbUnidadAc1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+
+        jLabel26.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel26.setText("Seleccione una fecha:");
+
+        jBtnAgregarAc1.setText("Agregar");
+        jBtnAgregarAc1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAgregarAc1ActionPerformed(evt);
+            }
+        });
+
+        jTblActitudA.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jTblActitudA.getTableHeader().setReorderingAllowed(false);
+        jScrollPane13.setViewportView(jTblActitudA);
+
+        jBtnAgregarA.setText("Guardar");
+        jBtnAgregarA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAgregarAActionPerformed(evt);
+            }
+        });
+
+        jBtnCancelarA.setText("Cancelar");
+        jBtnCancelarA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarAActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
+        jPanel26.setLayout(jPanel26Layout);
+        jPanel26Layout.setHorizontalGroup(
+            jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel26Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel26Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator36))
+                    .addGroup(jPanel26Layout.createSequentialGroup()
+                        .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel26Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jLblMateria1))
+                            .addComponent(jCmbMateriaAc1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel26Layout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addComponent(jLblCarrera13))
+                            .addComponent(jCmbCarreraAc1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCmbSemestreAc1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLblSemestre13))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel26Layout.createSequentialGroup()
+                                .addComponent(jCmbGrupoAc1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBtnBuscarAc1))
+                            .addComponent(jLblGrupo13))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel26Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator42))))
+            .addGroup(jPanel26Layout.createSequentialGroup()
+                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel26Layout.createSequentialGroup()
+                        .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel26Layout.createSequentialGroup()
+                                .addComponent(jLblUnidad1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCmbUnidadAc1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel26Layout.createSequentialGroup()
+                                .addComponent(jLabel26)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jDtcUnidadAc1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jBtnCancelarA))
+                        .addGap(0, 169, Short.MAX_VALUE))
+                    .addGroup(jPanel26Layout.createSequentialGroup()
+                        .addComponent(jBtnAgregarAc1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBtnAgregarA, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator46))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel26Layout.setVerticalGroup(
+            jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel26Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel10)
+                    .addComponent(jSeparator36, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel26Layout.createSequentialGroup()
+                        .addComponent(jLblMateria1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCmbMateriaAc1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel26Layout.createSequentialGroup()
+                        .addComponent(jLblCarrera13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCmbCarreraAc1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel26Layout.createSequentialGroup()
+                        .addComponent(jLblSemestre13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCmbSemestreAc1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel26Layout.createSequentialGroup()
+                        .addComponent(jLblGrupo13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCmbGrupoAc1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBtnBuscarAc1))
+                        .addGap(1, 1, 1)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel11)
+                    .addComponent(jSeparator42, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel26Layout.createSequentialGroup()
+                        .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLblUnidad1)
+                            .addComponent(jCmbUnidadAc1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel26)
+                            .addComponent(jDtcUnidadAc1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jSeparator46, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jBtnAgregarA)
+                            .addComponent(jBtnAgregarAc1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnCancelarA))
+                    .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Agregar", jPanel26);
+
+        jLabel12.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel12.setText("Busqueda:");
+
+        jLblMateria2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLblMateria2.setText("Materia:");
+
+        jCmbMateriaAcM.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jCmbMateriaAcM.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbMateriaAcMFocusGained(evt);
+            }
+        });
+        jCmbMateriaAcM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbMateriaAcMActionPerformed(evt);
+            }
+        });
+
+        jCmbCarreraAcM.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jCmbCarreraAcM.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbCarreraAcMFocusGained(evt);
+            }
+        });
+        jCmbCarreraAcM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbCarreraAcMActionPerformed(evt);
+            }
+        });
+
+        jLblCarrera14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLblCarrera14.setText("Carrera:");
+
+        jLblSemestre14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLblSemestre14.setText("Semestre:");
+
+        jCmbSemestreAcM.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jCmbSemestreAcM.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbSemestreAcMFocusGained(evt);
+            }
+        });
+        jCmbSemestreAcM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbSemestreAcMActionPerformed(evt);
+            }
+        });
+
+        jLblGrupo14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLblGrupo14.setText("Grupo:");
+
+        jCmbGrupoAcM.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jCmbGrupoAcM.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbGrupoAcMFocusGained(evt);
+            }
+        });
+        jCmbGrupoAcM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbGrupoAcMActionPerformed(evt);
+            }
+        });
+
+        jBtnBuscarAcM.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jBtnBuscarAcM.setText("Buscar");
+        jBtnBuscarAcM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnBuscarAcMActionPerformed(evt);
+            }
+        });
+
+        jLabel69.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel69.setText("Datos de la actitud:");
+
+        jTblActitudM.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jTblActitudM.getTableHeader().setResizingAllowed(false);
+        jTblActitudM.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(jTblActitudM);
+
+        jBtnActualizarAcM.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jBtnActualizarAcM.setText("Actualizar");
+        jBtnActualizarAcM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnActualizarAcMActionPerformed(evt);
+            }
+        });
+
+        jCmbUnidadAcM.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jCmbUnidadAcM.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCmbUnidadAcMFocusGained(evt);
+            }
+        });
+        jCmbUnidadAcM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbUnidadAcMActionPerformed(evt);
+            }
+        });
+
+        jLblGrupo15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLblGrupo15.setText("Unidad");
+
+        javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
+        jPanel27.setLayout(jPanel27Layout);
+        jPanel27Layout.setHorizontalGroup(
+            jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel27Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel27Layout.createSequentialGroup()
+                        .addComponent(jLabel69)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator48))
+                    .addGroup(jPanel27Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator47))
+                    .addGroup(jPanel27Layout.createSequentialGroup()
+                        .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel27Layout.createSequentialGroup()
+                                .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCmbMateriaAcM, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel27Layout.createSequentialGroup()
+                                        .addGap(2, 2, 2)
+                                        .addComponent(jLblMateria2)))
+                                .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel27Layout.createSequentialGroup()
+                                        .addGap(29, 29, 29)
+                                        .addComponent(jLblCarrera14))
+                                    .addGroup(jPanel27Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jCmbCarreraAcM, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLblSemestre14)
+                                    .addComponent(jCmbSemestreAcM, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLblGrupo14)
+                                    .addComponent(jCmbGrupoAcM, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLblGrupo15)
+                                    .addComponent(jCmbUnidadAcM, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(7, 7, 7)
+                                .addComponent(jBtnBuscarAcM)
+                                .addGap(0, 264, Short.MAX_VALUE))
+                            .addGroup(jPanel27Layout.createSequentialGroup()
+                                .addComponent(jScrollPane2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jBtnActualizarAcM)))
+                        .addContainerGap())))
+        );
+        jPanel27Layout.setVerticalGroup(
+            jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel27Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel12)
+                    .addComponent(jSeparator47, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel27Layout.createSequentialGroup()
+                        .addComponent(jLblMateria2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCmbMateriaAcM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCmbCarreraAcM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel27Layout.createSequentialGroup()
+                        .addComponent(jLblGrupo14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnBuscarAcM))
+                    .addGroup(jPanel27Layout.createSequentialGroup()
+                        .addComponent(jLblSemestre14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCmbGrupoAcM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCmbSemestreAcM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel27Layout.createSequentialGroup()
+                        .addComponent(jLblCarrera14)
+                        .addGap(29, 29, 29))
+                    .addGroup(jPanel27Layout.createSequentialGroup()
+                        .addComponent(jLblGrupo15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCmbUnidadAcM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel69)
+                    .addGroup(jPanel27Layout.createSequentialGroup()
+                        .addComponent(jSeparator48, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
+                    .addGroup(jPanel27Layout.createSequentialGroup()
+                        .addComponent(jBtnActualizarAcM)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+        );
+
+        jTabbedPane1.addTab("Modificar", jPanel27);
+
+        javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
+        jPanel23.setLayout(jPanel23Layout);
+        jPanel23Layout.setHorizontalGroup(
+            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1)
+        );
+        jPanel23Layout.setVerticalGroup(
+            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1)
+        );
+
+        Unidad.addTab("Actitud", jPanel23);
+
         jMenuBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true), "L.S'SOFT", javax.swing.border.TitledBorder.TRAILING, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/folder.png"))); // NOI18N
         jMenu3.setText("Archivo");
         jMenu3.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
 
-        jMICargar.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jMICargar.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
         jMICargar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/csv.png"))); // NOI18N
         jMICargar.setText("Cargar");
         jMICargar.addActionListener(new java.awt.event.ActionListener() {
@@ -3285,7 +4260,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
         });
         jMenu3.add(jMICargar);
 
-        jMiSalir.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jMiSalir.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
         jMiSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/icon.png"))); // NOI18N
         jMiSalir.setText("Salir");
         jMiSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -3332,6 +4307,83 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jTblConsultarListaLs.getColumnModel().getColumn(2).setPreferredWidth(35);
     }
 
+    public void LlenarTablaActitud() throws SQLException {
+        try {
+            //Agregar Actitud
+            BD mBD = new BD();
+            List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+            for (Lista actual : mLista) {
+                IDAc = String.valueOf(actual.getIdLista());
+            }
+            List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(IDAc));
+            int cont = 1;
+            //Mostrar la consulta alumno
+            Object[] encabezado = {"No", "NC", "Nombre"};
+            DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+            for (Alumno actual : lista) {
+
+                Object[] fila = {cont, actual.getNC(), actual.getNombre()};
+                modelo.addRow(fila);
+                cont++;
+            }
+            jTblActitudA.setModel(modelo);
+            this.jBtnAgregarA.setVisible(true);
+            jCmbUnidadAc1.setEnabled(true);
+            jDtcUnidadAc1.setEnabled(true);
+            jBtnAgregarAc1.setEnabled(true);
+            jBtnAgregarA.setVisible(false);
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+        }
+    }
+
+    public void LlenarTablaActitudM() throws SQLException {
+        try {
+            //Modificacion actitud
+
+            BD mBD = new BD();
+            int q = 3;
+            int z = 0;
+            String Act = "";
+            String Fecha = "";
+            List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+            for (Lista actual : mLista) {
+                IDAc = String.valueOf(actual.getIdLista());
+            }
+            List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(IDAc));
+            int cont = 1;
+
+            Object[] encabezado = {"No", "NC", "Nombre"};
+
+            DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+            for (Alumno actual1 : lista) {
+                Object[] fila = {cont, actual1.getNC(), actual1.getNombre()};
+                modelo.addRow(fila);
+                cont++;
+            }
+
+            List<Actitud> listaActitud = mBD.consultarFechas(Integer.parseInt(IDAc));
+            for (Actitud actual2 : listaActitud) {
+                Fecha = String.valueOf(actual2.getFecha());
+                List< Actitud> Lista = mBD.consultarFechasCovertir(Integer.parseInt(IDAc), Fecha);
+                for (Actitud actual3 : Lista) {
+                    modelo.addColumn(String.valueOf(actual3.getFecha()));
+                }
+                List<Actitud> Lista2 = mBD.consultarAsistencia(Fecha, Integer.parseInt(IDAc));
+                for (Actitud actual4 : Lista2) {
+                    modelo.setValueAt(actual4.getAsistencia(), z, q);
+                    z++;
+                }
+                z = 0;
+                q++;
+
+            }
+            jTblActitudM.setModel(modelo);
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+        }
+    }
+
     public void LLenarTablaAlumno() throws SQLException {
         //Consulta alumno
         BD mBD = new BD();
@@ -3361,7 +4413,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
         this.TxtMateriaLs.setText(null);
         this.TxtSemestreLs.setText(null);
     }
-    
+
     public void LlenarTablaDesempeño1() throws SQLException {
         int q = 3;
         int z = 0;
@@ -3404,288 +4456,6 @@ public class FrmPrincipal extends javax.swing.JDialog {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    private void jTxtNCAlKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtNCAlKeyTyped
-        // TODO add your handling code here:
-        char caracter = evt.getKeyChar();
-        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE)
-                && (caracter != '.')) {
-            /* lo que deseo colocar aqui es si ya se pulso el caracter (.) el mismo no se pueda repetir*/
-            evt.consume();
-            JOptionPane.showMessageDialog(rootPane, "Ingresar Solo Números");
-        }
-    }//GEN-LAST:event_jTxtNCAlKeyTyped
-
-    private void TxtPaternoAlKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtPaternoAlKeyTyped
-        // TODO add your handling code here:
-        if (!Character.isLetter(evt.getKeyChar())
-                != (evt.getKeyChar() == KeyEvent.VK_SPACE)
-                != (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_TxtPaternoAlKeyTyped
-
-    private void TxtMaternoAlKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtMaternoAlKeyTyped
-        // TODO add your handling code here:
-        if (!Character.isLetter(evt.getKeyChar())
-                != (evt.getKeyChar() == KeyEvent.VK_SPACE)
-                != (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_TxtMaternoAlKeyTyped
-//
-    private void jCmbCarreraAlFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraAlFocusGained
-        // TODO add your handling code here:
-        BD mBD = new BD();
-        this.jCmbCarreraAl.removeAllItems();
-        this.jCmbSemestreAl.removeAllItems();
-        this.jCmbGrupoAl.removeAllItems();
-        try {
-            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaAl.getSelectedItem()));
-            for (Lista actual : mLista) {
-                this.jCmbCarreraAl.addItem(actual.getCarrera());
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }//GEN-LAST:event_jCmbCarreraAlFocusGained
-
-    private void jCmbCarreraAlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraAlActionPerformed
-        // TODO add your handling code here:
-        Carrera = String.valueOf(this.jCmbCarreraAl.getSelectedItem());
-        System.out.println("Carrera: " + Carrera + "\n");
-    }//GEN-LAST:event_jCmbCarreraAlActionPerformed
-
-    private void jCmbGrupoAlFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoAlFocusGained
-        // TODO add your handling code here:
-        BD mBD = new BD();
-        this.jCmbGrupoAl.removeAllItems();
-        try {
-
-            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaAl.getSelectedItem()), String.valueOf(this.jCmbCarreraAl.getSelectedItem()), Semestre);
-
-            for (Lista actual : mLista) {
-                this.jCmbGrupoAl.addItem(String.valueOf(actual.getGrupo()));
-            }
-        } catch (SQLException ex) {
-
-        }
-    }//GEN-LAST:event_jCmbGrupoAlFocusGained
-
-    private void jCmbGrupoAlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoAlActionPerformed
-        // TODO add your handling code here:
-        Grupo = String.valueOf(this.jCmbGrupoAl.getSelectedItem());
-        System.out.println("Grupo: " + Grupo + "\n");
-    }//GEN-LAST:event_jCmbGrupoAlActionPerformed
-
-    private void jCmbSemestreAlFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestreAlFocusGained
-        // TODO add your handling code here:
-        BD mBD = new BD();
-        this.jCmbSemestreAl.removeAllItems();
-        try {
-            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaAl.getSelectedItem()), String.valueOf(this.jCmbCarreraAl.getSelectedItem()));
-            for (Lista actual : mLista) {
-                this.jCmbSemestreAl.addItem(String.valueOf(actual.getSemestre()));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCmbSemestreAlFocusGained
-
-    private void jCmbSemestreAlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreAlActionPerformed
-        // TODO add your handling code here:
-        Semestre = String.valueOf(this.jCmbSemestreAl.getSelectedItem());
-        System.out.println("Semestre: " + Semestre + "\n");
-    }//GEN-LAST:event_jCmbSemestreAlActionPerformed
-
-    private void jCmbMateriaAlFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaAlFocusGained
-        // TODO add your handling code here:
-        BD mBD = new BD();
-        this.jCmbMateriaAl.removeAllItems();
-        this.jCmbCarreraAl.removeAllItems();
-        this.jCmbSemestreAl.removeAllItems();
-        this.jCmbGrupoAl.removeAllItems();
-        try {
-            List<Lista> mLista = mBD.consultarListaMateria();
-            for (Lista actual : mLista) {
-                this.jCmbMateriaAl.addItem(actual.getMateria());
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCmbMateriaAlFocusGained
-
-    private void jCmbMateriaAlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaAlActionPerformed
-        // TODO add your handling code here:
-        Materia = String.valueOf(this.jCmbMateriaAl.getSelectedItem());
-        System.out.println("Materia: " + Materia + "\n");
-    }//GEN-LAST:event_jCmbMateriaAlActionPerformed
-
-    private void TxtNombreAlKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtNombreAlKeyTyped
-        // TODO add your handling code here:
-        if (!Character.isLetter(evt.getKeyChar())
-                != (evt.getKeyChar() == KeyEvent.VK_SPACE)
-                != (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_TxtNombreAlKeyTyped
-
-    private void BtnGuardarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarAlumnoActionPerformed
-        // TODO add your handling code here:
-        if (((this.jTxtNCAl.getText().equals("")) | (this.TxtNombreAl.getText().equals("")) | (this.TxtPaternoAl.getText().equals("")) | (this.TxtMaternoAl.getText().equals("") | (this.jCmbMateriaAl.getItemCount() == 0) | (this.jCmbCarreraAl.getItemCount() == 0) | (this.jCmbSemestreAl.getItemCount() == 0) | (this.jCmbGrupoAl.getItemCount() == 0)))) {
-            JOptionPane.showMessageDialog(rootPane, "Exiten campos vacios");
-        } else {
-            try {
-                //Guardar Alummno
-                Alumno mAlumno = new Alumno();
-                String ApellidoP = this.TxtPaternoAl.getText();
-                String ApellidoM = this.TxtMaternoAl.getText();
-                String Nombre = this.TxtNombreAl.getText();
-
-                mAlumno.setNombre(ApellidoP + " " + ApellidoM + " " + Nombre);
-
-                mAlumno.setNC(Integer.parseInt(this.jTxtNCAl.getText()));
-
-                String Materia = String.valueOf(jCmbMateriaAl.getSelectedItem());
-                String Grupo = String.valueOf(jCmbGrupoAl.getSelectedItem());
-                String Carrera = String.valueOf(jCmbCarreraAl.getSelectedItem());
-                String Semestre = String.valueOf(jCmbSemestreAl.getSelectedItem());
-                //Guardar el productor usando su control
-                BD mBD = new BD();
-                String ID = "";
-                List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
-                for (Lista actual : mLista) {
-                    ID = String.valueOf(actual.getIdLista());
-                }
-                mBD.agregarAlumno(mAlumno, ID);
-                JOptionPane.showMessageDialog(this, "Alumno guardado");
-
-                this.jTxtNCAl.setText(null);
-                this.TxtPaternoAl.setText(null);
-                this.TxtMaternoAl.setText(null);
-                this.TxtNombreAl.setText(null);
-                this.jCmbMateriaAl.removeAllItems();
-                this.jCmbCarreraAl.removeAllItems();
-                this.jCmbSemestreAl.removeAllItems();
-                this.jCmbGrupoAl.removeAllItems();
-
-            } catch (Exception ex) {
-                System.out.println(ex.toString());
-            }
-        }
-    }//GEN-LAST:event_BtnGuardarAlumnoActionPerformed
-
-    private void jTxtNCAlmKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtNCAlmKeyTyped
-        // TODO add your handling code here:
-        char caracter = evt.getKeyChar();
-        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE)
-                && (caracter != '.')) {
-            /* lo que deseo colocar aqui es si ya se pulso el caracter (.) el mismo no se pueda repetir*/
-            evt.consume();
-            JOptionPane.showMessageDialog(rootPane, "Ingresar Solo Números");
-        }
-    }//GEN-LAST:event_jTxtNCAlmKeyTyped
-
-    private void jTxtNombreAlmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtNombreAlmActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtNombreAlmActionPerformed
-
-    private void jTxtNombreAlmKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtNombreAlmKeyTyped
-        // TODO add your handling code here:
-        if (!Character.isLetter(evt.getKeyChar())
-                != (evt.getKeyChar() == KeyEvent.VK_SPACE)
-                != (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_jTxtNombreAlmKeyTyped
-
-    private void jCmbMateriaAcFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaAcFocusGained
-        // TODO add your handling code here:
-        BD mBD = new BD();
-        this.jCmbMateriaAc.removeAllItems();
-        this.jCmbCarreraAc.removeAllItems();
-        this.jCmbSemestreAc.removeAllItems();
-        this.jCmbGrupoAc.removeAllItems();
-        try {
-            List<Lista> mLista = mBD.consultarListaMateria();
-            for (Lista actual : mLista) {
-                this.jCmbMateriaAc.addItem(actual.getMateria());
-            }
-        } catch (SQLException ex) {
-//            Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCmbMateriaAcFocusGained
-
-    private void jCmbMateriaAcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaAcActionPerformed
-        // TODO add your handling code here:
-        Materia = String.valueOf(this.jCmbMateriaAc.getSelectedItem());
-        System.out.println("Materia: " + Materia + "\n");
-    }//GEN-LAST:event_jCmbMateriaAcActionPerformed
-
-    private void jCmbCarreraAcFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraAcFocusGained
-        // TODO add your handling code here:
-        BD mBD = new BD();
-        this.jCmbCarreraAc.removeAllItems();
-        this.jCmbSemestreAc.removeAllItems();
-        this.jCmbGrupoAc.removeAllItems();
-
-        try {
-            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaAc.getSelectedItem()));
-            for (Lista actual : mLista) {
-                this.jCmbCarreraAc.addItem(actual.getCarrera());
-            }
-        } catch (SQLException ex) {
-//            Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCmbCarreraAcFocusGained
-
-    private void jCmbCarreraAcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraAcActionPerformed
-        // TODO add your handling code here:
-        Carrera = String.valueOf(this.jCmbCarreraAc.getSelectedItem());
-        System.out.println("Carrera: " + Carrera + "\n");
-    }//GEN-LAST:event_jCmbCarreraAcActionPerformed
-
-    private void jCmbSemestreAcFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestreAcFocusGained
-        // TODO add your handling code here:
-        BD mBD = new BD();
-        this.jCmbSemestreAc.removeAllItems();
-        try {
-            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaAc.getSelectedItem()), String.valueOf(this.jCmbCarreraAc.getSelectedItem()));
-            for (Lista actual : mLista) {
-                this.jCmbSemestreAc.addItem(String.valueOf(actual.getSemestre()));
-            }
-        } catch (SQLException ex) {
-//            Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCmbSemestreAcFocusGained
-
-    private void jCmbSemestreAcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreAcActionPerformed
-        // TODO add your handling code here:
-        Semestre = String.valueOf(this.jCmbSemestreAc.getSelectedItem());
-        System.out.println("Semestre: " + Semestre + "\n");
-    }//GEN-LAST:event_jCmbSemestreAcActionPerformed
-
-    private void jCmbGrupoAcFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoAcFocusGained
-        // TODO add your handling code here:
-        BD mBD = new BD();
-        this.jCmbGrupoAc.removeAllItems();
-        try {
-            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaAc.getSelectedItem()), String.valueOf(this.jCmbCarreraAc.getSelectedItem()), Semestre);
-            for (Lista actual : mLista) {
-                this.jCmbGrupoAc.addItem(String.valueOf(actual.getGrupo()));
-            }
-        } catch (SQLException ex) {
-//            Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCmbGrupoAcFocusGained
-
-    private void jCmbGrupoAcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoAcActionPerformed
-        // TODO add your handling code here:
-        Grupo = String.valueOf(this.jCmbGrupoAc.getSelectedItem());
-        System.out.println("Grupo: " + Grupo + "\n");
-    }//GEN-LAST:event_jCmbGrupoAcActionPerformed
-
     private void jMICargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMICargarActionPerformed
         // TODO add your handling code here:
         new FrmBusquedaLista(this, true).setVisible(true);
@@ -3726,314 +4496,739 @@ public class FrmPrincipal extends javax.swing.JDialog {
         System.exit(0);
     }//GEN-LAST:event_jMiSalirActionPerformed
 
-    private void BtnGuardarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarListaActionPerformed
-        // TODO add your handling code here:
+    private void jBtnBuscarSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarSActionPerformed
+        String Unidad = "";
+        String Nombre;
+        int cont2 = 0;
+        int NC;
+        int IdA = 0;
+        int SumaD = 0;
+        int PromedioD = 0;
+        int SumaC = 0;
+        int PromedioC = 0;
+        int SumaP = 0;
+        int PromedioP = 0;
+        int x = 3;
+        double PromedioA = 0;
+        int cont1 = 0;
+        double SumaA = 0;
+
         BD mBD = new BD();
-        Lista mLista = new Lista();
-        if (((this.TxtMateriaLs.getText().equals("")) | (this.TxtGrupoLs.getText().equals("")) | (this.TxtSemestreLs.getText().equals("")) | (this.TxtCarreraLs.getText().equals("")))) {
-            JOptionPane.showMessageDialog(rootPane, "Exiten campos vacios");
-        } else {
-            switch (opc) {
-                case 0:
-                    try {
-                        //Agregar Lista
-
-                        mLista.setCarrera(TxtCarreraLs.getText());
-                        mLista.setGrupo(TxtGrupoLs.getText());
-                        mLista.setMateria(TxtMateriaLs.getText());
-                        mLista.setSemestre(Integer.parseInt(TxtSemestreLs.getText()));
-
-                        //Guardar el productor usando su control
-                        mBD.agregarLista(mLista);
-                        JOptionPane.showMessageDialog(this, "Lista guardada");
-                        this.LLenarTablaLista();
-                        this.LimpiarCamposLista();
-                    } catch (Exception ex) {
-                        System.out.println(ex.toString());
-                    }
-                    break;
-                case 1:
-                    try {
-                        //Modificar Lista
-                        int fila = this.jTblConsultarListaLs.getSelectedRow();
-
-                        if (fila >= 0) {
-                            mLista.setIdLista(Integer.parseInt(IDL));
-                            mLista.setMateria(this.TxtMateriaLs.getText());
-                            mLista.setGrupo(this.TxtGrupoLs.getText());
-                            mLista.setSemestre(Integer.parseInt(this.TxtSemestreLs.getText()));
-                            mLista.setCarrera(this.TxtCarreraLs.getText());
-
-                            mBD.modificarLista(mLista);
-                            JOptionPane.showMessageDialog(null, "Lista modificada");
-                            this.LLenarTablaLista();
-                            this.LimpiarCamposLista();
-                            this.BtnGuardarLista.setText("Guardar");
-                            opc = 0;
-
-                        }
-
-                    } catch (Exception ex) {
-                        System.out.println(ex.toString());
-                    }
-                    break;
-                default:
-                    opc = 0;
-                    break;
-            }
-
-        }
-    }//GEN-LAST:event_BtnGuardarListaActionPerformed
-
-    private void jTblConsultarListaLsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblConsultarListaLsMouseClicked
-        // TODO add your handling code here:
-        BD mBD = new BD();
-        String IDLs = "";
+        List<Lista> mLista;
         try {
-            int fila = this.jTblConsultarListaLs.getSelectedRow();
-            this.BtnGuardarLista.setText("Actualizar");
-            if (fila >= 0) {
-                int IDLista = (int) jTblConsultarListaLs.getValueAt(fila, 0);
-                String Materia = (String) jTblConsultarListaLs.getValueAt(fila, 1);
-                String Grupo = (String) jTblConsultarListaLs.getValueAt(fila, 2);
-                int Semestre = (int) jTblConsultarListaLs.getValueAt(fila, 3);
-                String Carrera = (String) jTblConsultarListaLs.getValueAt(fila, 4);
+            mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+            for (Lista actual : mLista) {
+                IDDes = String.valueOf(actual.getIdLista());
+            }
+            List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(IDDes));
+            int cont = 1;
+            if (lista.isEmpty()) {
 
-                List<Lista> mLista = mBD.ConsultaIDLista(Materia, Grupo, Semestre, Carrera);
-                for (Lista actual : mLista) {
-                    IDLs = String.valueOf(actual.getIdLista());
-                    System.out.println(IDLs);
+                JOptionPane.showMessageDialog(rootPane, "Lista vacia.");
+                jTblSemestre.setTableHeader(null);
+                DefaultTableModel tb = (DefaultTableModel) jTblSemestre.getModel();
+                int a = jTblSemestre.getRowCount() - 1;
+                for (int i = a; i >= 0; i--) {
+                    tb.removeRow(tb.getRowCount() - 1);
                 }
 
-                IDL = IDLs;
-                System.out.println();
+                Object[] encabezado = {};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                jTblSemestre.setModel(modelo);
 
-                this.TxtMateriaLs.setText(Materia);
-                this.TxtGrupoLs.setText(Grupo);
-                this.TxtSemestreLs.setText(String.valueOf(Semestre));
-                this.TxtCarreraLs.setText(Carrera);
+            } else {
+                Object[] encabezado = {"No", "NC", "Nombre"};
 
-                opc = 1;
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                for (Alumno actual1 : lista) {
+
+                    Object[] fila = {cont, actual1.getNC(), actual1.getNombre()};
+                    modelo.addRow(fila);
+                    cont++;
+
+                }
+
+                
+                
+
+                jTblSemestre.setModel(modelo);
+                jBtnMostrar.setEnabled(true);
+                jBtnBuscarS.setEnabled(false);
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jTblConsultarListaLsMouseClicked
+    }//GEN-LAST:event_jBtnBuscarSActionPerformed
 
-    private void jTblConsultarListaLsFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTblConsultarListaLsFocusGained
+    private void jCmbMateriaSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaSActionPerformed
+        Materia = String.valueOf(this.jCmbMateriaS.getSelectedItem());
+        System.out.println("Materia: " + Materia + "\n");
+    }//GEN-LAST:event_jCmbMateriaSActionPerformed
+
+    private void jCmbMateriaSFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaSFocusGained
+        BD mBD = new BD();
+        this.jCmbMateriaS.removeAllItems();
+        this.jCmbCarreraS.removeAllItems();
+        this.jCmbSemestreS.removeAllItems();
+        this.jCmbGrupoS.removeAllItems();
         try {
-            // TODO add your handling code here:
-            this.LLenarTablaLista();
-
+            List<Lista> mLista = mBD.consultarListaMateria();
+            for (Lista actual : mLista) {
+                this.jCmbMateriaS.addItem(actual.getMateria());
+            }
         } catch (SQLException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jTblConsultarListaLsFocusGained
+    }//GEN-LAST:event_jCmbMateriaSFocusGained
 
-    private void TxtCarreraLsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtCarreraLsKeyTyped
-        // TODO add your handling code here:
-        if (!Character.isLetter(evt.getKeyChar())
-                != (evt.getKeyChar() == KeyEvent.VK_SPACE)
-                != (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
-            evt.consume();
+    private void jCmbCarreraSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraSActionPerformed
+        Carrera = String.valueOf(this.jCmbCarreraS.getSelectedItem());
+        System.out.println("Carrera: " + Carrera + "\n");
+    }//GEN-LAST:event_jCmbCarreraSActionPerformed
+
+    private void jCmbCarreraSFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraSFocusGained
+        BD mBD = new BD();
+        this.jCmbCarreraS.removeAllItems();
+        this.jCmbSemestreS.removeAllItems();
+        this.jCmbGrupoS.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaS.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbCarreraS.addItem(actual.getCarrera());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_TxtCarreraLsKeyTyped
+    }//GEN-LAST:event_jCmbCarreraSFocusGained
 
-    private void TxtSemestreLsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtSemestreLsKeyTyped
+    private void jCmbSemestreSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreSActionPerformed
+        Semestre = String.valueOf(this.jCmbSemestreS.getSelectedItem());
+        System.out.println("Semestre: " + Semestre + "\n");
+    }//GEN-LAST:event_jCmbSemestreSActionPerformed
+
+    private void jCmbSemestreSFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestreSFocusGained
+        BD mBD = new BD();
+        this.jCmbSemestreS.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaS.getSelectedItem()), String.valueOf(this.jCmbCarreraS.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbSemestreS.addItem(String.valueOf(actual.getSemestre()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbSemestreSFocusGained
+
+    private void jCmbGrupoSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoSActionPerformed
+        Grupo = String.valueOf(this.jCmbGrupoS.getSelectedItem());
+        System.out.println("Grupo: " + Grupo + "\n");
+    }//GEN-LAST:event_jCmbGrupoSActionPerformed
+
+    private void jCmbGrupoSFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoSFocusGained
+        BD mBD = new BD();
+        this.jCmbGrupoS.removeAllItems();
+        try {
+
+            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaS.getSelectedItem()), String.valueOf(this.jCmbCarreraS.getSelectedItem()), Semestre);
+
+            for (Lista actual : mLista) {
+                this.jCmbGrupoS.addItem(String.valueOf(actual.getGrupo()));
+            }
+        } catch (SQLException ex) {
+
+        }
+    }//GEN-LAST:event_jCmbGrupoSFocusGained
+
+    private void jCmbUnidadUFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbUnidadUFocusGained
         // TODO add your handling code here:
+    }//GEN-LAST:event_jCmbUnidadUFocusGained
+
+    private void jBtnBuscarUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarUActionPerformed
+        int q = 3;
+        int z = 0;
+        String Unidad = this.jCmbUnidadU.getSelectedItem().toString();
+        String Nombre;
+        int NC;
+        int IdA = 0;
+        int numF = 3;
+        int SumaD = 0;
+        int PromedioD = 0;
+        int SumaC = 0;
+        int PromedioC = 0;
+        int SumaP = 0;
+        int PromedioP = 0;
+        double PromedioA = 0;
+        int cont1 = 0;
+        double SumaA = 0;
+
+        BD mBD = new BD();
+        String Desem = "";
+        List<Lista> mLista;
+        try {
+            mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+            for (Lista actual : mLista) {
+                IDDes = String.valueOf(actual.getIdLista());
+            }
+            List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(IDDes));
+            int cont = 1;
+            if (lista.isEmpty()) {
+
+                JOptionPane.showMessageDialog(rootPane, "Lista vacia.");
+                jTblUnidad.setTableHeader(null);
+                DefaultTableModel tb = (DefaultTableModel) jTblUnidad.getModel();
+                int a = jTblUnidad.getRowCount() - 1;
+                for (int i = a; i >= 0; i--) {
+                    tb.removeRow(tb.getRowCount() - 1);
+                }
+
+                Object[] encabezado = {};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                jTblUnidad.setModel(modelo);
+
+            } else {
+                Object[] encabezado = {"No", "NC", "Nombre", "Conocimiento 35%", "Producto 35%", "Desempeño 20%", "Actitud 10%", "Total"};
+
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                for (Alumno actual1 : lista) {
+                    Nombre = actual1.getNombre();
+                    NC = actual1.getNC();
+
+                    List<Alumno> Lista = mBD.ConsultaIDAlumno(NC, Nombre);
+                    for (Alumno actual2 : Lista) {
+                        IdA = actual2.getIdAlumno();
+                    }
+
+                    //Conocimiento
+                    List<Conocimiento> Lista3 = mBD.ConsultaCalCon(Integer.parseInt(IDDes), IdA, Integer.parseInt(Unidad));
+                    if (Lista3.isEmpty()) {
+                        PromedioC = 0;
+                    } else {
+                        SumaC = 0;
+                        for (Conocimiento actual4 : Lista3) {
+                            SumaC = actual4.getCalificacion();
+                        }
+                        int Puntos = 0;
+                        List<PuntosExtras> Lista4 = mBD.ConsultaCalExtras(Integer.parseInt(IDDes), IdA, Integer.parseInt(Unidad));
+                        if (Lista4.isEmpty()) {
+                            Puntos = 0;
+                        } else {
+                            for (PuntosExtras actual5 : Lista4) {
+                                Puntos = actual5.getPuntos() + Puntos;
+                            }
+                        }
+                        PromedioC = SumaC + Puntos;
+
+                        if (PromedioC > 100) {
+                            PromedioC = 100;
+                        }
+
+                    }
+
+                    //Producto
+                    List<Producto> Lista5 = mBD.ConsultaCalProd(Integer.parseInt(IDDes), IdA, Integer.parseInt(Unidad));
+                    if (Lista5.isEmpty()) {
+                        PromedioP = 0;
+                    } else {
+                        int numP = 0;
+                        SumaP = 0;
+                        for (Producto actual6 : Lista5) {
+                            SumaP = actual6.getCalificacion() + SumaP;
+                            numP++;
+                        }
+                        PromedioP = SumaP / numP;
+
+                    }
+
+                    //Desempeno
+                    List<Desempeño> Lista2 = mBD.ConsultaCalDes(Integer.parseInt(IDDes), IdA, Integer.parseInt(Unidad));
+                    if (Lista2.isEmpty()) {
+                        PromedioD = 0;
+                    } else {
+                        int numD = 0;
+                        SumaD = 0;
+                        for (Desempeño actual3 : Lista2) {
+                            SumaD = actual3.getCalificacion() + SumaD;
+                            numD++;
+                        }
+                        PromedioD = SumaD / numD;
+
+                    }
+                    //Actitud
+
+                    List<Actitud> Lista6 = mBD.ConsultaAsistencia(Integer.parseInt(IDDes), IdA, Integer.parseInt(Unidad));
+                    if (Lista6.isEmpty()) {
+                        PromedioA = 0;
+                    } else {
+                        double Sum = 0.0;
+
+                        SumaA = 0;
+                        cont1 = 0;
+                        for (Actitud actual7 : Lista6) {
+
+                            SumaA = actual7.getAsistencia() + SumaA;
+                            cont1++;
+
+                        }
+                        System.out.println(cont1);
+                        System.out.println(SumaA);
+                        Sum = SumaA / cont1;
+                        System.out.println(cont1);
+                        PromedioA = Sum * 100;
+                    }
+
+                    //Total
+                    double PromedioUni = 0;
+                    PromedioUni = (PromedioC * 0.35) + (PromedioP * 0.35) + (PromedioD * 0.20) + (PromedioA * 0.10);
+
+                    Object[] fila = {cont, actual1.getNC(), actual1.getNombre(), PromedioC, PromedioP, PromedioD, PromedioA, (int) PromedioUni};
+                    modelo.addRow(fila);
+                    cont++;
+                }
+
+                jTblUnidad.setModel(modelo);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnBuscarUActionPerformed
+
+    private void jCmbMateriaUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaUActionPerformed
+        Materia = String.valueOf(this.jCmbMateriaU.getSelectedItem());
+        System.out.println("Materia: " + Materia + "\n");
+    }//GEN-LAST:event_jCmbMateriaUActionPerformed
+
+    private void jCmbMateriaUFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaUFocusGained
+        BD mBD = new BD();
+        this.jCmbMateriaU.removeAllItems();
+        this.jCmbCarreraU.removeAllItems();
+        this.jCmbSemestreU.removeAllItems();
+        this.jCmbGrupoU.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaMateria();
+            for (Lista actual : mLista) {
+                this.jCmbMateriaU.addItem(actual.getMateria());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbMateriaUFocusGained
+
+    private void jCmbCarreraUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraUActionPerformed
+        Carrera = String.valueOf(this.jCmbCarreraU.getSelectedItem());
+        System.out.println("Carrera: " + Carrera + "\n");
+    }//GEN-LAST:event_jCmbCarreraUActionPerformed
+
+    private void jCmbCarreraUFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraUFocusGained
+        BD mBD = new BD();
+        this.jCmbCarreraU.removeAllItems();
+        this.jCmbSemestreU.removeAllItems();
+        this.jCmbGrupoU.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaU.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbCarreraU.addItem(actual.getCarrera());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbCarreraUFocusGained
+
+    private void jCmbSemestreUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreUActionPerformed
+        Semestre = String.valueOf(this.jCmbSemestreU.getSelectedItem());
+        System.out.println("Semestre: " + Semestre + "\n");
+    }//GEN-LAST:event_jCmbSemestreUActionPerformed
+
+    private void jCmbSemestreUFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestreUFocusGained
+        BD mBD = new BD();
+        this.jCmbSemestreU.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaU.getSelectedItem()), String.valueOf(this.jCmbCarreraU.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbSemestreU.addItem(String.valueOf(actual.getSemestre()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbSemestreUFocusGained
+
+    private void jCmbGrupoUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoUActionPerformed
+        Grupo = String.valueOf(this.jCmbGrupoU.getSelectedItem());
+        System.out.println("Grupo: " + Grupo + "\n");
+    }//GEN-LAST:event_jCmbGrupoUActionPerformed
+
+    private void jCmbGrupoUFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoUFocusGained
+        BD mBD = new BD();
+        this.jCmbGrupoU.removeAllItems();
+        try {
+
+            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaU.getSelectedItem()), String.valueOf(this.jCmbCarreraU.getSelectedItem()), Semestre);
+
+            for (Lista actual : mLista) {
+                this.jCmbGrupoU.addItem(String.valueOf(actual.getGrupo()));
+            }
+        } catch (SQLException ex) {
+
+        }
+    }//GEN-LAST:event_jCmbGrupoUFocusGained
+
+    private void jBtnBuscarPE1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarPE1ActionPerformed
+        int q = 3;
+        int z = 0;
+        String Unidad = this.jCmbUnidadPE1.getSelectedItem().toString();
+
+        BD mBD = new BD();
+        String Desem = "";
+        List<Lista> mLista;
+        try {
+            mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+            for (Lista actual : mLista) {
+                IDDes = String.valueOf(actual.getIdLista());
+            }
+            List<Alumno> lista = mBD.ConsultaAlumnoPuntos(Integer.parseInt(IDDes));
+            int cont = 1;
+            if (lista.isEmpty()) {
+
+                JOptionPane.showMessageDialog(rootPane, "Lista vacia.");
+                jTblPuntosExtras1.setTableHeader(null);
+                DefaultTableModel tb = (DefaultTableModel) jTblPuntosExtras1.getModel();
+                int a = jTblPuntosExtras1.getRowCount() - 1;
+                for (int i = a; i >= 0; i--) {
+                    tb.removeRow(tb.getRowCount() - 1);
+                }
+
+                Object[] encabezado = {};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                jTblPuntosExtras1.setModel(modelo);
+
+            } else {
+                Object[] encabezado = {"No", "NC", "Nombre"};
+
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                for (Alumno actual1 : lista) {
+                    Object[] fila = {cont, actual1.getNC(), actual1.getNombre()};
+                    modelo.addRow(fila);
+                    cont++;
+                }
+
+                List<PuntosExtras> lista2 = mBD.ConsultaPuntosExtrasUnidad(Integer.parseInt(IDDes));
+
+                for (PuntosExtras actual : lista2) {
+                    modelo.addColumn(String.valueOf(actual.getUnidad()));
+                    List<PuntosExtras> lista3 = mBD.ConsultaPuntosExtrasPuntos(Integer.parseInt(IDDes), String.valueOf(Unidad));
+                    for (PuntosExtras actual2 : lista3) {
+                        modelo.setValueAt(actual2.getPuntos(), z, q);
+                        z++;
+                    }
+                    z = 0;
+                    q++;
+                }
+                jTblPuntosExtras1.setModel(modelo);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnBuscarPE1ActionPerformed
+
+    private void jCmbGrupoPE1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoPE1ActionPerformed
+        Grupo = String.valueOf(this.jCmbGrupoPE1.getSelectedItem());
+        System.out.println("Grupo: " + Grupo + "\n");
+    }//GEN-LAST:event_jCmbGrupoPE1ActionPerformed
+
+    private void jCmbGrupoPE1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoPE1FocusGained
+        BD mBD = new BD();
+        this.jCmbGrupoPE1.removeAllItems();
+        try {
+
+            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaPE1.getSelectedItem()), String.valueOf(this.jCmbCarreraPE1.getSelectedItem()), Semestre);
+
+            for (Lista actual : mLista) {
+                this.jCmbGrupoPE1.addItem(String.valueOf(actual.getGrupo()));
+            }
+        } catch (SQLException ex) {
+
+        }
+    }//GEN-LAST:event_jCmbGrupoPE1FocusGained
+
+    private void jCmbSemestrePE1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestrePE1ActionPerformed
+        Semestre = String.valueOf(this.jCmbSemestrePE1.getSelectedItem());
+        System.out.println("Semestre: " + Semestre + "\n");
+    }//GEN-LAST:event_jCmbSemestrePE1ActionPerformed
+
+    private void jCmbSemestrePE1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestrePE1FocusGained
+        BD mBD = new BD();
+        this.jCmbSemestrePE1.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaPE1.getSelectedItem()), String.valueOf(this.jCmbCarreraPE1.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbSemestrePE1.addItem(String.valueOf(actual.getSemestre()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbSemestrePE1FocusGained
+
+    private void jBtnAgregarPE1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarPE1ActionPerformed
+        try {
+            BD mBD = new BD();
+            String Unidad = this.jCmbUnidadPE1.getSelectedItem().toString();
+            int calificacion;
+            String Nombre;
+            int NC;
+            int IdD = 0;
+            int IdA = 0;
+            int cont = 0;
+
+            PuntosExtras mPuntosExtras = new PuntosExtras();
+            List<PuntosExtras> lista2 = mBD.ConsultaPuntosExtrasUnidad(Integer.parseInt(IDDes));
+
+            for (PuntosExtras actual : lista2) {
+                cont++;
+            }
+            int d = 3 + cont;
+            for (int j = 3; j < d; j++) {
+                for (int i = 0; i < jTblPuntosExtras1.getRowCount(); i++) {
+                    DefaultTableModel modelo = (DefaultTableModel) jTblPuntosExtras1.getModel();
+                    JTableHeader th = jTblPuntosExtras1.getTableHeader();
+                    TableColumnModel tcm = th.getColumnModel();
+                    TableColumn tcmn = tcm.getColumn(j);
+                    tcmn.getHeaderValue();
+
+                    System.out.println(tcmn.getHeaderValue().toString());
+
+                    calificacion = Integer.parseInt(jTblPuntosExtras1.getValueAt(i, j).toString());
+                    Nombre = jTblPuntosExtras1.getValueAt(i, 2).toString();
+                    NC = Integer.parseInt(jTblPuntosExtras1.getValueAt(i, 1).toString());
+
+                    List<Alumno> mLista3 = mBD.ConsultaIDAlumno(NC, Nombre);
+                    for (Alumno actual3 : mLista3) {
+                        IdA = actual3.getIdAlumno();
+                    }
+
+                    System.out.println(calificacion);
+                    List<PuntosExtras> mLista2 = mBD.ConsultaIDPuntosExtras(tcmn.getHeaderValue().toString(), IdA);
+                    for (PuntosExtras actual2 : mLista2) {
+                        IdD = actual2.getIdPuntosExtras();
+                    }
+
+                    System.out.println(IdD);
+                    mPuntosExtras.setPuntos(calificacion);
+                    mPuntosExtras.setIdPuntosExtras(IdD);
+                    mPuntosExtras.setUnidad(Integer.parseInt(tcmn.getHeaderValue().toString()));
+                    mBD.modificarPuntosExtras(mPuntosExtras);
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Puntos extras actualizados");
+            LlenarTablaDesempeño1();
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnAgregarPE1ActionPerformed
+
+    private void jCmbUnidadPE1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbUnidadPE1FocusGained
+        BD mBD = new BD();
+        this.jCmbUnidadPE1.removeAllItems();
+        try {
+            List<PuntosExtras> mLista = mBD.ConsultaPuntosExtrasUnidad1();
+            for (PuntosExtras actual : mLista) {
+                this.jCmbUnidadPE1.addItem(String.valueOf(actual.getUnidad()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbUnidadPE1FocusGained
+
+    private void jCmbCarreraPE1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraPE1ActionPerformed
+        Carrera = String.valueOf(this.jCmbCarreraPE1.getSelectedItem());
+        System.out.println("Carrera: " + Carrera + "\n");
+    }//GEN-LAST:event_jCmbCarreraPE1ActionPerformed
+
+    private void jCmbCarreraPE1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraPE1FocusGained
+        BD mBD = new BD();
+        this.jCmbCarreraPE1.removeAllItems();
+        this.jCmbSemestrePE1.removeAllItems();
+        this.jCmbGrupoPE1.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaPE1.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbCarreraPE1.addItem(actual.getCarrera());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbCarreraPE1FocusGained
+
+    private void jCmbMateriaPE1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaPE1ActionPerformed
+        Materia = String.valueOf(this.jCmbMateriaPE1.getSelectedItem());
+        System.out.println("Materia: " + Materia + "\n");
+    }//GEN-LAST:event_jCmbMateriaPE1ActionPerformed
+
+    private void jCmbMateriaPE1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaPE1FocusGained
+        BD mBD = new BD();
+        this.jCmbMateriaPE1.removeAllItems();
+        this.jCmbCarreraPE1.removeAllItems();
+        this.jCmbSemestrePE1.removeAllItems();
+        this.jCmbGrupoPE1.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaMateria();
+            for (Lista actual : mLista) {
+                this.jCmbMateriaPE1.addItem(actual.getMateria());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbMateriaPE1FocusGained
+
+    private void jTxtPuntosExtrasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtPuntosExtrasKeyTyped
         char caracter = evt.getKeyChar();
         if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE)
-                && (caracter != '.')) {
+                && (caracter != '-')) {
             /* lo que deseo colocar aqui es si ya se pulso el caracter (.) el mismo no se pueda repetir*/
             evt.consume();
             JOptionPane.showMessageDialog(rootPane, "Ingresar Solo Números");
         }
-    }//GEN-LAST:event_TxtSemestreLsKeyTyped
+    }//GEN-LAST:event_jTxtPuntosExtrasKeyTyped
 
-    private void TxtGrupoLsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtGrupoLsKeyTyped
+    private void jTxtPuntosExtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtPuntosExtrasActionPerformed
         // TODO add your handling code here:
-        if (!Character.isLetter(evt.getKeyChar())
-                != (evt.getKeyChar() == KeyEvent.VK_SPACE)
-                != (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
-            evt.consume();
+    }//GEN-LAST:event_jTxtPuntosExtrasActionPerformed
+
+    private void jTxtNombreAlmPEKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtNombreAlmPEKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtNombreAlmPEKeyTyped
+
+    private void jTxtNombreAlmPEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtNombreAlmPEActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtNombreAlmPEActionPerformed
+
+    private void jTxtNCAlmPEKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtNCAlmPEKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtNCAlmPEKeyTyped
+
+    private void jBtnCancelarPEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarPEActionPerformed
+        jTblPuntosExtras.setTableHeader(null);
+        DefaultTableModel tb = (DefaultTableModel) jTblPuntosExtras.getModel();
+        int a = jTblPuntosExtras.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            tb.removeRow(tb.getRowCount() - 1);
         }
-    }//GEN-LAST:event_TxtGrupoLsKeyTyped
 
-    private void TxtMateriaLsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtMateriaLsKeyTyped
-        // TODO add your handling code here:
-        if (!Character.isLetter(evt.getKeyChar())
-                != (evt.getKeyChar() == KeyEvent.VK_SPACE)
-                != (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_TxtMateriaLsKeyTyped
+        Object[] encabezado = {};
+        DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+        jTblPuntosExtras.setModel(modelo);
+        this.jTxtNCAlmPE.setText("");
+        this.jTxtNombreAlmPE.setText("");
+        this.jCmbUnidadPE.setEnabled(false);
+        this.jTxtPuntosExtras.setEnabled(false);
+        this.jBtnGuardarPE.setEnabled(false);
+        this.jBtnCancelarPE.setEnabled(false);
+    }//GEN-LAST:event_jBtnCancelarPEActionPerformed
 
-    private void jCmbSemestreAlmFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestreAlmFocusGained
-        // TODO add your handling code here:
+    private void jBtnGuardarPEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuardarPEActionPerformed
+        int NC = Integer.parseInt(jTxtNCAlmPE.getText());
+        String Nombre = jTxtNombreAlmPE.getText();
+        String PuntosExtras = jTxtPuntosExtras.getText();
         BD mBD = new BD();
-        this.jCmbSemestreAlm.removeAllItems();
-        try {
-            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaAlm.getSelectedItem()), String.valueOf(this.jCmbCarreraAlm.getSelectedItem()));
-            for (Lista actual : mLista) {
-                this.jCmbSemestreAlm.addItem(String.valueOf(actual.getSemestre()));
+        int IdA = 0;
+        if ((this.jTxtNCAlmPE.getText().equals("")) || (jTxtNombreAlmPE.getText().equals("")) || (jTxtPuntosExtras.getText().equals(""))) {
+            JOptionPane.showMessageDialog(rootPane, "Hay campos vacios");
+        } else {
+            List<Alumno> mLista3;
+            try {
+                mLista3 = mBD.ConsultaIDAlumno(NC, Nombre);
+                for (Alumno actual3 : mLista3) {
+                    IdA = actual3.getIdAlumno();
+                }
+                PuntosExtras mPuntos = new PuntosExtras();
+                mPuntos.setPuntos(Integer.parseInt(PuntosExtras));
+                mPuntos.setUnidad(Integer.parseInt(jCmbUnidadPE.getSelectedItem().toString()));
+                mBD.agregarPuntosExtras(mPuntos, IdA);
+                JOptionPane.showMessageDialog(rootPane, "Puntos agregados con exito");
+
+                this.jTxtPuntosExtras.setText("");
+                Object[] encabezado1 = {};
+                DefaultTableModel modelo1 = new DefaultTableModel(null, encabezado1);
+                jTblPuntosExtras1.setModel(modelo1);
+
+            } catch (SQLException ex) {
+                Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jCmbSemestreAlmFocusGained
+    }//GEN-LAST:event_jBtnGuardarPEActionPerformed
 
-    private void jCmbSemestreAlmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreAlmActionPerformed
-        // TODO add your handling code here:
-        Semestre = String.valueOf(this.jCmbSemestreAlm.getSelectedItem());
-        System.out.println("Semestre: " + Semestre + "\n");
-    }//GEN-LAST:event_jCmbSemestreAlmActionPerformed
-
-    private void jCmbGrupoAlmFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoAlmFocusGained
-        // TODO add your handling code here:
+    private void jTblPuntosExtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblPuntosExtrasMouseClicked
         BD mBD = new BD();
-        this.jCmbGrupoAlm.removeAllItems();
-        try {
-            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaAlm.getSelectedItem()), String.valueOf(this.jCmbCarreraAlm.getSelectedItem()), Semestre);
-            for (Lista actual : mLista) {
-                this.jCmbGrupoAlm.addItem(String.valueOf(actual.getGrupo()));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+
+        int fila = this.jTblPuntosExtras.getSelectedRow();
+        if (fila >= 0) {
+            int NC = (int) jTblPuntosExtras.getValueAt(fila, 1);
+            String Nombre = (String) jTblPuntosExtras.getValueAt(fila, 2);
+
+            this.jTxtNombreAlmPE.setText(Nombre);
+            this.jTxtNCAlmPE.setText(String.valueOf(NC));
         }
-    }//GEN-LAST:event_jCmbGrupoAlmFocusGained
+    }//GEN-LAST:event_jTblPuntosExtrasMouseClicked
 
-    private void jCmbGrupoAlmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoAlmActionPerformed
-        // TODO add your handling code here:
-        Grupo = String.valueOf(this.jCmbGrupoAlm.getSelectedItem());
-        System.out.println("Grupo: " + Grupo + "\n");
-    }//GEN-LAST:event_jCmbGrupoAlmActionPerformed
+    private void jCmbMateriaPEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaPEActionPerformed
+        Materia = String.valueOf(this.jCmbMateriaPE.getSelectedItem());
+        System.out.println("Materia: " + Materia + "\n");
+    }//GEN-LAST:event_jCmbMateriaPEActionPerformed
 
-    private void jCmbCarreraAlmFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraAlmFocusGained
-        // TODO add your handling code here:
+    private void jCmbMateriaPEFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaPEFocusGained
         BD mBD = new BD();
-        this.jCmbCarreraAlm.removeAllItems();
-        this.jCmbSemestreAlm.removeAllItems();
-        this.jCmbGrupoAlm.removeAllItems();
-
-        try {
-            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaAlm.getSelectedItem()));
-            for (Lista actual : mLista) {
-                this.jCmbCarreraAlm.addItem(actual.getCarrera());
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCmbCarreraAlmFocusGained
-
-    private void jCmbCarreraAlmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraAlmActionPerformed
-        // TODO add your handling code here:
-        Carrera = String.valueOf(this.jCmbCarreraAlm.getSelectedItem());
-        System.out.println("Carrera: " + Carrera + "\n");
-    }//GEN-LAST:event_jCmbCarreraAlmActionPerformed
-
-    private void jCmbMateriaAlmFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaAlmFocusGained
-        // TODO add your handling code here:
-        BD mBD = new BD();
-        this.jCmbMateriaAlm.removeAllItems();
-        this.jCmbCarreraAlm.removeAllItems();
-        this.jCmbSemestreAlm.removeAllItems();
-        this.jCmbGrupoAlm.removeAllItems();
-
+        this.jCmbMateriaPE.removeAllItems();
+        this.jCmbCarreraPE.removeAllItems();
+        this.jCmbSemestrePE.removeAllItems();
+        this.jCmbGrupoPE.removeAllItems();
         try {
             List<Lista> mLista = mBD.consultarListaMateria();
             for (Lista actual : mLista) {
-                this.jCmbMateriaAlm.addItem(actual.getMateria());
+                this.jCmbMateriaPE.addItem(actual.getMateria());
             }
         } catch (SQLException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jCmbMateriaAlmFocusGained
+    }//GEN-LAST:event_jCmbMateriaPEFocusGained
 
-    private void jCmbMateriaAlmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaAlmActionPerformed
-        // TODO add your handling code here:
-        Materia = String.valueOf(this.jCmbMateriaAlm.getSelectedItem());
-        System.out.println("Materia: " + Materia + "\n");
-    }//GEN-LAST:event_jCmbMateriaAlmActionPerformed
+    private void jCmbCarreraPEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraPEActionPerformed
+        Carrera = String.valueOf(this.jCmbCarreraPE.getSelectedItem());
+        System.out.println("Carrera: " + Carrera + "\n");
+    }//GEN-LAST:event_jCmbCarreraPEActionPerformed
 
-    private void jBtnBuscarAlmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarAlmActionPerformed
-        try {
-            // TODO add your handling code here:
-            this.LLenarTablaAlumno();
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jBtnBuscarAlmActionPerformed
-
-    private void jTblConsultarAlumnoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblConsultarAlumnoMouseClicked
+    private void jCmbCarreraPEFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraPEFocusGained
         BD mBD = new BD();
-
-        int fila = this.jTblConsultarAlumno.getSelectedRow();
-        if (fila >= 0) {
-            int NC = (int) jTblConsultarAlumno.getValueAt(fila, 1);
-            String Nombre = (String) jTblConsultarAlumno.getValueAt(fila, 2);
-
-            this.jTxtNombreAlm.setText(Nombre);
-            this.jTxtNCAlm.setText(String.valueOf(NC));
-        }
-    }//GEN-LAST:event_jTblConsultarAlumnoMouseClicked
-
-    private void jBtnModificarAlmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnModificarAlmActionPerformed
+        this.jCmbCarreraPE.removeAllItems();
+        this.jCmbSemestrePE.removeAllItems();
+        this.jCmbGrupoPE.removeAllItems();
         try {
-            BD mBD = new BD();
-            String IDAlum = "";
-            Alumno mAlumno = new Alumno();
-            int fila = this.jTblConsultarAlumno.getSelectedRow();
-
-            if (fila >= 0) {
-                int NC = (int) jTblConsultarAlumno.getValueAt(fila, 1);
-                String Nombre = (String) jTblConsultarAlumno.getValueAt(fila, 2);
-                List<Alumno> mAlumno1 = mBD.ConsultaIDAlumno(NC, Nombre);
-                for (Alumno actual : mAlumno1) {
-                    IDAlum = String.valueOf(actual.getIdAlumno());
-                    System.out.println(IDAlum);
-                }
-            }
-
-            mAlumno.setIdAlumno(Integer.parseInt(IDAlum));
-            mAlumno.setNC(Integer.parseInt(this.jTxtNCAlm.getText()));
-            mAlumno.setNombre(jTxtNombreAlm.getText());
-
-            mBD.modificarAlumno(mAlumno);
-            JOptionPane.showMessageDialog(this, "Alumno modificado");
-            this.LLenarTablaAlumno();
-            jTxtNCAlm.setText(null);
-            jTxtNombreAlm.setText(null);
-        } catch (Exception ex) {
-            System.out.println(ex.toString());
-        }
-    }//GEN-LAST:event_jBtnModificarAlmActionPerformed
-
-    private void jCmbGrupoPFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoPFocusGained
-        BD mBD = new BD();
-        this.jCmbGrupoP.removeAllItems();
-        try {
-
-            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaP.getSelectedItem()), String.valueOf(this.jCmbCarreraP.getSelectedItem()), Semestre);
-
+            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaPE.getSelectedItem()));
             for (Lista actual : mLista) {
-                this.jCmbGrupoP.addItem(String.valueOf(actual.getGrupo()));
+                this.jCmbCarreraPE.addItem(actual.getCarrera());
             }
         } catch (SQLException ex) {
-
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jCmbGrupoPFocusGained
+    }//GEN-LAST:event_jCmbCarreraPEFocusGained
 
-    private void jCmbGrupoPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoPActionPerformed
-        Grupo = String.valueOf(this.jCmbGrupoP.getSelectedItem());
-        System.out.println("Grupo: " + Grupo + "\n");
-    }//GEN-LAST:event_jCmbGrupoPActionPerformed
+    private void jCmbSemestrePEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestrePEActionPerformed
+        Semestre = String.valueOf(this.jCmbSemestrePE.getSelectedItem());
+        System.out.println("Semestre: " + Semestre + "\n");
+    }//GEN-LAST:event_jCmbSemestrePEActionPerformed
 
-    private void jBtnBuscarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarPActionPerformed
+    private void jCmbSemestrePEFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestrePEFocusGained
+        BD mBD = new BD();
+        this.jCmbSemestrePE.removeAllItems();
         try {
-            // TODO add your handling code here:
+            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaPE.getSelectedItem()), String.valueOf(this.jCmbCarreraPE.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbSemestrePE.addItem(String.valueOf(actual.getSemestre()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbSemestrePEFocusGained
 
-            //Consulta alumno
+    private void jBtnBuscarPEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarPEActionPerformed
+        try {
             BD mBD = new BD();
             List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
             for (Lista actual : mLista) {
@@ -4042,27 +5237,21 @@ public class FrmPrincipal extends javax.swing.JDialog {
             System.out.println(IDAl);
             List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(IDAl));
             int cont = 1;
+
             if (lista.isEmpty()) {
 
-                JOptionPane.showMessageDialog(rootPane, "Esta lista esta vacia.");
-                jTblProducto.setTableHeader(null);
-
-                DefaultTableModel tb = (DefaultTableModel) jTblProducto.getModel();
-                int a = jTblProducto.getRowCount() - 1;
+                JOptionPane.showMessageDialog(rootPane, "Lista vacia.");
+                jTblPuntosExtras.setTableHeader(null);
+                DefaultTableModel tb = (DefaultTableModel) jTblPuntosExtras.getModel();
+                int a = jTblPuntosExtras.getRowCount() - 1;
                 for (int i = a; i >= 0; i--) {
                     tb.removeRow(tb.getRowCount() - 1);
                 }
 
                 Object[] encabezado = {};
                 DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-                jTblProducto.setModel(modelo);
+                jTblPuntosExtras.setModel(modelo);
 
-                this.jCmbUnidadP.setEnabled(false);
-                this.jTxtNombreProducto.setEnabled(false);
-                this.jTxtNombreProducto.setText("");
-                this.jBtnAgregarP.setEnabled(false);
-                this.jBtnGuardarP.setVisible(false);
-                this.jBtnCancelarP.setEnabled(false);
             } else {
                 //Mostrar la consulta alumno
                 Object[] encabezado = {"No", "NC", "Nombre"};
@@ -4072,88 +5261,337 @@ public class FrmPrincipal extends javax.swing.JDialog {
                     modelo.addRow(fila);
                     cont++;
                 }
-                this.jTblProducto.setModel(modelo);
-                this.jCmbUnidadP.setEnabled(true);
-                this.jTxtNombreProducto.setEnabled(true);
-                this.jTxtNombreProducto.setText("");
-                this.jBtnAgregarP.setEnabled(true);
-                this.jBtnGuardarP.setVisible(false);
-                this.jBtnCancelarP.setEnabled(true);
+                this.jTblPuntosExtras.setModel(modelo);
+                this.jCmbUnidadPE.setEnabled(true);
+                this.jTxtPuntosExtras.setEnabled(true);
+                this.jBtnGuardarPE.setEnabled(true);
+                this.jBtnCancelarPE.setEnabled(true);
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jBtnBuscarPActionPerformed
+    }//GEN-LAST:event_jBtnBuscarPEActionPerformed
 
-    private void jCmbSemestrePFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestrePFocusGained
+    private void jCmbGrupoPEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoPEActionPerformed
+        Grupo = String.valueOf(this.jCmbGrupoPE.getSelectedItem());
+        System.out.println("Grupo: " + Grupo + "\n");
+    }//GEN-LAST:event_jCmbGrupoPEActionPerformed
+
+    private void jCmbGrupoPEFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoPEFocusGained
         BD mBD = new BD();
-        this.jCmbSemestreP.removeAllItems();
+        this.jCmbGrupoPE.removeAllItems();
         try {
-            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaP.getSelectedItem()), String.valueOf(this.jCmbCarreraP.getSelectedItem()));
+            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaPE.getSelectedItem()), String.valueOf(this.jCmbCarreraPE.getSelectedItem()), Semestre);
             for (Lista actual : mLista) {
-                this.jCmbSemestreP.addItem(String.valueOf(actual.getSemestre()));
+                this.jCmbGrupoPE.addItem(String.valueOf(actual.getGrupo()));
+            }
+        } catch (SQLException ex) {
+        }
+    }//GEN-LAST:event_jCmbGrupoPEFocusGained
+
+    private void jBtnBuscarD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarD1ActionPerformed
+        int q = 3;
+        int z = 0;
+        String Unidad = this.jCmbUnidadD1.getSelectedItem().toString();
+
+        BD mBD = new BD();
+        String Desem = "";
+        List<Lista> mLista;
+        try {
+            mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+            for (Lista actual : mLista) {
+                IDDes = String.valueOf(actual.getIdLista());
+            }
+            List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(IDDes));
+            int cont = 1;
+            if (lista.isEmpty()) {
+
+                JOptionPane.showMessageDialog(rootPane, "Lista vacia.");
+                jTblDesempeño1.setTableHeader(null);
+                DefaultTableModel tb = (DefaultTableModel) jTblDesempeño1.getModel();
+                int a = jTblDesempeño1.getRowCount() - 1;
+                for (int i = a; i >= 0; i--) {
+                    tb.removeRow(tb.getRowCount() - 1);
+                }
+
+                Object[] encabezado = {};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                jTblDesempeño1.setModel(modelo);
+
+            } else {
+                Object[] encabezado = {"No", "NC", "Nombre"};
+
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                for (Alumno actual1 : lista) {
+                    Object[] fila = {cont, actual1.getNC(), actual1.getNombre()};
+                    modelo.addRow(fila);
+                    cont++;
+                }
+
+                List<Desempeño> lista2 = mBD.consultarListaTrabajos(Integer.parseInt(IDDes), Unidad);
+
+                for (Desempeño actual : lista2) {
+                    modelo.addColumn(String.valueOf(actual.getTrabajo()));
+                    List<Desempeño> lista3 = mBD.consultarDesempenoCal(String.valueOf(actual.getTrabajo()), Unidad);
+                    for (Desempeño actual2 : lista3) {
+                        modelo.setValueAt(actual2.getCalificacion(), z, q);
+                        z++;
+                    }
+                    z = 0;
+                    q++;
+                }
+                jTblDesempeño1.setModel(modelo);
             }
         } catch (SQLException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jCmbSemestrePFocusGained
+    }//GEN-LAST:event_jBtnBuscarD1ActionPerformed
 
-    private void jCmbSemestrePActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestrePActionPerformed
-        Semestre = String.valueOf(this.jCmbSemestreP.getSelectedItem());
+    private void jCmbGrupoD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoD1ActionPerformed
+        Grupo = String.valueOf(this.jCmbGrupoD1.getSelectedItem());
+        System.out.println("Grupo: " + Grupo + "\n");
+    }//GEN-LAST:event_jCmbGrupoD1ActionPerformed
+
+    private void jCmbGrupoD1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoD1FocusGained
+        BD mBD = new BD();
+        this.jCmbGrupoD1.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaD1.getSelectedItem()), String.valueOf(this.jCmbCarreraD1.getSelectedItem()), Semestre);
+            for (Lista actual : mLista) {
+                this.jCmbGrupoD1.addItem(String.valueOf(actual.getGrupo()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbGrupoD1FocusGained
+
+    private void jCmbSemestreD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreD1ActionPerformed
+        Semestre = String.valueOf(this.jCmbSemestreD1.getSelectedItem());
         System.out.println("Semestre: " + Semestre + "\n");
-    }//GEN-LAST:event_jCmbSemestrePActionPerformed
+    }//GEN-LAST:event_jCmbSemestreD1ActionPerformed
 
-    private void jCmbCarreraPFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraPFocusGained
+    private void jCmbSemestreD1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestreD1FocusGained
         BD mBD = new BD();
-        this.jCmbCarreraP.removeAllItems();
-        this.jCmbSemestreP.removeAllItems();
-        this.jCmbGrupoP.removeAllItems();
+        this.jCmbSemestreD1.removeAllItems();
         try {
-            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaP.getSelectedItem()));
+            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaD1.getSelectedItem()), String.valueOf(this.jCmbCarreraD1.getSelectedItem()));
             for (Lista actual : mLista) {
-                this.jCmbCarreraP.addItem(actual.getCarrera());
+                this.jCmbSemestreD1.addItem(String.valueOf(actual.getSemestre()));
             }
         } catch (SQLException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jCmbCarreraPFocusGained
+    }//GEN-LAST:event_jCmbSemestreD1FocusGained
 
-    private void jCmbCarreraPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraPActionPerformed
-        Carrera = String.valueOf(this.jCmbCarreraP.getSelectedItem());
-        System.out.println("Carrera: " + Carrera + "\n");
-    }//GEN-LAST:event_jCmbCarreraPActionPerformed
+    private void jBtnAgregarD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarD1ActionPerformed
+        try {
+            BD mBD = new BD();
+            String Unidad = this.jCmbUnidadD1.getSelectedItem().toString();
+            int calificacion;
+            String Nombre;
+            int NC;
+            int IdD = 0;
+            int IdA = 0;
+            int cont = 0;
 
-    private void jCmbMateriaPFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaPFocusGained
+            Desempeño mDesempeño = new Desempeño();
+            List<Desempeño> lista2 = mBD.consultarListaTrabajos(Integer.parseInt(IDDes), Unidad);
+
+            for (Desempeño actual : lista2) {
+                cont++;
+            }
+            int d = 3 + cont;
+            for (int j = 3; j < d; j++) {
+                for (int i = 0; i < jTblDesempeño1.getRowCount(); i++) {
+                    DefaultTableModel modelo = (DefaultTableModel) jTblDesempeño1.getModel();
+                    JTableHeader th = jTblDesempeño1.getTableHeader();
+                    TableColumnModel tcm = th.getColumnModel();
+                    TableColumn tcmn = tcm.getColumn(j);
+                    tcmn.getHeaderValue();
+
+                    System.out.println(tcmn.getHeaderValue().toString());
+
+                    calificacion = Integer.parseInt(jTblDesempeño1.getValueAt(i, j).toString());
+                    Nombre = jTblDesempeño1.getValueAt(i, 2).toString();
+                    NC = Integer.parseInt(jTblDesempeño1.getValueAt(i, 1).toString());
+
+                    List<Alumno> mLista3 = mBD.ConsultaIDAlumno(NC, Nombre);
+                    for (Alumno actual3 : mLista3) {
+                        IdA = actual3.getIdAlumno();
+                    }
+
+                    System.out.println(calificacion);
+                    List<Desempeño> mLista2 = mBD.ConsultaIDDesempeño(tcmn.getHeaderValue().toString(), IdA);
+                    for (Desempeño actual2 : mLista2) {
+                        IdD = actual2.getIdDesempeño();
+                    }
+
+                    System.out.println(IdD);
+                    mDesempeño.setCalificacion(calificacion);
+                    mDesempeño.setTrabajo(tcmn.getHeaderValue().toString());
+                    mDesempeño.setIdDesempeño(IdD);
+                    mBD.modificarDesempeño(mDesempeño);
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Desempeño(s) actualizado(s)");
+            LlenarTablaDesempeño1();
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnAgregarD1ActionPerformed
+
+    private void jCmbUnidadD1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbUnidadD1FocusGained
         BD mBD = new BD();
-        this.jCmbMateriaP.removeAllItems();
-        this.jCmbCarreraP.removeAllItems();
-        this.jCmbSemestreP.removeAllItems();
-        this.jCmbGrupoP.removeAllItems();
+        this.jCmbUnidadD1.removeAllItems();
+        try {
+            List<Desempeño> mLista = mBD.ConsultaDUnidad();
+            for (Desempeño actual : mLista) {
+                this.jCmbUnidadD1.addItem(String.valueOf(actual.getUnidadD()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbUnidadD1FocusGained
+
+    private void jCmbCarreraD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraD1ActionPerformed
+        Carrera = String.valueOf(this.jCmbCarreraD1.getSelectedItem());
+        System.out.println("Carrera: " + Carrera + "\n");
+    }//GEN-LAST:event_jCmbCarreraD1ActionPerformed
+
+    private void jCmbCarreraD1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraD1FocusGained
+        BD mBD = new BD();
+        this.jCmbCarreraD1.removeAllItems();
+        this.jCmbSemestreD1.removeAllItems();
+        this.jCmbGrupoD1.removeAllItems();
+
+        try {
+            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaD1.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbCarreraD1.addItem(actual.getCarrera());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbCarreraD1FocusGained
+
+    private void jCmbMateriaD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaD1ActionPerformed
+        Materia = String.valueOf(this.jCmbMateriaD1.getSelectedItem());
+        System.out.println("Materia: " + Materia + "\n");
+    }//GEN-LAST:event_jCmbMateriaD1ActionPerformed
+
+    private void jCmbMateriaD1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaD1FocusGained
+        BD mBD = new BD();
+        this.jCmbMateriaD1.removeAllItems();
+        this.jCmbCarreraD1.removeAllItems();
+        this.jCmbSemestreD1.removeAllItems();
+        this.jCmbGrupoD1.removeAllItems();
+
         try {
             List<Lista> mLista = mBD.consultarListaMateria();
             for (Lista actual : mLista) {
-                this.jCmbMateriaP.addItem(actual.getMateria());
+                this.jCmbMateriaD1.addItem(actual.getMateria());
             }
         } catch (SQLException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jCmbMateriaPFocusGained
+    }//GEN-LAST:event_jCmbMateriaD1FocusGained
 
-    private void jCmbMateriaPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaPActionPerformed
-        Materia = String.valueOf(this.jCmbMateriaP.getSelectedItem());
-        System.out.println("Materia: " + Materia + "\n");
-    }//GEN-LAST:event_jCmbMateriaPActionPerformed
+    private void jBtnCancelarDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarDActionPerformed
+        jTblDesempeño.setTableHeader(null);
+        DefaultTableModel tb = (DefaultTableModel) jTblDesempeño.getModel();
+        int a = jTblDesempeño.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            tb.removeRow(tb.getRowCount() - 1);
+        }
 
-    private void jBtnAgregarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarPActionPerformed
-        Trabajo = this.jTxtNombreProducto.getText();
-        String Unidad = this.jCmbUnidadP.getSelectedItem().toString();
-        boolean a = false;
+        Object[] encabezado = {};
+        DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+        jTblDesempeño.setModel(modelo);
+        this.jBtnGuardarD.setEnabled(false);
+        this.jBtnAgregarD.setEnabled(false);
+        this.jCmbUnidadD.setEnabled(false);
+        this.jTxtNombreTrabajo.setText("");
+        this.jTxtNombreTrabajo.setEnabled(false);
+        this.jBtnCancelarD.setEnabled(false);
+    }//GEN-LAST:event_jBtnCancelarDActionPerformed
+
+    private void jBtnGuardarDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuardarDActionPerformed
+        String Nombre;
+        String NC;
+        String Calificacion;
+        String ID = "";
         BD mBD = new BD();
+        String Unidad = this.jCmbUnidadD.getSelectedItem().toString();
+        //Agregar desempeño
+        boolean Vacio = true;
+        try {
+            for (int y = 0; y < jTblDesempeño.getRowCount(); y++) {
+                if (jTblDesempeño.getValueAt(y, 3) == "" || jTblDesempeño.getValueAt(y, 3) == null) {
+                    Vacio = false;
+                }
+                System.out.println(Vacio);
+            }
+            if (Vacio == true) {
+                for (int i = 0; i < jTblDesempeño.getRowCount(); i++) {
+                    Nombre = jTblDesempeño.getValueAt(i, 2).toString();
+                    NC = jTblDesempeño.getValueAt(i, 1).toString();
+                    List<Alumno> mLista = mBD.ConsultaIDAlumno(Integer.parseInt(NC), Nombre);
+                    for (Alumno actual : mLista) {
+                        ID = String.valueOf(actual.getIdAlumno());
+                    }
+                    System.out.println(Nombre);
+                    Calificacion = jTblDesempeño.getValueAt(i, 3).toString();
+                    Desempeño mDesempeño = new Desempeño();
+                    mDesempeño.setCalificacion(Integer.parseInt(Calificacion));
+                    mDesempeño.setTrabajo(Trabajo);
+                    mDesempeño.setUnidadD(Unidad);
+                    mBD.agregarDesempeño(mDesempeño, Integer.parseInt(ID));
+                }
 
+                JOptionPane.showMessageDialog(this, "Desempeno guardado");
+                this.jBtnGuardarD.setVisible(false);
+                this.jBtnCancelarD.setEnabled(false);
+                this.jTxtNombreProducto.setText("");
+                jTblDesempeño.setTableHeader(null);
+                DefaultTableModel tb = (DefaultTableModel) jTblDesempeño.getModel();
+                int a = jTblDesempeño.getRowCount() - 1;
+                for (int i = a; i >= 0; i--) {
+                    tb.removeRow(tb.getRowCount() - 1);
+                }
+
+                Object[] encabezado = {};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                jTblDesempeño.setModel(modelo);
+
+                /*jTblDesempeño1.setTableHeader(null);
+                DefaultTableModel tb1 = (DefaultTableModel) jTblDesempeño1.getModel();
+                int a1 = jTblDesempeño1.getRowCount() - 1;
+                for (int i = a1; i >= 0; i--) {
+                    tb.removeRow(tb.getRowCount() - 1);
+                }*/
+                Object[] encabezado1 = {};
+                DefaultTableModel modelo1 = new DefaultTableModel(null, encabezado1);
+                jTblDesempeño1.setModel(modelo1);
+
+            } else if (Vacio == false) {
+                JOptionPane.showMessageDialog(this, "Hay campo(s) vacio(s), favor de verificar");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnGuardarDActionPerformed
+
+    private void jBtnAgregarDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarDActionPerformed
+        Trabajo = this.jTxtNombreTrabajo.getText();
+        String Unidad = this.jCmbUnidadD.getSelectedItem().toString();
+        BD mBD = new BD();
         String Trabajo2 = "";
+        boolean a = false;
         List<Alumno> lista;
 
+        System.out.println(Trabajo);
         if (!"".equals(Trabajo)) {
             try {
                 List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
@@ -4161,17 +5599,18 @@ public class FrmPrincipal extends javax.swing.JDialog {
                     IDAl = String.valueOf(actual.getIdLista());
                 }
 
-                List<Producto> listaP = mBD.consultarListaTareas(Integer.parseInt(IDAl), Unidad);
+                List<Desempeño> listaD = mBD.consultarListaTrabajos(Integer.parseInt(IDAl), Unidad);
 
-                for (Producto actual : listaP) {
-                    Trabajo2 = String.valueOf(actual.getTareas());
+                for (Desempeño actual : listaD) {
+                    Trabajo2 = String.valueOf(actual.getTrabajo());
                     System.out.println(Trabajo2);
-                    if (Trabajo2.equals(jTxtNombreProducto.getText())) {
+                    if (Trabajo2.equals(jTxtNombreTrabajo.getText())) {
                         a = true;
                         System.out.println(Trabajo2 + "*");
                     }
 
                 }
+
                 if (a == false) {
                     lista = mBD.consultarAlumno(Integer.parseInt(IDAl));
 
@@ -4185,157 +5624,256 @@ public class FrmPrincipal extends javax.swing.JDialog {
                         modelo.addRow(fila);
                         cont++;
                     }
-                    this.jTblProducto.setModel(modelo);
+                    this.jTblDesempeño.setModel(modelo);
 
-                    this.jBtnAgregarP.setEnabled(false);
-                    this.jCmbUnidadP.setEnabled(false);
-                    this.jTxtNombreProducto.setEnabled(false);
-                    this.jBtnGuardarP.setVisible(true);
-                }else{
-                    JOptionPane.showMessageDialog(rootPane, "Existe una tarea con ese nombre");
+                    this.jBtnAgregarD.setEnabled(false);
+                    this.jCmbUnidadD.setEnabled(false);
+                    this.jTxtNombreTrabajo.setEnabled(false);
+                    this.jTxtNombreTrabajo.setText("");
+                    this.jBtnGuardarD.setVisible(true);
+
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Existe un trabajo con ese nombre");
                 }
+
             } catch (SQLException ex) {
                 Logger.getLogger(FrmPrincipal.class
-                    .getName()).log(Level.SEVERE, null, ex);
+                        .getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "No puede estar vacio");
+            JOptionPane.showMessageDialog(null, "El trabajo no puede estar vacio");
         }
-    }//GEN-LAST:event_jBtnAgregarPActionPerformed
+    }//GEN-LAST:event_jBtnAgregarDActionPerformed
 
-    private void jBtnGuardarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuardarPActionPerformed
-        String Nombre;
-        String NC;
-        String Calificacion;
-        String ID = "";
+    private void jCmbMateriaDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaDActionPerformed
+        Materia = String.valueOf(this.jCmbMateriaD.getSelectedItem());
+        System.out.println("Materia: " + Materia + "\n");
+    }//GEN-LAST:event_jCmbMateriaDActionPerformed
+
+    private void jCmbMateriaDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaDFocusGained
         BD mBD = new BD();
-        String Unidad = (String) this.jCmbUnidadP.getSelectedItem();
-        //Agregar desempeño
-        boolean Vacio = true;
+        this.jCmbMateriaD.removeAllItems();
+        this.jCmbCarreraD.removeAllItems();
+        this.jCmbSemestreD.removeAllItems();
+        this.jCmbGrupoD.removeAllItems();
+
         try {
-            for (int y = 0; y < jTblProducto.getRowCount(); y++) {
-                if (jTblProducto.getValueAt(y, 3) == "" || jTblProducto.getValueAt(y, 3) == null) {
-                    Vacio = false;
-                }
-                System.out.println(Vacio);
+            List<Lista> mLista = mBD.consultarListaMateria();
+            for (Lista actual : mLista) {
+                this.jCmbMateriaD.addItem(actual.getMateria());
             }
-            if (Vacio == true) {
-                for (int i = 0; i < jTblProducto.getRowCount(); i++) {
-                    Nombre = jTblProducto.getValueAt(i, 2).toString();
-                    NC = jTblProducto.getValueAt(i, 1).toString();
-                    List<Alumno> mLista = mBD.ConsultaIDAlumno(Integer.parseInt(NC), Nombre);
-                    for (Alumno actual : mLista) {
-                        ID = String.valueOf(actual.getIdAlumno());
-                    }
-                    Calificacion = jTblProducto.getValueAt(i, 3).toString();
-                    Producto mProducto = new Producto();
-                    mProducto.setCalificacion(Integer.parseInt(Calificacion));
-                    mProducto.setTareas(Trabajo);
-                    mProducto.setUnidadP(Unidad);
-                    mBD.agregarProducto(mProducto, Integer.parseInt(ID));
-                }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbMateriaDFocusGained
 
-                JOptionPane.showMessageDialog(this, "Producto guardado");
+    private void jCmbCarreraDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraDActionPerformed
+        Carrera = String.valueOf(this.jCmbCarreraD.getSelectedItem());
+        System.out.println("Carrera: " + Carrera + "\n");
+    }//GEN-LAST:event_jCmbCarreraDActionPerformed
 
-                this.jBtnGuardarP.setVisible(false);
-                this.jBtnCancelarP.setEnabled(false);
-                this.jTxtNombreProducto.setText("");
+    private void jCmbCarreraDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraDFocusGained
+        BD mBD = new BD();
+        this.jCmbCarreraD.removeAllItems();
+        this.jCmbSemestreD.removeAllItems();
+        this.jCmbGrupoD.removeAllItems();
 
-                jTblProducto.setTableHeader(null);
-                DefaultTableModel tb = (DefaultTableModel) jTblProducto.getModel();
-                int a = jTblProducto.getRowCount() - 1;
+        try {
+            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaD.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbCarreraD.addItem(actual.getCarrera());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbCarreraDFocusGained
+
+    private void jCmbSemestreDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreDActionPerformed
+        Semestre = String.valueOf(this.jCmbSemestreD.getSelectedItem());
+        System.out.println("Semestre: " + Semestre + "\n");
+    }//GEN-LAST:event_jCmbSemestreDActionPerformed
+
+    private void jCmbSemestreDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestreDFocusGained
+        BD mBD = new BD();
+        this.jCmbSemestreD.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaD.getSelectedItem()), String.valueOf(this.jCmbCarreraD.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbSemestreD.addItem(String.valueOf(actual.getSemestre()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbSemestreDFocusGained
+
+    private void jBtnBuscarDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarDActionPerformed
+        try {
+            BD mBD = new BD();
+            List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+            for (Lista actual : mLista) {
+                IDAl = String.valueOf(actual.getIdLista());
+            }
+            System.out.println(IDAl);
+            List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(IDAl));
+            int cont = 1;
+
+            if (lista.isEmpty()) {
+
+                JOptionPane.showMessageDialog(rootPane, "Lista vacia.");
+                jTblDesempeño.setTableHeader(null);
+                DefaultTableModel tb = (DefaultTableModel) jTblDesempeño.getModel();
+                int a = jTblDesempeño.getRowCount() - 1;
                 for (int i = a; i >= 0; i--) {
                     tb.removeRow(tb.getRowCount() - 1);
                 }
 
                 Object[] encabezado = {};
                 DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-                jTblProducto.setModel(modelo);
+                jTblDesempeño.setModel(modelo);
+                this.jCmbUnidadD.setEnabled(false);
+                this.jTxtNombreTrabajo.setEnabled(false);
+                this.jTxtNombreTrabajo.setText("");
+                this.jBtnAgregarD.setEnabled(false);
+                this.jBtnGuardarD.setVisible(false);
+                this.jBtnCancelarD.setEnabled(false);
 
-                Object[] encabezado1 = {};
-                DefaultTableModel modelo1 = new DefaultTableModel(null, encabezado1);
-                jTblProducto1.setModel(modelo1);
-            } else if (Vacio == false) {
-                JOptionPane.showMessageDialog(this, "Hay campo(s) vacio(s), favor de verificar");
+            } else {
+                //Mostrar la consulta alumno
+                Object[] encabezado = {"No", "NC", "Nombre"};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                for (Alumno actual : lista) {
+                    Object[] fila = {cont, actual.getNC(), actual.getNombre()};
+                    modelo.addRow(fila);
+                    cont++;
+                }
+                this.jTblDesempeño.setModel(modelo);
+                this.jCmbUnidadD.setEnabled(true);
+                this.jTxtNombreTrabajo.setEnabled(true);
+                this.jTxtNombreTrabajo.setText("");
+                this.jBtnAgregarD.setEnabled(true);
+                this.jBtnGuardarD.setVisible(false);
+                this.jBtnCancelarD.setEnabled(true);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnBuscarDActionPerformed
+
+    private void jCmbGrupoDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoDActionPerformed
+        Grupo = String.valueOf(this.jCmbGrupoD.getSelectedItem());
+        System.out.println("Grupo: " + Grupo + "\n");
+    }//GEN-LAST:event_jCmbGrupoDActionPerformed
+
+    private void jCmbGrupoDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoDFocusGained
+        BD mBD = new BD();
+        this.jCmbGrupoD.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaD.getSelectedItem()), String.valueOf(this.jCmbCarreraD.getSelectedItem()), Semestre);
+            for (Lista actual : mLista) {
+                this.jCmbGrupoD.addItem(String.valueOf(actual.getGrupo()));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class
-                .getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jBtnGuardarPActionPerformed
+    }//GEN-LAST:event_jCmbGrupoDFocusGained
 
-    private void jBtnCancelarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarPActionPerformed
-        jTblProducto.setTableHeader(null);
-        DefaultTableModel tb = (DefaultTableModel) jTblProducto.getModel();
-        int a = jTblProducto.getRowCount() - 1;
-        for (int i = a; i >= 0; i--) {
-            tb.removeRow(tb.getRowCount() - 1);
-        }
+    private void jBtnBuscarP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarP1ActionPerformed
+        int q = 3;
+        int z = 0;
+        String Unidad = this.jCmbUnidadP1.getSelectedItem().toString();
 
-        Object[] encabezado = {};
-        DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-        jTblProducto.setModel(modelo);
-        this.jBtnGuardarP.setEnabled(false);
-        this.jBtnAgregarP.setEnabled(false);
-        this.jCmbUnidadP.setEnabled(false);
-        this.jTxtNombreProducto.setText("");
-        this.jTxtNombreProducto.setEnabled(false);
-        this.jBtnCancelarP.setEnabled(false);
-    }//GEN-LAST:event_jBtnCancelarPActionPerformed
-
-    private void jCmbMateriaP1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaP1FocusGained
         BD mBD = new BD();
-        this.jCmbMateriaP1.removeAllItems();
-        this.jCmbCarreraP1.removeAllItems();
-        this.jCmbSemestreP1.removeAllItems();
+        String Desem = "";
+        List<Lista> mLista;
+        try {
+            mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+            for (Lista actual : mLista) {
+                IDPro = String.valueOf(actual.getIdLista());
+            }
+            List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(IDPro));
+            int cont = 1;
+
+            if (lista.isEmpty()) {
+
+                JOptionPane.showMessageDialog(rootPane, "Esta lista esta vacia.");
+                jTblProducto1.setTableHeader(null);
+                DefaultTableModel tb = (DefaultTableModel) jTblProducto1.getModel();
+                int a = jTblProducto1.getRowCount() - 1;
+                for (int i = a; i >= 0; i--) {
+                    tb.removeRow(tb.getRowCount() - 1);
+                }
+
+                Object[] encabezado = {};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                jTblProducto1.setModel(modelo);
+
+            } else {
+                Object[] encabezado = {"No", "NC", "Nombre"};
+
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                for (Alumno actual1 : lista) {
+                    Object[] fila = {cont, actual1.getNC(), actual1.getNombre()};
+                    modelo.addRow(fila);
+                    cont++;
+                }
+
+                List<Producto> lista2 = mBD.consultarListaTareas(Integer.parseInt(IDPro), Unidad);
+
+                for (Producto actual : lista2) {
+                    modelo.addColumn(String.valueOf(actual.getTareas()));
+                    List<Producto> lista3 = mBD.consultarProductoCal(String.valueOf(actual.getTareas()), Unidad);
+                    for (Producto actual2 : lista3) {
+                        modelo.setValueAt(actual2.getCalificacion(), z, q);
+                        z++;
+                    }
+                    z = 0;
+                    q++;
+                }
+                jTblProducto1.setModel(modelo);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnBuscarP1ActionPerformed
+
+    private void jCmbGrupoP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoP1ActionPerformed
+        Grupo = String.valueOf(this.jCmbGrupoP1.getSelectedItem());
+        System.out.println("Grupo: " + Grupo + "\n");
+    }//GEN-LAST:event_jCmbGrupoP1ActionPerformed
+
+    private void jCmbGrupoP1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoP1FocusGained
+        BD mBD = new BD();
         this.jCmbGrupoP1.removeAllItems();
         try {
-            List<Lista> mLista = mBD.consultarListaMateria();
+
+            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaP1.getSelectedItem()), String.valueOf(this.jCmbCarreraP1.getSelectedItem()), Semestre);
+
             for (Lista actual : mLista) {
-                this.jCmbMateriaP1.addItem(actual.getMateria());
+                this.jCmbGrupoP1.addItem(String.valueOf(actual.getGrupo()));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+
         }
-    }//GEN-LAST:event_jCmbMateriaP1FocusGained
+    }//GEN-LAST:event_jCmbGrupoP1FocusGained
 
-    private void jCmbMateriaP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaP1ActionPerformed
-        Materia = String.valueOf(this.jCmbMateriaP1.getSelectedItem());
-        System.out.println("Materia: " + Materia + "\n");
-    }//GEN-LAST:event_jCmbMateriaP1ActionPerformed
+    private void jCmbSemestreP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreP1ActionPerformed
+        Semestre = String.valueOf(this.jCmbSemestreP1.getSelectedItem());
+        System.out.println("Semestre: " + Semestre + "\n");
+    }//GEN-LAST:event_jCmbSemestreP1ActionPerformed
 
-    private void jCmbCarreraP1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraP1FocusGained
+    private void jCmbSemestreP1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestreP1FocusGained
         BD mBD = new BD();
-        this.jCmbCarreraP1.removeAllItems();
         this.jCmbSemestreP1.removeAllItems();
-        this.jCmbGrupoP1.removeAllItems();
         try {
-            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaP1.getSelectedItem()));
+            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaP1.getSelectedItem()), String.valueOf(this.jCmbCarreraP1.getSelectedItem()));
             for (Lista actual : mLista) {
-                this.jCmbCarreraP1.addItem(actual.getCarrera());
+                this.jCmbSemestreP1.addItem(String.valueOf(actual.getSemestre()));
             }
         } catch (SQLException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jCmbCarreraP1FocusGained
-
-    private void jCmbCarreraP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraP1ActionPerformed
-        Carrera = String.valueOf(this.jCmbCarreraP1.getSelectedItem());
-        System.out.println("Carrera: " + Carrera + "\n");
-    }//GEN-LAST:event_jCmbCarreraP1ActionPerformed
-
-    private void jCmbUnidadP1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbUnidadP1FocusGained
-        BD mBD = new BD();
-        this.jCmbUnidadP1.removeAllItems();
-        try {
-            List<Producto> mLista = mBD.ConsultaPUnidad();
-            for (Producto actual : mLista) {
-                this.jCmbUnidadP1.addItem(String.valueOf(actual.getUnidadP()));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCmbUnidadP1FocusGained
+    }//GEN-LAST:event_jCmbSemestreP1FocusGained
 
     private void jBtnAgregarP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarP1ActionPerformed
         try {
@@ -4432,245 +5970,149 @@ public class FrmPrincipal extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jBtnAgregarP1ActionPerformed
 
-    private void jCmbSemestreP1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestreP1FocusGained
+    private void jCmbUnidadP1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbUnidadP1FocusGained
         BD mBD = new BD();
-        this.jCmbSemestreP1.removeAllItems();
+        this.jCmbUnidadP1.removeAllItems();
         try {
-            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaP1.getSelectedItem()), String.valueOf(this.jCmbCarreraP1.getSelectedItem()));
-            for (Lista actual : mLista) {
-                this.jCmbSemestreP1.addItem(String.valueOf(actual.getSemestre()));
+            List<Producto> mLista = mBD.ConsultaPUnidad();
+            for (Producto actual : mLista) {
+                this.jCmbUnidadP1.addItem(String.valueOf(actual.getUnidadP()));
             }
         } catch (SQLException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jCmbSemestreP1FocusGained
+    }//GEN-LAST:event_jCmbUnidadP1FocusGained
 
-    private void jCmbSemestreP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreP1ActionPerformed
-        Semestre = String.valueOf(this.jCmbSemestreP1.getSelectedItem());
-        System.out.println("Semestre: " + Semestre + "\n");
-    }//GEN-LAST:event_jCmbSemestreP1ActionPerformed
+    private void jCmbCarreraP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraP1ActionPerformed
+        Carrera = String.valueOf(this.jCmbCarreraP1.getSelectedItem());
+        System.out.println("Carrera: " + Carrera + "\n");
+    }//GEN-LAST:event_jCmbCarreraP1ActionPerformed
 
-    private void jCmbGrupoP1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoP1FocusGained
+    private void jCmbCarreraP1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraP1FocusGained
         BD mBD = new BD();
+        this.jCmbCarreraP1.removeAllItems();
+        this.jCmbSemestreP1.removeAllItems();
         this.jCmbGrupoP1.removeAllItems();
         try {
-
-            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaP1.getSelectedItem()), String.valueOf(this.jCmbCarreraP1.getSelectedItem()), Semestre);
-
+            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaP1.getSelectedItem()));
             for (Lista actual : mLista) {
-                this.jCmbGrupoP1.addItem(String.valueOf(actual.getGrupo()));
-            }
-        } catch (SQLException ex) {
-
-        }
-    }//GEN-LAST:event_jCmbGrupoP1FocusGained
-
-    private void jCmbGrupoP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoP1ActionPerformed
-        Grupo = String.valueOf(this.jCmbGrupoP1.getSelectedItem());
-        System.out.println("Grupo: " + Grupo + "\n");
-    }//GEN-LAST:event_jCmbGrupoP1ActionPerformed
-
-    private void jBtnBuscarP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarP1ActionPerformed
-        int q = 3;
-        int z = 0;
-        String Unidad = this.jCmbUnidadP1.getSelectedItem().toString();
-
-        BD mBD = new BD();
-        String Desem = "";
-        List<Lista> mLista;
-        try {
-            mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
-            for (Lista actual : mLista) {
-                IDPro = String.valueOf(actual.getIdLista());
-            }
-            List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(IDPro));
-            int cont = 1;
-
-            if (lista.isEmpty()) {
-
-                JOptionPane.showMessageDialog(rootPane, "Esta lista esta vacia.");
-                jTblProducto1.setTableHeader(null);
-                DefaultTableModel tb = (DefaultTableModel) jTblProducto1.getModel();
-                int a = jTblProducto1.getRowCount() - 1;
-                for (int i = a; i >= 0; i--) {
-                    tb.removeRow(tb.getRowCount() - 1);
-                }
-
-                Object[] encabezado = {};
-                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-                jTblProducto1.setModel(modelo);
-
-            } else {
-                Object[] encabezado = {"No", "NC", "Nombre"};
-
-                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-                for (Alumno actual1 : lista) {
-                    Object[] fila = {cont, actual1.getNC(), actual1.getNombre()};
-                    modelo.addRow(fila);
-                    cont++;
-                }
-
-                List<Producto> lista2 = mBD.consultarListaTareas(Integer.parseInt(IDPro), Unidad);
-
-                for (Producto actual : lista2) {
-                    modelo.addColumn(String.valueOf(actual.getTareas()));
-                    List<Producto> lista3 = mBD.consultarProductoCal(String.valueOf(actual.getTareas()), Unidad);
-                    for (Producto actual2 : lista3) {
-                        modelo.setValueAt(actual2.getCalificacion(), z, q);
-                        z++;
-                    }
-                    z = 0;
-                    q++;
-                }
-                jTblProducto1.setModel(modelo);
+                this.jCmbCarreraP1.addItem(actual.getCarrera());
             }
         } catch (SQLException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jBtnBuscarP1ActionPerformed
+    }//GEN-LAST:event_jCmbCarreraP1FocusGained
 
-    private void jCmbGrupoDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoDFocusGained
+    private void jCmbMateriaP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaP1ActionPerformed
+        Materia = String.valueOf(this.jCmbMateriaP1.getSelectedItem());
+        System.out.println("Materia: " + Materia + "\n");
+    }//GEN-LAST:event_jCmbMateriaP1ActionPerformed
+
+    private void jCmbMateriaP1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaP1FocusGained
         BD mBD = new BD();
-        this.jCmbGrupoD.removeAllItems();
-        try {
-            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaD.getSelectedItem()), String.valueOf(this.jCmbCarreraD.getSelectedItem()), Semestre);
-            for (Lista actual : mLista) {
-                this.jCmbGrupoD.addItem(String.valueOf(actual.getGrupo()));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCmbGrupoDFocusGained
-
-    private void jCmbGrupoDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoDActionPerformed
-        Grupo = String.valueOf(this.jCmbGrupoD.getSelectedItem());
-        System.out.println("Grupo: " + Grupo + "\n");
-    }//GEN-LAST:event_jCmbGrupoDActionPerformed
-
-    private void jBtnBuscarDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarDActionPerformed
-        try {
-            BD mBD = new BD();
-            List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
-            for (Lista actual : mLista) {
-                IDAl = String.valueOf(actual.getIdLista());
-            }
-            System.out.println(IDAl);
-            List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(IDAl));
-            int cont = 1;
-
-            if (lista.isEmpty()) {
-
-                JOptionPane.showMessageDialog(rootPane, "Lista vacia.");
-                jTblDesempeño.setTableHeader(null);
-                DefaultTableModel tb = (DefaultTableModel) jTblDesempeño.getModel();
-                int a = jTblDesempeño.getRowCount() - 1;
-                for (int i = a; i >= 0; i--) {
-                    tb.removeRow(tb.getRowCount() - 1);
-                }
-
-                Object[] encabezado = {};
-                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-                jTblDesempeño.setModel(modelo);
-                this.jCmbUnidadD.setEnabled(false);
-                this.jTxtNombreTrabajo.setEnabled(false);
-                this.jTxtNombreTrabajo.setText("");
-                this.jBtnAgregarD.setEnabled(false);
-                this.jBtnGuardarD.setVisible(false);
-                this.jBtnCancelarD.setEnabled(false);
-
-            } else {
-                //Mostrar la consulta alumno
-                Object[] encabezado = {"No", "NC", "Nombre"};
-                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-                for (Alumno actual : lista) {
-                    Object[] fila = {cont, actual.getNC(), actual.getNombre()};
-                    modelo.addRow(fila);
-                    cont++;
-                }
-                this.jTblDesempeño.setModel(modelo);
-                this.jCmbUnidadD.setEnabled(true);
-                this.jTxtNombreTrabajo.setEnabled(true);
-                this.jTxtNombreTrabajo.setText("");
-                this.jBtnAgregarD.setEnabled(true);
-                this.jBtnGuardarD.setVisible(false);
-                this.jBtnCancelarD.setEnabled(true);
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jBtnBuscarDActionPerformed
-
-    private void jCmbSemestreDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestreDFocusGained
-        BD mBD = new BD();
-        this.jCmbSemestreD.removeAllItems();
-        try {
-            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaD.getSelectedItem()), String.valueOf(this.jCmbCarreraD.getSelectedItem()));
-            for (Lista actual : mLista) {
-                this.jCmbSemestreD.addItem(String.valueOf(actual.getSemestre()));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCmbSemestreDFocusGained
-
-    private void jCmbSemestreDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreDActionPerformed
-        Semestre = String.valueOf(this.jCmbSemestreD.getSelectedItem());
-        System.out.println("Semestre: " + Semestre + "\n");
-    }//GEN-LAST:event_jCmbSemestreDActionPerformed
-
-    private void jCmbCarreraDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraDFocusGained
-        BD mBD = new BD();
-        this.jCmbCarreraD.removeAllItems();
-        this.jCmbSemestreD.removeAllItems();
-        this.jCmbGrupoD.removeAllItems();
-
-        try {
-            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaD.getSelectedItem()));
-            for (Lista actual : mLista) {
-                this.jCmbCarreraD.addItem(actual.getCarrera());
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCmbCarreraDFocusGained
-
-    private void jCmbCarreraDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraDActionPerformed
-        Carrera = String.valueOf(this.jCmbCarreraD.getSelectedItem());
-        System.out.println("Carrera: " + Carrera + "\n");
-    }//GEN-LAST:event_jCmbCarreraDActionPerformed
-
-    private void jCmbMateriaDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaDFocusGained
-        BD mBD = new BD();
-        this.jCmbMateriaD.removeAllItems();
-        this.jCmbCarreraD.removeAllItems();
-        this.jCmbSemestreD.removeAllItems();
-        this.jCmbGrupoD.removeAllItems();
-
+        this.jCmbMateriaP1.removeAllItems();
+        this.jCmbCarreraP1.removeAllItems();
+        this.jCmbSemestreP1.removeAllItems();
+        this.jCmbGrupoP1.removeAllItems();
         try {
             List<Lista> mLista = mBD.consultarListaMateria();
             for (Lista actual : mLista) {
-                this.jCmbMateriaD.addItem(actual.getMateria());
+                this.jCmbMateriaP1.addItem(actual.getMateria());
             }
         } catch (SQLException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jCmbMateriaDFocusGained
+    }//GEN-LAST:event_jCmbMateriaP1FocusGained
 
-    private void jCmbMateriaDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaDActionPerformed
-        Materia = String.valueOf(this.jCmbMateriaD.getSelectedItem());
-        System.out.println("Materia: " + Materia + "\n");
-    }//GEN-LAST:event_jCmbMateriaDActionPerformed
+    private void jBtnCancelarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarPActionPerformed
+        jTblProducto.setTableHeader(null);
+        DefaultTableModel tb = (DefaultTableModel) jTblProducto.getModel();
+        int a = jTblProducto.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            tb.removeRow(tb.getRowCount() - 1);
+        }
 
-    private void jBtnAgregarDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarDActionPerformed
-        Trabajo = this.jTxtNombreTrabajo.getText();
-        String Unidad = this.jCmbUnidadD.getSelectedItem().toString();
+        Object[] encabezado = {};
+        DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+        jTblProducto.setModel(modelo);
+        this.jBtnGuardarP.setEnabled(false);
+        this.jBtnAgregarP.setEnabled(false);
+        this.jCmbUnidadP.setEnabled(false);
+        this.jTxtNombreProducto.setText("");
+        this.jTxtNombreProducto.setEnabled(false);
+        this.jBtnCancelarP.setEnabled(false);
+    }//GEN-LAST:event_jBtnCancelarPActionPerformed
+
+    private void jBtnGuardarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuardarPActionPerformed
+        String Nombre;
+        String NC;
+        String Calificacion;
+        String ID = "";
         BD mBD = new BD();
-        String Trabajo2 = "";
+        String Unidad = (String) this.jCmbUnidadP.getSelectedItem();
+        //Agregar desempeño
+        boolean Vacio = true;
+        try {
+            for (int y = 0; y < jTblProducto.getRowCount(); y++) {
+                if (jTblProducto.getValueAt(y, 3) == "" || jTblProducto.getValueAt(y, 3) == null) {
+                    Vacio = false;
+                }
+                System.out.println(Vacio);
+            }
+            if (Vacio == true) {
+                for (int i = 0; i < jTblProducto.getRowCount(); i++) {
+                    Nombre = jTblProducto.getValueAt(i, 2).toString();
+                    NC = jTblProducto.getValueAt(i, 1).toString();
+                    List<Alumno> mLista = mBD.ConsultaIDAlumno(Integer.parseInt(NC), Nombre);
+                    for (Alumno actual : mLista) {
+                        ID = String.valueOf(actual.getIdAlumno());
+                    }
+                    Calificacion = jTblProducto.getValueAt(i, 3).toString();
+                    Producto mProducto = new Producto();
+                    mProducto.setCalificacion(Integer.parseInt(Calificacion));
+                    mProducto.setTareas(Trabajo);
+                    mProducto.setUnidadP(Unidad);
+                    mBD.agregarProducto(mProducto, Integer.parseInt(ID));
+                }
+
+                JOptionPane.showMessageDialog(this, "Producto guardado");
+
+                this.jBtnGuardarP.setVisible(false);
+                this.jBtnCancelarP.setEnabled(false);
+                this.jTxtNombreProducto.setText("");
+
+                jTblProducto.setTableHeader(null);
+                DefaultTableModel tb = (DefaultTableModel) jTblProducto.getModel();
+                int a = jTblProducto.getRowCount() - 1;
+                for (int i = a; i >= 0; i--) {
+                    tb.removeRow(tb.getRowCount() - 1);
+                }
+
+                Object[] encabezado = {};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                jTblProducto.setModel(modelo);
+
+                Object[] encabezado1 = {};
+                DefaultTableModel modelo1 = new DefaultTableModel(null, encabezado1);
+                jTblProducto1.setModel(modelo1);
+            } else if (Vacio == false) {
+                JOptionPane.showMessageDialog(this, "Hay campo(s) vacio(s), favor de verificar");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnGuardarPActionPerformed
+
+    private void jBtnAgregarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarPActionPerformed
+        Trabajo = this.jTxtNombreProducto.getText();
+        String Unidad = this.jCmbUnidadP.getSelectedItem().toString();
         boolean a = false;
+        BD mBD = new BD();
+
+        String Trabajo2 = "";
         List<Alumno> lista;
 
-        System.out.println(Trabajo);
         if (!"".equals(Trabajo)) {
             try {
                 List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
@@ -4678,18 +6120,17 @@ public class FrmPrincipal extends javax.swing.JDialog {
                     IDAl = String.valueOf(actual.getIdLista());
                 }
 
-                List<Desempeño> listaD = mBD.consultarListaTrabajos(Integer.parseInt(IDAl), Unidad);
+                List<Producto> listaP = mBD.consultarListaTareas(Integer.parseInt(IDAl), Unidad);
 
-                for (Desempeño actual : listaD) {
-                    Trabajo2 = String.valueOf(actual.getTrabajo());
+                for (Producto actual : listaP) {
+                    Trabajo2 = String.valueOf(actual.getTareas());
                     System.out.println(Trabajo2);
-                    if (Trabajo2.equals(jTxtNombreTrabajo.getText())) {
+                    if (Trabajo2.equals(jTxtNombreProducto.getText())) {
                         a = true;
                         System.out.println(Trabajo2 + "*");
                     }
 
                 }
-
                 if (a == false) {
                     lista = mBD.consultarAlumno(Integer.parseInt(IDAl));
 
@@ -4703,400 +6144,88 @@ public class FrmPrincipal extends javax.swing.JDialog {
                         modelo.addRow(fila);
                         cont++;
                     }
-                    this.jTblDesempeño.setModel(modelo);
+                    this.jTblProducto.setModel(modelo);
 
-                    this.jBtnAgregarD.setEnabled(false);
-                    this.jCmbUnidadD.setEnabled(false);
-                    this.jTxtNombreTrabajo.setEnabled(false);
-                    this.jTxtNombreTrabajo.setText("");
-                    this.jBtnGuardarD.setVisible(true);
-
+                    this.jBtnAgregarP.setEnabled(false);
+                    this.jCmbUnidadP.setEnabled(false);
+                    this.jTxtNombreProducto.setEnabled(false);
+                    this.jBtnGuardarP.setVisible(true);
                 } else {
-                    JOptionPane.showMessageDialog(rootPane, "Existe un trabajo con ese nombre");
+                    JOptionPane.showMessageDialog(rootPane, "Existe una tarea con ese nombre");
                 }
-
             } catch (SQLException ex) {
                 Logger.getLogger(FrmPrincipal.class
-                    .getName()).log(Level.SEVERE, null, ex);
+                        .getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "El trabajo no puede estar vacio");
+            JOptionPane.showMessageDialog(null, "No puede estar vacio");
         }
-    }//GEN-LAST:event_jBtnAgregarDActionPerformed
+    }//GEN-LAST:event_jBtnAgregarPActionPerformed
 
-    private void jBtnGuardarDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuardarDActionPerformed
-        String Nombre;
-        String NC;
-        String Calificacion;
-        String ID = "";
+    private void jCmbMateriaPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaPActionPerformed
+        Materia = String.valueOf(this.jCmbMateriaP.getSelectedItem());
+        System.out.println("Materia: " + Materia + "\n");
+    }//GEN-LAST:event_jCmbMateriaPActionPerformed
+
+    private void jCmbMateriaPFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaPFocusGained
         BD mBD = new BD();
-        String Unidad = (String) this.jCmbUnidadD.getSelectedItem();
-        //Agregar desempeño
-        boolean Vacio = true;
-        try {
-            for (int y = 0; y < jTblDesempeño.getRowCount(); y++) {
-                if (jTblDesempeño.getValueAt(y, 3) == "" || jTblDesempeño.getValueAt(y, 3) == null) {
-                    Vacio = false;
-                }
-                System.out.println(Vacio);
-            }
-            if (Vacio == true) {
-                for (int i = 0; i < jTblDesempeño.getRowCount(); i++) {
-                    Nombre = jTblDesempeño.getValueAt(i, 2).toString();
-                    NC = jTblDesempeño.getValueAt(i, 1).toString();
-                    List<Alumno> mLista = mBD.ConsultaIDAlumno(Integer.parseInt(NC), Nombre);
-                    for (Alumno actual : mLista) {
-                        ID = String.valueOf(actual.getIdAlumno());
-                    }
-                    Calificacion = jTblDesempeño.getValueAt(i, 3).toString();
-                    Desempeño mDesempeño = new Desempeño();
-                    mDesempeño.setCalificacion(Integer.parseInt(Calificacion));
-                    mDesempeño.setTrabajo(Trabajo);
-                    mDesempeño.setUnidadD(Unidad);
-                    mBD.agregarDesempeño(mDesempeño, Integer.parseInt(ID));
-                }
-
-                JOptionPane.showMessageDialog(this, "Desempeno guardado");
-                this.jBtnGuardarD.setVisible(false);
-                this.jBtnCancelarD.setEnabled(false);
-                this.jTxtNombreProducto.setText("");
-                jTblDesempeño.setTableHeader(null);
-                DefaultTableModel tb = (DefaultTableModel) jTblDesempeño.getModel();
-                int a = jTblDesempeño.getRowCount() - 1;
-                for (int i = a; i >= 0; i--) {
-                    tb.removeRow(tb.getRowCount() - 1);
-                }
-
-                Object[] encabezado = {};
-                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-                jTblDesempeño.setModel(modelo);
-
-                /*jTblDesempeño1.setTableHeader(null);
-                DefaultTableModel tb1 = (DefaultTableModel) jTblDesempeño1.getModel();
-                int a1 = jTblDesempeño1.getRowCount() - 1;
-                for (int i = a1; i >= 0; i--) {
-                    tb.removeRow(tb.getRowCount() - 1);
-                }*/
-                Object[] encabezado1 = {};
-                DefaultTableModel modelo1 = new DefaultTableModel(null, encabezado1);
-                jTblDesempeño1.setModel(modelo1);
-
-            } else if (Vacio == false) {
-                JOptionPane.showMessageDialog(this, "Hay campo(s) vacio(s), favor de verificar");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class
-                .getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jBtnGuardarDActionPerformed
-
-    private void jBtnCancelarDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarDActionPerformed
-        jTblDesempeño.setTableHeader(null);
-        DefaultTableModel tb = (DefaultTableModel) jTblDesempeño.getModel();
-        int a = jTblDesempeño.getRowCount() - 1;
-        for (int i = a; i >= 0; i--) {
-            tb.removeRow(tb.getRowCount() - 1);
-        }
-
-        Object[] encabezado = {};
-        DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-        jTblDesempeño.setModel(modelo);
-        this.jBtnGuardarD.setEnabled(false);
-        this.jBtnAgregarD.setEnabled(false);
-        this.jCmbUnidadD.setEnabled(false);
-        this.jTxtNombreTrabajo.setText("");
-        this.jTxtNombreTrabajo.setEnabled(false);
-        this.jBtnCancelarD.setEnabled(false);
-    }//GEN-LAST:event_jBtnCancelarDActionPerformed
-
-    private void jCmbMateriaD1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaD1FocusGained
-        BD mBD = new BD();
-        this.jCmbMateriaD1.removeAllItems();
-        this.jCmbCarreraD1.removeAllItems();
-        this.jCmbSemestreD1.removeAllItems();
-        this.jCmbGrupoD1.removeAllItems();
-
+        this.jCmbMateriaP.removeAllItems();
+        this.jCmbCarreraP.removeAllItems();
+        this.jCmbSemestreP.removeAllItems();
+        this.jCmbGrupoP.removeAllItems();
         try {
             List<Lista> mLista = mBD.consultarListaMateria();
             for (Lista actual : mLista) {
-                this.jCmbMateriaD1.addItem(actual.getMateria());
+                this.jCmbMateriaP.addItem(actual.getMateria());
             }
         } catch (SQLException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jCmbMateriaD1FocusGained
+    }//GEN-LAST:event_jCmbMateriaPFocusGained
 
-    private void jCmbMateriaD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaD1ActionPerformed
-        Materia = String.valueOf(this.jCmbMateriaD1.getSelectedItem());
-        System.out.println("Materia: " + Materia + "\n");
-    }//GEN-LAST:event_jCmbMateriaD1ActionPerformed
-
-    private void jCmbCarreraD1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraD1FocusGained
-        BD mBD = new BD();
-        this.jCmbCarreraD1.removeAllItems();
-        this.jCmbSemestreD1.removeAllItems();
-        this.jCmbGrupoD1.removeAllItems();
-
-        try {
-            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaD1.getSelectedItem()));
-            for (Lista actual : mLista) {
-                this.jCmbCarreraD1.addItem(actual.getCarrera());
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCmbCarreraD1FocusGained
-
-    private void jCmbCarreraD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraD1ActionPerformed
-        Carrera = String.valueOf(this.jCmbCarreraD1.getSelectedItem());
+    private void jCmbCarreraPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraPActionPerformed
+        Carrera = String.valueOf(this.jCmbCarreraP.getSelectedItem());
         System.out.println("Carrera: " + Carrera + "\n");
-    }//GEN-LAST:event_jCmbCarreraD1ActionPerformed
+    }//GEN-LAST:event_jCmbCarreraPActionPerformed
 
-    private void jCmbUnidadD1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbUnidadD1FocusGained
+    private void jCmbCarreraPFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraPFocusGained
         BD mBD = new BD();
-        this.jCmbUnidadD1.removeAllItems();
+        this.jCmbCarreraP.removeAllItems();
+        this.jCmbSemestreP.removeAllItems();
+        this.jCmbGrupoP.removeAllItems();
         try {
-            List<Desempeño> mLista = mBD.ConsultaDUnidad();
-            for (Desempeño actual : mLista) {
-                this.jCmbUnidadD1.addItem(String.valueOf(actual.getUnidadD()));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCmbUnidadD1FocusGained
-
-    private void jBtnAgregarD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarD1ActionPerformed
-        try {
-            BD mBD = new BD();
-            String Unidad = this.jCmbUnidadD1.getSelectedItem().toString();
-            int calificacion;
-            String Nombre;
-            int NC;
-            int IdD = 0;
-            int IdA = 0;
-            int cont = 0;
-
-            Desempeño mDesempeño = new Desempeño();
-            List<Desempeño> lista2 = mBD.consultarListaTrabajos(Integer.parseInt(IDDes), Unidad);
-
-            for (Desempeño actual : lista2) {
-                cont++;
-            }
-            int d = 3 + cont;
-            for (int j = 3; j < d; j++) {
-                for (int i = 0; i < jTblDesempeño1.getRowCount(); i++) {
-                    DefaultTableModel modelo = (DefaultTableModel) jTblDesempeño1.getModel();
-                    JTableHeader th = jTblDesempeño1.getTableHeader();
-                    TableColumnModel tcm = th.getColumnModel();
-                    TableColumn tcmn = tcm.getColumn(j);
-                    tcmn.getHeaderValue();
-
-                    System.out.println(tcmn.getHeaderValue().toString());
-
-                    calificacion = Integer.parseInt(jTblDesempeño1.getValueAt(i, j).toString());
-                    Nombre = jTblDesempeño1.getValueAt(i, 2).toString();
-                    NC = Integer.parseInt(jTblDesempeño1.getValueAt(i, 1).toString());
-
-                    List<Alumno> mLista3 = mBD.ConsultaIDAlumno(NC, Nombre);
-                    for (Alumno actual3 : mLista3) {
-                        IdA = actual3.getIdAlumno();
-                    }
-
-                    System.out.println(calificacion);
-                    List<Desempeño> mLista2 = mBD.ConsultaIDDesempeño(tcmn.getHeaderValue().toString(), IdA);
-                    for (Desempeño actual2 : mLista2) {
-                        IdD = actual2.getIdDesempeño();
-                    }
-
-                    System.out.println(IdD);
-                    mDesempeño.setCalificacion(calificacion);
-                    mDesempeño.setTrabajo(tcmn.getHeaderValue().toString());
-                    mDesempeño.setIdDesempeño(IdD);
-                    mBD.modificarDesempeño(mDesempeño);
-                }
-            }
-            JOptionPane.showMessageDialog(null, "Desempeño(s) actualizado(s)");
-            LlenarTablaDesempeño1();
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jBtnAgregarD1ActionPerformed
-
-    private void jCmbSemestreD1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestreD1FocusGained
-        BD mBD = new BD();
-        this.jCmbSemestreD1.removeAllItems();
-        try {
-            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaD1.getSelectedItem()), String.valueOf(this.jCmbCarreraD1.getSelectedItem()));
+            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaP.getSelectedItem()));
             for (Lista actual : mLista) {
-                this.jCmbSemestreD1.addItem(String.valueOf(actual.getSemestre()));
+                this.jCmbCarreraP.addItem(actual.getCarrera());
             }
         } catch (SQLException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jCmbSemestreD1FocusGained
+    }//GEN-LAST:event_jCmbCarreraPFocusGained
 
-    private void jCmbSemestreD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreD1ActionPerformed
-        Semestre = String.valueOf(this.jCmbSemestreD1.getSelectedItem());
+    private void jCmbSemestrePActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestrePActionPerformed
+        Semestre = String.valueOf(this.jCmbSemestreP.getSelectedItem());
         System.out.println("Semestre: " + Semestre + "\n");
-    }//GEN-LAST:event_jCmbSemestreD1ActionPerformed
+    }//GEN-LAST:event_jCmbSemestrePActionPerformed
 
-    private void jCmbGrupoD1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoD1FocusGained
+    private void jCmbSemestrePFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestrePFocusGained
         BD mBD = new BD();
-        this.jCmbGrupoD1.removeAllItems();
+        this.jCmbSemestreP.removeAllItems();
         try {
-            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaD1.getSelectedItem()), String.valueOf(this.jCmbCarreraD1.getSelectedItem()), Semestre);
+            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaP.getSelectedItem()), String.valueOf(this.jCmbCarreraP.getSelectedItem()));
             for (Lista actual : mLista) {
-                this.jCmbGrupoD1.addItem(String.valueOf(actual.getGrupo()));
+                this.jCmbSemestreP.addItem(String.valueOf(actual.getSemestre()));
             }
         } catch (SQLException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jCmbGrupoD1FocusGained
+    }//GEN-LAST:event_jCmbSemestrePFocusGained
 
-    private void jCmbGrupoD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoD1ActionPerformed
-        Grupo = String.valueOf(this.jCmbGrupoD1.getSelectedItem());
-        System.out.println("Grupo: " + Grupo + "\n");
-    }//GEN-LAST:event_jCmbGrupoD1ActionPerformed
-
-    private void jBtnBuscarD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarD1ActionPerformed
-        int q = 3;
-        int z = 0;
-        String Unidad = this.jCmbUnidadD1.getSelectedItem().toString();
-
-        BD mBD = new BD();
-        String Desem = "";
-        List<Lista> mLista;
+    private void jBtnBuscarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarPActionPerformed
         try {
-            mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
-            for (Lista actual : mLista) {
-                IDDes = String.valueOf(actual.getIdLista());
-            }
-            List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(IDDes));
-            int cont = 1;
-            if (lista.isEmpty()) {
+            // TODO add your handling code here:
 
-                JOptionPane.showMessageDialog(rootPane, "Lista vacia.");
-                jTblDesempeño1.setTableHeader(null);
-                DefaultTableModel tb = (DefaultTableModel) jTblDesempeño1.getModel();
-                int a = jTblDesempeño1.getRowCount() - 1;
-                for (int i = a; i >= 0; i--) {
-                    tb.removeRow(tb.getRowCount() - 1);
-                }
-
-                Object[] encabezado = {};
-                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-                jTblDesempeño1.setModel(modelo);
-
-            } else {
-                Object[] encabezado = {"No", "NC", "Nombre"};
-
-                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-                for (Alumno actual1 : lista) {
-                    Object[] fila = {cont, actual1.getNC(), actual1.getNombre()};
-                    modelo.addRow(fila);
-                    cont++;
-                }
-
-                List<Desempeño> lista2 = mBD.consultarListaTrabajos(Integer.parseInt(IDDes), Unidad);
-
-                for (Desempeño actual : lista2) {
-                    modelo.addColumn(String.valueOf(actual.getTrabajo()));
-                    List<Desempeño> lista3 = mBD.consultarDesempenoCal(String.valueOf(actual.getTrabajo()), Unidad);
-                    for (Desempeño actual2 : lista3) {
-                        modelo.setValueAt(actual2.getCalificacion(), z, q);
-                        z++;
-                    }
-                    z = 0;
-                    q++;
-                }
-                jTblDesempeño1.setModel(modelo);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jBtnBuscarD1ActionPerformed
-
-    private void jCmbMateriaCFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaCFocusGained
-        BD mBD = new BD();
-        this.jCmbMateriaC.removeAllItems();
-        this.jCmbCarreraC.removeAllItems();
-        this.jCmbSemestreC.removeAllItems();
-        this.jCmbGrupoC.removeAllItems();
-        try {
-            List<Lista> mLista = mBD.consultarListaMateria();
-            for (Lista actual : mLista) {
-                this.jCmbMateriaC.addItem(actual.getMateria());
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCmbMateriaCFocusGained
-
-    private void jCmbMateriaCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaCActionPerformed
-        Materia = String.valueOf(this.jCmbMateriaC.getSelectedItem());
-        System.out.println("Materia: " + Materia + "\n");
-    }//GEN-LAST:event_jCmbMateriaCActionPerformed
-
-    private void jCmbCarreraCFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraCFocusGained
-        BD mBD = new BD();
-        this.jCmbCarreraC.removeAllItems();
-        this.jCmbSemestreC.removeAllItems();
-        this.jCmbGrupoC.removeAllItems();
-        try {
-            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaC.getSelectedItem()));
-            for (Lista actual : mLista) {
-                this.jCmbCarreraC.addItem(actual.getCarrera());
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCmbCarreraCFocusGained
-
-    private void jCmbCarreraCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraCActionPerformed
-        Carrera = String.valueOf(this.jCmbCarreraC.getSelectedItem());
-        System.out.println("Carrera: " + Carrera + "\n");
-    }//GEN-LAST:event_jCmbCarreraCActionPerformed
-
-    private void jCmbSemestreCFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestreCFocusGained
-        BD mBD = new BD();
-        this.jCmbSemestreC.removeAllItems();
-        try {
-            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaC.getSelectedItem()), String.valueOf(this.jCmbCarreraC.getSelectedItem()));
-            for (Lista actual : mLista) {
-                this.jCmbSemestreC.addItem(String.valueOf(actual.getSemestre()));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCmbSemestreCFocusGained
-
-    private void jCmbSemestreCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreCActionPerformed
-        Semestre = String.valueOf(this.jCmbSemestreC.getSelectedItem());
-        System.out.println("Semestre: " + Semestre + "\n");
-    }//GEN-LAST:event_jCmbSemestreCActionPerformed
-
-    private void jCmbGrupoCFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoCFocusGained
-        BD mBD = new BD();
-        this.jCmbGrupoC.removeAllItems();
-        try {
-
-            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaC.getSelectedItem()), String.valueOf(this.jCmbCarreraC.getSelectedItem()), Semestre);
-
-            for (Lista actual : mLista) {
-                this.jCmbGrupoC.addItem(String.valueOf(actual.getGrupo()));
-            }
-        } catch (SQLException ex) {
-
-        }
-    }//GEN-LAST:event_jCmbGrupoCFocusGained
-
-    private void jCmbGrupoCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoCActionPerformed
-        Grupo = String.valueOf(this.jCmbGrupoC.getSelectedItem());
-        System.out.println("Grupo: " + Grupo + "\n");
-    }//GEN-LAST:event_jCmbGrupoCActionPerformed
-
-    private void jBtnBuscarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarCActionPerformed
-        try {
+            //Consulta alumno
             BD mBD = new BD();
             List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
             for (Lista actual : mLista) {
@@ -5105,24 +6234,27 @@ public class FrmPrincipal extends javax.swing.JDialog {
             System.out.println(IDAl);
             List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(IDAl));
             int cont = 1;
-
             if (lista.isEmpty()) {
 
-                JOptionPane.showMessageDialog(rootPane, "Lista vacia.");
-                jTblConocimiento.setTableHeader(null);
-                DefaultTableModel tb = (DefaultTableModel) jTblConocimiento.getModel();
-                int a = jTblConocimiento.getRowCount() - 1;
+                JOptionPane.showMessageDialog(rootPane, "Esta lista esta vacia.");
+                jTblProducto.setTableHeader(null);
+
+                DefaultTableModel tb = (DefaultTableModel) jTblProducto.getModel();
+                int a = jTblProducto.getRowCount() - 1;
                 for (int i = a; i >= 0; i--) {
                     tb.removeRow(tb.getRowCount() - 1);
                 }
 
                 Object[] encabezado = {};
                 DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-                jTblConocimiento.setModel(modelo);
-                jCmbUnidadC.setEnabled(false);
-                this.jBtnAgregarC.setEnabled(false);
-                this.jBtnCancelarC.setEnabled(false);
+                jTblProducto.setModel(modelo);
 
+                this.jCmbUnidadP.setEnabled(false);
+                this.jTxtNombreProducto.setEnabled(false);
+                this.jTxtNombreProducto.setText("");
+                this.jBtnAgregarP.setEnabled(false);
+                this.jBtnGuardarP.setVisible(false);
+                this.jBtnCancelarP.setEnabled(false);
             } else {
                 //Mostrar la consulta alumno
                 Object[] encabezado = {"No", "NC", "Nombre"};
@@ -5132,222 +6264,109 @@ public class FrmPrincipal extends javax.swing.JDialog {
                     modelo.addRow(fila);
                     cont++;
                 }
-                this.jTblConocimiento.setModel(modelo);
-                this.jCmbUnidadC.setEnabled(true);
-                this.jBtnAgregarC.setEnabled(true);
-                this.jBtnCancelarC.setEnabled(true);
+                this.jTblProducto.setModel(modelo);
+                this.jCmbUnidadP.setEnabled(true);
+                this.jTxtNombreProducto.setEnabled(true);
+                this.jTxtNombreProducto.setText("");
+                this.jBtnAgregarP.setEnabled(true);
+                this.jBtnGuardarP.setVisible(false);
+                this.jBtnCancelarP.setEnabled(true);
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jBtnBuscarCActionPerformed
+    }//GEN-LAST:event_jBtnBuscarPActionPerformed
 
-    private void jBtnAgregarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarCActionPerformed
-        String Unidad = this.jCmbUnidadC.getSelectedItem().toString();
-        boolean a = false;
-        BD mBD = new BD();
-        String Unidad2;
-        List<Alumno> lista;
-
-        try {
-            List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
-            for (Lista actual : mLista) {
-                IDAl = String.valueOf(actual.getIdLista());
-            }
-
-            List<Conocimiento> listaC = mBD.consultarListaUnidadesC(Integer.parseInt(IDAl), Unidad);
-
-            for (Conocimiento actual : listaC) {
-                Unidad2 = String.valueOf(actual.getUnidad());
-                System.out.println(Unidad2);
-                if (Unidad2.equals(jTxtNombreProducto.getText())) {
-                    a = true;
-                    System.out.println(Unidad2 + "*");
-                }
-
-            }
-            if (a == false) {
-                lista = mBD.consultarAlumno(Integer.parseInt(IDAl));
-
-                int cont = 1;
-                String Nombre = "Unidad " + Unidad;
-                //Mostrar la consulta alumno
-                Object[] encabezado = {"No", "NC", "Nombre", Nombre};
-                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-                for (Alumno actual : lista) {
-
-                    Object[] fila = {cont, actual.getNC(), actual.getNombre(), ""};
-                    modelo.addRow(fila);
-                    cont++;
-                }
-                this.jTblConocimiento.setModel(modelo);
-
-                this.jBtnAgregarC.setEnabled(false);
-                this.jCmbUnidadC.setEnabled(false);
-                this.jBtnGuardarC.setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Existe unidad");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class
-                .getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jBtnAgregarCActionPerformed
-
-    private void jBtnCancelarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarCActionPerformed
-        jTblConocimiento.setTableHeader(null);
-        DefaultTableModel tb = (DefaultTableModel) jTblConocimiento.getModel();
-        int a = jTblConocimiento.getRowCount() - 1;
-        for (int i = a; i >= 0; i--) {
-            tb.removeRow(tb.getRowCount() - 1);
-        }
-
-        Object[] encabezado = {};
-        DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-        jTblConocimiento.setModel(modelo);
-        this.jBtnGuardarC.setEnabled(false);
-        this.jBtnAgregarC.setEnabled(false);
-        this.jCmbUnidadC.setEnabled(false);
-        this.jBtnCancelarC.setEnabled(false);
-    }//GEN-LAST:event_jBtnCancelarCActionPerformed
-
-    private void jBtnGuardarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuardarCActionPerformed
-        String Nombre;
-        String NC;
-        String Calificacion;
-        String ID = "";
-        BD mBD = new BD();
-        String Unidad = (String) this.jCmbUnidadC.getSelectedItem();
-
-        boolean Vacio = true;
-        try {
-            for (int y = 0; y < jTblConocimiento.getRowCount(); y++) {
-                if (jTblConocimiento.getValueAt(y, 3) == "" || jTblConocimiento.getValueAt(y, 3) == null) {
-                    Vacio = false;
-                }
-                System.out.println(Vacio);
-            }
-            if (Vacio == true) {
-                for (int i = 0; i < jTblConocimiento.getRowCount(); i++) {
-                    Nombre = jTblConocimiento.getValueAt(i, 2).toString();
-                    NC = jTblConocimiento.getValueAt(i, 1).toString();
-                    List<Alumno> mLista = mBD.ConsultaIDAlumno(Integer.parseInt(NC), Nombre);
-                    for (Alumno actual : mLista) {
-                        ID = String.valueOf(actual.getIdAlumno());
-                    }
-                    Calificacion = jTblConocimiento.getValueAt(i, 3).toString();
-                    Conocimiento mConocimiento = new Conocimiento();
-                    mConocimiento.setCalificacion(Integer.parseInt(Calificacion));
-                    mConocimiento.setUnidad(Integer.parseInt(Unidad));
-                    mBD.agregarConocimiento(mConocimiento, Integer.parseInt(ID));
-                }
-
-                JOptionPane.showMessageDialog(this, "Conocimiento guardado");
-                this.jBtnGuardarC.setVisible(false);
-                this.jBtnCancelarC.setEnabled(false);
-                jTblConocimiento.setTableHeader(null);
-                DefaultTableModel tb = (DefaultTableModel) jTblConocimiento.getModel();
-                int a = jTblConocimiento.getRowCount() - 1;
-                for (int i = a; i >= 0; i--) {
-                    tb.removeRow(tb.getRowCount() - 1);
-                }
-
-                Object[] encabezado = {};
-                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-                jTblConocimiento.setModel(modelo);
-
-                Object[] encabezado1 = {};
-                DefaultTableModel modelo1 = new DefaultTableModel(null, encabezado1);
-                jTblConocimiento1.setModel(modelo1);
-
-            } else if (Vacio == false) {
-                JOptionPane.showMessageDialog(this, "Hay campo(s) vacio(s), favor de verificar");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class
-                .getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jBtnGuardarCActionPerformed
-
-    private void jCmbMateriaC1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaC1FocusGained
-        BD mBD = new BD();
-        this.jCmbMateriaC1.removeAllItems();
-        this.jCmbCarreraC1.removeAllItems();
-        this.jCmbSemestreC1.removeAllItems();
-        this.jCmbGrupoC1.removeAllItems();
-        try {
-            List<Lista> mLista = mBD.consultarListaMateria();
-            for (Lista actual : mLista) {
-                this.jCmbMateriaC1.addItem(actual.getMateria());
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCmbMateriaC1FocusGained
-
-    private void jCmbMateriaC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaC1ActionPerformed
-        Materia = String.valueOf(this.jCmbMateriaC1.getSelectedItem());
-        System.out.println("Materia: " + Materia + "\n");
-    }//GEN-LAST:event_jCmbMateriaC1ActionPerformed
-
-    private void jCmbCarreraC1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraC1FocusGained
-        BD mBD = new BD();
-        this.jCmbCarreraC1.removeAllItems();
-        this.jCmbSemestreC1.removeAllItems();
-        this.jCmbGrupoC1.removeAllItems();
-        try {
-            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaC1.getSelectedItem()));
-            for (Lista actual : mLista) {
-                this.jCmbCarreraC1.addItem(actual.getCarrera());
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCmbCarreraC1FocusGained
-
-    private void jCmbCarreraC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraC1ActionPerformed
-        Carrera = String.valueOf(this.jCmbCarreraC1.getSelectedItem());
-        System.out.println("Carrera: " + Carrera + "\n");
-    }//GEN-LAST:event_jCmbCarreraC1ActionPerformed
-
-    private void jCmbSemestreC1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestreC1FocusGained
-        BD mBD = new BD();
-        this.jCmbSemestreC1.removeAllItems();
-        try {
-            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaC1.getSelectedItem()), String.valueOf(this.jCmbCarreraC1.getSelectedItem()));
-            for (Lista actual : mLista) {
-                this.jCmbSemestreC1.addItem(String.valueOf(actual.getSemestre()));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCmbSemestreC1FocusGained
-
-    private void jCmbSemestreC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreC1ActionPerformed
-        Semestre = String.valueOf(this.jCmbSemestreC1.getSelectedItem());
-        System.out.println("Semestre: " + Semestre + "\n");
-    }//GEN-LAST:event_jCmbSemestreC1ActionPerformed
-
-    private void jCmbGrupoC1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoC1FocusGained
-        BD mBD = new BD();
-        this.jCmbGrupoC1.removeAllItems();
-        try {
-
-            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaC1.getSelectedItem()), String.valueOf(this.jCmbCarreraC1.getSelectedItem()), Semestre);
-
-            for (Lista actual : mLista) {
-                this.jCmbGrupoC1.addItem(String.valueOf(actual.getGrupo()));
-            }
-        } catch (SQLException ex) {
-
-        }
-    }//GEN-LAST:event_jCmbGrupoC1FocusGained
-
-    private void jCmbGrupoC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoC1ActionPerformed
-        Grupo = String.valueOf(this.jCmbGrupoC1.getSelectedItem());
+    private void jCmbGrupoPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoPActionPerformed
+        Grupo = String.valueOf(this.jCmbGrupoP.getSelectedItem());
         System.out.println("Grupo: " + Grupo + "\n");
-    }//GEN-LAST:event_jCmbGrupoC1ActionPerformed
+    }//GEN-LAST:event_jCmbGrupoPActionPerformed
+
+    private void jCmbGrupoPFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoPFocusGained
+        BD mBD = new BD();
+        this.jCmbGrupoP.removeAllItems();
+        try {
+
+            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaP.getSelectedItem()), String.valueOf(this.jCmbCarreraP.getSelectedItem()), Semestre);
+
+            for (Lista actual : mLista) {
+                this.jCmbGrupoP.addItem(String.valueOf(actual.getGrupo()));
+            }
+        } catch (SQLException ex) {
+
+        }
+    }//GEN-LAST:event_jCmbGrupoPFocusGained
+
+    private void jBtnAgregarC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarC1ActionPerformed
+        try {
+            BD mBD = new BD();
+            String Unidad = this.jCmbUnidadC1.getSelectedItem().toString();
+            int calificacion;
+            String Nombre;
+            int NC;
+            int IdD = 0;
+            int IdA = 0;
+            int cont = 0;
+
+            Conocimiento mConocimiento = new Conocimiento();
+            List<Conocimiento> lista2 = mBD.ConsultaCUnidad(Integer.parseInt(IDCon), Integer.parseInt(Unidad));
+
+            for (Conocimiento actual : lista2) {
+                cont++;
+            }
+            int d = 3 + cont;
+            for (int j = 3; j < d; j++) {
+                for (int i = 0; i < jTblConocimiento1.getRowCount(); i++) {
+                    DefaultTableModel modelo = (DefaultTableModel) jTblConocimiento1.getModel();
+                    JTableHeader th = jTblConocimiento1.getTableHeader();
+                    TableColumnModel tcm = th.getColumnModel();
+                    TableColumn tcmn = tcm.getColumn(j);
+                    tcmn.getHeaderValue();
+
+                    System.out.println(tcmn.getHeaderValue().toString());
+
+                    calificacion = Integer.parseInt(jTblConocimiento1.getValueAt(i, j).toString());
+                    Nombre = jTblConocimiento1.getValueAt(i, 2).toString();
+                    NC = Integer.parseInt(jTblConocimiento1.getValueAt(i, 1).toString());
+
+                    List<Alumno> mLista3 = mBD.ConsultaIDAlumno(NC, Nombre);
+                    for (Alumno actual3 : mLista3) {
+                        IdA = actual3.getIdAlumno();
+                    }
+
+                    System.out.println(calificacion);
+                    List<Conocimiento> mLista2 = mBD.ConsultaIDConocimiento(tcmn.getHeaderValue().toString(), IdA);
+                    for (Conocimiento actual2 : mLista2) {
+                        IdD = actual2.getIdConocimiento();
+                    }
+
+                    System.out.println(IdD);
+                    mConocimiento.setCalificacion(calificacion);
+                    mConocimiento.setUnidad(Integer.parseInt(tcmn.getHeaderValue().toString()));
+                    mConocimiento.setIdConocimiento(IdD);
+                    mBD.modificarConocimiento(mConocimiento, IdA);
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Conocimiento(s) actualizado(s)");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnAgregarC1ActionPerformed
+
+    private void jCmbUnidadC1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbUnidadC1FocusGained
+        BD mBD = new BD();
+        this.jCmbUnidadC1.removeAllItems();
+        try {
+            List<Conocimiento> mLista = mBD.ConsultaConoUnidad();
+            for (Conocimiento actual : mLista) {
+                this.jCmbUnidadC1.addItem(String.valueOf(actual.getUnidad()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbUnidadC1FocusGained
 
     private void jBtnBuscarC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarC1ActionPerformed
         int q = 3;
@@ -5407,94 +6426,213 @@ public class FrmPrincipal extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jBtnBuscarC1ActionPerformed
 
-    private void jCmbUnidadC1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbUnidadC1FocusGained
-        BD mBD = new BD();
-        this.jCmbUnidadC1.removeAllItems();
-        try {
-            List<Conocimiento> mLista = mBD.ConsultaConoUnidad();
-            for (Conocimiento actual : mLista) {
-                this.jCmbUnidadC1.addItem(String.valueOf(actual.getUnidad()));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCmbUnidadC1FocusGained
-
-    private void jBtnAgregarC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarC1ActionPerformed
-        try {
-            BD mBD = new BD();
-            String Unidad = this.jCmbUnidadC1.getSelectedItem().toString();
-            int calificacion;
-            String Nombre;
-            int NC;
-            int IdD = 0;
-            int IdA = 0;
-            int cont = 0;
-
-            Conocimiento mConocimiento = new Conocimiento();
-            List<Conocimiento> lista2 = mBD.ConsultaCUnidad(Integer.parseInt(IDCon), Integer.parseInt(Unidad));
-
-            for (Conocimiento actual : lista2) {
-                cont++;
-            }
-            int d = 3 + cont;
-            for (int j = 3; j < d; j++) {
-                for (int i = 0; i < jTblConocimiento1.getRowCount(); i++) {
-                    DefaultTableModel modelo = (DefaultTableModel) jTblConocimiento1.getModel();
-                    JTableHeader th = jTblConocimiento1.getTableHeader();
-                    TableColumnModel tcm = th.getColumnModel();
-                    TableColumn tcmn = tcm.getColumn(j);
-                    tcmn.getHeaderValue();
-
-                    System.out.println(tcmn.getHeaderValue().toString());
-
-                    calificacion = Integer.parseInt(jTblConocimiento1.getValueAt(i, j).toString());
-                    Nombre = jTblConocimiento1.getValueAt(i, 2).toString();
-                    NC = Integer.parseInt(jTblConocimiento1.getValueAt(i, 1).toString());
-
-                    List<Alumno> mLista3 = mBD.ConsultaIDAlumno(NC, Nombre);
-                    for (Alumno actual3 : mLista3) {
-                        IdA = actual3.getIdAlumno();
-                    }
-
-                    System.out.println(calificacion);
-                    List<Conocimiento> mLista2 = mBD.ConsultaIDConocimiento(tcmn.getHeaderValue().toString(), IdA);
-                    for (Conocimiento actual2 : mLista2) {
-                        IdD = actual2.getIdConocimiento();
-                    }
-
-                    System.out.println(IdD);
-                    mConocimiento.setCalificacion(calificacion);
-                    mConocimiento.setUnidad(Integer.parseInt(tcmn.getHeaderValue().toString()));
-                    mConocimiento.setIdConocimiento(IdD);
-                    mBD.modificarConocimiento(mConocimiento, IdA);
-                }
-            }
-            JOptionPane.showMessageDialog(null, "Conocimiento(s) actualizado(s)");
-
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jBtnAgregarC1ActionPerformed
-
-    private void jCmbGrupoPEFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoPEFocusGained
-        BD mBD = new BD();
-        this.jCmbGrupoPE.removeAllItems();
-        try {
-            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaPE.getSelectedItem()), String.valueOf(this.jCmbCarreraPE.getSelectedItem()), Semestre);
-            for (Lista actual : mLista) {
-                this.jCmbGrupoPE.addItem(String.valueOf(actual.getGrupo()));
-            }
-        } catch (SQLException ex) {
-        }
-    }//GEN-LAST:event_jCmbGrupoPEFocusGained
-
-    private void jCmbGrupoPEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoPEActionPerformed
-        Grupo = String.valueOf(this.jCmbGrupoPE.getSelectedItem());
+    private void jCmbGrupoC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoC1ActionPerformed
+        Grupo = String.valueOf(this.jCmbGrupoC1.getSelectedItem());
         System.out.println("Grupo: " + Grupo + "\n");
-    }//GEN-LAST:event_jCmbGrupoPEActionPerformed
+    }//GEN-LAST:event_jCmbGrupoC1ActionPerformed
 
-    private void jBtnBuscarPEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarPEActionPerformed
+    private void jCmbGrupoC1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoC1FocusGained
+        BD mBD = new BD();
+        this.jCmbGrupoC1.removeAllItems();
+        try {
+
+            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaC1.getSelectedItem()), String.valueOf(this.jCmbCarreraC1.getSelectedItem()), Semestre);
+
+            for (Lista actual : mLista) {
+                this.jCmbGrupoC1.addItem(String.valueOf(actual.getGrupo()));
+            }
+        } catch (SQLException ex) {
+
+        }
+    }//GEN-LAST:event_jCmbGrupoC1FocusGained
+
+    private void jCmbSemestreC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreC1ActionPerformed
+        Semestre = String.valueOf(this.jCmbSemestreC1.getSelectedItem());
+        System.out.println("Semestre: " + Semestre + "\n");
+    }//GEN-LAST:event_jCmbSemestreC1ActionPerformed
+
+    private void jCmbSemestreC1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestreC1FocusGained
+        BD mBD = new BD();
+        this.jCmbSemestreC1.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaC1.getSelectedItem()), String.valueOf(this.jCmbCarreraC1.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbSemestreC1.addItem(String.valueOf(actual.getSemestre()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbSemestreC1FocusGained
+
+    private void jCmbCarreraC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraC1ActionPerformed
+        Carrera = String.valueOf(this.jCmbCarreraC1.getSelectedItem());
+        System.out.println("Carrera: " + Carrera + "\n");
+    }//GEN-LAST:event_jCmbCarreraC1ActionPerformed
+
+    private void jCmbCarreraC1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraC1FocusGained
+        BD mBD = new BD();
+        this.jCmbCarreraC1.removeAllItems();
+        this.jCmbSemestreC1.removeAllItems();
+        this.jCmbGrupoC1.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaC1.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbCarreraC1.addItem(actual.getCarrera());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbCarreraC1FocusGained
+
+    private void jCmbMateriaC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaC1ActionPerformed
+        Materia = String.valueOf(this.jCmbMateriaC1.getSelectedItem());
+        System.out.println("Materia: " + Materia + "\n");
+    }//GEN-LAST:event_jCmbMateriaC1ActionPerformed
+
+    private void jCmbMateriaC1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaC1FocusGained
+        BD mBD = new BD();
+        this.jCmbMateriaC1.removeAllItems();
+        this.jCmbCarreraC1.removeAllItems();
+        this.jCmbSemestreC1.removeAllItems();
+        this.jCmbGrupoC1.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaMateria();
+            for (Lista actual : mLista) {
+                this.jCmbMateriaC1.addItem(actual.getMateria());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbMateriaC1FocusGained
+
+    private void jBtnGuardarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuardarCActionPerformed
+        String Nombre;
+        String NC;
+        String Calificacion;
+        String ID = "";
+        BD mBD = new BD();
+        String Unidad = (String) this.jCmbUnidadC.getSelectedItem();
+
+        boolean Vacio = true;
+        try {
+            for (int y = 0; y < jTblConocimiento.getRowCount(); y++) {
+                if (jTblConocimiento.getValueAt(y, 3) == "" || jTblConocimiento.getValueAt(y, 3) == null) {
+                    Vacio = false;
+                }
+                System.out.println(Vacio);
+            }
+            if (Vacio == true) {
+                for (int i = 0; i < jTblConocimiento.getRowCount(); i++) {
+                    Nombre = jTblConocimiento.getValueAt(i, 2).toString();
+                    NC = jTblConocimiento.getValueAt(i, 1).toString();
+                    List<Alumno> mLista = mBD.ConsultaIDAlumno(Integer.parseInt(NC), Nombre);
+                    for (Alumno actual : mLista) {
+                        ID = String.valueOf(actual.getIdAlumno());
+                    }
+                    Calificacion = jTblConocimiento.getValueAt(i, 3).toString();
+                    Conocimiento mConocimiento = new Conocimiento();
+                    mConocimiento.setCalificacion(Integer.parseInt(Calificacion));
+                    mConocimiento.setUnidad(Integer.parseInt(Unidad));
+                    mBD.agregarConocimiento(mConocimiento, Integer.parseInt(ID));
+                }
+
+                JOptionPane.showMessageDialog(this, "Conocimiento guardado");
+                this.jBtnGuardarC.setVisible(false);
+                this.jBtnCancelarC.setEnabled(false);
+                jTblConocimiento.setTableHeader(null);
+                DefaultTableModel tb = (DefaultTableModel) jTblConocimiento.getModel();
+                int a = jTblConocimiento.getRowCount() - 1;
+                for (int i = a; i >= 0; i--) {
+                    tb.removeRow(tb.getRowCount() - 1);
+                }
+
+                Object[] encabezado = {};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                jTblConocimiento.setModel(modelo);
+
+                Object[] encabezado1 = {};
+                DefaultTableModel modelo1 = new DefaultTableModel(null, encabezado1);
+                jTblConocimiento1.setModel(modelo1);
+
+            } else if (Vacio == false) {
+                JOptionPane.showMessageDialog(this, "Hay campo(s) vacio(s), favor de verificar");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnGuardarCActionPerformed
+
+    private void jBtnCancelarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarCActionPerformed
+        jTblConocimiento.setTableHeader(null);
+        DefaultTableModel tb = (DefaultTableModel) jTblConocimiento.getModel();
+        int a = jTblConocimiento.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            tb.removeRow(tb.getRowCount() - 1);
+        }
+
+        Object[] encabezado = {};
+        DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+        jTblConocimiento.setModel(modelo);
+        this.jBtnGuardarC.setEnabled(false);
+        this.jBtnAgregarC.setEnabled(false);
+        this.jCmbUnidadC.setEnabled(false);
+        this.jBtnCancelarC.setEnabled(false);
+    }//GEN-LAST:event_jBtnCancelarCActionPerformed
+
+    private void jBtnAgregarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarCActionPerformed
+        String Unidad = this.jCmbUnidadC.getSelectedItem().toString();
+        boolean a = false;
+        BD mBD = new BD();
+        String Unidad2;
+        List<Alumno> lista;
+
+        try {
+            List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+            for (Lista actual : mLista) {
+                IDAl = String.valueOf(actual.getIdLista());
+            }
+
+            List<Conocimiento> listaC = mBD.consultarListaUnidadesC(Integer.parseInt(IDAl), Unidad);
+
+            for (Conocimiento actual : listaC) {
+                Unidad2 = String.valueOf(actual.getUnidad());
+                System.out.println(Unidad2);
+                if (Unidad2.equals(jTxtNombreProducto.getText())) {
+                    a = true;
+                    System.out.println(Unidad2 + "*");
+                }
+
+            }
+            if (a == false) {
+                lista = mBD.consultarAlumno(Integer.parseInt(IDAl));
+
+                int cont = 1;
+                String Nombre = "Unidad " + Unidad;
+                //Mostrar la consulta alumno
+                Object[] encabezado = {"No", "NC", "Nombre", Nombre};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                for (Alumno actual : lista) {
+
+                    Object[] fila = {cont, actual.getNC(), actual.getNombre(), ""};
+                    modelo.addRow(fila);
+                    cont++;
+                }
+                this.jTblConocimiento.setModel(modelo);
+
+                this.jBtnAgregarC.setEnabled(false);
+                this.jCmbUnidadC.setEnabled(false);
+                this.jBtnGuardarC.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Existe unidad");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnAgregarCActionPerformed
+
+    private void jBtnBuscarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarCActionPerformed
         try {
             BD mBD = new BD();
             List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
@@ -5508,16 +6646,19 @@ public class FrmPrincipal extends javax.swing.JDialog {
             if (lista.isEmpty()) {
 
                 JOptionPane.showMessageDialog(rootPane, "Lista vacia.");
-                jTblPuntosExtras.setTableHeader(null);
-                DefaultTableModel tb = (DefaultTableModel) jTblPuntosExtras.getModel();
-                int a = jTblPuntosExtras.getRowCount() - 1;
+                jTblConocimiento.setTableHeader(null);
+                DefaultTableModel tb = (DefaultTableModel) jTblConocimiento.getModel();
+                int a = jTblConocimiento.getRowCount() - 1;
                 for (int i = a; i >= 0; i--) {
                     tb.removeRow(tb.getRowCount() - 1);
                 }
 
                 Object[] encabezado = {};
                 DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-                jTblPuntosExtras.setModel(modelo);
+                jTblConocimiento.setModel(modelo);
+                jCmbUnidadC.setEnabled(false);
+                this.jBtnAgregarC.setEnabled(false);
+                this.jBtnCancelarC.setEnabled(false);
 
             } else {
                 //Mostrar la consulta alumno
@@ -5528,225 +6669,811 @@ public class FrmPrincipal extends javax.swing.JDialog {
                     modelo.addRow(fila);
                     cont++;
                 }
-                this.jTblPuntosExtras.setModel(modelo);
-                this.jCmbUnidadPE.setEnabled(true);
-                this.jTxtPuntosExtras.setEnabled(true);
-                this.jBtnGuardarPE.setEnabled(true);
-                this.jBtnCancelarPE.setEnabled(true);
+                this.jTblConocimiento.setModel(modelo);
+                this.jCmbUnidadC.setEnabled(true);
+                this.jBtnAgregarC.setEnabled(true);
+                this.jBtnCancelarC.setEnabled(true);
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jBtnBuscarPEActionPerformed
+    }//GEN-LAST:event_jBtnBuscarCActionPerformed
 
-    private void jCmbSemestrePEFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestrePEFocusGained
+    private void jCmbGrupoCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoCActionPerformed
+        Grupo = String.valueOf(this.jCmbGrupoC.getSelectedItem());
+        System.out.println("Grupo: " + Grupo + "\n");
+    }//GEN-LAST:event_jCmbGrupoCActionPerformed
+
+    private void jCmbGrupoCFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoCFocusGained
         BD mBD = new BD();
-        this.jCmbSemestrePE.removeAllItems();
+        this.jCmbGrupoC.removeAllItems();
         try {
-            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaPE.getSelectedItem()), String.valueOf(this.jCmbCarreraPE.getSelectedItem()));
+
+            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaC.getSelectedItem()), String.valueOf(this.jCmbCarreraC.getSelectedItem()), Semestre);
+
             for (Lista actual : mLista) {
-                this.jCmbSemestrePE.addItem(String.valueOf(actual.getSemestre()));
+                this.jCmbGrupoC.addItem(String.valueOf(actual.getGrupo()));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCmbSemestrePEFocusGained
 
-    private void jCmbSemestrePEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestrePEActionPerformed
-        Semestre = String.valueOf(this.jCmbSemestrePE.getSelectedItem());
+        }
+    }//GEN-LAST:event_jCmbGrupoCFocusGained
+
+    private void jCmbSemestreCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreCActionPerformed
+        Semestre = String.valueOf(this.jCmbSemestreC.getSelectedItem());
         System.out.println("Semestre: " + Semestre + "\n");
-    }//GEN-LAST:event_jCmbSemestrePEActionPerformed
+    }//GEN-LAST:event_jCmbSemestreCActionPerformed
 
-    private void jCmbCarreraPEFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraPEFocusGained
+    private void jCmbSemestreCFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestreCFocusGained
         BD mBD = new BD();
-        this.jCmbCarreraPE.removeAllItems();
-        this.jCmbSemestrePE.removeAllItems();
-        this.jCmbGrupoPE.removeAllItems();
+        this.jCmbSemestreC.removeAllItems();
         try {
-            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaPE.getSelectedItem()));
+            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaC.getSelectedItem()), String.valueOf(this.jCmbCarreraC.getSelectedItem()));
             for (Lista actual : mLista) {
-                this.jCmbCarreraPE.addItem(actual.getCarrera());
+                this.jCmbSemestreC.addItem(String.valueOf(actual.getSemestre()));
             }
         } catch (SQLException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jCmbCarreraPEFocusGained
+    }//GEN-LAST:event_jCmbSemestreCFocusGained
 
-    private void jCmbCarreraPEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraPEActionPerformed
-        Carrera = String.valueOf(this.jCmbCarreraPE.getSelectedItem());
+    private void jCmbCarreraCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraCActionPerformed
+        Carrera = String.valueOf(this.jCmbCarreraC.getSelectedItem());
         System.out.println("Carrera: " + Carrera + "\n");
-    }//GEN-LAST:event_jCmbCarreraPEActionPerformed
+    }//GEN-LAST:event_jCmbCarreraCActionPerformed
 
-    private void jCmbMateriaPEFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaPEFocusGained
+    private void jCmbCarreraCFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraCFocusGained
         BD mBD = new BD();
-        this.jCmbMateriaPE.removeAllItems();
-        this.jCmbCarreraPE.removeAllItems();
-        this.jCmbSemestrePE.removeAllItems();
-        this.jCmbGrupoPE.removeAllItems();
+        this.jCmbCarreraC.removeAllItems();
+        this.jCmbSemestreC.removeAllItems();
+        this.jCmbGrupoC.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaC.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbCarreraC.addItem(actual.getCarrera());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbCarreraCFocusGained
+
+    private void jCmbMateriaCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaCActionPerformed
+        Materia = String.valueOf(this.jCmbMateriaC.getSelectedItem());
+        System.out.println("Materia: " + Materia + "\n");
+    }//GEN-LAST:event_jCmbMateriaCActionPerformed
+
+    private void jCmbMateriaCFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaCFocusGained
+        BD mBD = new BD();
+        this.jCmbMateriaC.removeAllItems();
+        this.jCmbCarreraC.removeAllItems();
+        this.jCmbSemestreC.removeAllItems();
+        this.jCmbGrupoC.removeAllItems();
         try {
             List<Lista> mLista = mBD.consultarListaMateria();
             for (Lista actual : mLista) {
-                this.jCmbMateriaPE.addItem(actual.getMateria());
+                this.jCmbMateriaC.addItem(actual.getMateria());
             }
         } catch (SQLException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jCmbMateriaPEFocusGained
+    }//GEN-LAST:event_jCmbMateriaCFocusGained
 
-    private void jCmbMateriaPEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaPEActionPerformed
-        Materia = String.valueOf(this.jCmbMateriaPE.getSelectedItem());
-        System.out.println("Materia: " + Materia + "\n");
-    }//GEN-LAST:event_jCmbMateriaPEActionPerformed
-
-    private void jTblPuntosExtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblPuntosExtrasMouseClicked
-        BD mBD = new BD();
-
-        int fila = this.jTblPuntosExtras.getSelectedRow();
-        if (fila >= 0) {
-            int NC = (int) jTblPuntosExtras.getValueAt(fila, 1);
-            String Nombre = (String) jTblPuntosExtras.getValueAt(fila, 2);
-
-            this.jTxtNombreAlmPE.setText(Nombre);
-            this.jTxtNCAlmPE.setText(String.valueOf(NC));
+    private void jBtnBuscarAlmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarAlmActionPerformed
+        try {
+            // TODO add your handling code here:
+            this.LLenarTablaAlumno();
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jTblPuntosExtrasMouseClicked
+    }//GEN-LAST:event_jBtnBuscarAlmActionPerformed
 
-    private void jBtnGuardarPEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuardarPEActionPerformed
-        int NC = Integer.parseInt(jTxtNCAlmPE.getText());
-        String Nombre = jTxtNombreAlmPE.getText();
-        String PuntosExtras = jTxtPuntosExtras.getText();
+    private void jCmbMateriaAlmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaAlmActionPerformed
+        // TODO add your handling code here:
+        Materia = String.valueOf(this.jCmbMateriaAlm.getSelectedItem());
+        System.out.println("Materia: " + Materia + "\n");
+    }//GEN-LAST:event_jCmbMateriaAlmActionPerformed
+
+    private void jCmbMateriaAlmFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaAlmFocusGained
+        // TODO add your handling code here:
         BD mBD = new BD();
-        int IdA = 0;
-        if ((this.jTxtNCAlmPE.getText().equals("")) || (jTxtNombreAlmPE.getText().equals("")) || (jTxtPuntosExtras.getText().equals(""))) {
-            JOptionPane.showMessageDialog(rootPane, "Hay campos vacios");
-        } else {
-            List<Alumno> mLista3;
-            try {
-                mLista3 = mBD.ConsultaIDAlumno(NC, Nombre);
-                for (Alumno actual3 : mLista3) {
-                    IdA = actual3.getIdAlumno();
+        this.jCmbMateriaAlm.removeAllItems();
+        this.jCmbCarreraAlm.removeAllItems();
+        this.jCmbSemestreAlm.removeAllItems();
+        this.jCmbGrupoAlm.removeAllItems();
+
+        try {
+            List<Lista> mLista = mBD.consultarListaMateria();
+            for (Lista actual : mLista) {
+                this.jCmbMateriaAlm.addItem(actual.getMateria());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbMateriaAlmFocusGained
+
+    private void jCmbCarreraAlmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraAlmActionPerformed
+        // TODO add your handling code here:
+        Carrera = String.valueOf(this.jCmbCarreraAlm.getSelectedItem());
+        System.out.println("Carrera: " + Carrera + "\n");
+    }//GEN-LAST:event_jCmbCarreraAlmActionPerformed
+
+    private void jCmbCarreraAlmFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraAlmFocusGained
+        // TODO add your handling code here:
+        BD mBD = new BD();
+        this.jCmbCarreraAlm.removeAllItems();
+        this.jCmbSemestreAlm.removeAllItems();
+        this.jCmbGrupoAlm.removeAllItems();
+
+        try {
+            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaAlm.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbCarreraAlm.addItem(actual.getCarrera());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbCarreraAlmFocusGained
+
+    private void jCmbGrupoAlmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoAlmActionPerformed
+        // TODO add your handling code here:
+        Grupo = String.valueOf(this.jCmbGrupoAlm.getSelectedItem());
+        System.out.println("Grupo: " + Grupo + "\n");
+    }//GEN-LAST:event_jCmbGrupoAlmActionPerformed
+
+    private void jCmbGrupoAlmFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoAlmFocusGained
+        // TODO add your handling code here:
+        BD mBD = new BD();
+        this.jCmbGrupoAlm.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaAlm.getSelectedItem()), String.valueOf(this.jCmbCarreraAlm.getSelectedItem()), Semestre);
+            for (Lista actual : mLista) {
+                this.jCmbGrupoAlm.addItem(String.valueOf(actual.getGrupo()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbGrupoAlmFocusGained
+
+    private void jCmbSemestreAlmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreAlmActionPerformed
+        // TODO add your handling code here:
+        Semestre = String.valueOf(this.jCmbSemestreAlm.getSelectedItem());
+        System.out.println("Semestre: " + Semestre + "\n");
+    }//GEN-LAST:event_jCmbSemestreAlmActionPerformed
+
+    private void jCmbSemestreAlmFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestreAlmFocusGained
+        // TODO add your handling code here:
+        BD mBD = new BD();
+        this.jCmbSemestreAlm.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaAlm.getSelectedItem()), String.valueOf(this.jCmbCarreraAlm.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbSemestreAlm.addItem(String.valueOf(actual.getSemestre()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbSemestreAlmFocusGained
+
+    private void jBtnModificarAlmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnModificarAlmActionPerformed
+        try {
+            BD mBD = new BD();
+            String IDAlum = "";
+            Alumno mAlumno = new Alumno();
+            int fila = this.jTblConsultarAlumno.getSelectedRow();
+
+            if (fila >= 0) {
+                int NC = (int) jTblConsultarAlumno.getValueAt(fila, 1);
+                String Nombre = (String) jTblConsultarAlumno.getValueAt(fila, 2);
+                List<Alumno> mAlumno1 = mBD.ConsultaIDAlumno(NC, Nombre);
+                for (Alumno actual : mAlumno1) {
+                    IDAlum = String.valueOf(actual.getIdAlumno());
+                    System.out.println(IDAlum);
                 }
-                PuntosExtras mPuntos = new PuntosExtras();
-                mPuntos.setPuntos(Integer.parseInt(PuntosExtras));
-                mPuntos.setUnidad(Integer.parseInt(jCmbUnidadPE.getSelectedItem().toString()));
-                mBD.agregarPuntosExtras(mPuntos, IdA);
-                JOptionPane.showMessageDialog(rootPane, "Puntos agregados con exito");
+            }
 
-                this.jTxtPuntosExtras.setText("");
-                Object[] encabezado1 = {};
-                DefaultTableModel modelo1 = new DefaultTableModel(null, encabezado1);
-                jTblPuntosExtras1.setModel(modelo1);
+            mAlumno.setIdAlumno(Integer.parseInt(IDAlum));
+            mAlumno.setNC(Integer.parseInt(this.jTxtNCAlm.getText()));
+            mAlumno.setNombre(jTxtNombreAlm.getText());
 
-            } catch (SQLException ex) {
-                Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            mBD.modificarAlumno(mAlumno);
+            JOptionPane.showMessageDialog(this, "Alumno modificado");
+            this.LLenarTablaAlumno();
+            jTxtNCAlm.setText(null);
+            jTxtNombreAlm.setText(null);
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+        }
+    }//GEN-LAST:event_jBtnModificarAlmActionPerformed
+
+    private void jTblConsultarAlumnoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblConsultarAlumnoMouseClicked
+        BD mBD = new BD();
+
+        int fila = this.jTblConsultarAlumno.getSelectedRow();
+        if (fila >= 0) {
+            int NC = (int) jTblConsultarAlumno.getValueAt(fila, 1);
+            String Nombre = (String) jTblConsultarAlumno.getValueAt(fila, 2);
+
+            this.jTxtNombreAlm.setText(Nombre);
+            this.jTxtNCAlm.setText(String.valueOf(NC));
+        }
+    }//GEN-LAST:event_jTblConsultarAlumnoMouseClicked
+
+    private void jTxtNombreAlmKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtNombreAlmKeyTyped
+        // TODO add your handling code here:
+        if (!Character.isLetter(evt.getKeyChar())
+                != (evt.getKeyChar() == KeyEvent.VK_SPACE)
+                != (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTxtNombreAlmKeyTyped
+
+    private void jTxtNombreAlmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtNombreAlmActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtNombreAlmActionPerformed
+
+    private void jTxtNCAlmKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtNCAlmKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE)
+                && (caracter != '.')) {
+            /* lo que deseo colocar aqui es si ya se pulso el caracter (.) el mismo no se pueda repetir*/
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Ingresar Solo Números");
+        }
+    }//GEN-LAST:event_jTxtNCAlmKeyTyped
+
+    private void BtnGuardarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarAlumnoActionPerformed
+        // TODO add your handling code here:
+        if (((this.jTxtNCAl.getText().equals("")) | (this.TxtNombreAl.getText().equals("")) | (this.TxtPaternoAl.getText().equals("")) | (this.TxtMaternoAl.getText().equals("") | (this.jCmbMateriaAl.getItemCount() == 0) | (this.jCmbCarreraAl.getItemCount() == 0) | (this.jCmbSemestreAl.getItemCount() == 0) | (this.jCmbGrupoAl.getItemCount() == 0)))) {
+            JOptionPane.showMessageDialog(rootPane, "Exiten campos vacios");
+        } else {
+            try {
+                //Guardar Alummno
+                Alumno mAlumno = new Alumno();
+                String ApellidoP = this.TxtPaternoAl.getText();
+                String ApellidoM = this.TxtMaternoAl.getText();
+                String Nombre = this.TxtNombreAl.getText();
+
+                mAlumno.setNombre(ApellidoP + " " + ApellidoM + " " + Nombre);
+
+                mAlumno.setNC(Integer.parseInt(this.jTxtNCAl.getText()));
+
+                String Materia = String.valueOf(jCmbMateriaAl.getSelectedItem());
+                String Grupo = String.valueOf(jCmbGrupoAl.getSelectedItem());
+                String Carrera = String.valueOf(jCmbCarreraAl.getSelectedItem());
+                String Semestre = String.valueOf(jCmbSemestreAl.getSelectedItem());
+                //Guardar el productor usando su control
+                BD mBD = new BD();
+                String ID = "";
+                List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+                for (Lista actual : mLista) {
+                    ID = String.valueOf(actual.getIdLista());
+                }
+                mBD.agregarAlumno(mAlumno, ID);
+                JOptionPane.showMessageDialog(this, "Alumno guardado");
+
+                this.jTxtNCAl.setText(null);
+                this.TxtPaternoAl.setText(null);
+                this.TxtMaternoAl.setText(null);
+                this.TxtNombreAl.setText(null);
+                this.jCmbMateriaAl.removeAllItems();
+                this.jCmbCarreraAl.removeAllItems();
+                this.jCmbSemestreAl.removeAllItems();
+                this.jCmbGrupoAl.removeAllItems();
+
+            } catch (Exception ex) {
+                System.out.println(ex.toString());
             }
         }
-    }//GEN-LAST:event_jBtnGuardarPEActionPerformed
+    }//GEN-LAST:event_BtnGuardarAlumnoActionPerformed
 
-    private void jBtnCancelarPEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarPEActionPerformed
-        jTblPuntosExtras.setTableHeader(null);
-        DefaultTableModel tb = (DefaultTableModel) jTblPuntosExtras.getModel();
-        int a = jTblPuntosExtras.getRowCount() - 1;
+    private void TxtNombreAlKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtNombreAlKeyTyped
+        // TODO add your handling code here:
+        if (!Character.isLetter(evt.getKeyChar())
+                != (evt.getKeyChar() == KeyEvent.VK_SPACE)
+                != (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtNombreAlKeyTyped
+
+    private void jCmbMateriaAlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaAlActionPerformed
+        // TODO add your handling code here:
+        Materia = String.valueOf(this.jCmbMateriaAl.getSelectedItem());
+        System.out.println("Materia: " + Materia + "\n");
+    }//GEN-LAST:event_jCmbMateriaAlActionPerformed
+
+    private void jCmbMateriaAlFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaAlFocusGained
+        // TODO add your handling code here:
+        BD mBD = new BD();
+        this.jCmbMateriaAl.removeAllItems();
+        this.jCmbCarreraAl.removeAllItems();
+        this.jCmbSemestreAl.removeAllItems();
+        this.jCmbGrupoAl.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaMateria();
+            for (Lista actual : mLista) {
+                this.jCmbMateriaAl.addItem(actual.getMateria());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbMateriaAlFocusGained
+
+    private void jCmbSemestreAlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreAlActionPerformed
+        // TODO add your handling code here:
+        Semestre = String.valueOf(this.jCmbSemestreAl.getSelectedItem());
+        System.out.println("Semestre: " + Semestre + "\n");
+    }//GEN-LAST:event_jCmbSemestreAlActionPerformed
+
+    private void jCmbSemestreAlFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestreAlFocusGained
+        // TODO add your handling code here:
+        BD mBD = new BD();
+        this.jCmbSemestreAl.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaAl.getSelectedItem()), String.valueOf(this.jCmbCarreraAl.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbSemestreAl.addItem(String.valueOf(actual.getSemestre()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbSemestreAlFocusGained
+
+    private void jCmbGrupoAlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoAlActionPerformed
+        // TODO add your handling code here:
+        Grupo = String.valueOf(this.jCmbGrupoAl.getSelectedItem());
+        System.out.println("Grupo: " + Grupo + "\n");
+    }//GEN-LAST:event_jCmbGrupoAlActionPerformed
+
+    private void jCmbGrupoAlFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoAlFocusGained
+        // TODO add your handling code here:
+        BD mBD = new BD();
+        this.jCmbGrupoAl.removeAllItems();
+        try {
+
+            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaAl.getSelectedItem()), String.valueOf(this.jCmbCarreraAl.getSelectedItem()), Semestre);
+
+            for (Lista actual : mLista) {
+                this.jCmbGrupoAl.addItem(String.valueOf(actual.getGrupo()));
+            }
+        } catch (SQLException ex) {
+
+        }
+    }//GEN-LAST:event_jCmbGrupoAlFocusGained
+
+    private void jCmbCarreraAlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraAlActionPerformed
+        // TODO add your handling code here:
+        Carrera = String.valueOf(this.jCmbCarreraAl.getSelectedItem());
+        System.out.println("Carrera: " + Carrera + "\n");
+    }//GEN-LAST:event_jCmbCarreraAlActionPerformed
+
+//
+    private void jCmbCarreraAlFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraAlFocusGained
+        // TODO add your handling code here:
+        BD mBD = new BD();
+        this.jCmbCarreraAl.removeAllItems();
+        this.jCmbSemestreAl.removeAllItems();
+        this.jCmbGrupoAl.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaAl.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbCarreraAl.addItem(actual.getCarrera());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbCarreraAlFocusGained
+
+    private void TxtMaternoAlKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtMaternoAlKeyTyped
+        // TODO add your handling code here:
+        if (!Character.isLetter(evt.getKeyChar())
+                != (evt.getKeyChar() == KeyEvent.VK_SPACE)
+                != (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtMaternoAlKeyTyped
+
+    private void TxtPaternoAlKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtPaternoAlKeyTyped
+        // TODO add your handling code here:
+        if (!Character.isLetter(evt.getKeyChar())
+                != (evt.getKeyChar() == KeyEvent.VK_SPACE)
+                != (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtPaternoAlKeyTyped
+
+    private void jTxtNCAlKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtNCAlKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE)
+                && (caracter != '.')) {
+            /* lo que deseo colocar aqui es si ya se pulso el caracter (.) el mismo no se pueda repetir*/
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Ingresar Solo Números");
+        }
+    }//GEN-LAST:event_jTxtNCAlKeyTyped
+
+    private void jTblConsultarListaLsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblConsultarListaLsMouseClicked
+        // TODO add your handling code here:
+        BD mBD = new BD();
+        String IDLs = "";
+        try {
+            int fila = this.jTblConsultarListaLs.getSelectedRow();
+            this.BtnGuardarLista.setText("Actualizar");
+            if (fila >= 0) {
+                int IDLista = (int) jTblConsultarListaLs.getValueAt(fila, 0);
+                String Materia = (String) jTblConsultarListaLs.getValueAt(fila, 1);
+                String Grupo = (String) jTblConsultarListaLs.getValueAt(fila, 2);
+                int Semestre = (int) jTblConsultarListaLs.getValueAt(fila, 3);
+                String Carrera = (String) jTblConsultarListaLs.getValueAt(fila, 4);
+
+                List<Lista> mLista = mBD.ConsultaIDLista(Materia, Grupo, Semestre, Carrera);
+                for (Lista actual : mLista) {
+                    IDLs = String.valueOf(actual.getIdLista());
+                    System.out.println(IDLs);
+                }
+
+                IDL = IDLs;
+                System.out.println();
+
+                this.TxtMateriaLs.setText(Materia);
+                this.TxtGrupoLs.setText(Grupo);
+                this.TxtSemestreLs.setText(String.valueOf(Semestre));
+                this.TxtCarreraLs.setText(Carrera);
+
+                opc = 1;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jTblConsultarListaLsMouseClicked
+
+    private void jTblConsultarListaLsFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTblConsultarListaLsFocusGained
+        try {
+            // TODO add your handling code here:
+            this.LLenarTablaLista();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jTblConsultarListaLsFocusGained
+
+    private void BtnGuardarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarListaActionPerformed
+        // TODO add your handling code here:
+        BD mBD = new BD();
+        Lista mLista = new Lista();
+        if (((this.TxtMateriaLs.getText().equals("")) | (this.TxtGrupoLs.getText().equals("")) | (this.TxtSemestreLs.getText().equals("")) | (this.TxtCarreraLs.getText().equals("")))) {
+            JOptionPane.showMessageDialog(rootPane, "Exiten campos vacios");
+        } else {
+            switch (opc) {
+                case 0:
+                    try {
+                        //Agregar Lista
+
+                        mLista.setCarrera(TxtCarreraLs.getText());
+                        mLista.setGrupo(TxtGrupoLs.getText());
+                        mLista.setMateria(TxtMateriaLs.getText());
+                        mLista.setSemestre(Integer.parseInt(TxtSemestreLs.getText()));
+
+                        //Guardar el productor usando su control
+                        mBD.agregarLista(mLista);
+                        JOptionPane.showMessageDialog(this, "Lista guardada");
+                        this.LLenarTablaLista();
+                        this.LimpiarCamposLista();
+                    } catch (Exception ex) {
+                        System.out.println(ex.toString());
+                    }
+                    break;
+                case 1:
+                    try {
+                        //Modificar Lista
+                        int fila = this.jTblConsultarListaLs.getSelectedRow();
+
+                        if (fila >= 0) {
+                            mLista.setIdLista(Integer.parseInt(IDL));
+                            mLista.setMateria(this.TxtMateriaLs.getText());
+                            mLista.setGrupo(this.TxtGrupoLs.getText());
+                            mLista.setSemestre(Integer.parseInt(this.TxtSemestreLs.getText()));
+                            mLista.setCarrera(this.TxtCarreraLs.getText());
+
+                            mBD.modificarLista(mLista);
+                            JOptionPane.showMessageDialog(null, "Lista modificada");
+                            this.LLenarTablaLista();
+                            this.LimpiarCamposLista();
+                            this.BtnGuardarLista.setText("Guardar");
+                            opc = 0;
+
+                        }
+
+                    } catch (Exception ex) {
+                        System.out.println(ex.toString());
+                    }
+                    break;
+                default:
+                    opc = 0;
+                    break;
+            }
+
+        }
+    }//GEN-LAST:event_BtnGuardarListaActionPerformed
+
+    private void TxtCarreraLsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtCarreraLsKeyTyped
+        // TODO add your handling code here:
+        if (!Character.isLetter(evt.getKeyChar())
+                != (evt.getKeyChar() == KeyEvent.VK_SPACE)
+                != (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtCarreraLsKeyTyped
+
+    private void TxtSemestreLsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtSemestreLsKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE)
+                && (caracter != '.')) {
+            /* lo que deseo colocar aqui es si ya se pulso el caracter (.) el mismo no se pueda repetir*/
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Ingresar Solo Números");
+        }
+    }//GEN-LAST:event_TxtSemestreLsKeyTyped
+
+    private void TxtGrupoLsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtGrupoLsKeyTyped
+        // TODO add your handling code here:
+        if (!Character.isLetter(evt.getKeyChar())
+                != (evt.getKeyChar() == KeyEvent.VK_SPACE)
+                != (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtGrupoLsKeyTyped
+
+    private void TxtMateriaLsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtMateriaLsKeyTyped
+        // TODO add your handling code here:
+        if (!Character.isLetter(evt.getKeyChar())
+                != (evt.getKeyChar() == KeyEvent.VK_SPACE)
+                != (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtMateriaLsKeyTyped
+
+    private void jCmbGrupoEDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoEDFocusGained
+        BD mBD = new BD();
+        this.jCmbGrupoED.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaED.getSelectedItem()), String.valueOf(this.jCmbCarreraED.getSelectedItem()), Semestre);
+            for (Lista actual : mLista) {
+                this.jCmbGrupoED.addItem(String.valueOf(actual.getGrupo()));
+            }
+        } catch (SQLException ex) {
+            //            Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbGrupoEDFocusGained
+
+    private void jCmbGrupoEDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoEDActionPerformed
+        Grupo = String.valueOf(this.jCmbGrupoED.getSelectedItem());
+        System.out.println("Grupo: " + Grupo + "\n");
+    }//GEN-LAST:event_jCmbGrupoEDActionPerformed
+
+    private void jBtnBuscarEDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarEDActionPerformed
+        try {
+            BD mBD = new BD();
+            List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+            for (Lista actual : mLista) {
+                IDAl = String.valueOf(actual.getIdLista());
+            }
+            System.out.println(IDAl);
+            List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(IDAl));
+            int cont = 1;
+
+            if (lista.isEmpty()) {
+
+                JOptionPane.showMessageDialog(rootPane, "Lista vacia.");
+                jTblEvaluacionD.setTableHeader(null);
+                DefaultTableModel tb = (DefaultTableModel) jTblEvaluacionD.getModel();
+                int a = jTblEvaluacionD.getRowCount() - 1;
+                for (int i = a; i >= 0; i--) {
+                    tb.removeRow(tb.getRowCount() - 1);
+                }
+
+                Object[] encabezado = {};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                jTblEvaluacionD.setModel(modelo);
+
+            } else {
+                //Mostrar la consulta alumno
+                Object[] encabezado = {"No", "NC", "Nombre", "Calificacion"};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                for (Alumno actual : lista) {
+                    Object[] fila = {cont, actual.getNC(), actual.getNombre()};
+                    modelo.addRow(fila);
+                    cont++;
+                }
+                this.jTblEvaluacionD.setModel(modelo);
+                this.jBtnAgregarED.setEnabled(true);
+                this.jBtnCancelarED.setEnabled(true);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnBuscarEDActionPerformed
+
+    private void jCmbSemestreEDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestreEDFocusGained
+        BD mBD = new BD();
+        this.jCmbSemestreED.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaED.getSelectedItem()), String.valueOf(this.jCmbCarreraED.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbSemestreED.addItem(String.valueOf(actual.getSemestre()));
+            }
+        } catch (SQLException ex) {
+            //            Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbSemestreEDFocusGained
+
+    private void jCmbSemestreEDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreEDActionPerformed
+        Semestre = String.valueOf(this.jCmbSemestreED.getSelectedItem());
+        System.out.println("Semestre: " + Semestre + "\n");
+    }//GEN-LAST:event_jCmbSemestreEDActionPerformed
+
+    private void jCmbCarreraEDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraEDFocusGained
+        BD mBD = new BD();
+        this.jCmbCarreraED.removeAllItems();
+        this.jCmbSemestreED.removeAllItems();
+        this.jCmbGrupoED.removeAllItems();
+
+        try {
+            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaED.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbCarreraED.addItem(actual.getCarrera());
+            }
+        } catch (SQLException ex) {
+            //            Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbCarreraEDFocusGained
+
+    private void jCmbCarreraEDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraEDActionPerformed
+        Carrera = String.valueOf(this.jCmbCarreraED.getSelectedItem());
+        System.out.println("Carrera: " + Carrera + "\n");
+    }//GEN-LAST:event_jCmbCarreraEDActionPerformed
+
+    private void jCmbMateriaEDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaEDFocusGained
+        BD mBD = new BD();
+        this.jCmbMateriaED.removeAllItems();
+        this.jCmbCarreraED.removeAllItems();
+        this.jCmbSemestreED.removeAllItems();
+        this.jCmbGrupoED.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaMateria();
+            for (Lista actual : mLista) {
+                this.jCmbMateriaED.addItem(actual.getMateria());
+            }
+        } catch (SQLException ex) {
+            //            Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbMateriaEDFocusGained
+
+    private void jCmbMateriaEDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaEDActionPerformed
+        Materia = String.valueOf(this.jCmbMateriaED.getSelectedItem());
+        System.out.println("Materia: " + Materia + "\n");
+    }//GEN-LAST:event_jCmbMateriaEDActionPerformed
+
+    private void jBtnAgregarEDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarEDActionPerformed
+        String Nombre;
+        String NC;
+        String Calificacion;
+        String ID = "";
+        BD mBD = new BD();
+        boolean Vacio = true;
+        try {
+            for (int y = 0; y < jTblEvaluacionD.getRowCount(); y++) {
+                if (jTblEvaluacionD.getValueAt(y, 3) == "" || jTblEvaluacionD.getValueAt(y, 3) == null) {
+                    Vacio = false;
+                }
+                System.out.println(Vacio);
+            }
+            if (Vacio == true) {
+                for (int i = 0; i < jTblEvaluacionD.getRowCount(); i++) {
+                    Nombre = jTblEvaluacionD.getValueAt(i, 2).toString();
+                    NC = jTblEvaluacionD.getValueAt(i, 1).toString();
+                    List<Alumno> mLista = mBD.ConsultaIDAlumno(Integer.parseInt(NC), Nombre);
+                    for (Alumno actual : mLista) {
+                        ID = String.valueOf(actual.getIdAlumno());
+                    }
+                    Calificacion = jTblEvaluacionD.getValueAt(i, 3).toString();
+                    Eval_Diagnostica mEval_Diagnostica = new Eval_Diagnostica();
+                    mEval_Diagnostica.setCalificacion(Integer.parseInt(Calificacion));
+                    mBD.agregarEva_Diagnostica(mEval_Diagnostica, Integer.parseInt(ID));
+                }
+
+                JOptionPane.showMessageDialog(this, "Evaluación guardada");
+                this.jBtnAgregarED.setEnabled(false);
+                this.jBtnCancelarED.setEnabled(false);
+                jTblEvaluacionD.setTableHeader(null);
+                DefaultTableModel tb = (DefaultTableModel) jTblEvaluacionD.getModel();
+                int a = jTblEvaluacionD.getRowCount() - 1;
+                for (int i = a; i >= 0; i--) {
+                    tb.removeRow(tb.getRowCount() - 1);
+                }
+
+                Object[] encabezado = {};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                jTblEvaluacionD.setModel(modelo);
+
+                Object[] encabezado1 = {};
+                DefaultTableModel modelo1 = new DefaultTableModel(null, encabezado1);
+                jTblEvaluacionD1.setModel(modelo1);
+
+            } else if (Vacio == false) {
+                JOptionPane.showMessageDialog(this, "Hay campo(s) vacio(s), favor de verificar");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnAgregarEDActionPerformed
+
+    private void jBtnCancelarEDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarEDActionPerformed
+        jTblEvaluacionD.setTableHeader(null);
+        DefaultTableModel tb = (DefaultTableModel) jTblEvaluacionD.getModel();
+        int a = jTblEvaluacionD.getRowCount() - 1;
         for (int i = a; i >= 0; i--) {
             tb.removeRow(tb.getRowCount() - 1);
         }
 
         Object[] encabezado = {};
         DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-        jTblPuntosExtras.setModel(modelo);
-        this.jTxtNCAlmPE.setText("");
-        this.jTxtNombreAlmPE.setText("");
-        this.jCmbUnidadPE.setEnabled(false);
-        this.jTxtPuntosExtras.setEnabled(false);
-        this.jBtnGuardarPE.setEnabled(false);
-        this.jBtnCancelarPE.setEnabled(false);
-    }//GEN-LAST:event_jBtnCancelarPEActionPerformed
+        jTblEvaluacionD.setModel(modelo);
+        jBtnCancelarED.setEnabled(false);
+        jBtnAgregarED.setEnabled(false);
+    }//GEN-LAST:event_jBtnCancelarEDActionPerformed
 
-    private void jTxtNCAlmPEKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtNCAlmPEKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtNCAlmPEKeyTyped
-
-    private void jTxtNombreAlmPEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtNombreAlmPEActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtNombreAlmPEActionPerformed
-
-    private void jTxtNombreAlmPEKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtNombreAlmPEKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtNombreAlmPEKeyTyped
-
-    private void jTxtPuntosExtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtPuntosExtrasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtPuntosExtrasActionPerformed
-
-    private void jTxtPuntosExtrasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtPuntosExtrasKeyTyped
-        char caracter = evt.getKeyChar();
-        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE)
-            && (caracter != '-')) {
-            /* lo que deseo colocar aqui es si ya se pulso el caracter (.) el mismo no se pueda repetir*/
-            evt.consume();
-            JOptionPane.showMessageDialog(rootPane, "Ingresar Solo Números");
-        }
-    }//GEN-LAST:event_jTxtPuntosExtrasKeyTyped
-
-    private void jCmbMateriaPE1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaPE1FocusGained
+    private void jCmbMateriaED1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaED1FocusGained
         BD mBD = new BD();
-        this.jCmbMateriaPE1.removeAllItems();
-        this.jCmbCarreraPE1.removeAllItems();
-        this.jCmbSemestrePE1.removeAllItems();
-        this.jCmbGrupoPE1.removeAllItems();
+        this.jCmbMateriaED1.removeAllItems();
+        this.jCmbCarreraED1.removeAllItems();
+        this.jCmbSemestreED1.removeAllItems();
+        this.jCmbGrupoED1.removeAllItems();
         try {
             List<Lista> mLista = mBD.consultarListaMateria();
             for (Lista actual : mLista) {
-                this.jCmbMateriaPE1.addItem(actual.getMateria());
+                this.jCmbMateriaED1.addItem(actual.getMateria());
             }
         } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            //            Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jCmbMateriaPE1FocusGained
+    }//GEN-LAST:event_jCmbMateriaED1FocusGained
 
-    private void jCmbMateriaPE1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaPE1ActionPerformed
-        Materia = String.valueOf(this.jCmbMateriaPE1.getSelectedItem());
+    private void jCmbMateriaED1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaED1ActionPerformed
+        Materia = String.valueOf(this.jCmbMateriaED1.getSelectedItem());
         System.out.println("Materia: " + Materia + "\n");
-    }//GEN-LAST:event_jCmbMateriaPE1ActionPerformed
+    }//GEN-LAST:event_jCmbMateriaED1ActionPerformed
 
-    private void jCmbCarreraPE1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraPE1FocusGained
+    private void jCmbCarreraED1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraED1FocusGained
         BD mBD = new BD();
-        this.jCmbCarreraPE1.removeAllItems();
-        this.jCmbSemestrePE1.removeAllItems();
-        this.jCmbGrupoPE1.removeAllItems();
+        this.jCmbCarreraED1.removeAllItems();
+        this.jCmbSemestreED1.removeAllItems();
+        this.jCmbGrupoED1.removeAllItems();
+
         try {
-            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaPE1.getSelectedItem()));
+            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaED1.getSelectedItem()));
             for (Lista actual : mLista) {
-                this.jCmbCarreraPE1.addItem(actual.getCarrera());
+                this.jCmbCarreraED1.addItem(actual.getCarrera());
             }
         } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            //            Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jCmbCarreraPE1FocusGained
+    }//GEN-LAST:event_jCmbCarreraED1FocusGained
 
-    private void jCmbCarreraPE1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraPE1ActionPerformed
-        Carrera = String.valueOf(this.jCmbCarreraPE1.getSelectedItem());
+    private void jCmbCarreraED1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraED1ActionPerformed
+        Carrera = String.valueOf(this.jCmbCarreraED1.getSelectedItem());
         System.out.println("Carrera: " + Carrera + "\n");
-    }//GEN-LAST:event_jCmbCarreraPE1ActionPerformed
+    }//GEN-LAST:event_jCmbCarreraED1ActionPerformed
 
-    private void jCmbUnidadPE1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbUnidadPE1FocusGained
-        BD mBD = new BD();
-        this.jCmbUnidadPE1.removeAllItems();
-        try {
-            List<PuntosExtras> mLista = mBD.ConsultaPuntosExtrasUnidad1();
-            for (PuntosExtras actual : mLista) {
-                this.jCmbUnidadPE1.addItem(String.valueOf(actual.getUnidad()));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCmbUnidadPE1FocusGained
-
-    private void jBtnAgregarPE1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarPE1ActionPerformed
+    private void jBtnAgregarD3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarD3ActionPerformed
         try {
             BD mBD = new BD();
-            String Unidad = this.jCmbUnidadPE1.getSelectedItem().toString();
             int calificacion;
             String Nombre;
             int NC;
@@ -5754,242 +7481,84 @@ public class FrmPrincipal extends javax.swing.JDialog {
             int IdA = 0;
             int cont = 0;
 
-            PuntosExtras mPuntosExtras = new PuntosExtras();
-            List<PuntosExtras> lista2 = mBD.ConsultaPuntosExtrasUnidad(Integer.parseInt(IDDes));
+            for (int i = 0; i < jTblEvaluacionD1.getRowCount(); i++) {
 
-            for (PuntosExtras actual : lista2) {
-                cont++;
-            }
-            int d = 3 + cont;
-            for (int j = 3; j < d; j++) {
-                for (int i = 0; i < jTblPuntosExtras1.getRowCount(); i++) {
-                    DefaultTableModel modelo = (DefaultTableModel) jTblPuntosExtras1.getModel();
-                    JTableHeader th = jTblPuntosExtras1.getTableHeader();
-                    TableColumnModel tcm = th.getColumnModel();
-                    TableColumn tcmn = tcm.getColumn(j);
-                    tcmn.getHeaderValue();
+                calificacion = Integer.parseInt(jTblEvaluacionD1.getValueAt(i, 3).toString());
+                Nombre = jTblEvaluacionD1.getValueAt(i, 2).toString();
+                System.out.println(Nombre);
+                NC = Integer.parseInt(jTblEvaluacionD1.getValueAt(i, 1).toString());
 
-                    System.out.println(tcmn.getHeaderValue().toString());
-
-                    calificacion = Integer.parseInt(jTblPuntosExtras1.getValueAt(i, j).toString());
-                    Nombre = jTblPuntosExtras1.getValueAt(i, 2).toString();
-                    NC = Integer.parseInt(jTblPuntosExtras1.getValueAt(i, 1).toString());
-
-                    List<Alumno> mLista3 = mBD.ConsultaIDAlumno(NC, Nombre);
-                    for (Alumno actual3 : mLista3) {
-                        IdA = actual3.getIdAlumno();
-                    }
-
-                    System.out.println(calificacion);
-                    List<PuntosExtras> mLista2 = mBD.ConsultaIDPuntosExtras(tcmn.getHeaderValue().toString(), IdA);
-                    for (PuntosExtras actual2 : mLista2) {
-                        IdD = actual2.getIdPuntosExtras();
-                    }
-
-                    System.out.println(IdD);
-                    mPuntosExtras.setPuntos(calificacion);
-                    mPuntosExtras.setIdPuntosExtras(IdD);
-                    mPuntosExtras.setUnidad(Integer.parseInt(tcmn.getHeaderValue().toString()));
-                    mBD.modificarPuntosExtras(mPuntosExtras);
+                List<Alumno> mLista3 = mBD.ConsultaIDAlumno(NC, Nombre);
+                for (Alumno actual3 : mLista3) {
+                    IdA = actual3.getIdAlumno();
                 }
+                System.out.println(IdA);
+                System.out.println(calificacion);
+                List<Eval_Diagnostica> mLista2 = mBD.ConsultaIDEvaluacion(IdA);
+                for (Eval_Diagnostica actual2 : mLista2) {
+                    IdD = actual2.getIdEval_Diagnostica();
+                }
+
+                System.out.println(IdD);
+                Eval_Diagnostica mEval_Diagnostica = new Eval_Diagnostica();
+                mEval_Diagnostica.setCalificacion(calificacion);
+                mEval_Diagnostica.setIdEval_Diagnostica(IdD);
+                mBD.modificarEval_Diagnostica(mEval_Diagnostica);
             }
-            JOptionPane.showMessageDialog(null, "Puntos extras actualizados");
-            LlenarTablaDesempeño1();
+            jLabel79.setVisible(false);
+            jLblPromedio.setVisible(false);
+            JOptionPane.showMessageDialog(null, "Evaluacion actualizada");
+
         } catch (SQLException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jBtnAgregarPE1ActionPerformed
+    }//GEN-LAST:event_jBtnAgregarD3ActionPerformed
 
-    private void jCmbSemestrePE1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestrePE1FocusGained
+    private void jCmbSemestreED1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestreED1FocusGained
+        // TODO add your handling code here:
         BD mBD = new BD();
-        this.jCmbSemestrePE1.removeAllItems();
+        this.jCmbSemestreED1.removeAllItems();
         try {
-            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaPE1.getSelectedItem()), String.valueOf(this.jCmbCarreraPE1.getSelectedItem()));
+            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaED1.getSelectedItem()), String.valueOf(this.jCmbCarreraED1.getSelectedItem()));
             for (Lista actual : mLista) {
-                this.jCmbSemestrePE1.addItem(String.valueOf(actual.getSemestre()));
+                this.jCmbSemestreED1.addItem(String.valueOf(actual.getSemestre()));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            //            Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jCmbSemestrePE1FocusGained
+    }//GEN-LAST:event_jCmbSemestreED1FocusGained
 
-    private void jCmbSemestrePE1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestrePE1ActionPerformed
-        Semestre = String.valueOf(this.jCmbSemestrePE1.getSelectedItem());
+    private void jCmbSemestreED1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreED1ActionPerformed
+        Semestre = String.valueOf(this.jCmbSemestreED1.getSelectedItem());
         System.out.println("Semestre: " + Semestre + "\n");
-    }//GEN-LAST:event_jCmbSemestrePE1ActionPerformed
+    }//GEN-LAST:event_jCmbSemestreED1ActionPerformed
 
-    private void jCmbGrupoPE1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoPE1FocusGained
+    private void jCmbGrupoED1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoED1FocusGained
         BD mBD = new BD();
-        this.jCmbGrupoPE1.removeAllItems();
+        this.jCmbGrupoED1.removeAllItems();
         try {
-
-            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaPE1.getSelectedItem()), String.valueOf(this.jCmbCarreraPE1.getSelectedItem()), Semestre);
-
+            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaED1.getSelectedItem()), String.valueOf(this.jCmbCarreraED1.getSelectedItem()), Semestre);
             for (Lista actual : mLista) {
-                this.jCmbGrupoPE1.addItem(String.valueOf(actual.getGrupo()));
+                this.jCmbGrupoED1.addItem(String.valueOf(actual.getGrupo()));
             }
         } catch (SQLException ex) {
-
+            //            Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jCmbGrupoPE1FocusGained
+    }//GEN-LAST:event_jCmbGrupoED1FocusGained
 
-    private void jCmbGrupoPE1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoPE1ActionPerformed
-        Grupo = String.valueOf(this.jCmbGrupoPE1.getSelectedItem());
+    private void jCmbGrupoED1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoED1ActionPerformed
+        Grupo = String.valueOf(this.jCmbGrupoED1.getSelectedItem());
         System.out.println("Grupo: " + Grupo + "\n");
-    }//GEN-LAST:event_jCmbGrupoPE1ActionPerformed
+    }//GEN-LAST:event_jCmbGrupoED1ActionPerformed
 
-    private void jBtnBuscarPE1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarPE1ActionPerformed
+    private void jBtnBuscarED1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarED1ActionPerformed
+        jLabel79.setVisible(true);
+        jLblPromedio.setVisible(true);
         int q = 3;
         int z = 0;
-        String Unidad = this.jCmbUnidadPE1.getSelectedItem().toString();
-
-        BD mBD = new BD();
-        String Desem = "";
-        List<Lista> mLista;
-        try {
-            mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
-            for (Lista actual : mLista) {
-                IDDes = String.valueOf(actual.getIdLista());
-            }
-            List<Alumno> lista = mBD.ConsultaAlumnoPuntos(Integer.parseInt(IDDes));
-            int cont = 1;
-            if (lista.isEmpty()) {
-
-                JOptionPane.showMessageDialog(rootPane, "Lista vacia.");
-                jTblPuntosExtras1.setTableHeader(null);
-                DefaultTableModel tb = (DefaultTableModel) jTblPuntosExtras1.getModel();
-                int a = jTblPuntosExtras1.getRowCount() - 1;
-                for (int i = a; i >= 0; i--) {
-                    tb.removeRow(tb.getRowCount() - 1);
-                }
-
-                Object[] encabezado = {};
-                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-                jTblPuntosExtras1.setModel(modelo);
-
-            } else {
-                Object[] encabezado = {"No", "NC", "Nombre"};
-
-                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-                for (Alumno actual1 : lista) {
-                    Object[] fila = {cont, actual1.getNC(), actual1.getNombre()};
-                    modelo.addRow(fila);
-                    cont++;
-                }
-
-                List<PuntosExtras> lista2 = mBD.ConsultaPuntosExtrasUnidad(Integer.parseInt(IDDes));
-
-                for (PuntosExtras actual : lista2) {
-                    modelo.addColumn(String.valueOf(actual.getUnidad()));
-                    List<PuntosExtras> lista3 = mBD.ConsultaPuntosExtrasPuntos(Integer.parseInt(IDDes), String.valueOf(Unidad));
-                    for (PuntosExtras actual2 : lista3) {
-                        modelo.setValueAt(actual2.getPuntos(), z, q);
-                        z++;
-                    }
-                    z = 0;
-                    q++;
-                }
-                jTblPuntosExtras1.setModel(modelo);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jBtnBuscarPE1ActionPerformed
-
-    private void jCmbGrupoUFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoUFocusGained
-        BD mBD = new BD();
-        this.jCmbGrupoU.removeAllItems();
-        try {
-
-            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaU.getSelectedItem()), String.valueOf(this.jCmbCarreraU.getSelectedItem()), Semestre);
-
-            for (Lista actual : mLista) {
-                this.jCmbGrupoU.addItem(String.valueOf(actual.getGrupo()));
-            }
-        } catch (SQLException ex) {
-
-        }
-    }//GEN-LAST:event_jCmbGrupoUFocusGained
-
-    private void jCmbGrupoUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoUActionPerformed
-        Grupo = String.valueOf(this.jCmbGrupoU.getSelectedItem());
-        System.out.println("Grupo: " + Grupo + "\n");
-    }//GEN-LAST:event_jCmbGrupoUActionPerformed
-
-    private void jCmbSemestreUFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestreUFocusGained
-        BD mBD = new BD();
-        this.jCmbSemestreU.removeAllItems();
-        try {
-            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaU.getSelectedItem()), String.valueOf(this.jCmbCarreraU.getSelectedItem()));
-            for (Lista actual : mLista) {
-                this.jCmbSemestreU.addItem(String.valueOf(actual.getSemestre()));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCmbSemestreUFocusGained
-
-    private void jCmbSemestreUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreUActionPerformed
-        Semestre = String.valueOf(this.jCmbSemestreU.getSelectedItem());
-        System.out.println("Semestre: " + Semestre + "\n");
-    }//GEN-LAST:event_jCmbSemestreUActionPerformed
-
-    private void jCmbCarreraUFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraUFocusGained
-        BD mBD = new BD();
-        this.jCmbCarreraU.removeAllItems();
-        this.jCmbSemestreU.removeAllItems();
-        this.jCmbGrupoU.removeAllItems();
-        try {
-            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaU.getSelectedItem()));
-            for (Lista actual : mLista) {
-                this.jCmbCarreraU.addItem(actual.getCarrera());
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCmbCarreraUFocusGained
-
-    private void jCmbCarreraUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraUActionPerformed
-        Carrera = String.valueOf(this.jCmbCarreraU.getSelectedItem());
-        System.out.println("Carrera: " + Carrera + "\n");
-    }//GEN-LAST:event_jCmbCarreraUActionPerformed
-
-    private void jCmbMateriaUFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaUFocusGained
-        BD mBD = new BD();
-        this.jCmbMateriaU.removeAllItems();
-        this.jCmbCarreraU.removeAllItems();
-        this.jCmbSemestreU.removeAllItems();
-        this.jCmbGrupoU.removeAllItems();
-        try {
-            List<Lista> mLista = mBD.consultarListaMateria();
-            for (Lista actual : mLista) {
-                this.jCmbMateriaU.addItem(actual.getMateria());
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCmbMateriaUFocusGained
-
-    private void jCmbMateriaUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaUActionPerformed
-        Materia = String.valueOf(this.jCmbMateriaU.getSelectedItem());
-        System.out.println("Materia: " + Materia + "\n");
-    }//GEN-LAST:event_jCmbMateriaUActionPerformed
-
-    private void jBtnBuscarUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarUActionPerformed
-        int q = 3;
-        int z = 0;
-        String Unidad = this.jCmbUnidadU.getSelectedItem().toString();
-        String Nombre;
-        int NC;
-        int IdA = 0;
-        int numF = 3;
-        int SumaD = 0;
-        int PromedioD = 0;
-        int SumaC = 0;
-        int PromedioC = 0;
-        int SumaP = 0;
-        int PromedioP = 0;
-
+        int SumaED = 0;
+        int PromedioED = 0;
+        int r = 0;
         BD mBD = new BD();
         String Desem = "";
         List<Lista> mLista;
@@ -6003,106 +7572,598 @@ public class FrmPrincipal extends javax.swing.JDialog {
             if (lista.isEmpty()) {
 
                 JOptionPane.showMessageDialog(rootPane, "Lista vacia.");
-                jTblUnidad.setTableHeader(null);
-                DefaultTableModel tb = (DefaultTableModel) jTblUnidad.getModel();
-                int a = jTblUnidad.getRowCount() - 1;
+                jTblEvaluacionD1.setTableHeader(null);
+                DefaultTableModel tb = (DefaultTableModel) jTblEvaluacionD1.getModel();
+                int a = jTblEvaluacionD1.getRowCount() - 1;
                 for (int i = a; i >= 0; i--) {
                     tb.removeRow(tb.getRowCount() - 1);
                 }
 
                 Object[] encabezado = {};
                 DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
-                jTblUnidad.setModel(modelo);
+                jTblEvaluacionD1.setModel(modelo);
 
             } else {
-                Object[] encabezado = {"No", "NC", "Nombre", "Conocimiento 35%", "Producto 35%", "Desempeño 20%", "Actitud 10%", "Total"};
+                Object[] encabezado = {"No", "NC", "Nombre", "Calificación"};
 
                 DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
                 for (Alumno actual1 : lista) {
-                    Nombre = actual1.getNombre();
-                    NC = actual1.getNC();
-
-                    List<Alumno> Lista = mBD.ConsultaIDAlumno(NC, Nombre);
-                    for (Alumno actual2 : Lista) {
-                        IdA = actual2.getIdAlumno();
-                    }
-
-                    //Conocimiento
-                    List<Conocimiento> Lista3 = mBD.ConsultaCalCon(Integer.parseInt(IDDes), IdA, Integer.parseInt(Unidad));
-                    if (Lista3.isEmpty()) {
-                        PromedioC = 0;
-                    } else {
-                        SumaC = 0;
-                        for (Conocimiento actual4 : Lista3) {
-                            SumaC = actual4.getCalificacion();
-                        }
-                        int Puntos = 0;
-                        List<PuntosExtras> Lista4 = mBD.ConsultaCalExtras(Integer.parseInt(IDDes), IdA, Integer.parseInt(Unidad));
-                        if (Lista4.isEmpty()) {
-                            Puntos = 0;
-                        } else {
-                            for (PuntosExtras actual5 : Lista4) {
-                                Puntos = actual5.getPuntos() + Puntos;
-                            }
-                        }
-                        PromedioC = SumaC + Puntos;
-
-                        if (PromedioC > 100) {
-                            PromedioC = 100;
-                        }
-
-                    }
-
-                    //Producto
-                    List<Producto> Lista5 = mBD.ConsultaCalProd(Integer.parseInt(IDDes), IdA, Integer.parseInt(Unidad));
-                    if (Lista5.isEmpty()) {
-                        PromedioP = 0;
-                    } else {
-                        int numP = 0;
-                        SumaP = 0;
-                        for (Producto actual6 : Lista5) {
-                            SumaP = actual6.getCalificacion() + SumaP;
-                            numP++;
-                        }
-                        PromedioP = SumaP / numP;
-
-                    }
-
-                    //Desempeno
-                    List<Desempeño> Lista2 = mBD.ConsultaCalDes(Integer.parseInt(IDDes), IdA, Integer.parseInt(Unidad));
-                    if (Lista2.isEmpty()) {
-                        PromedioD = 0;
-                    } else {
-                        int numD = 0;
-                        SumaD = 0;
-                        for (Desempeño actual3 : Lista2) {
-                            SumaD = actual3.getCalificacion() + SumaD;
-                            numD++;
-                        }
-                        PromedioD = SumaD / numD;
-
-                    }
-                    //Actitud
-                    int PromedioA =0;
-                    //Total
-                    double PromedioUni = 0;
-                    PromedioUni = (PromedioC * 0.35) + (PromedioP * 0.30) + (PromedioD * 0.30) + (PromedioA * 0.20);
-
-                    Object[] fila = {cont, actual1.getNC(), actual1.getNombre(), PromedioC, PromedioP, PromedioD, PromedioA, (int)PromedioUni};
+                    Object[] fila = {cont, actual1.getNC(), actual1.getNombre()};
                     modelo.addRow(fila);
                     cont++;
                 }
 
-                jTblUnidad.setModel(modelo);
+                List<Eval_Diagnostica> lista3 = mBD.ConsultaCalED(Integer.parseInt(IDDes));
+                for (Eval_Diagnostica actual2 : lista3) {
+                    modelo.setValueAt(actual2.getCalificacion(), z, 3);
+                    SumaED = actual2.getCalificacion() + SumaED;
+                    z++;
+                }
+                PromedioED = SumaED / z;
+                z = 0;
+                this.jLblPromedio.setText(String.valueOf(PromedioED));
+                jTblEvaluacionD1.setModel(modelo);
             }
         } catch (SQLException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jBtnBuscarUActionPerformed
+    }//GEN-LAST:event_jBtnBuscarED1ActionPerformed
 
-    private void jCmbUnidadUFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbUnidadUFocusGained
+    private void jCmbMateriaAc1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaAc1FocusGained
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCmbUnidadUFocusGained
+        BD mBD = new BD();
+        this.jCmbMateriaAc1.removeAllItems();
+        this.jCmbCarreraAc1.removeAllItems();
+        this.jCmbSemestreAc1.removeAllItems();
+        this.jCmbGrupoAc1.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaMateria();
+            for (Lista actual : mLista) {
+                this.jCmbMateriaAc1.addItem(actual.getMateria());
+            }
+        } catch (SQLException ex) {
+            //            Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbMateriaAc1FocusGained
+
+    private void jCmbMateriaAc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaAc1ActionPerformed
+        // TODO add your handling code here:
+        Materia = String.valueOf(this.jCmbMateriaAc1.getSelectedItem());
+        System.out.println("Materia: " + Materia + "\n");
+    }//GEN-LAST:event_jCmbMateriaAc1ActionPerformed
+
+    private void jCmbCarreraAc1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraAc1FocusGained
+        // TODO add your handling code here:
+        BD mBD = new BD();
+        this.jCmbCarreraAc1.removeAllItems();
+        this.jCmbSemestreAc1.removeAllItems();
+        this.jCmbGrupoAc1.removeAllItems();
+
+        try {
+            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaAc1.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbCarreraAc1.addItem(actual.getCarrera());
+            }
+        } catch (SQLException ex) {
+            //            Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbCarreraAc1FocusGained
+
+    private void jCmbCarreraAc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraAc1ActionPerformed
+        // TODO add your handling code here:
+        Carrera = String.valueOf(this.jCmbCarreraAc1.getSelectedItem());
+        System.out.println("Carrera: " + Carrera + "\n");
+    }//GEN-LAST:event_jCmbCarreraAc1ActionPerformed
+
+    private void jCmbSemestreAc1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestreAc1FocusGained
+        // TODO add your handling code here:
+        BD mBD = new BD();
+        this.jCmbSemestreAc1.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaAc1.getSelectedItem()), String.valueOf(this.jCmbCarreraAc1.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbSemestreAc1.addItem(String.valueOf(actual.getSemestre()));
+            }
+        } catch (SQLException ex) {
+            //            Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbSemestreAc1FocusGained
+
+    private void jCmbSemestreAc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreAc1ActionPerformed
+        // TODO add your handling code here:
+        Semestre = String.valueOf(this.jCmbSemestreAc1.getSelectedItem());
+        System.out.println("Semestre: " + Semestre + "\n");
+    }//GEN-LAST:event_jCmbSemestreAc1ActionPerformed
+
+    private void jCmbGrupoAc1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoAc1FocusGained
+        // TODO add your handling code here:
+        BD mBD = new BD();
+        this.jCmbGrupoAc1.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaAc1.getSelectedItem()), String.valueOf(this.jCmbCarreraAc1.getSelectedItem()), Semestre);
+            for (Lista actual : mLista) {
+                this.jCmbGrupoAc1.addItem(String.valueOf(actual.getGrupo()));
+            }
+        } catch (SQLException ex) {
+            //            Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbGrupoAc1FocusGained
+
+    private void jCmbGrupoAc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoAc1ActionPerformed
+        // TODO add your handling code here:
+        Grupo = String.valueOf(this.jCmbGrupoAc1.getSelectedItem());
+        System.out.println("Grupo: " + Grupo + "\n");
+    }//GEN-LAST:event_jCmbGrupoAc1ActionPerformed
+
+    private void jBtnBuscarAc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarAc1ActionPerformed
+        try {
+            // TODO add your handling code here:
+            this.LlenarTablaActitud();
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnBuscarAc1ActionPerformed
+
+    private void jBtnAgregarAc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarAc1ActionPerformed
+        java.util.Date Fecha = this.jDtcUnidadAc1.getDate();
+        List<Alumno> lista;
+        BD mBD = new BD();
+
+        if (null != this.jDtcUnidadAc1.getDate()) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-YYYY");
+            Fecha5 = String.valueOf(sdf.format(Fecha));
+            System.out.println(Fecha5);
+            this.jDtcUnidadAc1.setEnabled(false);
+
+            try {
+                lista = mBD.consultarAlumno(Integer.parseInt(IDAc));
+
+                int cont = 1;
+                //Mostrar la consulta alumno
+                Object[] encabezado = {"No", "NC", "Nombre", Fecha5};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                for (Alumno actual : lista) {
+
+                    Object[] fila = {cont, actual.getNC(), actual.getNombre(), ""};
+                    modelo.addRow(fila);
+                    cont++;
+                }
+                this.jTblActitudA.setModel(modelo);
+                this.jBtnAgregarA.setEnabled(true);
+                this.jBtnAgregarA.setVisible(true);
+                jCmbUnidadAc1.setEnabled(false);
+                jDtcUnidadAc1.setEnabled(false);
+                jBtnAgregarAc1.setEnabled(false);
+                jBtnAgregarA.setVisible(true);
+
+            } catch (SQLException ex) {
+                Logger.getLogger(FrmPrincipal.class
+                        .getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Primero seleccione una fecha");
+        }
+    }//GEN-LAST:event_jBtnAgregarAc1ActionPerformed
+
+    private void jCmbMateriaAcMFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbMateriaAcMFocusGained
+        // TODO add your handling code here:
+        BD mBD = new BD();
+        this.jCmbMateriaAcM.removeAllItems();
+        this.jCmbCarreraAcM.removeAllItems();
+        this.jCmbSemestreAcM.removeAllItems();
+        this.jCmbGrupoAcM.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaMateria();
+            for (Lista actual : mLista) {
+                this.jCmbMateriaAcM.addItem(actual.getMateria());
+            }
+        } catch (SQLException ex) {
+            //            Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbMateriaAcMFocusGained
+
+    private void jCmbMateriaAcMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMateriaAcMActionPerformed
+        // TODO add your handling code here:
+        Materia = String.valueOf(this.jCmbMateriaAcM.getSelectedItem());
+        System.out.println("Materia: " + Materia + "\n");
+    }//GEN-LAST:event_jCmbMateriaAcMActionPerformed
+
+    private void jCmbCarreraAcMFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbCarreraAcMFocusGained
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        BD mBD = new BD();
+        this.jCmbCarreraAcM.removeAllItems();
+        this.jCmbSemestreAcM.removeAllItems();
+        this.jCmbGrupoAcM.removeAllItems();
+
+        try {
+            List<Lista> mLista = mBD.consultarListaCarrera(String.valueOf(this.jCmbMateriaAcM.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbCarreraAcM.addItem(actual.getCarrera());
+            }
+        } catch (SQLException ex) {
+            //            Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jCmbCarreraAcMFocusGained
+
+    private void jCmbCarreraAcMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraAcMActionPerformed
+        // TODO add your handling code here:
+        Carrera = String.valueOf(this.jCmbCarreraAcM.getSelectedItem());
+        System.out.println("Carrera: " + Carrera + "\n");
+    }//GEN-LAST:event_jCmbCarreraAcMActionPerformed
+
+    private void jCmbSemestreAcMFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbSemestreAcMFocusGained
+        // TODO add your handling code here:
+        BD mBD = new BD();
+        this.jCmbSemestreAcM.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaSemestres(String.valueOf(this.jCmbMateriaAcM.getSelectedItem()), String.valueOf(this.jCmbCarreraAcM.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbSemestreAcM.addItem(String.valueOf(actual.getSemestre()));
+            }
+        } catch (SQLException ex) {
+            //            Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbSemestreAcMFocusGained
+
+    private void jCmbSemestreAcMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreAcMActionPerformed
+        // TODO add your handling code here:
+        Semestre = String.valueOf(this.jCmbSemestreAcM.getSelectedItem());
+        System.out.println("Semestre: " + Semestre + "\n");
+
+    }//GEN-LAST:event_jCmbSemestreAcMActionPerformed
+
+    private void jCmbGrupoAcMFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbGrupoAcMFocusGained
+
+        BD mBD = new BD();
+        this.jCmbGrupoAcM.removeAllItems();
+        try {
+            List<Lista> mLista = mBD.consultarListaGrupo(String.valueOf(this.jCmbMateriaAcM.getSelectedItem()), String.valueOf(this.jCmbCarreraAcM.getSelectedItem()), String.valueOf(this.jCmbSemestreAcM.getSelectedItem()));
+            for (Lista actual : mLista) {
+                this.jCmbGrupoAcM.addItem(String.valueOf(actual.getGrupo()));
+            }
+        } catch (SQLException ex) {
+            //            Logger.getLogger(FrmBusquedaLista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbGrupoAcMFocusGained
+
+    private void jCmbGrupoAcMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbGrupoAcMActionPerformed
+        Grupo = String.valueOf(this.jCmbGrupoAcM.getSelectedItem());
+        System.out.println("Grupo: " + Grupo + "\n");
+
+    }//GEN-LAST:event_jCmbGrupoAcMActionPerformed
+
+    private void jBtnBuscarAcMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarAcMActionPerformed
+        try {
+            // TODO add your handling code here:
+            this.LlenarTablaActitudM();
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnBuscarAcMActionPerformed
+
+    private void jCmbUnidadAcMFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCmbUnidadAcMFocusGained
+        BD mBD = new BD();
+        this.jCmbUnidadAcM.removeAllItems();
+        try {
+            List<Actitud> mLista = mBD.ConsultaActitudUnidad1();
+            for (Actitud actual : mLista) {
+                this.jCmbUnidadAcM.addItem(String.valueOf(actual.getUnidad()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCmbUnidadAcMFocusGained
+
+    private void jCmbUnidadAcMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbUnidadAcMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCmbUnidadAcMActionPerformed
+
+    private void jBtnAgregarAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarAActionPerformed
+        boolean Vacio = true;
+        Vacio = true;
+        String Nombre;
+        String NC;
+        String ID = "";
+        BD mBD = new BD();
+        String Actitud = "";
+        try {
+            for (int y = 0; y < jTblActitudA.getRowCount(); y++) {
+                if (jTblActitudA.getValueAt(y, 3) == "" || jTblActitudA.getValueAt(y, 3) == null) {
+                    Vacio = false;
+                }
+                System.out.println(Vacio);
+            }
+            this.jDtcUnidadAc1.setEnabled(false);
+            String Fecha6 = "";
+            if (Vacio == true) {
+                for (int i = 0; i < jTblActitudA.getRowCount(); i++) {
+                    Nombre = jTblActitudA.getValueAt(i, 2).toString();
+                    NC = jTblActitudA.getValueAt(i, 1).toString();
+                    System.out.println(Nombre);
+                    List<Alumno> mLista = mBD.ConsultaIDAlumno(Integer.parseInt(NC), Nombre);
+                    for (Alumno actual : mLista) {
+                        ID = String.valueOf(actual.getIdAlumno());
+                    }
+                    Actitud = jTblActitudA.getValueAt(i, 3).toString();
+                    Actitud mActitud = new Actitud();
+                    mActitud.setAsistencia(Integer.parseInt(Actitud));
+
+                    Date Fecha = this.jDtcUnidadAc1.getDate();
+                    SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+                    Fecha6 = String.valueOf(sdf.format(Fecha));
+                    System.out.println(Fecha5);
+
+                    mActitud.setFecha(Fecha6);
+                    mActitud.setUnidad(Integer.parseInt(jCmbUnidadAc1.getSelectedItem().toString()));
+
+                    mBD.agregarActitud(mActitud, Integer.parseInt(ID));
+                    this.jDtcUnidadAc1.setEnabled(false);
+
+                }
+                JOptionPane.showMessageDialog(this, "Asistencia guardada");
+                this.jBtnAgregarA.setEnabled(false);
+                this.jBtnAgregarA.setVisible(false);
+                jCmbUnidadAc1.setEnabled(false);
+                jDtcUnidadAc1.setEnabled(false);
+                jBtnAgregarAc1.setEnabled(false);
+                jBtnAgregarA.setVisible(false);
+                jTblActitudA.setTableHeader(null);
+                DefaultTableModel tb = (DefaultTableModel) jTblActitudA.getModel();
+                int a = jTblActitudA.getRowCount() - 1;
+                for (int i = a; i >= 0; i--) {
+                    tb.removeRow(tb.getRowCount() - 1);
+                }
+
+                Object[] encabezado = {};
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                jTblActitudA.setModel(modelo);
+                jBtnCancelarA.setEnabled(false);
+
+            } else if (Vacio == false) {
+                JOptionPane.showMessageDialog(this, "Hay campo(s) vacio(s), favor de verificar");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnAgregarAActionPerformed
+
+    private void jBtnCancelarAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarAActionPerformed
+        jTblActitudA.setTableHeader(null);
+        DefaultTableModel tb = (DefaultTableModel) jTblActitudA.getModel();
+        int a = jTblActitudA.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            tb.removeRow(tb.getRowCount() - 1);
+        }
+
+        Object[] encabezado = {};
+        DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+        jTblActitudA.setModel(modelo);
+        this.jBtnAgregarA.setEnabled(false);
+        jCmbUnidadAc1.setEnabled(false);
+        jBtnAgregarA.setVisible(false);
+        jBtnCancelarA.setEnabled(false);
+        jDtcUnidadAc1.setEnabled(false);
+        jBtnAgregarAc1.setEnabled(false);
+    }//GEN-LAST:event_jBtnCancelarAActionPerformed
+
+    private void jBtnActualizarAcMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnActualizarAcMActionPerformed
+        BD mBD = new BD();
+        int calificacion;
+        String Nombre;
+        int NC;
+        int IdAC = 0;
+        int IdA = 0;
+        int Asistencia = 0;
+        int cont = 0;
+        Actitud mActitud = new Actitud();
+        try {
+            List<Actitud> lista2 = mBD.consultarFechas(Integer.parseInt(IDAc));
+
+            for (Actitud actual : lista2) {
+                cont++;
+            }
+            int d = 3 + cont;
+
+            for (int j = 3; j < d; j++) {
+                for (int i = 0; i < jTblActitudM.getRowCount(); i++) {
+                    DefaultTableModel modelo = (DefaultTableModel) jTblActitudM.getModel();
+                    JTableHeader th = jTblActitudM.getTableHeader();
+                    TableColumnModel tcm = th.getColumnModel();
+                    TableColumn tcmn = tcm.getColumn(j);
+                    tcmn.getHeaderValue();
+
+                    System.out.println(tcmn.getHeaderValue().toString());
+
+                    Asistencia = Integer.parseInt(jTblActitudM.getValueAt(i, j).toString());
+                    Nombre = jTblActitudM.getValueAt(i, 2).toString();
+                    NC = Integer.parseInt(jTblActitudM.getValueAt(i, 1).toString());
+
+                    List<Alumno> mLista3 = mBD.ConsultaIDAlumno(NC, Nombre);
+                    for (Alumno actual3 : mLista3) {
+                        IdA = actual3.getIdAlumno();
+                    }
+
+                    String Fecha = tcmn.getHeaderValue().toString();
+                    String[] partes = Fecha.split("-");
+                    String dia = partes[0];
+                    String mes = partes[1];
+                    String anyo = partes[2];
+                    String FechaAC = anyo + "-" + mes + "-" + dia;
+
+                    System.out.println(Asistencia);
+                    List<Actitud> mLista2 = mBD.ConsultaIDActiud(FechaAC, IdA);
+                    for (Actitud actual2 : mLista2) {
+                        IdAC = actual2.getIdActitud();
+                    }
+
+                    System.out.println(IdAC);
+                    mActitud.setAsistencia(Asistencia);
+                    mActitud.setFecha(FechaAC);
+                    mActitud.setIdActitud(IdAC);
+
+                    mBD.modificarActitud(mActitud);
+                }
+
+            }
+            this.jBtnActualizarAcM.setEnabled(true);
+            JOptionPane.showMessageDialog(null, "Asistencia actualizada");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jBtnActualizarAcMActionPerformed
+
+    private void jBtnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMostrarActionPerformed
+        String Unidad = "";
+        String Nombre;
+        int cont2 = 0;
+        int NC;
+        int IdA = 0;
+        int SumaD = 0;
+        int PromedioD = 0;
+        int SumaC = 0;
+        int PromedioC = 0;
+        int SumaP = 0;
+        int PromedioP = 0;
+        int x = 3;
+        double PromedioA = 0;
+        int cont1 = 0;
+        double SumaA = 0;
+
+        BD mBD = new BD();
+        List<Lista> mLista;
+        
+        try{
+            mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+            for (Lista actual : mLista) {
+                IDDes = String.valueOf(actual.getIdLista());
+            }
+            List<Alumno> lista = mBD.consultarAlumno(Integer.parseInt(IDDes));
+            int cont = 1;
+        
+        Object[] encabezado = {"No", "NC", "Nombre"};
+
+                DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
+                for (Alumno actual1 : lista) {
+
+                    Object[] fila = {cont, actual1.getNC(), actual1.getNombre()};
+                    modelo.addRow(fila);
+                    cont++;
+
+                }
+
+                List<Conocimiento> Lista10 = mBD.ConcultarUnidades(Integer.parseInt(IDDes));
+                for (Conocimiento actual10 : Lista10) {
+                    Unidad = String.valueOf(actual10.getUnidad());
+                    modelo.addColumn(String.valueOf("Unidad " + Unidad));
+                    cont2++;
+
+                    for (int i = 0; i < jTblSemestre.getRowCount(); i++) {
+                        Nombre = jTblSemestre.getValueAt(i,2).toString();
+                        NC = Integer.parseInt(jTblSemestre.getValueAt(i,1).toString());
+
+                        List<Alumno> Lista = mBD.ConsultaIDAlumno(NC, Nombre);
+                        for (Alumno actual2 : Lista) {
+                            IdA = actual2.getIdAlumno();
+                        }
+                        //Conocimiento
+                        List<Conocimiento> Lista3 = mBD.ConsultaCalCon(Integer.parseInt(IDDes), IdA, Integer.parseInt(Unidad));
+                        if (Lista3.isEmpty()) {
+                            PromedioC = 0;
+                        } else {
+                            SumaC = 0;
+                            for (Conocimiento actual4 : Lista3) {
+                                SumaC = actual4.getCalificacion();
+                            }
+                            int Puntos = 0;
+                            List<PuntosExtras> Lista4 = mBD.ConsultaCalExtras(Integer.parseInt(IDDes), IdA, Integer.parseInt(Unidad));
+                            if (Lista4.isEmpty()) {
+                                Puntos = 0;
+                            } else {
+                                for (PuntosExtras actual5 : Lista4) {
+                                    Puntos = actual5.getPuntos() + Puntos;
+                                }
+                            }
+                            PromedioC = SumaC + Puntos;
+
+                            if (PromedioC > 100) {
+                                PromedioC = 100;
+                            }
+
+                        }
+
+                        //Producto
+                        List<Producto> Lista5 = mBD.ConsultaCalProd(Integer.parseInt(IDDes), IdA, Integer.parseInt(Unidad));
+                        if (Lista5.isEmpty()) {
+                            PromedioP = 0;
+                        } else {
+                            int numP = 0;
+                            SumaP = 0;
+                            for (Producto actual6 : Lista5) {
+                                SumaP = actual6.getCalificacion() + SumaP;
+                                numP++;
+                            }
+                            PromedioP = SumaP / numP;
+
+                        }
+
+                        //Desempeno
+                        List<Desempeño> Lista2 = mBD.ConsultaCalDes(Integer.parseInt(IDDes), IdA, Integer.parseInt(Unidad));
+                        if (Lista2.isEmpty()) {
+                            PromedioD = 0;
+                        } else {
+                            int numD = 0;
+                            SumaD = 0;
+                            for (Desempeño actual3 : Lista2) {
+                                SumaD = actual3.getCalificacion() + SumaD;
+                                numD++;
+                            }
+                            PromedioD = SumaD / numD;
+
+                        }
+                        //Actitud
+
+                        List<Actitud> Lista6 = mBD.ConsultaAsistencia(Integer.parseInt(IDDes), IdA, Integer.parseInt(Unidad));
+                        if (Lista6.isEmpty()) {
+                            PromedioA = 0;
+                        } else {
+                            double Sum = 0.0;
+
+                            SumaA = 0;
+                            cont1 = 0;
+                            for (Actitud actual7 : Lista6) {
+
+                                SumaA = actual7.getAsistencia() + SumaA;
+                                cont1++;
+
+                            }
+                            System.out.println(cont1);
+                            System.out.println(SumaA);
+                            Sum = SumaA / cont1;
+                            System.out.println(cont1);
+                            PromedioA = Sum * 100;
+                        }
+
+                        //Total
+                        double PromedioUni = 0;
+                        PromedioUni = (PromedioC * 0.35) + (PromedioP * 0.35) + (PromedioD * 0.20) + (PromedioA * 0.10);
+                        modelo.setValueAt(PromedioUni, i, x);
+                    }
+                    x++;
+                }
+
+                jTblSemestre.setModel(modelo);
+                jBtnMostrar.setEnabled(false);
+                jBtnBuscarS.setEnabled(true);
+        } catch (SQLException ex) {
+                    Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+    }//GEN-LAST:event_jBtnMostrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -6118,16 +8179,24 @@ public class FrmPrincipal extends javax.swing.JDialog {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -6155,27 +8224,37 @@ public class FrmPrincipal extends javax.swing.JDialog {
     public javax.swing.JTextField TxtPaternoAl;
     public javax.swing.JTextField TxtSemestreLs;
     private javax.swing.JTabbedPane Unidad;
-    private javax.swing.JButton jBtnActualizarAc;
+    private javax.swing.JButton jBtnActualizarAcM;
+    private javax.swing.JButton jBtnAgregarA;
+    private javax.swing.JButton jBtnAgregarAc1;
     private javax.swing.JButton jBtnAgregarC;
     private javax.swing.JButton jBtnAgregarC1;
     private javax.swing.JButton jBtnAgregarD;
     private javax.swing.JButton jBtnAgregarD1;
+    private javax.swing.JButton jBtnAgregarD3;
+    private javax.swing.JButton jBtnAgregarED;
     private javax.swing.JButton jBtnAgregarP;
     private javax.swing.JButton jBtnAgregarP1;
     private javax.swing.JButton jBtnAgregarPE1;
-    private javax.swing.JButton jBtnBuscarAc;
+    private javax.swing.JButton jBtnBuscarAc1;
+    private javax.swing.JButton jBtnBuscarAcM;
     private javax.swing.JButton jBtnBuscarAlm;
     private javax.swing.JButton jBtnBuscarC;
     private javax.swing.JButton jBtnBuscarC1;
     private javax.swing.JButton jBtnBuscarD;
     private javax.swing.JButton jBtnBuscarD1;
+    private javax.swing.JButton jBtnBuscarED;
+    private javax.swing.JButton jBtnBuscarED1;
     private javax.swing.JButton jBtnBuscarP;
     private javax.swing.JButton jBtnBuscarP1;
     private javax.swing.JButton jBtnBuscarPE;
     private javax.swing.JButton jBtnBuscarPE1;
+    private javax.swing.JButton jBtnBuscarS;
     private javax.swing.JButton jBtnBuscarU;
+    private javax.swing.JButton jBtnCancelarA;
     private javax.swing.JButton jBtnCancelarC;
     private javax.swing.JButton jBtnCancelarD;
+    private javax.swing.JButton jBtnCancelarED;
     private javax.swing.JButton jBtnCancelarP;
     private javax.swing.JButton jBtnCancelarPE;
     private javax.swing.JButton jBtnGuardarC;
@@ -6183,56 +8262,74 @@ public class FrmPrincipal extends javax.swing.JDialog {
     private javax.swing.JButton jBtnGuardarP;
     private javax.swing.JButton jBtnGuardarPE;
     private javax.swing.JButton jBtnModificarAlm;
+    private javax.swing.JButton jBtnMostrar;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
-    private javax.swing.JComboBox<String> jCmbCarreraAc;
+    private javax.swing.JComboBox<String> jCmbCarreraAc1;
+    private javax.swing.JComboBox<String> jCmbCarreraAcM;
     private javax.swing.JComboBox<String> jCmbCarreraAl;
     private javax.swing.JComboBox<String> jCmbCarreraAlm;
     private javax.swing.JComboBox<String> jCmbCarreraC;
     private javax.swing.JComboBox<String> jCmbCarreraC1;
     private javax.swing.JComboBox<String> jCmbCarreraD;
     private javax.swing.JComboBox<String> jCmbCarreraD1;
+    private javax.swing.JComboBox<String> jCmbCarreraED;
+    private javax.swing.JComboBox<String> jCmbCarreraED1;
     private javax.swing.JComboBox<String> jCmbCarreraP;
     private javax.swing.JComboBox<String> jCmbCarreraP1;
     private javax.swing.JComboBox<String> jCmbCarreraPE;
     private javax.swing.JComboBox<String> jCmbCarreraPE1;
+    private javax.swing.JComboBox<String> jCmbCarreraS;
     private javax.swing.JComboBox<String> jCmbCarreraU;
-    private javax.swing.JComboBox<String> jCmbGrupoAc;
+    private javax.swing.JComboBox<String> jCmbGrupoAc1;
+    private javax.swing.JComboBox<String> jCmbGrupoAcM;
     private javax.swing.JComboBox<String> jCmbGrupoAl;
     private javax.swing.JComboBox<String> jCmbGrupoAlm;
     private javax.swing.JComboBox<String> jCmbGrupoC;
     private javax.swing.JComboBox<String> jCmbGrupoC1;
     private javax.swing.JComboBox<String> jCmbGrupoD;
     private javax.swing.JComboBox<String> jCmbGrupoD1;
+    private javax.swing.JComboBox<String> jCmbGrupoED;
+    private javax.swing.JComboBox<String> jCmbGrupoED1;
     private javax.swing.JComboBox<String> jCmbGrupoP;
     private javax.swing.JComboBox<String> jCmbGrupoP1;
     private javax.swing.JComboBox<String> jCmbGrupoPE;
     private javax.swing.JComboBox<String> jCmbGrupoPE1;
+    private javax.swing.JComboBox<String> jCmbGrupoS;
     private javax.swing.JComboBox<String> jCmbGrupoU;
-    private javax.swing.JComboBox<String> jCmbMateriaAc;
+    private javax.swing.JComboBox<String> jCmbMateriaAc1;
+    private javax.swing.JComboBox<String> jCmbMateriaAcM;
     private javax.swing.JComboBox<String> jCmbMateriaAl;
     private javax.swing.JComboBox<String> jCmbMateriaAlm;
     private javax.swing.JComboBox<String> jCmbMateriaC;
     private javax.swing.JComboBox<String> jCmbMateriaC1;
     private javax.swing.JComboBox<String> jCmbMateriaD;
     private javax.swing.JComboBox<String> jCmbMateriaD1;
+    private javax.swing.JComboBox<String> jCmbMateriaED;
+    private javax.swing.JComboBox<String> jCmbMateriaED1;
     private javax.swing.JComboBox<String> jCmbMateriaP;
     private javax.swing.JComboBox<String> jCmbMateriaP1;
     private javax.swing.JComboBox<String> jCmbMateriaPE;
     private javax.swing.JComboBox<String> jCmbMateriaPE1;
+    private javax.swing.JComboBox<String> jCmbMateriaS;
     private javax.swing.JComboBox<String> jCmbMateriaU;
-    private javax.swing.JComboBox<String> jCmbSemestreAc;
+    private javax.swing.JComboBox<String> jCmbSemestreAc1;
+    private javax.swing.JComboBox<String> jCmbSemestreAcM;
     private javax.swing.JComboBox<String> jCmbSemestreAl;
     private javax.swing.JComboBox<String> jCmbSemestreAlm;
     private javax.swing.JComboBox<String> jCmbSemestreC;
     private javax.swing.JComboBox<String> jCmbSemestreC1;
     private javax.swing.JComboBox<String> jCmbSemestreD;
     private javax.swing.JComboBox<String> jCmbSemestreD1;
+    private javax.swing.JComboBox<String> jCmbSemestreED;
+    private javax.swing.JComboBox<String> jCmbSemestreED1;
     private javax.swing.JComboBox<String> jCmbSemestreP;
     private javax.swing.JComboBox<String> jCmbSemestreP1;
     private javax.swing.JComboBox<String> jCmbSemestrePE;
     private javax.swing.JComboBox<String> jCmbSemestrePE1;
+    private javax.swing.JComboBox<String> jCmbSemestreS;
     private javax.swing.JComboBox<String> jCmbSemestreU;
-    private javax.swing.JComboBox<String> jCmbUnidadAc;
+    private javax.swing.JComboBox<String> jCmbUnidadAc1;
+    private javax.swing.JComboBox<String> jCmbUnidadAcM;
     private javax.swing.JComboBox<String> jCmbUnidadC;
     private javax.swing.JComboBox<String> jCmbUnidadC1;
     private javax.swing.JComboBox<String> jCmbUnidadD;
@@ -6242,9 +8339,12 @@ public class FrmPrincipal extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> jCmbUnidadPE;
     private javax.swing.JComboBox<String> jCmbUnidadPE1;
     private javax.swing.JComboBox<String> jCmbUnidadU;
-    private com.toedter.calendar.JDateChooser jDtcUnidadAc;
+    public com.toedter.calendar.JDateChooser jDtcUnidadAc1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -6256,9 +8356,9 @@ public class FrmPrincipal extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
@@ -6294,6 +8394,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel58;
+    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
@@ -6302,16 +8403,27 @@ public class FrmPrincipal extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel65;
     private javax.swing.JLabel jLabel66;
     private javax.swing.JLabel jLabel67;
+    private javax.swing.JLabel jLabel68;
+    private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel71;
+    private javax.swing.JLabel jLabel72;
+    private javax.swing.JLabel jLabel73;
     private javax.swing.JLabel jLabel74;
+    private javax.swing.JLabel jLabel75;
     private javax.swing.JLabel jLabel76;
     private javax.swing.JLabel jLabel77;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel79;
+    private javax.swing.JLabel jLabel81;
+    private javax.swing.JLabel jLabel82;
+    private javax.swing.JLabel jLabel83;
     private javax.swing.JLabel jLblAlumno;
-    private javax.swing.JLabel jLblCarrera;
     private javax.swing.JLabel jLblCarrera1;
+    private javax.swing.JLabel jLblCarrera10;
     private javax.swing.JLabel jLblCarrera11;
+    private javax.swing.JLabel jLblCarrera12;
+    private javax.swing.JLabel jLblCarrera13;
+    private javax.swing.JLabel jLblCarrera14;
     private javax.swing.JLabel jLblCarrera2;
     private javax.swing.JLabel jLblCarrera3;
     private javax.swing.JLabel jLblCarrera4;
@@ -6319,10 +8431,15 @@ public class FrmPrincipal extends javax.swing.JDialog {
     private javax.swing.JLabel jLblCarrera6;
     private javax.swing.JLabel jLblCarrera7;
     private javax.swing.JLabel jLblCarrera8;
+    private javax.swing.JLabel jLblCarrera9;
     private javax.swing.JLabel jLblDatos;
-    private javax.swing.JLabel jLblGrupo;
     private javax.swing.JLabel jLblGrupo1;
+    private javax.swing.JLabel jLblGrupo10;
     private javax.swing.JLabel jLblGrupo11;
+    private javax.swing.JLabel jLblGrupo12;
+    private javax.swing.JLabel jLblGrupo13;
+    private javax.swing.JLabel jLblGrupo14;
+    private javax.swing.JLabel jLblGrupo15;
     private javax.swing.JLabel jLblGrupo2;
     private javax.swing.JLabel jLblGrupo3;
     private javax.swing.JLabel jLblGrupo4;
@@ -6330,11 +8447,17 @@ public class FrmPrincipal extends javax.swing.JDialog {
     private javax.swing.JLabel jLblGrupo6;
     private javax.swing.JLabel jLblGrupo7;
     private javax.swing.JLabel jLblGrupo8;
+    private javax.swing.JLabel jLblGrupo9;
     private javax.swing.JLabel jLblListaGeneral;
-    private javax.swing.JLabel jLblMateria;
-    private javax.swing.JLabel jLblSemestre;
+    private javax.swing.JLabel jLblMateria1;
+    private javax.swing.JLabel jLblMateria2;
+    private javax.swing.JLabel jLblPromedio;
     private javax.swing.JLabel jLblSemestre1;
+    private javax.swing.JLabel jLblSemestre10;
     private javax.swing.JLabel jLblSemestre11;
+    private javax.swing.JLabel jLblSemestre12;
+    private javax.swing.JLabel jLblSemestre13;
+    private javax.swing.JLabel jLblSemestre14;
     private javax.swing.JLabel jLblSemestre2;
     private javax.swing.JLabel jLblSemestre3;
     private javax.swing.JLabel jLblSemestre4;
@@ -6342,7 +8465,8 @@ public class FrmPrincipal extends javax.swing.JDialog {
     private javax.swing.JLabel jLblSemestre6;
     private javax.swing.JLabel jLblSemestre7;
     private javax.swing.JLabel jLblSemestre8;
-    private javax.swing.JLabel jLblUnidad;
+    private javax.swing.JLabel jLblSemestre9;
+    private javax.swing.JLabel jLblUnidad1;
     private javax.swing.JMenuItem jMICargar;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -6361,9 +8485,16 @@ public class FrmPrincipal extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel23;
+    private javax.swing.JPanel jPanel24;
+    private javax.swing.JPanel jPanel25;
+    private javax.swing.JPanel jPanel26;
+    private javax.swing.JPanel jPanel27;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -6376,9 +8507,13 @@ public class FrmPrincipal extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane13;
+    private javax.swing.JScrollPane jScrollPane14;
+    private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane16;
+    private javax.swing.JScrollPane jScrollPane17;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
@@ -6389,10 +8524,8 @@ public class FrmPrincipal extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator12;
     private javax.swing.JSeparator jSeparator13;
-    private javax.swing.JSeparator jSeparator14;
     private javax.swing.JSeparator jSeparator15;
     private javax.swing.JSeparator jSeparator16;
-    private javax.swing.JSeparator jSeparator17;
     private javax.swing.JSeparator jSeparator18;
     private javax.swing.JSeparator jSeparator19;
     private javax.swing.JSeparator jSeparator2;
@@ -6413,29 +8546,45 @@ public class FrmPrincipal extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator33;
     private javax.swing.JSeparator jSeparator34;
     private javax.swing.JSeparator jSeparator35;
+    private javax.swing.JSeparator jSeparator36;
+    private javax.swing.JSeparator jSeparator37;
+    private javax.swing.JSeparator jSeparator38;
+    private javax.swing.JSeparator jSeparator39;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator40;
     private javax.swing.JSeparator jSeparator41;
+    private javax.swing.JSeparator jSeparator42;
+    private javax.swing.JSeparator jSeparator43;
+    private javax.swing.JSeparator jSeparator44;
+    private javax.swing.JSeparator jSeparator45;
+    private javax.swing.JSeparator jSeparator46;
+    private javax.swing.JSeparator jSeparator47;
+    private javax.swing.JSeparator jSeparator48;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTabbedPane jTabbedPane5;
-    public javax.swing.JTable jTable2;
+    private javax.swing.JTabbedPane jTabbedPane6;
+    public javax.swing.JTable jTblActitudA;
+    public javax.swing.JTable jTblActitudM;
     public javax.swing.JTable jTblConocimiento;
     public javax.swing.JTable jTblConocimiento1;
     public javax.swing.JTable jTblConsultarAlumno;
     public javax.swing.JTable jTblConsultarListaLs;
     public javax.swing.JTable jTblDesempeño;
     public javax.swing.JTable jTblDesempeño1;
+    public javax.swing.JTable jTblEvaluacionD;
+    public javax.swing.JTable jTblEvaluacionD1;
     public javax.swing.JTable jTblProducto;
     public javax.swing.JTable jTblProducto1;
     public javax.swing.JTable jTblPuntosExtras;
     public javax.swing.JTable jTblPuntosExtras1;
+    public javax.swing.JTable jTblSemestre;
     public javax.swing.JTable jTblUnidad;
     private javax.swing.JTabbedPane jTbpModificar;
     public javax.swing.JTextField jTxtNCAl;
