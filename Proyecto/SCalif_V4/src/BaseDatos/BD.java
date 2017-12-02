@@ -23,7 +23,7 @@ public class BD {
 
     public BD() {
         try {
-            mConexion.Conectar("localhost", "calificaciones", "root", "1234aszx");
+            mConexion.Conectar("localhost", "calificaciones", "root", "noteladigo");
         } catch (Exception error) {
             System.out.println(error.toString());
         }
@@ -899,4 +899,18 @@ public class BD {
         }
         return Lista;
     }
+    
+    public List<Alumno> ConcultarAlumnoNC(int NC) throws SQLException {
+        List<Alumno> Lista = new ArrayList();
+        String SQL = "select NC from alumno where NC = "+ NC;
+        ResultSet consulta = mConexion.ejecutarConsulta(SQL);
+        while (consulta.next()){
+            Alumno mAlumno = new Alumno();
+            mAlumno.setNC(consulta.getInt("NC"));
+            Lista.add(mAlumno);
+        }
+        return Lista;
+    }
+    
+    
 }
