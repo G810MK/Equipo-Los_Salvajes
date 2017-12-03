@@ -57,10 +57,11 @@ public class FrmBusquedaLista extends javax.swing.JDialog {
         jLblMateria = new javax.swing.JLabel();
         JCmbMateria = new javax.swing.JComboBox<>();
         jBtnAceptar = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        JCmbCarrera.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        JCmbCarrera.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         JCmbCarrera.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 JCmbCarreraFocusGained(evt);
@@ -72,7 +73,7 @@ public class FrmBusquedaLista extends javax.swing.JDialog {
             }
         });
 
-        JCmbSemestre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        JCmbSemestre.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         JCmbSemestre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 JCmbSemestreFocusGained(evt);
@@ -84,7 +85,7 @@ public class FrmBusquedaLista extends javax.swing.JDialog {
             }
         });
 
-        JCmbGrupo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        JCmbGrupo.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         JCmbGrupo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 JCmbGrupoFocusGained(evt);
@@ -96,19 +97,19 @@ public class FrmBusquedaLista extends javax.swing.JDialog {
             }
         });
 
-        jLblCarrera.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLblCarrera.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLblCarrera.setText("Carrera");
 
-        jLblSemestre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLblSemestre.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLblSemestre.setText("Semestre");
 
-        jLblGrupo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLblGrupo.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLblGrupo.setText("Grupo");
 
-        jLblMateria.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLblMateria.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLblMateria.setText("Materia");
 
-        JCmbMateria.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        JCmbMateria.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         JCmbMateria.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 JCmbMateriaFocusGained(evt);
@@ -120,12 +121,16 @@ public class FrmBusquedaLista extends javax.swing.JDialog {
             }
         });
 
+        jBtnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/24x24/accept.png"))); // NOI18N
         jBtnAceptar.setText("Aceptar");
         jBtnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnAceptarActionPerformed(evt);
             }
         });
+
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true), "L'S.SOFT", javax.swing.border.TitledBorder.TRAILING, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -136,33 +141,30 @@ public class FrmBusquedaLista extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jLblMateria))
-                    .addComponent(JCmbMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(JCmbMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JCmbCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLblCarrera))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLblSemestre)
+                    .addComponent(JCmbSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jLblCarrera))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(JCmbGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(JCmbCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jLblSemestre))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(JCmbSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLblGrupo)
-                            .addComponent(JCmbGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addComponent(jBtnAceptar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jBtnAceptar))
+                    .addComponent(jLblGrupo))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLblMateria)
                     .addComponent(jLblCarrera)
@@ -173,9 +175,9 @@ public class FrmBusquedaLista extends javax.swing.JDialog {
                     .addComponent(JCmbMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JCmbSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JCmbGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnAceptar)
-                    .addComponent(JCmbCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                    .addComponent(JCmbCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnAceptar))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -363,5 +365,6 @@ public class FrmBusquedaLista extends javax.swing.JDialog {
     private javax.swing.JLabel jLblGrupo;
     private javax.swing.JLabel jLblMateria;
     private javax.swing.JLabel jLblSemestre;
+    private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }
