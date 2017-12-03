@@ -662,7 +662,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
                                 .addComponent(TxtCarreraLs, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLblListaGeneral)
-                        .addGap(244, 244, 244))))
+                        .addGap(427, 427, 427))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -1151,28 +1151,6 @@ public class FrmPrincipal extends javax.swing.JDialog {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jSeparator13)
-                                .addGap(6, 6, 6))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel7Layout.createSequentialGroup()
-                                        .addComponent(jLabel22)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTxtNombreAlm, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel7Layout.createSequentialGroup()
-                                            .addGap(137, 137, 137)
-                                            .addComponent(jBtnModificarAlm))
-                                        .addGroup(jPanel7Layout.createSequentialGroup()
-                                            .addContainerGap()
-                                            .addComponent(jLabel21)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jTxtNCAlm, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 535, Short.MAX_VALUE)))
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
@@ -1193,9 +1171,27 @@ public class FrmPrincipal extends javax.swing.JDialog {
                             .addComponent(jLabel29)
                             .addComponent(jCmbGrupoAlm, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jBtnBuscarAlm)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jBtnBuscarAlm))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel7Layout.createSequentialGroup()
+                                    .addComponent(jLabel22)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jTxtNombreAlm, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel7Layout.createSequentialGroup()
+                                        .addGap(137, 137, 137)
+                                        .addComponent(jBtnModificarAlm))
+                                    .addGroup(jPanel7Layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(jLabel21)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTxtNCAlm, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jSeparator13, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 833, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4315,7 +4311,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Unidad, javax.swing.GroupLayout.DEFAULT_SIZE, 1349, Short.MAX_VALUE)
+            .addComponent(Unidad)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -7081,61 +7077,62 @@ public class FrmPrincipal extends javax.swing.JDialog {
         if (((this.jTxtNCAl.getText().equals("")) | (this.TxtNombreAl.getText().equals("")) | (this.TxtPaternoAl.getText().equals("")) | (this.TxtMaternoAl.getText().equals("") | (this.jCmbMateriaAl.getItemCount() == 0) | (this.jCmbCarreraAl.getItemCount() == 0) | (this.jCmbSemestreAl.getItemCount() == 0) | (this.jCmbGrupoAl.getItemCount() == 0)))) {
             JOptionPane.showMessageDialog(rootPane, "Exiten campos vacios");
         } else {
-            boolean Vacio = true;
+            int Vacio = 0;
             int NoC = Integer.parseInt(this.jTxtNCAl.getText());
             List<Alumno> mLista10;
 
             try {
                 mLista10 = mBD.ConcultarAlumnoNC(NoC);
+                /*
                 for (Alumno actual : mLista10) {
                     if (mLista10.isEmpty()) {
-                        Vacio = false;
+                        Vacio = 1;
                     }
+                }
+                */
+                if (mLista10.isEmpty()) {
+                    try {
+                        //Guardar Alummno
+                        Alumno mAlumno = new Alumno();
+                        String ApellidoP = this.TxtPaternoAl.getText();
+                        String ApellidoM = this.TxtMaternoAl.getText();
+                        String Nombre = this.TxtNombreAl.getText();
+
+                        mAlumno.setNombre(ApellidoP + " " + ApellidoM + " " + Nombre);
+
+                        mAlumno.setNC(Integer.parseInt(this.jTxtNCAl.getText()));
+
+                        String Materia = String.valueOf(jCmbMateriaAl.getSelectedItem());
+                        String Grupo = String.valueOf(jCmbGrupoAl.getSelectedItem());
+                        String Carrera = String.valueOf(jCmbCarreraAl.getSelectedItem());
+                        String Semestre = String.valueOf(jCmbSemestreAl.getSelectedItem());
+                        //Guardar el productor usando su control
+
+                        String ID = "";
+                        List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
+                        for (Lista actual : mLista) {
+                            ID = String.valueOf(actual.getIdLista());
+                        }
+                        mBD.agregarAlumno(mAlumno, ID);
+                        JOptionPane.showMessageDialog(this, "Alumno guardado");
+
+                        this.jTxtNCAl.setText(null);
+                        this.TxtPaternoAl.setText(null);
+                        this.TxtMaternoAl.setText(null);
+                        this.TxtNombreAl.setText(null);
+                        this.jCmbMateriaAl.removeAllItems();
+                        this.jCmbCarreraAl.removeAllItems();
+                        this.jCmbSemestreAl.removeAllItems();
+                        this.jCmbGrupoAl.removeAllItems();
+
+                    } catch (Exception ex) {
+                        System.out.println(ex.toString());
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Numero de control exitente");
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            if (Vacio == false) {
-                try {
-                    //Guardar Alummno
-                    Alumno mAlumno = new Alumno();
-                    String ApellidoP = this.TxtPaternoAl.getText();
-                    String ApellidoM = this.TxtMaternoAl.getText();
-                    String Nombre = this.TxtNombreAl.getText();
-
-                    mAlumno.setNombre(ApellidoP + " " + ApellidoM + " " + Nombre);
-
-                    mAlumno.setNC(Integer.parseInt(this.jTxtNCAl.getText()));
-
-                    String Materia = String.valueOf(jCmbMateriaAl.getSelectedItem());
-                    String Grupo = String.valueOf(jCmbGrupoAl.getSelectedItem());
-                    String Carrera = String.valueOf(jCmbCarreraAl.getSelectedItem());
-                    String Semestre = String.valueOf(jCmbSemestreAl.getSelectedItem());
-                    //Guardar el productor usando su control
-
-                    String ID = "";
-                    List<Lista> mLista = mBD.consultarListarID(Materia, Carrera, Grupo, Semestre);
-                    for (Lista actual : mLista) {
-                        ID = String.valueOf(actual.getIdLista());
-                    }
-                    mBD.agregarAlumno(mAlumno, ID);
-                    JOptionPane.showMessageDialog(this, "Alumno guardado");
-
-                    this.jTxtNCAl.setText(null);
-                    this.TxtPaternoAl.setText(null);
-                    this.TxtMaternoAl.setText(null);
-                    this.TxtNombreAl.setText(null);
-                    this.jCmbMateriaAl.removeAllItems();
-                    this.jCmbCarreraAl.removeAllItems();
-                    this.jCmbSemestreAl.removeAllItems();
-                    this.jCmbGrupoAl.removeAllItems();
-
-                } catch (Exception ex) {
-                    System.out.println(ex.toString());
-                }
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Numero de control exitente");
             }
 
         }
