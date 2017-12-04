@@ -541,6 +541,11 @@ public class FrmPrincipal extends javax.swing.JDialog {
         jPpmEliminarLista.add(jMniEliminarLista);
 
         jMniEliminarAlumno.setText("Eliminar");
+        jMniEliminarAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMniEliminarAlumnoActionPerformed(evt);
+            }
+        });
         jPpmEliminarAlumno.add(jMniEliminarAlumno);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -7140,6 +7145,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
                 != (evt.getKeyChar() == KeyEvent.VK_SPACE)
                 != (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
             evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo letras");
         }
     }//GEN-LAST:event_TxtCarreraLsKeyTyped
 
@@ -7160,6 +7166,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
                 != (evt.getKeyChar() == KeyEvent.VK_SPACE)
                 != (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
             evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo letras");
         }
     }//GEN-LAST:event_TxtGrupoLsKeyTyped
 
@@ -7169,6 +7176,7 @@ public class FrmPrincipal extends javax.swing.JDialog {
                 != (evt.getKeyChar() == KeyEvent.VK_SPACE)
                 != (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
             evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo letras");
         }
     }//GEN-LAST:event_TxtMateriaLsKeyTyped
 
@@ -8113,6 +8121,33 @@ public class FrmPrincipal extends javax.swing.JDialog {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jBtnMostrarActionPerformed
+
+    private void jMniEliminarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMniEliminarAlumnoActionPerformed
+        // TODO add your handling code here:
+        BD mBD = new BD();
+        int fila = this.jTblConsultarAlumno.getSelectedRow();
+        try {
+            if (fila >= 0) {
+                int NC = (int) jTblConsultarAlumno.getValueAt(fila, 1);
+                String Nombre = (String) jTblConsultarAlumno.getValueAt(fila, 2);
+                System.out.println(NC);
+                System.out.println(Nombre);
+
+                List<Alumno> mAlumno = mBD.ConsultaIDAlumno(NC, Nombre);
+                for (Alumno actual : mAlumno) {
+                    IDAl = String.valueOf(actual.getIdAlumno());
+                    System.out.println(IDAl);
+                }
+                mBD.eliminarAlumno(Integer.parseInt(IDAl));
+                JOptionPane.showMessageDialog(null, "Alumno eliminado.");
+                this.LLenarTablaAlumno();
+                jTxtNCAlm.setText(null);
+                jTxtNombreAlm.setText(null);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMniEliminarAlumnoActionPerformed
 
     /**
      * @param args the command line arguments
