@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 17-10-2017 a las 02:11:30
+-- Tiempo de generación: 04-12-2017 a las 18:28:46
 -- Versión del servidor: 5.7.17-log
 -- Versión de PHP: 5.6.30
 
@@ -31,8 +31,9 @@ USE `calificaciones`;
 CREATE TABLE `actitud` (
   `idActitud` int(11) NOT NULL,
   `Alumno_idAlumno` int(11) NOT NULL,
-  `Asistencia` int(11) DEFAULT NULL,
-  `Fecha` date DEFAULT NULL
+  `Asistencia` int(11) NOT NULL,
+  `Fecha` date NOT NULL,
+  `Unidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -57,8 +58,9 @@ CREATE TABLE `alumno` (
 CREATE TABLE `desempeno` (
   `idDesempeno` int(11) NOT NULL,
   `Alumno_idAlumno` int(11) NOT NULL,
-  `Trabajo` varchar(70) DEFAULT NULL,
-  `Calificacion` int(11) DEFAULT NULL
+  `Trabajo` varchar(70) NOT NULL,
+  `Calificacion` int(11) NOT NULL,
+  `Unidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -76,18 +78,6 @@ CREATE TABLE `evaluacion_diagnostica` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `evaluacion_general`
---
-
-CREATE TABLE `evaluacion_general` (
-  `idEvaluacion_general` int(11) NOT NULL,
-  `Evaluacion_unidad_idEvaluacion_unidad` int(11) NOT NULL,
-  `Total` double DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `evaluacion_unidad`
 --
 
@@ -95,10 +85,7 @@ CREATE TABLE `evaluacion_unidad` (
   `idEvaluacion_unidad` int(11) NOT NULL,
   `Alumno_idAlumno` int(11) NOT NULL,
   `Unidad` int(11) DEFAULT NULL,
-  `Conocimiento` double DEFAULT NULL,
-  `Producto` double DEFAULT NULL,
-  `Desempeno` double DEFAULT NULL,
-  `Actitud` double DEFAULT NULL
+  `Conocimiento` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -124,8 +111,22 @@ CREATE TABLE `lista` (
 CREATE TABLE `producto` (
   `idProducto` int(11) NOT NULL,
   `Alumno_idAlumno` int(11) NOT NULL,
-  `Tareas` varchar(70) DEFAULT NULL,
-  `Calificacion` int(11) DEFAULT NULL
+  `Tareas` varchar(70) NOT NULL,
+  `Calificacion` int(11) NOT NULL,
+  `Unidad` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `puntos_extras`
+--
+
+CREATE TABLE `puntos_extras` (
+  `idPuntos_Extras` int(11) NOT NULL,
+  `Alumno_idAlumno` int(11) NOT NULL,
+  `Puntos` int(11) NOT NULL,
+  `unidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -161,13 +162,6 @@ ALTER TABLE `evaluacion_diagnostica`
   ADD KEY `Alumno_idAlumno` (`Alumno_idAlumno`);
 
 --
--- Indices de la tabla `evaluacion_general`
---
-ALTER TABLE `evaluacion_general`
-  ADD PRIMARY KEY (`idEvaluacion_general`),
-  ADD KEY `Evaluacion_unidad_idEvaluacion_unidad` (`Evaluacion_unidad_idEvaluacion_unidad`);
-
---
 -- Indices de la tabla `evaluacion_unidad`
 --
 ALTER TABLE `evaluacion_unidad`
@@ -185,6 +179,13 @@ ALTER TABLE `lista`
 --
 ALTER TABLE `producto`
   ADD PRIMARY KEY (`idProducto`),
+  ADD KEY `Alumno_idAlumno` (`Alumno_idAlumno`);
+
+--
+-- Indices de la tabla `puntos_extras`
+--
+ALTER TABLE `puntos_extras`
+  ADD PRIMARY KEY (`idPuntos_Extras`),
   ADD KEY `Alumno_idAlumno` (`Alumno_idAlumno`);
 
 --
@@ -212,11 +213,6 @@ ALTER TABLE `desempeno`
 ALTER TABLE `evaluacion_diagnostica`
   MODIFY `idEvaluacion_diagnostica` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de la tabla `evaluacion_general`
---
-ALTER TABLE `evaluacion_general`
-  MODIFY `idEvaluacion_general` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT de la tabla `evaluacion_unidad`
 --
 ALTER TABLE `evaluacion_unidad`
@@ -231,6 +227,11 @@ ALTER TABLE `lista`
 --
 ALTER TABLE `producto`
   MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `puntos_extras`
+--
+ALTER TABLE `puntos_extras`
+  MODIFY `idPuntos_Extras` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Restricciones para tablas volcadas
 --
@@ -260,12 +261,6 @@ ALTER TABLE `evaluacion_diagnostica`
   ADD CONSTRAINT `evaluacion_diagnostica_ibfk_1` FOREIGN KEY (`Alumno_idAlumno`) REFERENCES `alumno` (`idAlumno`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `evaluacion_general`
---
-ALTER TABLE `evaluacion_general`
-  ADD CONSTRAINT `evaluacion_general_ibfk_1` FOREIGN KEY (`Evaluacion_unidad_idEvaluacion_unidad`) REFERENCES `evaluacion_unidad` (`idEvaluacion_unidad`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Filtros para la tabla `evaluacion_unidad`
 --
 ALTER TABLE `evaluacion_unidad`
@@ -276,6 +271,12 @@ ALTER TABLE `evaluacion_unidad`
 --
 ALTER TABLE `producto`
   ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`Alumno_idAlumno`) REFERENCES `alumno` (`idAlumno`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `puntos_extras`
+--
+ALTER TABLE `puntos_extras`
+  ADD CONSTRAINT `puntos_extras_ibfk_1` FOREIGN KEY (`Alumno_idAlumno`) REFERENCES `alumno` (`idAlumno`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
