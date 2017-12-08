@@ -23,7 +23,7 @@ public class BD {
 
     public BD() {
         try {
-            mConexion.Conectar("localhost", "calificaciones", "root", "1234aszx");
+            mConexion.Conectar("localhost", "calificaciones", "usuarioCalif", "12345");
         } catch (Exception error) {
             System.out.println(error.toString());
         }
